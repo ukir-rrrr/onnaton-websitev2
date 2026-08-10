@@ -100,7 +100,7 @@ export function Hero() {
               fill
               priority
               sizes="100vw"
-              className="object-cover object-[60%_center]"
+              className="object-cover object-[55%_72%] sm:object-[60%_center]"
             />
           </div>
 
@@ -128,15 +128,20 @@ export function Hero() {
                   alt={heroSlides[incoming].alt}
                   fill
                   sizes="100vw"
-                  className="object-cover object-[60%_center]"
+                  className="object-cover object-[55%_72%] sm:object-[60%_center]"
                 />
               </motion.div>
             )}
           </AnimatePresence>
         </motion.div>
 
-        <div className="absolute inset-0 bg-gradient-to-r from-black/35 via-black/15 to-transparent" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/0 via-transparent to-black/35" />
+        {/* PC: left-rail + light bottom wash */}
+        <div className="absolute inset-0 hidden bg-gradient-to-r from-black/35 via-black/15 to-transparent sm:block" />
+        <div className="absolute inset-0 hidden bg-gradient-to-b from-black/0 via-transparent to-black/35 sm:block" />
+        {/* Mobile: darker full scrim so copy stays readable on bright meat */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/40 to-black/75 sm:hidden" />
+        {/* Mobile: extra shade over the lower text band */}
+        <div className="pointer-events-none absolute inset-x-0 bottom-0 h-[58%] bg-gradient-to-t from-black/55 via-black/25 to-transparent sm:hidden" />
 
         <motion.div
           className="absolute bottom-6 right-6 z-20 flex items-center gap-2 sm:bottom-8 sm:right-8"
@@ -158,7 +163,7 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          className="absolute inset-0 z-10 flex items-center px-6 pt-16 sm:px-12 sm:pt-14 lg:px-16"
+          className="absolute inset-0 z-10 flex items-start overflow-y-auto overscroll-contain px-5 pb-12 pt-28 sm:items-center sm:overflow-visible sm:px-12 sm:pb-0 sm:pt-14 lg:px-16"
           initial={false}
           animate={{
             opacity: showCopy ? 1 : 0,
@@ -171,25 +176,25 @@ export function Hero() {
           }}
         >
           <div className="w-full max-w-[36rem]">
-            <p className="font-serif-jp mb-2 text-[18px] font-normal tracking-[0.12em] text-[#c4a574] sm:mb-2.5 sm:text-[20px]">
+            <p className="font-serif-jp mb-1.5 text-[17px] font-normal tracking-[0.12em] text-[#e0c89a] [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-2.5 sm:text-[20px] sm:text-[#c4a574] sm:[text-shadow:none]">
               沖縄しゃぶしゃぶ 恩納豚 那覇
             </p>
 
-            <p className="font-serif-jp mb-5 text-[13px] font-normal tracking-[0.12em] text-[#c4a574] sm:mb-6 sm:text-[16px]">
+            <p className="font-serif-jp mb-4 text-[13px] font-normal tracking-[0.12em] text-[#e0c89a] [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[16px] sm:text-[#c4a574] sm:[text-shadow:none]">
               コース料理専門店
-              <span className="mx-2 text-[#c4a574]/70" aria-hidden>
+              <span className="mx-2 text-[#e0c89a]/80 sm:text-[#c4a574]/70" aria-hidden>
                 ｜
               </span>
               完全予約制
             </p>
 
-            <h1 className="font-serif-jp mb-5 text-[24px] font-medium leading-[1.65] tracking-[0.06em] text-cream sm:mb-6 sm:text-[40px] sm:leading-[1.7] lg:text-[48px]">
+            <h1 className="font-serif-jp mb-4 text-[23px] font-medium leading-[1.6] tracking-[0.06em] text-cream [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[40px] sm:leading-[1.7] sm:[text-shadow:none] lg:text-[48px]">
               <span className="block">あぐー豚×特選石垣牛</span>
               <span className="block">沖縄の恵みを、</span>
               <span className="block">極上のしゃぶしゃぶで。</span>
             </h1>
 
-            <p className="font-serif-jp mb-7 max-w-[28rem] text-[13px] leading-[2] tracking-[0.06em] text-cream/85 sm:mb-8 sm:text-[14px] sm:leading-[2.1]">
+            <p className="font-serif-jp mb-6 max-w-[28rem] text-[13px] leading-[1.9] tracking-[0.06em] text-cream/95 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-8 sm:text-[14px] sm:leading-[2.1] sm:text-cream/85 sm:[text-shadow:none]">
               島の水と大地が育てた銘柄豚と和牛を当店だけの出汁でいただく
               <br className="hidden sm:block" />
               唯一無二のしゃぶしゃぶ体験。旅の一夜を、忘れられない特別な
@@ -201,7 +206,7 @@ export function Hero() {
               className="font-serif-jp mb-3 min-h-11 w-full max-w-sm rounded-none px-9 py-3.5 text-[14px] font-medium tracking-[0.18em] text-white hover:bg-cream hover:text-ink sm:w-auto sm:px-24 sm:py-3 sm:text-[14px]"
             />
 
-            <p className="text-[12px] tracking-[0.04em] text-cream/55 sm:text-[13px]">
+            <p className="text-[12px] tracking-[0.04em] text-cream/75 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:text-[13px] sm:text-cream/55 sm:[text-shadow:none]">
               （完全予約制のため、事前のご予約をお願いいたします。）
             </p>
           </div>
