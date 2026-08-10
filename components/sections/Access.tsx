@@ -1,0 +1,120 @@
+"use client";
+
+import { motion, useReducedMotion } from "motion/react";
+import { storeInfoRows, siteConfig } from "@/lib/content/store";
+import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
+
+const ease = [0.22, 1, 0.36, 1] as const;
+
+function InstagramIcon({ className }: { className?: string }) {
+  return (
+    <svg
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      className={className}
+      aria-hidden
+    >
+      <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
+      <circle cx="12" cy="12" r="4.25" />
+      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
+    </svg>
+  );
+}
+
+export function Access() {
+  const reduceMotion = useReducedMotion() === true;
+
+  return (
+    <section
+      id="access"
+      className="scroll-mt-24 grid w-full grid-cols-1 items-start gap-14 px-6 pb-24 sm:px-10 sm:pb-32 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:px-14 lg:pb-[200px]"
+    >
+      <div>
+        <motion.div
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.85, ease }}
+        >
+          <SectionEyebrow
+            eyebrow="ACCESS"
+            heading="店舗情報・アクセス"
+            align="left"
+            className="mb-10 sm:mb-12"
+          />
+        </motion.div>
+
+        <motion.div
+          className="flex flex-col gap-6"
+          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.25 }}
+          transition={{ duration: 0.9, delay: 0.12, ease }}
+        >
+          {storeInfoRows.map((row, i) => (
+            <div
+              key={row.label}
+              className={`grid grid-cols-[5.5rem_1fr] items-start gap-x-3 py-1 sm:grid-cols-[120px_1fr] sm:gap-x-0 ${
+                i === 0 ? "border-t border-cream/12 pt-4" : ""
+              }`}
+            >
+              <span className="pt-0.5 text-[13px] text-cream/50 sm:text-[13px]">
+                {row.label}
+              </span>
+              {row.href ? (
+                <a
+                  href={row.href}
+                  target={row.href.startsWith("http") ? "_blank" : undefined}
+                  rel={
+                    row.href.startsWith("http")
+                      ? "noopener noreferrer"
+                      : undefined
+                  }
+                  className="inline-flex min-h-11 items-center gap-2.5 py-1 text-[15px] leading-[1.7] text-cream underline-offset-4 transition-colors hover:text-gold hover:underline sm:min-h-0 sm:py-0"
+                >
+                  <span>{row.value}</span>
+                  {row.icon === "instagram" ? (
+                    <InstagramIcon className="h-[18px] w-[18px] shrink-0" />
+                  ) : null}
+                </a>
+              ) : (
+                <span className="py-1 text-[15px] leading-[1.7] text-cream sm:py-0">
+                  {row.value}
+                </span>
+              )}
+            </div>
+          ))}
+        </motion.div>
+      </div>
+
+      <motion.div
+        className="mt-2 w-full overflow-hidden rounded-sm border border-cream/10 sm:mt-4 lg:mt-16"
+        initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+        whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.2 }}
+        transition={{ duration: 0.95, delay: 0.15, ease }}
+      >
+        <iframe
+          title="恩納豚の地図"
+          src={siteConfig.mapEmbedSrc}
+          className="h-[320px] w-full border-0 sm:h-[420px] lg:h-[600px]"
+          loading="lazy"
+          referrerPolicy="no-referrer-when-downgrade"
+          allowFullScreen
+        />
+        <a
+          href={siteConfig.mapLink}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="flex min-h-11 items-center justify-center border-t border-cream/10 bg-ink-raised px-4 py-3.5 text-[13px] tracking-[0.12em] text-cream/70 transition-colors hover:text-gold"
+        >
+          Google マップで開く →
+        </a>
+      </motion.div>
+    </section>
+  );
+}

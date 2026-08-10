@@ -1,0 +1,60 @@
+export interface GalleryItem {
+  src: string;
+  alt: string;
+}
+
+/**
+ * ギャラリー画像一覧（public/images/gallery/ のみ）。
+ * 追加時: 画像を同フォルダに置き、下の配列に追記する。
+ */
+export const galleryList: GalleryItem[] = [
+  { src: "/images/gallery/gallery-01.jpg", alt: "恩納豚 ギャラリー 1" },
+  { src: "/images/gallery/gallery-02.jpg", alt: "恩納豚 ギャラリー 2" },
+  { src: "/images/gallery/gallery-03.jpg", alt: "恩納豚 ギャラリー 3" },
+  { src: "/images/gallery/gallery-04.jpg", alt: "恩納豚 ギャラリー 4" },
+  { src: "/images/gallery/gallery-05.jpg", alt: "恩納豚 ギャラリー 5" },
+  { src: "/images/gallery/gallery-06.jpg", alt: "恩納豚 ギャラリー 6" },
+  { src: "/images/gallery/gallery-07.jpg", alt: "恩納豚 ギャラリー 7" },
+  { src: "/images/gallery/gallery-08.jpg", alt: "恩納豚 ギャラリー 8" },
+  { src: "/images/gallery/gallery-09.jpg", alt: "恩納豚 ギャラリー 9" },
+  { src: "/images/gallery/gallery-10.jpg", alt: "恩納豚 ギャラリー 10" },
+  { src: "/images/gallery/gallery-11.jpg", alt: "恩納豚 ギャラリー 11" },
+  { src: "/images/gallery/gallery-12.jpg", alt: "恩納豚 ギャラリー 12" },
+  { src: "/images/gallery/gallery-13.jpg", alt: "恩納豚 ギャラリー 13" },
+  { src: "/images/gallery/gallery-14.jpg", alt: "恩納豚 ギャラリー 14" },
+  { src: "/images/gallery/gallery-15.jpg", alt: "恩納豚 ギャラリー 15" },
+  { src: "/images/gallery/gallery-16.jpg", alt: "恩納豚 ギャラリー 16" },
+  { src: "/images/gallery/gallery-17.jpg", alt: "恩納豚 ギャラリー 17" },
+  { src: "/images/gallery/gallery-18.jpg", alt: "恩納豚 ギャラリー 18" },
+  { src: "/images/gallery/gallery-19.jpg", alt: "恩納豚 ギャラリー 19" },
+  { src: "/images/gallery/gallery-20.jpg", alt: "恩納豚 ギャラリー 20" },
+  { src: "/images/gallery/gallery-21.jpg", alt: "恩納豚 ギャラリー 21" },
+  { src: "/images/gallery/gallery-22.jpg", alt: "恩納豚 ギャラリー 22" },
+  { src: "/images/gallery/gallery-23.jpg", alt: "恩納豚 ギャラリー 23" },
+  { src: "/images/gallery/gallery-24.jpg", alt: "恩納豚 ギャラリー 24" },
+  { src: "/images/gallery/gallery-25.jpg", alt: "恩納豚 ギャラリー 25" },
+  { src: "/images/gallery/gallery-26.jpg", alt: "恩納豚 ギャラリー 26" },
+  { src: "/images/gallery/gallery-27.jpg", alt: "恩納豚 ギャラリー 27" },
+  { src: "/images/gallery/gallery-28.jpg", alt: "恩納豚 ギャラリー 28" },
+  { src: "/images/gallery/gallery-29.jpg", alt: "恩納豚 ギャラリー 29" },
+  { src: "/images/gallery/gallery-30.jpg", alt: "恩納豚 ギャラリー 30" },
+  { src: "/images/gallery/gallery-31.jpg", alt: "恩納豚 ギャラリー 31" },
+  { src: "/images/gallery/gallery-32.jpg", alt: "恩納豚 ギャラリー 32" },
+  { src: "/images/gallery/gallery-33.jpg", alt: "恩納豚 ギャラリー 33" },
+  { src: "/images/gallery/gallery-34.jpg", alt: "恩納豚 ギャラリー 34" },
+  { src: "/images/gallery/gallery-35.jpg", alt: "恩納豚 ギャラリー 35" },
+  { src: "/images/gallery/gallery-36.jpg", alt: "恩納豚 ギャラリー 36" },
+  { src: "/images/gallery/gallery-37.jpg", alt: "恩納豚 ギャラリー 37" },
+  { src: "/images/gallery/gallery-38.jpg", alt: "恩納豚 ギャラリー 38" },
+  { src: "/images/gallery/gallery-39.jpg", alt: "恩納豚 ギャラリー 39" },
+  { src: "/images/gallery/gallery-40.jpg", alt: "恩納豚 ギャラリー 40" },
+  { src: "/images/gallery/gallery-41.jpg", alt: "恩納豚 ギャラリー 41" },
+  { src: "/images/gallery/gallery-42.jpg", alt: "恩納豚 ギャラリー 42" },
+  { src: "/images/gallery/gallery-43.jpg", alt: "恩納豚 ギャラリー 43" },
+  { src: "/images/gallery/gallery-44.jpg", alt: "恩納豚 ギャラリー 44" },
+  { src: "/images/gallery/gallery-45.jpg", alt: "恩納豚 ギャラリー 45" },
+  { src: "/images/gallery/gallery-46.jpg", alt: "恩納豚 ギャラリー 46" },
+  { src: "/images/gallery/gallery-47.jpg", alt: "恩納豚 ギャラリー 47" },
+  { src: "/images/gallery/gallery-48.jpg", alt: "恩納豚 ギャラリー 48" },
+  { src: "/images/gallery/gallery-49.jpg", alt: "恩納豚 ギャラリー 49" },
+];

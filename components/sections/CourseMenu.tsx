@@ -1,0 +1,60 @@
+import Image from "next/image";
+import Link from "next/link";
+import { photos } from "@/lib/content/photos";
+
+/**
+ * Top-page course teaser: full-bleed photo → /course.
+ * Hover: full dim + centered copy/CTA. Touch: bottom label + outline button.
+ */
+export function CourseMenu() {
+  return (
+    <section id="course" className="scroll-mt-24 w-full">
+      <Link
+        href="/course"
+        className="group relative block w-full overflow-hidden focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-[-4px] focus-visible:outline-gold"
+        aria-label="コースを見る"
+      >
+        <div className="relative h-[50vh] min-h-[300px] w-full sm:h-[90vh] sm:min-h-[360px]">
+          <Image
+            src={photos.courseMenu}
+            alt="コース・メニュー"
+            fill
+            sizes="100vw"
+            className="object-cover transition-transform duration-[380ms] ease-out group-hover:scale-[1.03]"
+            priority={false}
+          />
+        </div>
+
+        <div
+          className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent"
+          aria-hidden
+        />
+        <p className="pointer-events-none absolute bottom-6 left-6 text-xs tracking-[0.35em] text-cream/85 transition-opacity duration-[380ms] ease-out sm:bottom-8 sm:left-10 sm:text-[12px] [@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-0">
+          COURSE MENU
+        </p>
+
+        <div
+          className="pointer-events-none absolute inset-0 hidden bg-black/0 transition-colors duration-[380ms] ease-out group-hover:bg-black/50 [@media(hover:hover)_and_(pointer:fine)]:block"
+          aria-hidden
+        />
+        <div className="pointer-events-none absolute inset-0 hidden translate-y-3 flex-col items-center justify-center gap-4 px-6 text-center opacity-0 transition-all duration-[380ms] ease-out group-hover:translate-y-0 group-hover:opacity-100 [@media(hover:hover)_and_(pointer:fine)]:flex">
+          <p className="font-serif-jp text-[28px] tracking-[0.16em] text-cream sm:text-[36px]">
+            コース・メニュー
+          </p>
+          <p className="max-w-md text-[13px] leading-relaxed tracking-[0.04em] text-cream/80 sm:text-[14px]">
+            当日の食材に合わせたコースをご用意しています
+          </p>
+          <span className="mt-2 inline-flex items-center border border-cream/75 px-8 py-3 text-[12px] tracking-[0.22em] text-cream">
+            コースを見る
+          </span>
+        </div>
+
+        <div className="absolute right-5 bottom-5 left-5 flex justify-end sm:right-10 sm:bottom-8 sm:left-auto [@media(hover:hover)_and_(pointer:fine)]:hidden">
+          <span className="inline-flex min-h-11 items-center border border-cream/70 px-6 py-3 text-[13px] tracking-[0.18em] text-cream">
+            コースを見る
+          </span>
+        </div>
+      </Link>
+    </section>
+  );
+}
