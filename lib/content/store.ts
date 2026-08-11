@@ -5,7 +5,7 @@
  * Source: Google Business Profile + https://www.onnaton.com/access/
  */
 export const siteConfig = {
-  name: "沖縄しゃぶしゃぶ恩納豚 　那覇",
+  name: "恩納豚",
   // nameReading: "おんなとん",
   nameRomaji: "ONNATON",
   reservationPhoneDisplay: "090-3650-0710",
@@ -27,7 +27,8 @@ export interface StoreInfoRow {
 
 /** 店舗情報・アクセス — aligned with Google / official site listing. */
 export const storeInfoRows: StoreInfoRow[] = [
-  { label: "店名", value: `${siteConfig.name} ` },  /*（${siteConfig.nameReading}）*/
+  // ヘッダー／フッターの `siteConfig.name` とは別。ここだけアクセス欄の店名。
+  { label: "店名", value: "沖縄しゃぶしゃぶ恩納豚　那覇" },
   { label: "住所", value: "〒900-0037 沖縄県那覇市辻1-2-5" },
   {
     label: "電話番号",
