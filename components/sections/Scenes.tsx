@@ -4,11 +4,13 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { sceneList } from "@/lib/content/scenes";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
+import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Scenes() {
   const reduceMotion = useReducedMotion() === true;
+  const isMobile = useIsMobile();
 
   return (
     <section className="w-full px-6 pt-24 pb-24 sm:px-10 sm:pt-32 sm:pb-32 lg:px-14 lg:pt-[120px] lg:pb-[200px]">
@@ -28,7 +30,9 @@ export function Scenes() {
         viewport={{ once: true, amount: 0.15 }}
         variants={{
           hidden: {},
-          visible: { transition: { staggerChildren: 0.12 } },
+          visible: {
+            transition: { staggerChildren: isMobile ? 0.08 : 0.12 },
+          },
         }}
       >
         {sceneList.map((scene) => (
@@ -39,21 +43,38 @@ export function Scenes() {
               reduceMotion
                 ? undefined
                 : {
-                    hidden: { opacity: 0, y: 32 },
+                    hidden: isMobile
+                      ? { opacity: 0 }
+                      : { opacity: 0, y: 32 },
                     visible: {
                       opacity: 1,
                       y: 0,
-                      transition: { duration: 0.85, ease },
+                      transition: {
+                        duration: isMobile ? 0.55 : 0.85,
+                        ease,
+                      },
                     },
                   }
             }
           >
             <motion.div
               className="absolute inset-0"
-              initial={reduceMotion ? false : { scale: 1.1 }}
-              whileInView={reduceMotion ? undefined : { scale: 1 }}
+              initial={
+                reduceMotion
+                  ? false
+                  : isMobile
+                    ? { opacity: 0 }
+                    : { scale: 1.1 }
+              }
+              whileInView={
+                reduceMotion
+                  ? undefined
+                  : isMobile
+                    ? { opacity: 1 }
+                    : { scale: 1 }
+              }
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1.25, ease }}
+              transition={{ duration: isMobile ? 0.6 : 1.25, ease }}
             >
               <Image
                 src={scene.photo}

@@ -4,6 +4,8 @@ export interface ExecutiveDish {
   name: string;
   /** Same column as name; smaller / lighter annotation */
   note?: string;
+  /** Phone-only line breaks (md+ / tategaki keep `name` + `note`) */
+  nameMobileLines?: readonly [string, string];
 }
 
 /**
@@ -14,6 +16,9 @@ export const executiveCourse = {
   name: "エグゼクティブコース",
   priceMain: "一〇、五〇〇円",
   priceTaxNote: "（税込 一一、五五〇円）",
+  /** Phone-only Arabic numerals (md+ keeps kanji above). */
+  priceMainMobile: "10,500円",
+  priceTaxNoteMobile: "（税込 11,550円）",
   slides: [
     { src: photos.course013, alt: "久米島産海ぶどう" },
     { src: photos.course011, alt: "前菜" },
@@ -28,7 +33,14 @@ export const executiveCourse = {
     { name: "ミミガーの和え物" },
     { name: "久米島産海ぶどう", note: "（海ぶどう未入荷時は代わりの物をお出しします）" },
     { name: "紅しゃぶスープ" },
-    { name: "沖縄県産ブランド黒毛和牛　もとぶ牛（Ａ５ランク）", note: "１００ｇ" },
+    {
+      name: "沖縄県産ブランド黒毛和牛　もとぶ牛（Ａ５ランク）",
+      note: "１００ｇ",
+      nameMobileLines: [
+        "沖縄県産ブランド黒毛和牛",
+        "もとぶ牛（Ａ５ランク）",
+      ],
+    },
     { name: "あぐー豚", note: "１００ｇ" },
     { name: "お野菜" },
     { name: "手ごねのあぐーつくね" },

@@ -4,11 +4,13 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { kodawariList } from "@/lib/content/kodawari";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
+import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Kodawari() {
   const reduceMotion = useReducedMotion() === true;
+  const isMobile = useIsMobile();
 
   return (
     <section
@@ -36,7 +38,7 @@ export function Kodawari() {
         variants={{
           hidden: {},
           visible: {
-            transition: { staggerChildren: 0.12 },
+            transition: { staggerChildren: isMobile ? 0.08 : 0.12 },
           },
         }}
       >
@@ -48,11 +50,16 @@ export function Kodawari() {
               reduceMotion
                 ? undefined
                 : {
-                    hidden: { opacity: 0, y: 32 },
+                    hidden: isMobile
+                      ? { opacity: 0 }
+                      : { opacity: 0, y: 32 },
                     visible: {
                       opacity: 1,
                       y: 0,
-                      transition: { duration: 0.85, ease },
+                      transition: {
+                        duration: isMobile ? 0.55 : 0.85,
+                        ease,
+                      },
                     },
                   }
             }
@@ -61,10 +68,25 @@ export function Kodawari() {
               {item.photo ? (
                 <motion.div
                   className="h-full w-full"
-                  initial={reduceMotion ? false : { scale: 1.1 }}
-                  whileInView={reduceMotion ? undefined : { scale: 1 }}
+                  initial={
+                    reduceMotion
+                      ? false
+                      : isMobile
+                        ? { opacity: 0 }
+                        : { scale: 1.1 }
+                  }
+                  whileInView={
+                    reduceMotion
+                      ? undefined
+                      : isMobile
+                        ? { opacity: 1 }
+                        : { scale: 1 }
+                  }
                   viewport={{ once: true, amount: 0.35 }}
-                  transition={{ duration: 1.25, ease }}
+                  transition={{
+                    duration: isMobile ? 0.6 : 1.25,
+                    ease,
+                  }}
                 >
                   <Image
                     src={item.photo}

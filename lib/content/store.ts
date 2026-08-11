@@ -5,7 +5,7 @@
  * Source: Google Business Profile + https://www.onnaton.com/access/
  */
 export const siteConfig = {
-  name: "恩納豚",
+  name: "沖縄しゃぶしゃぶ恩納豚 　那覇",
   // nameReading: "おんなとん",
   nameRomaji: "ONNATON",
   reservationPhoneDisplay: "090-3650-0710",

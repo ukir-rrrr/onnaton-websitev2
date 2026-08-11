@@ -6,11 +6,13 @@ import { motion, useReducedMotion } from "motion/react";
 import { photos } from "@/lib/content/photos";
 import { interiorFacts } from "@/lib/content/store";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
+import { useIsMobile } from "@/lib/hooks/useIsMobile";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Interior() {
   const reduceMotion = useReducedMotion() === true;
+  const isMobile = useIsMobile();
 
   return (
     <section id="interior" className="w-full px-6 pb-24 sm:px-10 sm:pb-32 lg:px-14 lg:pb-[200px]">
@@ -30,7 +32,9 @@ export function Interior() {
         viewport={{ once: true, amount: 0.2 }}
         variants={{
           hidden: {},
-          visible: { transition: { staggerChildren: 0.14 } },
+          visible: {
+            transition: { staggerChildren: isMobile ? 0.1 : 0.14 },
+          },
         }}
       >
         {[
@@ -44,21 +48,38 @@ export function Interior() {
               reduceMotion
                 ? undefined
                 : {
-                    hidden: { opacity: 0, y: 28 },
+                    hidden: isMobile
+                      ? { opacity: 0 }
+                      : { opacity: 0, y: 28 },
                     visible: {
                       opacity: 1,
                       y: 0,
-                      transition: { duration: 0.9, ease },
+                      transition: {
+                        duration: isMobile ? 0.55 : 0.9,
+                        ease,
+                      },
                     },
                   }
             }
           >
             <motion.div
               className="absolute inset-0"
-              initial={reduceMotion ? false : { scale: 1.1 }}
-              whileInView={reduceMotion ? undefined : { scale: 1 }}
+              initial={
+                reduceMotion
+                  ? false
+                  : isMobile
+                    ? { opacity: 0 }
+                    : { scale: 1.1 }
+              }
+              whileInView={
+                reduceMotion
+                  ? undefined
+                  : isMobile
+                    ? { opacity: 1 }
+                    : { scale: 1 }
+              }
               viewport={{ once: true, amount: 0.3 }}
-              transition={{ duration: 1.3, ease }}
+              transition={{ duration: isMobile ? 0.6 : 1.3, ease }}
             >
               <Image
                 src={photo.src}

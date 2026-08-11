@@ -116,24 +116,45 @@ export function ExecutiveCourse() {
                 {c.name}
               </h1>
               <p className="font-serif-jp text-[22px] tracking-[0.08em] text-gold sm:text-[26px]">
-                {c.priceMain}
+                <span className="md:hidden">{c.priceMainMobile}</span>
+                <span className="hidden md:inline">{c.priceMain}</span>
               </p>
               <p className="mt-1 text-[13px] tracking-[0.08em] text-wipe/85 sm:text-[14px]">
-                {c.priceTaxNote}
+                <span className="md:hidden">{c.priceTaxNoteMobile}</span>
+                <span className="hidden md:inline">{c.priceTaxNote}</span>
               </p>
             </div>
 
             <ul className="font-serif-jp divide-y divide-cream/10">
               {c.dishes.map((dish) => (
                 <li key={dish.name} className="py-3.5 sm:py-4">
-                  <p className="text-[15px] leading-[1.7] tracking-[0.06em] text-wipe sm:text-[16px]">
-                    {dish.name}
-                  </p>
-                  {dish.note ? (
-                    <p className="mt-1 text-[12px] leading-[1.6] tracking-[0.04em] text-wipe/70 sm:text-[13px]">
-                      {dish.note}
-                    </p>
-                  ) : null}
+                  {dish.nameMobileLines ? (
+                    <>
+                      <p className="text-[15px] leading-[1.7] tracking-[0.06em] text-wipe md:hidden sm:text-[16px]">
+                        <span className="block">{dish.nameMobileLines[0]}</span>
+                        <span className="block">{dish.nameMobileLines[1]}</span>
+                      </p>
+                      <p className="hidden text-[15px] leading-[1.7] tracking-[0.06em] text-wipe md:block sm:text-[16px]">
+                        {dish.name}
+                      </p>
+                      {dish.note ? (
+                        <p className="mt-1 text-[12px] leading-[1.6] tracking-[0.04em] text-wipe/70 sm:text-[13px]">
+                          {dish.note}
+                        </p>
+                      ) : null}
+                    </>
+                  ) : (
+                    <>
+                      <p className="text-[15px] leading-[1.7] tracking-[0.06em] text-wipe sm:text-[16px]">
+                        {dish.name}
+                      </p>
+                      {dish.note ? (
+                        <p className="mt-1 text-[12px] leading-[1.6] tracking-[0.04em] text-wipe/70 sm:text-[13px]">
+                          {dish.note}
+                        </p>
+                      ) : null}
+                    </>
+                  )}
                 </li>
               ))}
             </ul>
