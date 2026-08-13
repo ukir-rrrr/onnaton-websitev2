@@ -1,31 +1,17 @@
 "use client";
 
 import { motion, useReducedMotion } from "motion/react";
+import Link from "next/link";
 import { storeInfoRows, siteConfig } from "@/lib/content/store";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
+import { InstagramIcon } from "@/components/ui/InstagramIcon";
+import { copy } from "@/lib/i18n/copy";
+import { useT } from "@/components/i18n/LocaleProvider";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-function InstagramIcon({ className }: { className?: string }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.5"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      className={className}
-      aria-hidden
-    >
-      <rect x="2.5" y="2.5" width="19" height="19" rx="5" />
-      <circle cx="12" cy="12" r="4.25" />
-      <circle cx="17.5" cy="6.5" r="1" fill="currentColor" stroke="none" />
-    </svg>
-  );
-}
-
 export function Access() {
+  const { t, tr, locale, isJa } = useT();
   const reduceMotion = useReducedMotion() === true;
 
   return (
@@ -42,7 +28,7 @@ export function Access() {
         >
           <SectionEyebrow
             eyebrow="ACCESS"
-            heading="店舗情報・アクセス"
+            heading={t(copy.access.heading)}
             align="left"
             className="mb-10 sm:mb-12"
           />
@@ -63,9 +49,16 @@ export function Access() {
               }`}
             >
               <span className="pt-0.5 text-[13px] text-cream/50 sm:text-[13px]">
-                {row.label}
+                {tr(row.label)}
               </span>
-              {row.href ? (
+              {row.label === "ご予約" && !isJa ? (
+                <Link
+                  href="/reserve"
+                  className="inline-flex min-h-11 items-center py-1 text-[15px] leading-[1.7] text-cream underline-offset-4 transition-colors hover:text-gold hover:underline sm:min-h-0 sm:py-0"
+                >
+                  {t(copy.access.reserveOnline)}
+                </Link>
+              ) : row.href ? (
                 <a
                   href={row.href}
                   target={row.href.startsWith("http") ? "_blank" : undefined}
@@ -76,14 +69,14 @@ export function Access() {
                   }
                   className="inline-flex min-h-11 items-center gap-2.5 py-1 text-[15px] leading-[1.7] text-cream underline-offset-4 transition-colors hover:text-gold hover:underline sm:min-h-0 sm:py-0"
                 >
-                  <span>{row.value}</span>
+                  <span>{tr(row.value)}</span>
                   {row.icon === "instagram" ? (
                     <InstagramIcon className="h-[18px] w-[18px] shrink-0" />
                   ) : null}
                 </a>
               ) : (
                 <span className="py-1 text-[15px] leading-[1.7] text-cream sm:py-0">
-                  {row.value}
+                  {tr(row.value)}
                 </span>
               )}
             </div>
@@ -99,8 +92,11 @@ export function Access() {
         transition={{ duration: 0.95, delay: 0.15, ease }}
       >
         <iframe
-          title="恩納豚の地図"
-          src={siteConfig.mapEmbedSrc}
+          title={t(copy.access.mapTitle)}
+          src={siteConfig.mapEmbedSrc.replace(
+            "hl=ja",
+            `hl=${locale === "zh" ? "zh-CN" : locale}`,
+          )}
           className="h-[320px] w-full border-0 sm:h-[420px] lg:h-[600px]"
           loading="lazy"
           referrerPolicy="no-referrer-when-downgrade"
@@ -112,7 +108,7 @@ export function Access() {
           rel="noopener noreferrer"
           className="flex min-h-11 items-center justify-center border-t border-cream/10 bg-ink-raised px-4 py-3.5 text-[13px] tracking-[0.12em] text-cream/70 transition-colors hover:text-gold"
         >
-          Google マップで開く →
+          {t(copy.access.openMap)}
         </a>
       </motion.div>
     </section>

@@ -1,4 +1,20 @@
-import { languageFlags } from "@/lib/content/languages";
+"use client";
+
+import { useTransition } from "react";
+import { useRouter } from "next/navigation";
+import { setLocale } from "@/app/actions/locale";
+import { type Locale } from "@/lib/i18n/config";
+import { copy } from "@/lib/i18n/copy";
+import { useT } from "@/components/i18n/LocaleProvider";
+
+function JpFlag({ className }: { className?: string }) {
+  return (
+    <svg viewBox="0 0 60 40" className={className} aria-hidden>
+      <rect width="60" height="40" fill="#fff" stroke="rgba(0,0,0,0.12)" strokeWidth="1" />
+      <circle cx="30" cy="20" r="8" fill="#bc002d" />
+    </svg>
+  );
+}
 
 function UsFlag({ className }: { className?: string }) {
   return (
@@ -35,30 +51,58 @@ function CnFlag({ className }: { className?: string }) {
   );
 }
 
-const FLAG = {
-  us: UsFlag,
-  kr: KrFlag,
-  cn: CnFlag,
-} as const;
+const OPTIONS: {
+  code: Locale;
+  Flag: typeof JpFlag;
+  labelKey: "ja" | "en" | "ko" | "zh";
+}[] = [
+  { code: "ja", Flag: JpFlag, labelKey: "ja" },
+  { code: "en", Flag: UsFlag, labelKey: "en" },
+  { code: "ko", Flag: KrFlag, labelKey: "ko" },
+  { code: "zh", Flag: CnFlag, labelKey: "zh" },
+];
 
 interface LanguageFlagsProps {
   className?: string;
 }
 
-/** Flag buttons for EN / KO / ZH. Japanese is default (no JP flag). */
 export function LanguageFlags({ className = "" }: LanguageFlagsProps) {
+  const { locale, t } = useT();
+  const router = useRouter();
+  const [pending, startTransition] = useTransition();
+
+  const switchTo = (code: Locale) => {
+    if (code === locale || pending) return;
+    startTransition(async () => {
+      await setLocale(code);
+      router.refresh();
+    });
+  };
+
   return (
     <div className={`flex items-center gap-1.5 sm:gap-3 ${className}`}>
-      {languageFlags.map((lang) => {
-        const Flag = FLAG[lang.flag];
+      {OPTIONS.map(({ code, Flag, labelKey }) => {
+        const active = locale === code;
+        const label = t(copy.lang[labelKey]);
         return (
           <button
-            key={lang.code}
+            key={code}
             type="button"
-            aria-label={`${lang.label}に切り替え`}
-            className="flex min-h-11 min-w-11 items-center justify-center opacity-90 transition-opacity hover:opacity-100 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold"
+            disabled={pending}
+            aria-label={label}
+            aria-pressed={active}
+            onClick={() => switchTo(code)}
+            className={`flex min-h-11 min-w-11 items-center justify-center transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
+              active ? "opacity-100" : "opacity-55 hover:opacity-100"
+            } ${pending ? "pointer-events-none" : ""}`}
           >
-            <Flag className="h-5 w-[30px] overflow-hidden rounded-[1px] shadow-[0_0_0_1px_rgba(255,255,255,0.18)] sm:h-[22px] sm:w-[33px]" />
+            <Flag
+              className={`h-5 w-[30px] overflow-hidden rounded-[1px] sm:h-[22px] sm:w-[33px] ${
+                active
+                  ? "shadow-[0_0_0_2px_rgba(201,169,98,0.9)]"
+                  : "shadow-[0_0_0_1px_rgba(255,255,255,0.18)]"
+              }`}
+            />
           </button>
         );
       })}

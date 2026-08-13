@@ -1,7 +1,6 @@
 /**
  * Languages shown as flag buttons in the header.
- * Japanese is the site default — no JP flag (matches common JP restaurant sites).
- * Visual-only until real locale routing is wired.
+ * Japanese is the site default. Switching is persisted in a cookie.
  */
 export const languageFlags = [
   { code: "en", label: "English", flag: "us" },

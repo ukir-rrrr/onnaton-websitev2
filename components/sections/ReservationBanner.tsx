@@ -10,16 +10,18 @@ import {
   type LucideIcon,
 } from "lucide-react";
 import { ReserveButton } from "@/components/ui/ReserveButton";
-
-const points: { label: string; icon: LucideIcon }[] = [
-  { label: "コース料理専門店", icon: UtensilsCrossed },
-  { label: "完全予約制", icon: CalendarCheck },
-  { label: "事前予約が必要です", icon: Clock },
-  { label: "予約なしでのご来店には対応できません", icon: Ban },
-  { label: "ご予約時に希望コースをお選びいただきます", icon: ListChecks },
-];
+import { copy } from "@/lib/i18n/copy";
+import { useT } from "@/components/i18n/LocaleProvider";
 
 export function ReservationBanner() {
+  const { t } = useT();
+  const points: { label: string; icon: LucideIcon }[] = [
+    { label: t(copy.reservationBanner.p1), icon: UtensilsCrossed },
+    { label: t(copy.reservationBanner.p2), icon: CalendarCheck },
+    { label: t(copy.reservationBanner.p3), icon: Clock },
+    { label: t(copy.reservationBanner.p4), icon: Ban },
+    { label: t(copy.reservationBanner.p5), icon: ListChecks },
+  ];
   return (
     <section className="relative w-full overflow-hidden border-y border-cream/[0.08] bg-[#161412]">
       <div className="relative px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
@@ -30,7 +32,7 @@ export function ReservationBanner() {
           <div className="flex items-center gap-4">
             <span className="hidden h-8 w-px bg-wipe sm:block" aria-hidden />
             <h2 className="font-serif-jp text-center text-xl font-normal tracking-[0.08em] text-cream sm:text-2xl lg:text-[26px]">
-              コース料理専門店・完全予約制
+              {t(copy.reservationBanner.heading)}
             </h2>
             <span className="hidden h-8 w-px bg-wipe sm:block" aria-hidden />
           </div>
@@ -73,9 +75,27 @@ export function ReservationBanner() {
           ))}
         </motion.ul>
 
+        <motion.div
+          className="mx-auto mt-10 max-w-2xl text-center lg:mt-12"
+          initial={{ opacity: 0, y: 16 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.4 }}
+          transition={{ duration: 0.5, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
+        >
+          <p className="text-[13px] leading-[1.9] tracking-[0.04em] text-cream/75 sm:text-[14px]">
+            {t(copy.children.lead)}
+          </p>
+          <a
+            href="/#children"
+            className="mt-2 inline-flex min-h-11 items-center text-[13px] tracking-[0.06em] text-gold underline-offset-4 transition-colors hover:text-cream hover:underline sm:mt-3 sm:text-[13px]"
+          >
+            {t(copy.children.more)} →
+          </a>
+        </motion.div>
+
         {/* Outside the 5-col cells so width is not capped by a narrow column */}
         <motion.div
-          className="mx-auto mt-10 flex max-w-5xl justify-center lg:mt-12"
+          className="mx-auto mt-8 flex max-w-5xl justify-center lg:mt-10"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}

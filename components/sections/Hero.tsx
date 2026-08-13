@@ -13,11 +13,14 @@ import {
 } from "@/lib/motion/diagonalWipe";
 import { PageIntro, type IntroPhase } from "@/components/hero/PageIntro";
 import { ReserveButton } from "@/components/ui/ReserveButton";
+import { copy } from "@/lib/i18n/copy";
+import { useT } from "@/components/i18n/LocaleProvider";
 
 const LOGO_HOLD_MS = 2500;
 const SLIDE_INTERVAL_MS = 6000;
 
 export function Hero() {
+  const { t } = useT();
   const reduceMotion = useReducedMotion() === true;
   const [phase, setPhase] = useState<IntroPhase>("logo");
   const [current, setCurrent] = useState(0);
@@ -177,29 +180,25 @@ export function Hero() {
         >
           <div className="w-full max-w-[36rem]">
             <p className="font-serif-jp mb-1.5 text-[17px] font-normal tracking-[0.12em] text-[#e0c89a] [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-2.5 sm:text-[20px] sm:text-[#c4a574] sm:[text-shadow:none]">
-              沖縄しゃぶしゃぶ 恩納豚 那覇
+              {t(copy.hero.kicker)}
             </p>
 
             <p className="font-serif-jp mb-4 text-[13px] font-normal tracking-[0.12em] text-[#e0c89a] [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[16px] sm:text-[#c4a574] sm:[text-shadow:none]">
-              コース料理専門店
+              {t(copy.hero.specialty)}
               <span className="mx-2 text-[#e0c89a]/80 sm:text-[#c4a574]/70" aria-hidden>
                 ｜
               </span>
-              完全予約制
+              {t(copy.hero.reservation)}
             </p>
 
             <h1 className="font-serif-jp mb-4 text-[23px] font-medium leading-[1.6] tracking-[0.06em] text-cream [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[40px] sm:leading-[1.7] sm:[text-shadow:none] lg:text-[48px]">
-              <span className="block">あぐー豚×特選石垣牛</span>
-              <span className="block">沖縄の恵みを、</span>
-              <span className="block">極上のしゃぶしゃぶで。</span>
+              <span className="block">{t(copy.hero.h1a)}</span>
+              <span className="block">{t(copy.hero.h1b)}</span>
+              <span className="block">{t(copy.hero.h1c)}</span>
             </h1>
 
             <p className="font-serif-jp mb-6 max-w-[28rem] text-[13px] leading-[1.9] tracking-[0.06em] text-cream/95 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-8 sm:text-[14px] sm:leading-[2.1] sm:text-cream/85 sm:[text-shadow:none]">
-              島の水と大地が育てた銘柄豚と和牛を当店だけの出汁でいただく
-              <br className="hidden sm:block" />
-              唯一無二のしゃぶしゃぶ体験。旅の一夜を、忘れられない特別な
-              <br className="hidden sm:block" />
-              時間に。
+              {t(copy.hero.body)}
             </p>
 
             <ReserveButton
@@ -207,7 +206,7 @@ export function Hero() {
             />
 
             <p className="text-[12px] tracking-[0.04em] text-cream/75 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:text-[13px] sm:text-cream/55 sm:[text-shadow:none]">
-              （完全予約制のため、事前のご予約をお願いいたします。）
+              {t(copy.hero.note)}
             </p>
           </div>
         </motion.div>

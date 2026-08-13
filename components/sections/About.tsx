@@ -3,10 +3,13 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { photos } from "@/lib/content/photos";
+import { copy } from "@/lib/i18n/copy";
+import { useT } from "@/components/i18n/LocaleProvider";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function About() {
+  const { t } = useT();
   const reduceMotion = useReducedMotion() === true;
 
   const fadeUp = (delay = 0) =>
@@ -53,7 +56,7 @@ export function About() {
             className="mt-3.5 text-[13px] tracking-[0.2em] text-cream/55"
             {...fadeUp(0.12)}
           >
-            コンセプト
+            {t(copy.about.conceptJa)}
           </motion.p>
         </div>
         <div className="max-w-[420px] lg:pt-6">
@@ -61,13 +64,13 @@ export function About() {
             className="font-serif-jp text-base leading-[2.9] text-cream"
             {...fadeLeft(0.18)}
           >
-            良いものには、それだけの理由がある。
+            {t(copy.about.line1)}
           </motion.p>
           <motion.p
             className="font-serif-jp text-base leading-[2.9] text-cream"
             {...fadeLeft(0.3)}
           >
-            沖縄の恵みを、恩納豚だけの出汁で。
+            {t(copy.about.line2)}
           </motion.p>
         </div>
       </div>
@@ -82,7 +85,7 @@ export function About() {
         >
           <Image
             src={photos.interiorKaiseki}
-            alt="店内"
+            alt={t(copy.about.interiorAlt)}
             fill
             sizes="100vw"
             quality={90}
@@ -104,13 +107,13 @@ export function About() {
             className="font-serif-jp mb-3 text-2xl font-bold text-cream sm:mb-4 sm:text-3xl lg:text-[42px]"
             {...fadeUp(0.2)}
           >
-            沖縄の恵みを、極上のしゃぶしゃぶで。
+            {t(copy.about.overlay)}
           </motion.p>
           <motion.p
             className="text-[13px] tracking-[0.02em] text-cream/75 sm:text-sm"
             {...fadeUp(0.35)}
           >
-            Okinawa&apos;s finest ingredients, served as exquisite shabu-shabu.
+            {t(copy.about.overlayEn)}
           </motion.p>
         </div>
 
@@ -141,42 +144,24 @@ export function About() {
             className="mb-6 text-[13px] tracking-[0.28em] text-gold sm:mb-8 sm:text-[18px]"
             {...fadeUp(0)}
           >
-            恩納豚について
+            {t(copy.about.heading)}
           </motion.p>
 
           <motion.h3
             className="font-serif-jp mb-10 text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-12 sm:text-[28px] sm:leading-[2.05] lg:text-[32px]"
             {...fadeUp(0.1)}
           >
-            あぐー豚と特選石垣牛。沖縄が誇る二大名産を
-            <br className="hidden sm:block" />
-            数日間熟成させた恩納豚オリジナルの出汁でいただく
-            <br className="hidden sm:block" />
-            唯一無二のしゃぶしゃぶ専門店です。
+            {t(copy.about.lead)}
           </motion.h3>
 
           <motion.div {...fadeUp(0.2)}>
             <div className="font-serif-jp space-y-8 text-[14px] font-normal leading-[2.35] tracking-[0.04em] text-cream/80 sm:text-[16px] sm:leading-[2.5]">
-              <p>
-                あぐー豚や特選石垣牛は、通常のお肉に比べて甘みと旨みが際立ちます。
-                その味わいに負けないよう、当店では数日間熟成させたコクのある
-                オリジナルの出汁をご用意しました。
-                <br className="hidden sm:block" />
-                ポン酢やごまだれではなく、この出汁と共に味わうことで肉本来の旨さをより引き出します。
-              </p>
-              <p>
-                使用する食材の約95%は沖縄県産。沖縄県農林水産部が推奨する
-                <br className="hidden sm:block" />
-                「おきなわ食材の店」にも認定されています。
-              </p>
-              <p>
-                良いものをお出しするには、それだけの手間と時間がかかります。
-                <br className="hidden sm:block" />
-                その一皿の背景にある想いごと、味わっていただければ幸いです。
-              </p>
+              <p>{t(copy.about.p1)}</p>
+              <p>{t(copy.about.p2)}</p>
+              <p>{t(copy.about.p3)}</p>
             </div>
             <p className="font-serif-jp mt-12 text-left text-[14px] tracking-[0.18em] text-cream sm:mt-14 sm:text-[15px]">
-              恩納豚　店主
+              {t(copy.about.chef)}
             </p>
           </motion.div>
         </div>
@@ -197,7 +182,7 @@ export function About() {
           >
             <Image
               src={photos.onnatonAbout}
-              alt="恩納豚について"
+              alt={t(copy.about.photoAlt)}
               fill
               sizes="(max-width: 1024px) 100vw, 50vw"
               quality={90}

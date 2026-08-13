@@ -7,22 +7,25 @@ import { photos } from "@/lib/content/photos";
 import { interiorFacts } from "@/lib/content/store";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { useIsMobile } from "@/lib/hooks/useIsMobile";
+import { copy } from "@/lib/i18n/copy";
+import { useT } from "@/components/i18n/LocaleProvider";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Interior() {
+  const { t, tr } = useT();
   const reduceMotion = useReducedMotion() === true;
   const isMobile = useIsMobile();
 
   return (
-    <section id="interior" className="w-full px-6 pb-24 sm:px-10 sm:pb-32 lg:px-14 lg:pb-[200px]">
+    <section id="interior" className="scroll-mt-24 w-full px-6 pb-24 sm:px-10 sm:pb-32 lg:px-14 lg:pb-[200px]">
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 24 }}
         whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.85, ease }}
       >
-        <SectionEyebrow eyebrow="INTERIOR & SEATS" heading="店内・お席" className="mb-16 sm:mb-20" />
+        <SectionEyebrow eyebrow="INTERIOR & SEATS" heading={t(copy.interior.heading)} className="mb-16 sm:mb-20" />
       </motion.div>
 
       <motion.div
@@ -38,8 +41,8 @@ export function Interior() {
         }}
       >
         {[
-          { src: photos.interiorTatami, alt: "お座敷個室" },
-          { src: photos.interiorTable, alt: "テーブル席" },
+          { src: photos.interiorTatami, alt: t(copy.interior.tatami) },
+          { src: photos.interiorTable, alt: t(copy.interior.table) },
         ].map((photo) => (
           <motion.div
             key={photo.alt}
@@ -101,11 +104,11 @@ export function Interior() {
         viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.85, delay: 0.1, ease }}
       >
-        <div className="grid flex-1 grid-cols-2 gap-8 sm:grid-cols-4">
+        <div className="grid flex-1 grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
           {interiorFacts.map((fact) => (
             <div key={fact.label}>
-              <p className="mb-2.5 text-[13px] text-cream/50">{fact.label}</p>
-              <p className="text-[15px] text-cream sm:text-base">{fact.value}</p>
+              <p className="mb-2.5 text-[13px] text-cream/50">{tr(fact.label)}</p>
+              <p className="text-[15px] text-cream sm:text-base">{tr(fact.value)}</p>
             </div>
           ))}
         </div>

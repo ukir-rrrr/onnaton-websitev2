@@ -1,13 +1,21 @@
 import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { ExecutiveCourse } from "@/components/course/ExecutiveCourse";
+import { CourseDetail } from "@/components/course/ExecutiveCourse";
+import { ExtraMenu } from "@/components/course/ExtraMenu";
+import { DrinkMenu } from "@/components/course/DrinkMenu";
+import { courseMenus } from "@/lib/content/executiveCourse";
+import { getLocale } from "@/lib/i18n/getLocale";
+import { copy } from "@/lib/i18n/copy";
+import { t } from "@/lib/i18n/types";
 
-export const metadata: Metadata = {
-  title: "エグゼクティブコース | 恩納豚（おんなとん）",
-  description:
-    "もとぶ牛・あぐー豚を味わう恩納豚のエグゼクティブコース。お一人様 10,500円（税別）。完全予約制。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return {
+    title: t(locale, copy.meta.courseTitle),
+    description: t(locale, copy.meta.courseDesc),
+  };
+}
 
 export default function CoursePage() {
   return (
@@ -18,7 +26,20 @@ export default function CoursePage() {
       </div>
 
       <main>
-        <ExecutiveCourse />
+        {courseMenus.map((course, i) => {
+          const next = courseMenus[i + 1];
+          return (
+            <CourseDetail
+              key={course.id}
+              course={course}
+              headingAs={i === 0 ? "h1" : "h2"}
+              id={course.id}
+              nextCourseHref={next ? `#${next.id}` : "#extras"}
+            />
+          );
+        })}
+        <ExtraMenu nextHref="#drinks" />
+        <DrinkMenu />
       </main>
 
       <Footer />

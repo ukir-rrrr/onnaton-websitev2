@@ -1,24 +1,32 @@
 "use client";
 
 import { useEffect, useId, useState } from "react";
+import Link from "next/link";
 import { siteConfig } from "@/lib/content/store";
+import { copy } from "@/lib/i18n/copy";
+import { useT } from "@/components/i18n/LocaleProvider";
 
 interface ReserveButtonProps {
   variant?: "solid" | "outline";
   className?: string;
   children?: React.ReactNode;
+  /** Pre-select this course on the online form (EN / KO / ZH). */
+  courseId?: string;
 }
 
 function isDesktopPointer() {
   return window.matchMedia("(hover: hover) and (pointer: fine)").matches;
 }
 
-/** 電話で予約する — mobile dials; desktop shows number + copy. */
+/** JA: phone reservation. EN / KO / ZH: online reservation form. */
 export function ReserveButton({
   variant = "solid",
   className = "",
-  children = "電話で予約する",
+  children,
+  courseId,
 }: ReserveButtonProps) {
+  const { t, isJa } = useT();
+  const label = children ?? (isJa ? t(copy.reserve.call) : t(copy.reserve.online));
   const titleId = useId();
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
@@ -50,6 +58,17 @@ export function ReserveButton({
       ? "bg-gold text-ink hover:bg-cream"
       : "border border-gold text-gold hover:bg-gold hover:text-ink";
 
+  if (!isJa) {
+    const href = courseId
+      ? `/reserve?course=${encodeURIComponent(courseId)}`
+      : "/reserve";
+    return (
+      <Link href={href} className={`${base} ${styles} ${className}`}>
+        {label}
+      </Link>
+    );
+  }
+
   const copyNumber = async () => {
     try {
       await navigator.clipboard.writeText(siteConfig.reservationPhoneDisplay);
@@ -71,7 +90,7 @@ export function ReserveButton({
           setOpen(true);
         }}
       >
-        {children}
+        {label}
       </a>
 
       {open ? (
@@ -91,13 +110,13 @@ export function ReserveButton({
               id={titleId}
               className="mb-3 text-xs tracking-[0.28em] text-gold sm:text-[12px]"
             >
-              ご予約電話番号
+              {t(copy.reserve.phoneLabel)}
             </p>
             <p className="font-serif-jp mb-2 text-[30px] font-medium tracking-[0.08em] text-cream sm:text-[42px]">
               {siteConfig.reservationPhoneDisplay}
             </p>
             <p className="mb-8 text-[13px] leading-[1.8] tracking-[0.04em] text-cream/60">
-              受付 13:30〜21:00（完全予約制・お電話のみ）
+              {t(copy.reserve.hours)}
             </p>
 
             <div className="flex flex-col gap-3">
@@ -106,20 +125,20 @@ export function ReserveButton({
                 onClick={copyNumber}
                 className="inline-flex min-h-11 w-full items-center justify-center rounded-sm bg-gold px-6 py-3.5 text-[14px] font-bold tracking-[0.14em] text-ink transition-colors hover:bg-cream"
               >
-                {copied ? "コピーしました" : "番号をコピー"}
+                {copied ? t(copy.reserve.copied) : t(copy.reserve.copy)}
               </button>
               <a
                 href={siteConfig.reservationPhoneHref}
                 className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-cream/25 px-6 py-3.5 text-[14px] font-bold tracking-[0.14em] text-cream transition-colors hover:border-gold hover:text-gold"
               >
-                電話をかける
+                {t(copy.reserve.dial)}
               </a>
               <button
                 type="button"
                 onClick={() => setOpen(false)}
                 className="mt-1 flex min-h-11 w-full items-center justify-center text-[13px] tracking-[0.12em] text-cream/45 transition-colors hover:text-cream/70"
               >
-                閉じる
+                {t(copy.reserve.close)}
               </button>
             </div>
           </div>

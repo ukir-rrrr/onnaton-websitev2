@@ -2,10 +2,11 @@
 
 import { Fragment, useEffect, useState, type MouseEvent } from "react";
 import Link from "next/link";
-import { usePathname } from "next/navigation";
-import { navLinks } from "@/lib/content/nav";
+import { usePathname, useRouter } from "next/navigation";
 import { siteConfig } from "@/lib/content/store";
 import { LanguageFlags } from "@/components/layout/LanguageFlags";
+import { copy } from "@/lib/i18n/copy";
+import { useT } from "@/components/i18n/LocaleProvider";
 
 /** Home-page section id → matching nav href */
 const SECTION_TO_NAV: { id: string; href: string }[] = [
@@ -23,12 +24,32 @@ function navClass(active: boolean) {
     : "font-serif-jp rounded px-3.5 py-1.5 text-[13.5px] tracking-[0.06em] text-cream hover:bg-cream/6 hover:text-gold";
 }
 
+const SCROLL_TO_KEY = "onnaton-scroll-to";
+
+function scrollToId(id: string) {
+  const el = document.getElementById(id);
+  if (!el) return false;
+  el.scrollIntoView({ behavior: "smooth", block: "start" });
+  return true;
+}
+
 export function Header() {
+  const { t, isJa } = useT();
+  const reserveHref = isJa ? "/#reserve" : "/reserve";
+  const navLinks = [
+    { href: "/", label: t(copy.nav.top) },
+    { href: "/#about-text", label: t(copy.nav.about) },
+    { href: "/#kodawari", label: t(copy.nav.kodawari) },
+    { href: "/course", label: t(copy.nav.course) },
+    { href: "/seats", label: t(copy.nav.seats) },
+    { href: "/#access", label: t(copy.nav.access) },
+  ];
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [hidden, setHidden] = useState(false);
   const [activeHref, setActiveHref] = useState("/");
   const pathname = usePathname();
+  const router = useRouter();
 
   useEffect(() => {
     let lastY = window.scrollY;
@@ -65,6 +86,10 @@ export function Header() {
     }
     if (pathname === "/seats") {
       setActiveHref("/seats");
+      return;
+    }
+    if (pathname === "/reserve") {
+      setActiveHref("/reserve");
       return;
     }
     if (pathname !== "/") {
@@ -119,6 +144,25 @@ export function Header() {
     return () => observer.disconnect();
   }, [pathname]);
 
+  // App Router の <Link href="/#section"> は同一ページだとスクロールしないことがある
+  useEffect(() => {
+    if (pathname !== "/") return;
+
+    const stored = sessionStorage.getItem(SCROLL_TO_KEY);
+    if (stored) sessionStorage.removeItem(SCROLL_TO_KEY);
+    const id = stored || window.location.hash.replace(/^#/, "");
+    if (!id) return;
+
+    const timer = window.setTimeout(() => {
+      if (scrollToId(id)) {
+        window.history.replaceState(null, "", `/#${id}`);
+        setActiveHref(`/#${id}`);
+      }
+    }, 80);
+
+    return () => window.clearTimeout(timer);
+  }, [pathname]);
+
   useEffect(() => {
     if (!menuOpen) return;
     const prev = document.body.style.overflow;
@@ -136,11 +180,27 @@ export function Header() {
 
   const onNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
     setMenuOpen(false);
-    // Same-page "/" does not scroll in the App Router — force top.
+    setHidden(false);
+
     if (href === "/" && pathname === "/") {
       event.preventDefault();
       scrollToTop();
+      return;
     }
+
+    const hash = href.includes("#") ? href.slice(href.indexOf("#") + 1) : "";
+    if (!hash) return;
+
+    event.preventDefault();
+    if (pathname === "/") {
+      scrollToId(hash);
+      window.history.pushState(null, "", href);
+      setActiveHref(href);
+      return;
+    }
+
+    sessionStorage.setItem(SCROLL_TO_KEY, hash);
+    router.push("/");
   };
 
   return (
@@ -199,12 +259,16 @@ export function Header() {
 
           <LanguageFlags />
 
-          <a
-            href="/#reserve"
+          <Link
+            href={reserveHref}
+            onClick={(event) => {
+              if (isJa) onNavClick(event, "/#reserve");
+            }}
             className="my-3.5 flex items-center rounded-sm bg-gold px-7 font-bold tracking-[0.05em] text-ink hover:bg-cream"
+            aria-current={pathname === "/reserve" ? "page" : undefined}
           >
-            予約・お問い合わせ
-          </a>
+            {isJa ? t(copy.nav.reserve) : t(copy.reserve.online)}
+          </Link>
         </nav>
 
         <div className="flex items-center lg:hidden">
@@ -212,7 +276,7 @@ export function Header() {
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
-            aria-label={menuOpen ? "メニューを閉じる" : "メニューを開く"}
+            aria-label={menuOpen ? t(copy.nav.closeMenu) : t(copy.nav.openMenu)}
             aria-expanded={menuOpen}
             className="flex min-h-11 w-14 flex-col items-center justify-center gap-1.5 self-stretch border-l border-cream/20 sm:w-16"
           >
@@ -246,13 +310,16 @@ export function Header() {
               </Link>
             ))}
           </nav>
-          <a
-            href="/#reserve"
-            onClick={() => setMenuOpen(false)}
+          <Link
+            href={reserveHref}
+            onClick={(event) => {
+              setMenuOpen(false);
+              if (isJa) onNavClick(event, "/#reserve");
+            }}
             className="mt-5 flex min-h-12 items-center justify-center bg-gold text-[15px] font-bold tracking-[0.05em] text-ink"
           >
-            予約・お問い合わせ
-          </a>
+            {isJa ? t(copy.nav.reserve) : t(copy.reserve.online)}
+          </Link>
         </div>
       )}
     </header>

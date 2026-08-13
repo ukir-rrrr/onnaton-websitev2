@@ -13,14 +13,21 @@ export interface SeatType {
   imageLeft: boolean;
 }
 
-/** お席について — placeholder copy until final seat copy is supplied. */
+export interface TennaiShot {
+  src: string;
+  alt: string;
+  /** Tailwind col-span on sm+ (mobile is always full width) */
+  className: string;
+}
+
+/** お席について */
 export const seatList: SeatType[] = [
   {
     id: "zashiki",
     name: "お座敷",
     navLabel: "お座敷",
     desc: "ゆったりとくつろげるお座敷席。ご家族やご友人との団らん、記念日のお食事など、落ち着いた時間をお過ごしいただけます。",
-    photo: photos.interiorTatami,
+    photo: photos.tennai04,
     imageLeft: true,
   },
   {
@@ -31,16 +38,71 @@ export const seatList: SeatType[] = [
     photo: photos.interiorTable,
     imageLeft: false,
   },
-  {
-    id: "private",
-    name: "個室",
-    navLabel: "個室",
-    note: "※個室のご利用はご予約時にご相談ください。",
-    desc: "周囲を気にせず寛げるお座敷個室。大切な方との特別な夜や、落ち着いた接待の場としてご利用いただけます。",
-    photo: photos.interiorKaiseki,
-    imageLeft: true,
-  },
 ];
 
 export const seatsIntro =
-  "お座敷でのくつろぎの時間。テーブル席での団らん。個室での特別なひととき。恩納豚では、記念日・ご家族でのお食事・接待など、シーンに合わせてお席をお選びいただけます。";
+  "お座敷でのくつろぎの時間。テーブル席での団らん。恩納豚では、記念日・会食・接待など、シーンに合わせてお席をお選びいただけます。";
+
+/** 店内写真 — ワイドとペアを交互にして雑誌のようなリズムにする */
+export const tennaiGallery: TennaiShot[] = [
+  {
+    src: photos.tennai01,
+    alt: "色紙が並ぶ店内の通路",
+    className: "sm:col-span-12 aspect-[16/9] lg:aspect-[2.15/1]",
+  },
+  {
+    src: photos.tennai06,
+    alt: "暖簾と店内の入口",
+    className: "sm:col-span-7 aspect-[3/2]",
+  },
+  {
+    src: photos.tennai03,
+    alt: "店内の行灯",
+    className: "sm:col-span-5 aspect-[3/2]",
+  },
+  {
+    src: photos.tennai04,
+    alt: "お座敷",
+    className: "sm:col-span-12 aspect-[16/9] lg:aspect-[2.15/1]",
+  },
+  {
+    src: photos.tennai05,
+    alt: "お席のセッティング",
+    className: "sm:col-span-6 aspect-[3/2]",
+  },
+  {
+    src: photos.tennai07,
+    alt: "店内のシーサー",
+    className: "sm:col-span-6 aspect-[3/2]",
+  },
+  {
+    src: photos.tennai02,
+    alt: "色紙の壁",
+    className: "sm:col-span-4 aspect-[3/2]",
+  },
+  {
+    src: photos.tennai08,
+    alt: "色紙と行灯",
+    className: "sm:col-span-4 aspect-[3/2]",
+  },
+  {
+    src: photos.tennai10,
+    alt: "特選石垣牛の認定",
+    className: "sm:col-span-4 aspect-[3/2]",
+  },
+  {
+    src: photos.tennai11,
+    alt: "恩納豚の暖簾と通路",
+    className: "sm:col-span-7 aspect-[3/2]",
+  },
+  {
+    src: photos.tennai09,
+    alt: "お客様からのメッセージ",
+    className: "sm:col-span-5 aspect-[3/2]",
+  },
+  {
+    src: photos.tennai12,
+    alt: "夜間の入口",
+    className: "sm:col-span-12 aspect-[16/9] lg:aspect-[2.15/1]",
+  },
+];

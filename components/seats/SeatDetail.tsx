@@ -1,15 +1,19 @@
+"use client";
+
 import Image from "next/image";
 import type { SeatType } from "@/lib/content/seats";
+import { useT } from "@/components/i18n/LocaleProvider";
 
 /** Overlapping photo + dark copy panel (reference: Sayaka seats). */
 export function SeatDetail({ seat }: { seat: SeatType }) {
+  const { tr } = useT();
   const imageLeft = seat.imageLeft;
 
   return (
     <section id={seat.id} className="scroll-mt-24 px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
       {seat.note ? (
         <p className="mb-8 text-center text-[13px] tracking-[0.04em] text-cream/65 sm:mb-10">
-          {seat.note}
+          {tr(seat.note)}
         </p>
       ) : null}
 
@@ -21,7 +25,7 @@ export function SeatDetail({ seat }: { seat: SeatType }) {
         <div className="relative aspect-[16/10] w-full overflow-hidden lg:w-[68%]">
           <Image
             src={seat.photo}
-            alt={seat.name}
+            alt={tr(seat.name)}
             fill
             sizes="(min-width: 1024px) 68vw, 100vw"
             className="object-cover"
@@ -36,10 +40,10 @@ export function SeatDetail({ seat }: { seat: SeatType }) {
           }`}
         >
           <h2 className="font-serif-jp mb-5 text-[24px] tracking-[0.12em] text-cream sm:mb-6 sm:text-[26px]">
-            {seat.name}
+            {tr(seat.name)}
           </h2>
           <p className="font-serif-jp text-[14px] leading-[2.15] tracking-[0.04em] text-cream/85 sm:text-[14px] sm:leading-[2.25]">
-            {seat.desc}
+            {tr(seat.desc)}
           </p>
         </div>
       </div>

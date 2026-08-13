@@ -1,6 +1,11 @@
 import type { Metadata, Viewport } from "next";
 import { Sawarabi_Mincho, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
 import "./globals.css";
+import { getLocale } from "@/lib/i18n/getLocale";
+import { htmlLang } from "@/lib/i18n/config";
+import { copy } from "@/lib/i18n/copy";
+import { t } from "@/lib/i18n/types";
+import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 
 const sawarabiMincho = Sawarabi_Mincho({
   variable: "--font-sawarabi-mincho",
@@ -30,11 +35,13 @@ const notoSerifJp = Noto_Serif_JP({
   display: "swap",
 });
 
-export const metadata: Metadata = {
-  title: "恩納豚（おんなとん）| 沖縄しゃぶしゃぶ 完全予約制コース料理専門店",
-  description:
-    "あぐー豚×特選石垣牛。沖縄・那覇の完全予約制しゃぶしゃぶコース専門店「恩納豚（おんなとん）」。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return {
+    title: t(locale, copy.meta.homeTitle),
+    description: t(locale, copy.meta.homeDesc),
+  };
+}
 
 export const viewport: Viewport = {
   width: "device-width",
@@ -42,13 +49,17 @@ export const viewport: Viewport = {
   viewportFit: "cover",
 };
 
-export default function RootLayout({ children }: LayoutProps<"/">) {
+export default async function RootLayout({ children }: LayoutProps<"/">) {
+  const locale = await getLocale();
   return (
     <html
-      lang="ja"
+      lang={htmlLang[locale]}
       className={`${sawarabiMincho.variable} ${notoSansJp.variable} ${notoSerifJp.variable}`}
     >
-      <body>{children}</body>
+      <body>
+        <LocaleProvider locale={locale}>{children}</LocaleProvider>
+      </body>
     </html>
   );
 }
+

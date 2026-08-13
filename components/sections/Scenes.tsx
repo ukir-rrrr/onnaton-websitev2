@@ -5,10 +5,13 @@ import { motion, useReducedMotion } from "motion/react";
 import { sceneList } from "@/lib/content/scenes";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { useIsMobile } from "@/lib/hooks/useIsMobile";
+import { copy } from "@/lib/i18n/copy";
+import { useT } from "@/components/i18n/LocaleProvider";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Scenes() {
+  const { t, tr } = useT();
   const reduceMotion = useReducedMotion() === true;
   const isMobile = useIsMobile();
 
@@ -20,7 +23,7 @@ export function Scenes() {
         viewport={{ once: true, amount: 0.4 }}
         transition={{ duration: 0.85, ease }}
       >
-        <SectionEyebrow eyebrow="SCENE" heading="ご利用シーン" className="mb-16 sm:mb-20" />
+        <SectionEyebrow eyebrow="SCENE" heading={t(copy.scenes.heading)} className="mb-16 sm:mb-20" />
       </motion.div>
 
       <motion.div
@@ -78,7 +81,7 @@ export function Scenes() {
             >
               <Image
                 src={scene.photo}
-                alt={scene.title}
+                alt={tr(scene.title)}
                 fill
                 sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
                 quality={90}
@@ -88,10 +91,10 @@ export function Scenes() {
             <div className="absolute inset-0 bg-gradient-to-b from-black/0 from-40% to-black/85" />
             <div className="absolute inset-x-6 bottom-6">
               <h3 className="font-serif-jp mb-2 text-lg font-semibold text-cream sm:text-[19px]">
-                {scene.title}
+                {tr(scene.title)}
               </h3>
               <p className="text-[13px] leading-[1.7] text-cream/80 sm:text-[13px]">
-                {scene.desc}
+                {tr(scene.desc)}
               </p>
             </div>
           </motion.div>

@@ -2,14 +2,21 @@ import type { Metadata } from "next";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { SeatsHero } from "@/components/seats/SeatsHero";
+import { SeatsFacts } from "@/components/seats/SeatsFacts";
 import { SeatDetail } from "@/components/seats/SeatDetail";
+import { SeatsGallery } from "@/components/seats/SeatsGallery";
 import { seatList } from "@/lib/content/seats";
+import { getLocale } from "@/lib/i18n/getLocale";
+import { copy } from "@/lib/i18n/copy";
+import { t } from "@/lib/i18n/types";
 
-export const metadata: Metadata = {
-  title: "お席について | 恩納豚（おんなとん）",
-  description:
-    "お座敷・テーブル席・個室など、恩納豚のお席のご案内です。完全予約制。",
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locale = await getLocale();
+  return {
+    title: t(locale, copy.meta.seatsTitle),
+    description: t(locale, copy.meta.seatsDesc),
+  };
+}
 
 export default function SeatsPage() {
   return (
@@ -21,9 +28,11 @@ export default function SeatsPage() {
 
       <main>
         <SeatsHero />
+        <SeatsFacts />
         {seatList.map((seat) => (
           <SeatDetail key={seat.id} seat={seat} />
         ))}
+        <SeatsGallery />
       </main>
 
       <Footer />

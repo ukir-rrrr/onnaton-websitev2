@@ -8,14 +8,21 @@ export interface KodawariItem {
   placeholderLabel?: string;
 }
 
-/** 当店のこだわり — replace desc/photo as sourcing details are finalized. */
+/** こだわり先頭の特集 — 認定ブランド「あぐー豚」 */
+export const aguFeature = {
+  num: "01",
+  heading: ["「アグー豚」ではなく、", "認定ブランド「あぐー豚」"] as const,
+  photo: photos.kodawariAguPork,
+  photoAlt: "認定ブランド あぐー豚のしゃぶしゃぶ",
+  paragraphs: [
+    "恩納豚で使用しているのは、JAおきなわの品質基準をクリアした、認定ブランドの「あぐー豚」です。",
+    "沖縄でよく目にする「アグー豚」という呼び方とは異なり、ひらがなの「あぐー」は、JAおきなわが商標を管理するブランド名称。\n定められた品質基準を満たし、認定された豚肉だけが「あぐー」として流通します。",
+    "恩納豚では、この認定された「あぐー豚」を使用しています。脂に上品な甘みがあり、しゃぶしゃぶにすることで柔らかさと旨みが際立ちます。沖縄が誇る上質な味わいを、存分にお楽しみください。",
+  ],
+} as const;
+
+/** 当店のこだわり — あぐー豚特集の下に並ぶ項目 */
 export const kodawariList: KodawariItem[] = [
-  {
-    num: "01",
-    title: "沖縄県産 あぐー豚",
-    desc: "島の気候でじっくり育てられたあぐー豚は、脂に上品な甘みがあり、しゃぶしゃぶにすることでその柔らかさと旨みが際立ちます。",
-    photo: photos.kodawariAguPork,
-  },
   {
     num: "02",
     title: "特選 石垣牛",

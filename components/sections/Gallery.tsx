@@ -3,7 +3,11 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { galleryList } from "@/lib/content/gallery";
+import { siteConfig } from "@/lib/content/store";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
+import { InstagramIcon } from "@/components/ui/InstagramIcon";
+import { copy } from "@/lib/i18n/copy";
+import { useT } from "@/components/i18n/LocaleProvider";
 
 /** Auto drift speed (px / ms). */
 const AUTO_SPEED = 0.025;
@@ -11,6 +15,7 @@ const AUTO_SPEED = 0.025;
 const DRAG_THRESHOLD_PX = 8;
 
 export function Gallery() {
+  const { t } = useT();
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
@@ -172,7 +177,7 @@ export function Gallery() {
   return (
     <section className="w-full overflow-hidden py-20 sm:py-32 lg:py-[160px]">
       <div className="mb-12 px-5 sm:mb-20 sm:px-10 lg:px-14">
-        <SectionEyebrow eyebrow="GALLERY" heading="ギャラリー" />
+        <SectionEyebrow eyebrow="GALLERY" heading={t(copy.gallery.heading)} />
       </div>
 
       <div
@@ -181,7 +186,7 @@ export function Gallery() {
           isDragging ? "cursor-grabbing" : "cursor-grab"
         }`}
         role="region"
-        aria-label="ギャラリー（左右にスワイプ／ドラッグで操作できます）"
+        aria-label={t(copy.gallery.aria)}
       >
         <div ref={trackRef} className="flex w-max will-change-transform">
           {loopPhotos.map((item, i) => (
@@ -205,8 +210,26 @@ export function Gallery() {
       </div>
 
       <p className="mt-5 px-5 text-center text-[12px] tracking-[0.08em] text-cream/40 sm:hidden">
-        ← スワイプで写真を送れます →
+        {t(copy.gallery.swipe)}
       </p>
+
+      <div className="mx-auto mt-14 flex max-w-[720px] flex-col items-center px-6 text-center sm:mt-20 sm:px-10 lg:mt-24">
+        <p className="font-serif-jp mb-3 text-[15px] leading-[2.1] tracking-[0.04em] text-cream/85 sm:text-base sm:leading-[2.2]">
+          {t(copy.gallery.p1)}
+        </p>
+        <p className="font-serif-jp mb-8 text-[15px] leading-[2.1] tracking-[0.04em] text-cream/75 sm:mb-10 sm:text-base sm:leading-[2.2]">
+          {t(copy.gallery.p2)}
+        </p>
+        <a
+          href={siteConfig.instagramUrl}
+          target="_blank"
+          rel="noopener noreferrer"
+          className="inline-flex min-h-11 items-center justify-center gap-3 border border-gold px-8 py-3.5 text-[14px] font-bold tracking-[0.08em] text-gold transition-colors hover:bg-gold hover:text-ink sm:min-w-[280px] sm:px-12"
+        >
+          <InstagramIcon className="h-[18px] w-[18px]" />
+          {siteConfig.instagramHandle}
+        </a>
+      </div>
     </section>
   );
 }

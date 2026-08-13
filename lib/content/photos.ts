@@ -21,6 +21,19 @@ export const photos = {
   course015: "/images/course015.jpg",
   course016: "/images/course016.jpg",
   course017: "/images/course017.jpg",
+  course018: "/images/course018.jpg",
+  course019: "/images/course019.jpg",
+  course020: "/images/course020.jpg",
+  course021: "/images/course021.jpg",
+  course022: "/images/course022.jpg",
+  course023: "/images/course023.jpg",
+  course024: "/images/course024.jpg",
+
+  /** 追加のお料理 */
+  tuika01: "/images/tuika_01.jpg",
+  tuika02: "/images/tuika_02.jpg",
+  tuika03: "/images/tuika_03.jpg",
+  tuika04: "/images/tuika_04.jpg",
 
   ishigakiBeef: "/images/ishigaki-beef.jpg",
   shabuDashi: "/images/shabu-dashi.jpg",
@@ -46,9 +59,23 @@ export const photos = {
   /** About / 恩納豚について — vertical portrait. */
   onnatonAbout: "/images/onnnaton_tuite.jpg",
   // 当店のこだわり
-  kodawariAguPork:"/images/kodawari_agu_buta.jpg",
+  kodawariAguPork: "/images/kodawariagubuta.jpg",
+  kodawariAguButa: "/images/kodawari_agu_buta.jpg",
   kodawariShabuDashi:"/images/kodawari_03.jpg",
   kodawariYasai:"/images/kodawari_04.jpg",
+  /** お席ページ — 店内写真 */
+  tennai01: "/images/tennai_01.jpg",
+  tennai02: "/images/tennai_02.jpg",
+  tennai03: "/images/tennai_03.jpg",
+  tennai04: "/images/tennai_04.jpg",
+  tennai05: "/images/tennai_05.jpg",
+  tennai06: "/images/tennai_06.jpg",
+  tennai07: "/images/tennai_07.jpg",
+  tennai08: "/images/tennai_08.jpg",
+  tennai09: "/images/tennai_09.jpg",
+  tennai10: "/images/tennai_10.jpg",
+  tennai11: "/images/tennai_11.jpg",
+  tennai12: "/images/tennai_12.jpg",
 } as const;
 
 export type PhotoKey = keyof typeof photos;
