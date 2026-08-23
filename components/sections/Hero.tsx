@@ -16,7 +16,7 @@ import { ReserveButton } from "@/components/ui/ReserveButton";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
-const LOGO_HOLD_MS = 2500;
+const LOGO_HOLD_MS = 400;
 const SLIDE_INTERVAL_MS = 6000;
 
 export function Hero() {
@@ -158,8 +158,8 @@ export function Hero() {
               key={i}
               className={
                 i === activeDot
-                  ? "h-1.5 w-1.5 rounded-full bg-cream"
-                  : "h-1.5 w-1.5 rounded-full bg-cream/35"
+                  ? "h-1.5 w-1.5 rounded-full bg-on-dark"
+                  : "h-1.5 w-1.5 rounded-full bg-on-dark/35"
               }
             />
           ))}
@@ -191,21 +191,21 @@ export function Hero() {
               {t(copy.hero.reservation)}
             </p>
 
-            <h1 className="font-serif-jp mb-4 text-[23px] font-medium leading-[1.6] tracking-[0.06em] text-cream [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[40px] sm:leading-[1.7] sm:[text-shadow:none] lg:text-[48px]">
+            <h1 className="font-serif-jp mb-4 text-[23px] font-medium leading-[1.6] tracking-[0.06em] text-on-dark [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[40px] sm:leading-[1.7] sm:[text-shadow:none] lg:text-[48px]">
               <span className="block">{t(copy.hero.h1a)}</span>
               <span className="block">{t(copy.hero.h1b)}</span>
               <span className="block">{t(copy.hero.h1c)}</span>
             </h1>
 
-            <p className="font-serif-jp mb-6 max-w-[28rem] text-[13px] leading-[1.9] tracking-[0.06em] text-cream/95 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-8 sm:text-[14px] sm:leading-[2.1] sm:text-cream/85 sm:[text-shadow:none]">
+            <p className="font-serif-jp mb-6 max-w-[28rem] text-[14px] leading-[1.9] tracking-[0.06em] text-on-dark/95 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-8 sm:text-[15px] sm:leading-[2.1] sm:text-on-dark/85 sm:[text-shadow:none]">
               {t(copy.hero.body)}
             </p>
 
             <ReserveButton
-              className="font-serif-jp mb-3 min-h-11 w-full max-w-sm rounded-none px-9 py-3.5 text-[14px] font-medium tracking-[0.18em] text-white hover:bg-cream hover:text-ink sm:w-auto sm:px-24 sm:py-3 sm:text-[14px]"
+              className="font-serif-jp mb-3 min-h-11 w-full max-w-sm rounded-none px-9 py-3.5 text-[14px] font-medium tracking-[0.18em] text-white hover:bg-on-dark hover:text-cream sm:w-auto sm:px-24 sm:py-3 sm:text-[14px]"
             />
 
-            <p className="text-[12px] tracking-[0.04em] text-cream/75 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:text-[13px] sm:text-cream/55 sm:[text-shadow:none]">
+            <p className="text-[12px] tracking-[0.04em] text-on-dark/75 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:text-[13px] sm:text-on-dark/55 sm:[text-shadow:none]">
               {t(copy.hero.note)}
             </p>
           </div>

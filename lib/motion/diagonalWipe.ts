@@ -17,4 +17,4 @@ export const CLIP_FULL =
   "polygon(0% 0%, 100% 0%, 100% 100%, 0% 100%)";
 
 export const WIPE_EASE = [0.65, 0, 0.35, 1] as const;
-export const WIPE_DURATION = 1.0;
+export const WIPE_DURATION = 0.7;

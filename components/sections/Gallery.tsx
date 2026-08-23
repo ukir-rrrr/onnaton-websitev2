@@ -213,18 +213,18 @@ export function Gallery() {
         {t(copy.gallery.swipe)}
       </p>
 
-      <div className="mx-auto mt-14 flex max-w-[720px] flex-col items-center px-6 text-center sm:mt-20 sm:px-10 lg:mt-24">
-        <p className="font-serif-jp mb-3 text-[15px] leading-[2.1] tracking-[0.04em] text-cream/85 sm:text-base sm:leading-[2.2]">
+      <div className="mx-auto mt-14 flex max-w-4xl flex-col items-center px-6 text-center sm:mt-20 sm:px-10 lg:mt-24">
+        <p className="font-serif-jp mb-3 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/88 sm:text-[18px] sm:leading-[2.2] lg:whitespace-nowrap">
           {t(copy.gallery.p1)}
         </p>
-        <p className="font-serif-jp mb-8 text-[15px] leading-[2.1] tracking-[0.04em] text-cream/75 sm:mb-10 sm:text-base sm:leading-[2.2]">
+        <p className="font-serif-jp mb-8 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/82 sm:mb-10 sm:text-[18px] sm:leading-[2.2] lg:whitespace-nowrap">
           {t(copy.gallery.p2)}
         </p>
         <a
           href={siteConfig.instagramUrl}
           target="_blank"
           rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center justify-center gap-3 border border-gold px-8 py-3.5 text-[14px] font-bold tracking-[0.08em] text-gold transition-colors hover:bg-gold hover:text-ink sm:min-w-[280px] sm:px-12"
+          className="inline-flex min-h-11 items-center justify-center gap-3 border border-gold px-8 py-3.5 text-[15px] font-bold tracking-[0.08em] text-gold transition-colors hover:bg-gold hover:text-ink sm:min-w-[280px] sm:px-12 sm:text-[16px]"
         >
           <InstagramIcon className="h-[18px] w-[18px]" />
           {siteConfig.instagramHandle}

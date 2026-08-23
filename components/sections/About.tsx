@@ -16,31 +16,31 @@ export function About() {
     reduceMotion
       ? {}
       : {
-          initial: { opacity: 0, y: 28 },
-          whileInView: { opacity: 1, y: 0 },
-          viewport: { once: true, amount: 0.35 },
-          transition: { duration: 0.9, delay, ease },
-        };
+        initial: { opacity: 0, y: 28 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true, amount: 0.35 },
+        transition: { duration: 0.9, delay, ease },
+      };
 
   const fade = (delay = 0) =>
     reduceMotion
       ? {}
       : {
-          initial: { opacity: 0 },
-          whileInView: { opacity: 1 },
-          viewport: { once: true, amount: 0.35 },
-          transition: { duration: 1, delay, ease },
-        };
+        initial: { opacity: 0 },
+        whileInView: { opacity: 1 },
+        viewport: { once: true, amount: 0.35 },
+        transition: { duration: 1, delay, ease },
+      };
 
   const fadeLeft = (delay = 0) =>
     reduceMotion
       ? {}
       : {
-          initial: { opacity: 0, x: 24 },
-          whileInView: { opacity: 1, x: 0 },
-          viewport: { once: true, amount: 0.35 },
-          transition: { duration: 0.85, delay, ease },
-        };
+        initial: { opacity: 0, x: 24 },
+        whileInView: { opacity: 1, x: 0 },
+        viewport: { once: true, amount: 0.35 },
+        transition: { duration: 0.85, delay, ease },
+      };
 
   return (
     <section id="about" className="scroll-mt-24 w-full pt-24 sm:pt-32 lg:pt-[140px]">
@@ -61,13 +61,13 @@ export function About() {
         </div>
         <div className="max-w-[420px] lg:pt-6">
           <motion.p
-            className="font-serif-jp text-base leading-[2.9] text-cream"
+            className="font-serif-jp text-lg leading-[2.9] text-cream"
             {...fadeLeft(0.18)}
           >
             {t(copy.about.line1)}
           </motion.p>
           <motion.p
-            className="font-serif-jp text-base leading-[2.9] text-cream"
+            className="font-serif-jp text-lg leading-[2.9] text-cream"
             {...fadeLeft(0.3)}
           >
             {t(copy.about.line2)}
@@ -95,7 +95,7 @@ export function About() {
         <div className="absolute inset-0 bg-gradient-to-b from-black/25 to-black/55" />
 
         <motion.span
-          className="font-sans-jp absolute left-5 top-10 hidden text-[14px] font-bold tracking-[0.45em] text-cream sm:left-11 sm:top-20 sm:block sm:text-[15px]"
+          className="font-sans-jp absolute left-5 top-10 hidden text-[14px] font-bold tracking-[0.45em] text-on-dark sm:left-11 sm:top-20 sm:block sm:text-[15px]"
           style={{ writingMode: "vertical-rl" }}
           {...fade(0.35)}
         >
@@ -104,13 +104,13 @@ export function About() {
 
         <div className="absolute inset-x-6 bottom-8 sm:inset-x-16 sm:bottom-16 lg:left-[120px] lg:right-auto lg:bottom-[120px] lg:max-w-[1100px]">
           <motion.p
-            className="font-serif-jp mb-3 text-2xl font-bold text-cream sm:mb-4 sm:text-3xl lg:text-[42px]"
+            className="font-serif-jp mb-3 text-2xl font-bold text-on-dark sm:mb-4 sm:text-3xl lg:text-[42px]"
             {...fadeUp(0.2)}
           >
             {t(copy.about.overlay)}
           </motion.p>
           <motion.p
-            className="text-[13px] tracking-[0.02em] text-cream/75 sm:text-sm"
+            className="text-[13px] tracking-[0.02em] text-on-dark/75 sm:text-sm"
             {...fadeUp(0.35)}
           >
             {t(copy.about.overlayEn)}
@@ -155,7 +155,7 @@ export function About() {
           </motion.h3>
 
           <motion.div {...fadeUp(0.2)}>
-            <div className="font-serif-jp space-y-8 text-[14px] font-normal leading-[2.35] tracking-[0.04em] text-cream/80 sm:text-[16px] sm:leading-[2.5]">
+            <div className="font-serif-jp space-y-8 text-[14px] font-normal leading-[2.35] tracking-[0.04em] text-cream/80 sm:text-[18px] sm:leading-[2.5]">
               <p>{t(copy.about.p1)}</p>
               <p>{t(copy.about.p2)}</p>
               <p>{t(copy.about.p3)}</p>

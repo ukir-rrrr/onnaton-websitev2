@@ -1,5 +1,10 @@
 import type { Metadata, Viewport } from "next";
-import { Sawarabi_Mincho, Noto_Sans_JP, Noto_Serif_JP } from "next/font/google";
+import {
+  Sawarabi_Mincho,
+  Noto_Sans_JP,
+  Noto_Serif_JP,
+  Zen_Maru_Gothic,
+} from "next/font/google";
 import "./globals.css";
 import { getLocale } from "@/lib/i18n/getLocale";
 import { htmlLang } from "@/lib/i18n/config";
@@ -35,11 +40,24 @@ const notoSerifJp = Noto_Serif_JP({
   display: "swap",
 });
 
+/** Soft rounded JP display face — section headings only (e.g. 当店のこだわり). */
+const zenMaruGothic = Zen_Maru_Gothic({
+  variable: "--font-zen-maru-gothic",
+  subsets: ["latin"],
+  weight: ["400", "500"],
+  display: "swap",
+});
+
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
   return {
     title: t(locale, copy.meta.homeTitle),
     description: t(locale, copy.meta.homeDesc),
+    icons: {
+      icon: [{ url: "/images/onnaton-logo.jpg", type: "image/jpeg" }],
+      shortcut: "/images/onnaton-logo.jpg",
+      apple: "/images/onnaton-logo.jpg",
+    },
   };
 }
 
@@ -54,7 +72,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={htmlLang[locale]}
-      className={`${sawarabiMincho.variable} ${notoSansJp.variable} ${notoSerifJp.variable}`}
+      className={`${sawarabiMincho.variable} ${notoSansJp.variable} ${notoSerifJp.variable} ${zenMaruGothic.variable}`}
     >
       <body>
         <LocaleProvider locale={locale}>{children}</LocaleProvider>

@@ -1,11 +1,62 @@
 @import "tailwindcss";
 
 :root {
-  --color-ink: #141210;
-  --color-ink-raised: #1c1815;
-  --color-cream: #f2ede6;
+  /* Warm kinari / washi palette */
+  --color-paper: #ebe2d0;
+  --color-paper-raised: #e0d4bc;
+  --color-text: #2a2520;
+  --color-text-muted: #5c5348;
+  --color-on-dark: #f2ede6;
+  --color-ink: var(--color-paper);
+  --color-ink-raised: var(--color-paper-raised);
+  --color-cream: var(--color-text);
   --color-gold: #c9a063;
   --color-wipe: #a68c6e;
+
+  /* Layered washi texture — fiber, uneven tone, fine grain */
+  --washi-texture:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E"),
+    radial-gradient(
+      ellipse 90% 70% at 12% 8%,
+      rgba(196, 175, 140, 0.38) 0%,
+      transparent 58%
+    ),
+    radial-gradient(
+      ellipse 80% 60% at 88% 92%,
+      rgba(188, 168, 132, 0.32) 0%,
+      transparent 55%
+    ),
+    radial-gradient(
+      ellipse 55% 45% at 62% 38%,
+      rgba(210, 198, 172, 0.22) 0%,
+      transparent 62%
+    ),
+    radial-gradient(
+      ellipse 40% 35% at 28% 72%,
+      rgba(175, 158, 125, 0.18) 0%,
+      transparent 50%
+    ),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 2px,
+      rgba(165, 145, 115, 0.045) 2px,
+      rgba(165, 145, 115, 0.045) 3px
+    ),
+    repeating-linear-gradient(
+      91deg,
+      transparent,
+      transparent 7px,
+      rgba(150, 132, 105, 0.035) 7px,
+      rgba(150, 132, 105, 0.035) 8px
+    ),
+    repeating-linear-gradient(
+      3deg,
+      transparent,
+      transparent 18px,
+      rgba(180, 160, 130, 0.028) 18px,
+      rgba(180, 160, 130, 0.028) 19px
+    );
 }
 
 @theme inline {
@@ -14,30 +65,81 @@
   --color-cream: var(--color-cream);
   --color-gold: var(--color-gold);
   --color-wipe: var(--color-wipe);
+  --color-on-dark: var(--color-on-dark);
   --font-serif-jp: var(--font-sawarabi-mincho);
   --font-serif-jp-tategaki: var(--font-noto-serif-jp);
   --font-sans-jp: var(--font-noto-sans-jp);
+  --font-display-jp: var(--font-zen-maru-gothic);
 }
 
 html {
   /* Keep the vertical scrollbar gutter from the first paint
      so intro → hero does not jump when the bar appears. */
   overflow-y: scroll;
+  overflow-x: clip;
   scrollbar-gutter: stable;
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
+  background-color: var(--color-paper);
+  background-image: var(--washi-texture);
+  background-size:
+    512px 512px,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 4px,
+    100% 100%,
+    100% 100%;
+  background-attachment: fixed;
 }
 
 body {
-  background: var(--color-ink);
   color: var(--color-cream);
   font-family: var(--font-sans-jp), sans-serif;
   -webkit-font-smoothing: antialiased;
   /* Comfortable tap highlight on iOS */
-  -webkit-tap-highlight-color: color-mix(in srgb, var(--color-gold) 25%, transparent);
+  -webkit-tap-highlight-color: color-mix(
+    in srgb,
+    var(--color-gold) 25%,
+    transparent
+  );
+}
+
+/* Apply washi surface wherever bg-ink is used (page shells, sections) */
+.bg-ink {
+  background-color: var(--color-paper);
+  background-image: var(--washi-texture);
+  background-size:
+    512px 512px,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 100%,
+    100% 4px,
+    100% 100%,
+    100% 100%;
+}
+
+.bg-ink-raised {
+  background-color: var(--color-paper-raised);
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E"),
+    linear-gradient(165deg, rgba(255, 248, 235, 0.35) 0%, transparent 45%),
+    repeating-linear-gradient(
+      0deg,
+      transparent,
+      transparent 3px,
+      rgba(155, 135, 105, 0.04) 3px,
+      rgba(155, 135, 105, 0.04) 4px
+    );
+  background-size:
+    256px 256px,
+    100% 100%,
+    100% 100%;
 }
 
 ::selection {
   background: var(--color-gold);
-  color: var(--color-ink);
+  color: var(--color-on-dark);
 }

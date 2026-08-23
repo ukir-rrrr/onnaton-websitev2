@@ -5,18 +5,22 @@ interface SectionEyebrowProps {
   className?: string;
   /** Render as h1 on standalone pages (e.g. /course). */
   as?: "h1" | "h2";
+  /** Use light text when placed over a dark photo overlay. */
+  tone?: "default" | "onDark";
 }
 
-/** Eyebrow + gold rule + serif heading — matches「OUR COMMITMENT / 当店のこだわり」. */
+/** Eyebrow + gold rule + display heading — matches「OUR COMMITMENT / 当店のこだわり」. */
 export function SectionEyebrow({
   eyebrow,
   heading,
   align = "center",
   className = "",
   as = "h2",
+  tone = "default",
 }: SectionEyebrowProps) {
   const HeadingTag = as;
   const centered = align === "center";
+  const headingColor = tone === "onDark" ? "text-on-dark" : "text-cream";
 
   return (
     <div className={`${centered ? "text-center" : ""} ${className}`}>
@@ -26,7 +30,9 @@ export function SectionEyebrow({
       <div
         className={`mb-6 h-px w-12 bg-gold/55 ${centered ? "mx-auto" : ""}`}
       />
-      <HeadingTag className="font-serif-jp text-[26px] font-normal tracking-[0.18em] text-cream sm:text-[34px] lg:text-[38px]">
+      <HeadingTag
+        className={`font-display-jp text-[26px] font-medium tracking-[0.14em] ${headingColor} sm:text-[34px] lg:text-[38px]`}
+      >
         {heading}
       </HeadingTag>
     </div>

@@ -27,24 +27,24 @@ function PolicyCard({
       id={id}
       className="scroll-mt-24 rounded-sm border border-cream/10 bg-ink-raised px-6 py-10 sm:px-12 sm:py-14"
     >
-      <h3 className="font-serif-jp mb-6 text-center text-[20px] font-normal tracking-[0.12em] text-cream sm:mb-8 sm:text-[24px]">
+      <h3 className="font-serif-jp mb-6 text-center text-[24px] font-normal tracking-[0.12em] text-cream sm:mb-8 sm:text-[28px] lg:text-[30px]">
         {heading}
       </h3>
-      <p className="font-serif-jp mb-8 text-[15px] leading-[2] tracking-[0.04em] text-cream sm:mb-10 sm:text-base sm:leading-[2.1]">
+      <p className="font-serif-jp mb-8 text-[16px] leading-[2.05] tracking-[0.04em] text-cream sm:mb-10 sm:text-[18px] sm:leading-[2.15]">
         {lead}
       </p>
-      <div className="space-y-6 text-[14px] leading-[2.15] tracking-[0.04em] text-cream/75 sm:text-[15px] sm:leading-[2.25]">
+      <div className="font-serif-jp space-y-6 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/80 sm:space-y-7 sm:text-[18px] sm:leading-[2.2]">
         {paragraphs.map((paragraph) => (
           <p key={paragraph}>{paragraph}</p>
         ))}
       </div>
       {note ? (
-        <p className="mt-8 text-[13px] leading-[2] tracking-[0.04em] text-cream/55 sm:mt-10 sm:text-[14px]">
+        <p className="mt-8 text-[15px] leading-[2.05] tracking-[0.04em] text-cream/60 sm:mt-10 sm:text-[16px] sm:leading-[2.15]">
           ※{note}
         </p>
       ) : null}
       {closing ? (
-        <p className="mt-6 text-[14px] leading-[2] tracking-[0.04em] text-cream/80 sm:text-[15px]">
+        <p className="mt-6 text-[16px] leading-[2.05] tracking-[0.04em] text-cream/85 sm:text-[17px] sm:leading-[2.15]">
           {closing}
         </p>
       ) : null}
@@ -65,16 +65,17 @@ export function Reserve() {
           sizes="100vw"
           className="object-cover"
         />
-        <div className="absolute inset-0 bg-ink/75" />
+        <div className="absolute inset-0 bg-black/65" />
 
         <div className="absolute inset-0 flex flex-col items-center justify-center px-6 py-16 sm:px-10 lg:px-14">
           <SectionEyebrow
             eyebrow="RESERVATION"
             heading={t(copy.reserveSection.heading)}
             className="mb-8"
+            tone="onDark"
           />
 
-          <p className="mx-auto mb-6 max-w-[720px] text-[14px] leading-[2] text-cream/80 sm:mb-8 sm:text-base">
+          <p className="mx-auto mb-6 max-w-[720px] text-[14px] leading-[2] text-on-dark/80 sm:mb-8 sm:text-base">
             {t(copy.reserveSection.body)}
           </p>
           <div className="mx-auto mb-8 max-w-[720px] sm:mb-10">
@@ -83,7 +84,7 @@ export function Reserve() {
             </p>
             <a
               href="#children"
-              className="mt-1 inline-flex min-h-11 items-center text-[12px] tracking-[0.06em] text-cream/55 underline-offset-4 transition-colors hover:text-gold hover:underline sm:text-[13px]"
+              className="mt-1 inline-flex min-h-11 items-center text-[12px] tracking-[0.06em] text-on-dark/55 underline-offset-4 transition-colors hover:text-gold hover:underline sm:text-[13px]"
             >
               {t(copy.children.more)} →
             </a>
@@ -92,14 +93,14 @@ export function Reserve() {
             variant="outline"
             className="min-h-11 w-full max-w-sm px-8 py-3.5 text-[14px] sm:min-w-[320px] sm:w-auto sm:px-16"
           />
-          <p className="mt-6 text-[12px] tracking-[0.04em] text-cream/55 sm:text-[13px]">
+          <p className="mt-6 text-[12px] tracking-[0.04em] text-on-dark/55 sm:text-[13px]">
             {t(copy.hero.note)}
           </p>
         </div>
       </div>
 
       <div className="px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
-        <div className="mx-auto flex w-full max-w-[720px] flex-col gap-8 sm:gap-10">
+        <div className="mx-auto flex w-full max-w-[42rem] flex-col gap-8 sm:gap-10 lg:max-w-[46rem]">
           <PolicyCard
             id="children"
             heading={t(copy.children.heading)}
@@ -117,6 +118,12 @@ export function Reserve() {
             heading={t(copy.tattoo.heading)}
             lead={t(copy.tattoo.lead)}
             paragraphs={[t(copy.tattoo.p1)]}
+          />
+          <PolicyCard
+            id="fragrance"
+            heading={t(copy.fragrance.heading)}
+            lead={t(copy.fragrance.lead)}
+            paragraphs={[t(copy.fragrance.p1)]}
           />
         </div>
       </div>

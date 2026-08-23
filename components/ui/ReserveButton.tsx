@@ -95,7 +95,7 @@ export function ReserveButton({
 
       {open ? (
         <div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-ink/75 px-6 backdrop-blur-[2px]"
+          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 px-6 backdrop-blur-[2px]"
           onClick={() => setOpen(false)}
           role="presentation"
         >

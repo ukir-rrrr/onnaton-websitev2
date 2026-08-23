@@ -3,7 +3,11 @@
 import { useEffect, useState } from "react";
 import Image from "next/image";
 import { ChevronLeft, ChevronRight } from "lucide-react";
-import { executiveCourse, type CourseMenuData } from "@/lib/content/executiveCourse";
+import {
+  executiveCourse,
+  courseSlideImageCrop,
+  type CourseMenuData,
+} from "@/lib/content/executiveCourse";
 import { ReserveButton } from "@/components/ui/ReserveButton";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
@@ -58,36 +62,61 @@ export function CourseDetail({
   }, [total]);
 
   return (
-    <article id={id} className="scroll-mt-24 w-full bg-ink py-12 sm:py-16 lg:py-24">
+    <article id={id} className="scroll-mt-24 w-full overflow-x-clip bg-ink py-12 sm:py-16 lg:py-24">
       <div className="mx-auto flex w-full flex-col gap-8 px-5 sm:gap-10 sm:px-6 xl:flex-row xl:items-stretch xl:gap-6 xl:px-8 2xl:gap-8 2xl:px-12">
         {/* ===== LEFT: photo slider ===== */}
         <div className="relative w-full shrink-0 xl:w-[36%] 2xl:w-[38%]">
           <div className="relative aspect-[3/2] w-full overflow-hidden">
-            {c.slides.map((slide, i) => (
-              <div
-                key={slide.src}
-                aria-hidden={i !== index}
-                className={`absolute inset-0 transition-opacity duration-700 ease-out ${
-                  i === index ? "opacity-100" : "pointer-events-none opacity-0"
-                }`}
-              >
-                <Image
-                  src={slide.src}
-                  alt={slide.alt}
-                  fill
-                  priority={i === 0}
-                  sizes="(min-width: 1280px) 38vw, 100vw"
-                  quality={90}
-                  className="object-cover"
-                />
-              </div>
-            ))}
+            {c.slides.map((slide, i) => {
+              const crop = courseSlideImageCrop[slide.src];
+              return (
+                <div
+                  key={slide.src}
+                  aria-hidden={i !== index}
+                  className={`absolute inset-0 transition-opacity duration-700 ease-out ${
+                    i === index ? "opacity-100" : "pointer-events-none opacity-0"
+                  }`}
+                >
+                  {crop ? (
+                    <div className="absolute inset-0 overflow-hidden">
+                      <div
+                        className="relative h-full w-full origin-top"
+                        style={{ transform: `scale(${crop.scale})` }}
+                      >
+                        <Image
+                          src={slide.src}
+                          alt={slide.alt}
+                          fill
+                          priority={i === 0}
+                          sizes="(min-width: 1280px) 38vw, 100vw"
+                          quality={90}
+                          className="object-cover"
+                          style={{
+                            objectPosition: crop.objectPosition ?? "center",
+                          }}
+                        />
+                      </div>
+                    </div>
+                  ) : (
+                    <Image
+                      src={slide.src}
+                      alt={slide.alt}
+                      fill
+                      priority={i === 0}
+                      sizes="(min-width: 1280px) 38vw, 100vw"
+                      quality={90}
+                      className="object-cover"
+                    />
+                  )}
+                </div>
+              );
+            })}
 
             <button
               type="button"
               onClick={prev}
               aria-label={t(copy.coursePage.prevPhoto)}
-              className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-cream/90 transition-colors hover:bg-black/70 sm:left-4"
+              className="absolute left-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-on-dark/90 transition-colors hover:bg-black/70 sm:left-4"
             >
               <ChevronLeft className="h-5 w-5" strokeWidth={1.25} />
             </button>
@@ -95,7 +124,7 @@ export function CourseDetail({
               type="button"
               onClick={next}
               aria-label={t(copy.coursePage.nextPhoto)}
-              className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-cream/90 transition-colors hover:bg-black/70 sm:right-4"
+              className="absolute right-3 top-1/2 z-10 flex h-11 w-11 -translate-y-1/2 items-center justify-center rounded-full bg-black/50 text-on-dark/90 transition-colors hover:bg-black/70 sm:right-4"
             >
               <ChevronRight className="h-5 w-5" strokeWidth={1.25} />
             </button>
@@ -126,7 +155,7 @@ export function CourseDetail({
           {/* Mobile / tablet: yokogaki list */}
           <div className={isJa ? "xl:hidden" : ""}>
             <div className="mb-6 border-b border-cream/10 pb-5 text-center sm:mb-8 sm:pb-6">
-              <Heading className="font-serif-jp mb-3 text-[26px] font-normal tracking-[0.2em] text-gold sm:text-[30px]">
+              <Heading className="font-serif-jp mb-3 text-[26px] font-normal tracking-[0.2em] text-cream sm:text-[30px]">
                 {trName(c.name)}
               </Heading>
               {c.subtitle ? (
@@ -135,11 +164,11 @@ export function CourseDetail({
                 </p>
               ) : null}
               {c.priceLabel ? (
-                <p className="mb-1 text-[13px] tracking-[0.12em] text-wipe/80">
+                <p className="mb-1 text-[13px] tracking-[0.12em] text-cream/75">
                   {tr(c.priceLabel)}
                 </p>
               ) : null}
-              <p className="font-serif-jp text-[22px] tracking-[0.08em] text-gold sm:text-[26px]">
+              <p className="font-serif-jp text-[22px] tracking-[0.08em] text-cream sm:text-[26px]">
                 {isJa ? (
                   <>
                     <span className="md:hidden">{c.priceMainMobile}</span>
@@ -149,7 +178,7 @@ export function CourseDetail({
                   c.priceMainMobile
                 )}
               </p>
-              <p className="mt-1 text-[13px] tracking-[0.08em] text-wipe/85 sm:text-[14px]">
+              <p className="mt-1 text-[13px] tracking-[0.08em] text-cream/80 sm:text-[14px]">
                 {isJa ? (
                   <>
                     <span className="md:hidden">{c.priceTaxNoteMobile}</span>
@@ -161,10 +190,10 @@ export function CourseDetail({
               </p>
               {c.altPrice ? (
                 <div className="mt-4">
-                  <p className="mb-1 text-[13px] tracking-[0.12em] text-wipe/80">
+                  <p className="mb-1 text-[13px] tracking-[0.12em] text-cream/75">
                     {tr(c.altPrice.label)}
                   </p>
-                  <p className="font-serif-jp text-[20px] tracking-[0.08em] text-gold sm:text-[24px]">
+                  <p className="font-serif-jp text-[20px] tracking-[0.08em] text-cream sm:text-[24px]">
                     {isJa ? (
                       <>
                         <span className="md:hidden">{c.altPrice.mainMobile}</span>
@@ -174,7 +203,7 @@ export function CourseDetail({
                       c.altPrice.mainMobile
                     )}
                   </p>
-                  <p className="mt-1 text-[13px] tracking-[0.08em] text-wipe/85 sm:text-[14px]">
+                  <p className="mt-1 text-[13px] tracking-[0.08em] text-cream/80 sm:text-[14px]">
                     {isJa ? (
                       <>
                         <span className="md:hidden">{c.altPrice.taxNoteMobile}</span>
@@ -193,19 +222,19 @@ export function CourseDetail({
                 <li key={`${dish.name}-${dish.note ?? ""}`} className="py-3.5 sm:py-4">
                   {dish.nameMobileLines ? (
                     <>
-                      <p className="text-[15px] leading-[1.7] tracking-[0.06em] text-wipe md:hidden sm:text-[16px]">
+                      <p className="text-[15px] leading-[1.7] tracking-[0.06em] text-cream md:hidden sm:text-[16px]">
                         <span className="block">{tr(dish.nameMobileLines[0])}</span>
                         <span className="block">{tr(dish.nameMobileLines[1])}</span>
                       </p>
-                      <p className="hidden text-[15px] leading-[1.7] tracking-[0.06em] text-wipe md:block sm:text-[16px]">
+                      <p className="hidden text-[15px] leading-[1.7] tracking-[0.06em] text-cream md:block sm:text-[16px]">
                         {trName(dish.name)}
                       </p>
                       {dish.note ? (
                         <p
                           className={`mt-1 leading-[1.6] tracking-[0.04em] ${
                             dish.emphasizeNote
-                              ? "text-[16px] text-gold sm:text-[18px]"
-                              : "text-[12px] text-wipe/70 sm:text-[13px]"
+                              ? "text-[16px] text-cream sm:text-[18px]"
+                              : "text-[12px] text-cream/70 sm:text-[13px]"
                           }`}
                         >
                           {tr(dish.note)}
@@ -214,15 +243,15 @@ export function CourseDetail({
                     </>
                   ) : (
                     <>
-                      <p className="text-[15px] leading-[1.7] tracking-[0.06em] text-wipe sm:text-[16px]">
+                      <p className="text-[15px] leading-[1.7] tracking-[0.06em] text-cream sm:text-[16px]">
                         {trName(dish.name)}
                       </p>
                       {dish.note ? (
                         <p
                           className={`mt-1 leading-[1.6] tracking-[0.04em] ${
                             dish.emphasizeNote
-                              ? "text-[16px] text-gold sm:text-[18px]"
-                              : "text-[12px] text-wipe/70 sm:text-[13px]"
+                              ? "text-[16px] text-cream sm:text-[18px]"
+                              : "text-[12px] text-cream/70 sm:text-[13px]"
                           }`}
                         >
                           {tr(dish.note)}
@@ -236,11 +265,11 @@ export function CourseDetail({
           </div>
 
           {/* Desktop: tategaki columns */}
-          <div className={`hidden flex-1 xl:h-full xl:overflow-visible ${isJa ? "xl:block" : ""}`}>
+          <div className={`hidden min-w-0 flex-1 xl:h-full xl:overflow-x-auto xl:overflow-y-visible ${isJa ? "xl:block" : ""}`}>
             <div className="flex h-full justify-end">
-              <div className="font-serif-jp flex flex-row-reverse items-start gap-3 text-wipe 2xl:gap-5">
+              <div className="font-serif-jp flex flex-row-reverse items-start gap-3 text-cream 2xl:gap-5">
                 <Heading
-                  className="shrink-0 text-[34px] font-normal tracking-[0.4em] text-gold"
+                  className="shrink-0 text-[34px] font-normal tracking-[0.4em] text-cream"
                   style={verticalTextStyle}
                 >
                   {c.nameTategakiLead ? trName(c.nameTategakiLead) : trName(c.name)}
@@ -268,31 +297,31 @@ export function CourseDetail({
                 >
                   {c.priceLabel ? (
                     <>
-                      <span className="text-[14px] tracking-[0.12em] text-wipe/80">
+                      <span className="text-[14px] tracking-[0.12em] text-cream/75">
                         {tr(c.priceLabel)}
                       </span>
                       <br />
                     </>
                   ) : null}
-                  <span className="text-[28px] tracking-[0.1em] text-gold">
+                  <span className="text-[28px] tracking-[0.1em] text-cream">
                     {c.priceMain}
                   </span>
                   <br />
-                  <span className="text-[14px] tracking-[0.12em] text-wipe/90">
+                  <span className="text-[14px] tracking-[0.12em] text-cream/85">
                     {c.priceTaxNote}
                   </span>
                   {c.altPrice ? (
                     <>
                       <br />
-                      <span className="text-[14px] tracking-[0.12em] text-wipe/80">
+                      <span className="text-[14px] tracking-[0.12em] text-cream/75">
                         {tr(c.altPrice.label)}
                       </span>
                       <br />
-                      <span className="text-[24px] tracking-[0.1em] text-gold">
+                      <span className="text-[24px] tracking-[0.1em] text-cream">
                         {c.altPrice.main}
                       </span>
                       <br />
-                      <span className="text-[14px] tracking-[0.12em] text-wipe/90">
+                      <span className="text-[14px] tracking-[0.12em] text-cream/85">
                         {c.altPrice.taxNote}
                       </span>
                     </>
@@ -305,15 +334,15 @@ export function CourseDetail({
                     className="shrink-0 leading-[2] tracking-[0.18em]"
                     style={verticalTextStyle}
                   >
-                    <span className="text-[18px] text-wipe 2xl:text-[20px]">
+                    <span className="text-[18px] text-cream 2xl:text-[20px]">
                       {trName(dish.name)}
                     </span>
                     {dish.note ? (
                       <span
                         className={
                           dish.emphasizeNote
-                            ? "text-[18px] tracking-[0.08em] text-gold 2xl:text-[20px]"
-                            : "text-[14px] tracking-[0.08em] text-wipe/85"
+                            ? "text-[18px] tracking-[0.08em] text-cream 2xl:text-[20px]"
+                            : "text-[14px] tracking-[0.08em] text-cream/80"
                         }
                       >
                         {"　"}
@@ -338,7 +367,7 @@ export function CourseDetail({
       {nextCourseHref ? (
         <a
           href={nextCourseHref}
-          className="mt-10 flex min-h-11 items-center justify-center text-[22px] leading-none text-gold/80 transition-colors hover:text-gold sm:mt-12 sm:text-[26px]"
+          className="mt-10 flex min-h-11 items-center justify-center text-[22px] leading-none text-cream/80 transition-colors hover:text-cream sm:mt-12 sm:text-[26px]"
           aria-label={t(copy.coursePage.next)}
         >
           ▽

@@ -20,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
 
 export default function SeatsPage() {
   return (
-    <div className="relative w-full bg-ink text-cream">
+    <div className="relative w-full overflow-x-clip bg-ink text-cream">
       <div className="relative">
         <Header />
         <div className="h-20 bg-ink" aria-hidden />

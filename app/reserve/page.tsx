@@ -28,7 +28,7 @@ export default async function ReservePage({
   const initialCourse = course && isReservationCourseId(course) ? course : "";
 
   return (
-    <div className="relative w-full bg-ink text-cream">
+    <div className="relative w-full overflow-x-clip bg-ink text-cream">
       <div className="relative">
         <Header />
         <div className="h-20 bg-ink" aria-hidden />
@@ -45,12 +45,13 @@ export default async function ReservePage({
             className="object-cover object-[50%_21%]"
             priority
           />
-          <div className="absolute inset-0 bg-ink/75" />
+          <div className="absolute inset-0 bg-black/65" />
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 py-16">
             <SectionEyebrow
               eyebrow="RESERVATION"
               heading={t(locale, copy.form.heading)}
               as="h1"
+              tone="onDark"
             />
           </div>
         </section>

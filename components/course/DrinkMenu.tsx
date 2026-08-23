@@ -34,7 +34,7 @@ export function DrinkMenu() {
                   key={item.name}
                   className="flex items-baseline justify-between gap-4 py-2.5"
                 >
-                  <span className="text-[14px] leading-[1.7] tracking-[0.04em] text-wipe sm:text-[15px]">
+                  <span className="text-[14px] leading-[1.7] tracking-[0.04em] text-cream sm:text-[15px]">
                     {tr(item.name)}
                   </span>
                   {item.price ? (

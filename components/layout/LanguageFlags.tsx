@@ -1,6 +1,6 @@
 "use client";
 
-import { useTransition } from "react";
+import { useEffect, useRef, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
 import { setLocale } from "@/app/actions/locale";
 import { type Locale } from "@/lib/i18n/config";
@@ -51,61 +51,112 @@ function CnFlag({ className }: { className?: string }) {
   );
 }
 
+const NATIVE_LABELS: Record<Locale, string> = {
+  ja: "日本語",
+  en: "English",
+  ko: "한국어",
+  zh: "中文",
+};
+
 const OPTIONS: {
   code: Locale;
   Flag: typeof JpFlag;
-  labelKey: "ja" | "en" | "ko" | "zh";
 }[] = [
-  { code: "ja", Flag: JpFlag, labelKey: "ja" },
-  { code: "en", Flag: UsFlag, labelKey: "en" },
-  { code: "ko", Flag: KrFlag, labelKey: "ko" },
-  { code: "zh", Flag: CnFlag, labelKey: "zh" },
+  { code: "ja", Flag: JpFlag },
+  { code: "en", Flag: UsFlag },
+  { code: "ko", Flag: KrFlag },
+  { code: "zh", Flag: CnFlag },
 ];
 
 interface LanguageFlagsProps {
   className?: string;
+  onHero?: boolean;
 }
 
-export function LanguageFlags({ className = "" }: LanguageFlagsProps) {
+export function LanguageFlags({ className = "", onHero = false }: LanguageFlagsProps) {
   const { locale, t } = useT();
   const router = useRouter();
   const [pending, startTransition] = useTransition();
+  const [open, setOpen] = useState(false);
+  const rootRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    const onPointerDown = (event: PointerEvent) => {
+      if (rootRef.current && !rootRef.current.contains(event.target as Node)) {
+        setOpen(false);
+      }
+    };
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === "Escape") setOpen(false);
+    };
+
+    document.addEventListener("pointerdown", onPointerDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("pointerdown", onPointerDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
 
   const switchTo = (code: Locale) => {
     if (code === locale || pending) return;
+    setOpen(false);
     startTransition(async () => {
       await setLocale(code);
       router.refresh();
     });
   };
 
+  const buttonIdle = onHero
+    ? "text-on-dark hover:bg-on-dark/10 hover:text-gold"
+    : "text-cream hover:bg-cream/6 hover:text-gold";
+
   return (
-    <div className={`flex items-center gap-1.5 sm:gap-3 ${className}`}>
-      {OPTIONS.map(({ code, Flag, labelKey }) => {
-        const active = locale === code;
-        const label = t(copy.lang[labelKey]);
-        return (
-          <button
-            key={code}
-            type="button"
-            disabled={pending}
-            aria-label={label}
-            aria-pressed={active}
-            onClick={() => switchTo(code)}
-            className={`flex min-h-11 min-w-11 items-center justify-center transition-opacity focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold ${
-              active ? "opacity-100" : "opacity-55 hover:opacity-100"
-            } ${pending ? "pointer-events-none" : ""}`}
-          >
-            <Flag
-              className={`h-5 w-[30px] overflow-hidden rounded-[1px] sm:h-[22px] sm:w-[33px] ${
-                active
-                  ? "shadow-[0_0_0_2px_rgba(201,169,98,0.9)]"
-                  : "shadow-[0_0_0_1px_rgba(255,255,255,0.18)]"
-              }`}
-            />
-          </button>
-        );
-      })}
+    <div ref={rootRef} className={`relative ${className}`}>
+      <button
+        type="button"
+        onClick={() => setOpen((value) => !value)}
+        aria-expanded={open}
+        aria-haspopup="listbox"
+        aria-label={t(copy.lang.menuButton)}
+        disabled={pending}
+        className={`font-serif-jp flex min-h-11 items-center gap-1 rounded px-2 py-1.5 text-[14px] tracking-[0.06em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:gap-1.5 sm:px-3.5 sm:text-[16px] ${buttonIdle} ${
+          open ? "text-gold" : ""
+        } ${pending ? "pointer-events-none opacity-60" : ""}`}
+      >
+        <span aria-hidden>🌐</span>
+        <span className="hidden sm:inline">Language</span>
+      </button>
+
+      {open ? (
+        <div
+          role="listbox"
+          aria-label={t(copy.lang.menuButton)}
+          className="absolute right-0 top-full z-[60] mt-2 min-w-[210px] overflow-hidden rounded-sm border border-black/8 bg-white py-1.5 shadow-[0_8px_24px_rgba(0,0,0,0.18)]"
+        >
+          {OPTIONS.map(({ code, Flag }) => {
+            const active = locale === code;
+            return (
+              <button
+                key={code}
+                type="button"
+                role="option"
+                aria-selected={active}
+                disabled={pending}
+                onClick={() => switchTo(code)}
+                className={`flex w-full items-center gap-3 px-4 py-2.5 text-left text-[15px] tracking-[0.02em] text-black transition-colors hover:bg-black/[0.04] ${
+                  active ? "bg-black/[0.04] font-medium" : ""
+                }`}
+              >
+                <Flag className="h-4 w-6 shrink-0 overflow-hidden rounded-[1px] shadow-[0_0_0_1px_rgba(0,0,0,0.1)]" />
+                <span>{NATIVE_LABELS[code]}</span>
+              </button>
+            );
+          })}
+        </div>
+      ) : null}
     </div>
   );
 }

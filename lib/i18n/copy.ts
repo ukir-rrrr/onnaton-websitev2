@@ -73,6 +73,12 @@ export const copy = {
       "로 전환",
       "切换到",
     ),
+    menuButton: L(
+      "言語を選択",
+      "Select language",
+      "언어 선택",
+      "选择语言",
+    ),
   },
   reserve: {
     call: L("電話で予約する", "Call to reserve", "전화로 예약", "电话预约"),
@@ -184,10 +190,10 @@ export const copy = {
   },
   reservationBanner: {
     heading: L(
-      "コース料理専門店・完全予約制",
-      "Course dining · Reservation only",
-      "코스 요리 전문점 · 완전예약제",
-      "套餐专门店 · 完全预约制",
+      "コース料理専門店・事前予約制",
+      "Course dining · Advance reservation",
+      "코스 요리 전문점 · 사전예약제",
+      "套餐专门店 · 事前预约制",
     ),
     p1: L("コース料理専門店", "Course dining only", "코스 요리 전문점", "套餐专门店"),
     p2: L("完全予約制", "Reservation only", "완전예약제", "完全预约制"),
@@ -198,11 +204,29 @@ export const copy = {
       "예약 없이 방문하시면 안내가 어렵습니다",
       "恕不接待未预约客人",
     ),
-    p5: L(
-      "ご予約時に希望コースをお選びいただきます",
-      "Please choose your course when you book",
-      "예약 시 원하시는 코스를 선택해 주세요",
-      "预约时请选择套餐",
+    notice1: L(
+      "当店では、ご予約いただいたお客様のために新鮮な食材を仕入れ、出汁も時間をかけて丁寧にご用意しております。",
+      "For guests who reserve with us, we source fresh ingredients and prepare our broth with care over time.",
+      "저희는 예약해 주신 손님을 위해 신선한 식재료를 조달하고, 육수도 시간을 들여 정성껏 준비합니다.",
+      "本店为预约客人采购新鲜食材，并花时间精心熬制出汁。",
+    ),
+    notice2: L(
+      "より良い状態でお料理をお楽しみいただくため、基本的に前日までのご予約をお願いしております。",
+      "So you can enjoy your meal at its best, we generally ask for reservations by the day before.",
+      "더 좋은 상태로 요리를 즐기실 수 있도록, 기본적으로 전날까지 예약을 부탁드립니다.",
+      "为让您在最佳状态下享用料理，原则上请在前一天之前预约。",
+    ),
+    notice3: L(
+      "なお、食材のご用意やお席の状況によっては、当日でもご案内できる場合がございます。",
+      "Depending on ingredients and seating, we may sometimes be able to welcome you the same day.",
+      "다만 식재료 준비와 좌석 상황에 따라 당일 안내가 가능한 경우도 있습니다.",
+      "此外，视食材准备与座位情况，有时也可当日接待。",
+    ),
+    notice4: L(
+      "当日のご来店をご希望の際は、お電話にてお問い合わせください。",
+      "If you hope to visit today, please contact us by phone.",
+      "당일 방문을 원하실 경우 전화로 문의해 주세요.",
+      "若希望当日来店，请致电咨询。",
     ),
   },
   courseTeaser: {
@@ -293,6 +317,21 @@ export const copy = {
       "We hold no prejudice; some guests may be surprised. Thank you for understanding.",
       "편견은 없지만, 놀라시는 손님도 계십니다. 양해 부탁드립니다.",
       "本店并无偏见，但部分客人可能会感到惊讶。敬请理解。",
+    ),
+  },
+  fragrance: {
+    heading: L("香水・香りについて", "Fragrance", "향수·향기에 대하여", "关于香水与香气"),
+    lead: L(
+      "お料理やお出汁本来の香りをお楽しみいただくため、香水や香りの強い整髪料など、強い香りをまとってのご来店はご遠慮くださいますようお願いいたします。",
+      "To enjoy the natural aroma of our dishes and broth, please refrain from wearing strong perfume, heavily scented hair products, or other strong fragrances when you visit.",
+      "요리와 육수 본연의 향을 즐기실 수 있도록, 향수나 향이 강한 헤어 제품 등 강한 향을 뿌리고 방문하시는 것은 삼가 주시기 바랍니다.",
+      "为让您充分感受料理与出汁本身的香气，请勿喷洒过浓的香水、使用香气强烈的整发产品等，并以较强香气来访。",
+    ),
+    p1: L(
+      "しゃぶしゃぶは、食材や出汁の繊細な香りも味わいの一部です。皆様に心地よくお過ごしいただくため、ご理解とご協力をお願いいたします。",
+      "In shabu-shabu, the delicate scents of the ingredients and broth are part of the experience. We appreciate your understanding and cooperation.",
+      "샤브샤브는 식재료와 육수의 섬세한 향도 맛의 일부입니다. 모두가 편안히 시간을 보내실 수 있도록 양해와 협조 부탁드립니다.",
+      "涮涮锅之中，食材与出汁的细腻香气也是风味的一部分。敬请理解与配合，以便各位舒适用餐。",
     ),
   },
   gallery: {

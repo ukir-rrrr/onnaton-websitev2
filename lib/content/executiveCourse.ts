@@ -1,5 +1,14 @@
 import { photos } from "./photos";
 
+/** Course slider only — zoom/crop specific photos; frame size unchanged. */
+export const courseSlideImageCrop: Partial<
+  Record<string, { scale: number; objectPosition?: string }>
+> = {
+  /** お出汁 — hide portable konro/flame at bottom */
+  [photos.course013]: { scale: 1.03, objectPosition: "center top" },
+  [photos.kodawariAguButa]: { scale: 1.03, objectPosition: "center top" },
+};
+
 export interface ExecutiveDish {
   name: string;
   /** Same column as name; smaller / lighter annotation */
@@ -42,7 +51,7 @@ export interface CourseMenuData {
 }
 
 const executiveSlides = [
-  { src: photos.course013, alt: "久米島産海ぶどう" },
+  { src: photos.course013, alt: "お出汁" },
   { src: photos.course011, alt: "前菜" },
   { src: photos.course012, alt: "お料理" },
   { src: photos.course014, alt: "もとぶ牛・特選肉" },
@@ -52,7 +61,7 @@ const executiveSlides = [
 ] as const;
 
 const kiwamiSlides = [
-  { src: photos.course013, alt: "久米島産海ぶどう" },
+  { src: photos.course013, alt: "お出汁" },
   { src: photos.course011, alt: "前菜" },
   { src: photos.course012, alt: "お料理" },
   { src: photos.course018, alt: "もとぶ牛・山城牛・特選石垣牛" },
@@ -65,7 +74,7 @@ const kiwamiSlides = [
 ] as const;
 
 const kouSlides = [
-  { src: photos.course013, alt: "久米島産海ぶどう" },
+  { src: photos.course013, alt: "お出汁" },
   { src: photos.course011, alt: "前菜" },
   { src: photos.course012, alt: "お料理" },
   { src: photos.course022, alt: "もとぶ牛・山城牛・特選石垣牛" },
@@ -80,7 +89,7 @@ const kouSlides = [
 ] as const;
 
 const chateaubriandSlides = [
-  { src: photos.course013, alt: "久米島産海ぶどう" },
+  { src: photos.course013, alt: "お出汁" },
   { src: photos.course011, alt: "前菜" },
   { src: photos.course012, alt: "お料理" },
   { src: photos.course022, alt: "もとぶ牛・山城牛・特選石垣牛" },

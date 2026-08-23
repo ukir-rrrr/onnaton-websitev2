@@ -13,7 +13,7 @@ import { Access } from "@/components/sections/Access";
 
 export default function Home() {
   return (
-    <div className="relative w-full overflow-hidden bg-ink text-cream">
+    <div className="relative w-full overflow-x-clip overflow-y-visible bg-ink text-cream">
       <Header />
       <Hero />
       <About />

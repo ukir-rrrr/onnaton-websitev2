@@ -18,10 +18,15 @@ const SECTION_TO_NAV: { id: string; href: string }[] = [
   { id: "access", href: "/#access" },
 ];
 
-function navClass(active: boolean) {
+function navClass(active: boolean, onHero: boolean) {
+  const base =
+    "font-serif-jp rounded px-2 py-1.5 text-[14px] tracking-[0.06em] lg:px-2.5 lg:text-[15px] xl:px-3.5 xl:text-[16px]";
+  const idle = onHero
+    ? `${base} text-on-dark hover:bg-on-dark/10 hover:text-gold`
+    : `${base} text-cream hover:bg-cream/6 hover:text-gold`;
   return active
-    ? "font-serif-jp rounded px-3.5 py-1.5 text-[13.5px] tracking-[0.06em] text-gold bg-cream/8"
-    : "font-serif-jp rounded px-3.5 py-1.5 text-[13.5px] tracking-[0.06em] text-cream hover:bg-cream/6 hover:text-gold";
+    ? `${base} text-gold bg-cream/8`
+    : idle;
 }
 
 const SCROLL_TO_KEY = "onnaton-scroll-to";
@@ -203,6 +208,13 @@ export function Header() {
     router.push("/");
   };
 
+  const onHero = pathname === "/" && !scrolled && !menuOpen;
+  const headerText = onHero ? "text-on-dark" : "text-cream";
+  const headerTextMuted = onHero ? "text-on-dark/70" : "text-cream/70";
+  const headerBorder = onHero ? "border-on-dark/20" : "border-cream/20";
+  const headerDivider = onHero ? "border-on-dark/35" : "border-cream/35";
+  const headerBar = onHero ? "bg-on-dark" : "bg-cream";
+
   return (
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,backdrop-filter,border-color] duration-300 ease-out ${
@@ -224,32 +236,32 @@ export function Header() {
               setMenuOpen(false);
             }
           }}
-          className="flex flex-col justify-center gap-0.5 pl-5 sm:flex-row sm:items-center sm:gap-3 sm:pl-10"
+          className="flex min-w-0 shrink flex-col justify-center gap-0.5 pl-4 sm:flex-row sm:items-center sm:gap-3 sm:pl-10"
           aria-label={`${siteConfig.name} ${siteConfig.nameRomaji}`}
         >
-          <span className="font-serif-jp text-[20px] font-bold leading-none tracking-[0.06em] text-cream sm:text-2xl">
+          <span className={`font-serif-jp text-[18px] font-bold leading-none tracking-[0.06em] ${headerText} sm:text-2xl`}>
             {siteConfig.name}
           </span>
-          <span className="font-sans-jp text-[10px] font-medium leading-none tracking-[0.28em] text-cream/70 sm:text-[11px]">
+          <span className={`font-sans-jp hidden text-[10px] font-medium leading-none tracking-[0.28em] ${headerTextMuted} min-[400px]:inline sm:text-[11px]`}>
             {siteConfig.nameRomaji}
           </span>
         </Link>
 
-        <nav className="hidden items-center gap-7 pr-5 lg:flex lg:pr-8">
+        <nav className="hidden min-w-0 items-center gap-3 pr-3 lg:flex lg:gap-4 xl:gap-7 xl:pr-8">
           <div className="flex items-center">
             {navLinks.map((link, i) => (
               <Fragment key={link.href}>
                 {i > 0 && (
                   <span
                     aria-hidden
-                    className="mx-1 h-4 border-l border-dotted border-cream/35"
+                    className={`mx-1 h-5 border-l border-dotted ${headerDivider}`}
                   />
                 )}
                 <Link
                   href={link.href}
                   onClick={(event) => onNavClick(event, link.href)}
                   aria-current={activeHref === link.href ? "page" : undefined}
-                  className={navClass(activeHref === link.href)}
+                  className={navClass(activeHref === link.href, onHero)}
                 >
                   {link.label}
                 </Link>
@@ -257,35 +269,37 @@ export function Header() {
             ))}
           </div>
 
-          <LanguageFlags />
+          <LanguageFlags onHero={onHero} />
 
           <Link
             href={reserveHref}
             onClick={(event) => {
               if (isJa) onNavClick(event, "/#reserve");
             }}
-            className="my-3.5 flex items-center rounded-sm bg-gold px-7 font-bold tracking-[0.05em] text-ink hover:bg-cream"
+            className="my-3.5 flex shrink-0 items-center rounded-sm bg-gold px-4 text-[13px] font-bold tracking-[0.05em] text-on-dark hover:bg-cream hover:text-on-dark lg:px-5 xl:px-7 xl:text-base"
             aria-current={pathname === "/reserve" ? "page" : undefined}
           >
             {isJa ? t(copy.nav.reserve) : t(copy.reserve.online)}
           </Link>
         </nav>
 
-        <div className="flex items-center lg:hidden">
-          <LanguageFlags className="pr-3" />
+        <div className="flex shrink-0 items-center lg:hidden">
+          {!menuOpen ? (
+            <LanguageFlags className="pr-1 sm:pr-3" onHero={onHero} />
+          ) : null}
           <button
             type="button"
             onClick={() => setMenuOpen((v) => !v)}
             aria-label={menuOpen ? t(copy.nav.closeMenu) : t(copy.nav.openMenu)}
             aria-expanded={menuOpen}
-            className="flex min-h-11 w-14 flex-col items-center justify-center gap-1.5 self-stretch border-l border-cream/20 sm:w-16"
+            className={`flex min-h-11 w-12 shrink-0 flex-col items-center justify-center gap-1.5 self-stretch border-l ${headerBorder} sm:w-16`}
           >
             <span
-              className={`h-px w-5 bg-cream transition-transform ${menuOpen ? "translate-y-[7px] rotate-45" : ""}`}
+              className={`h-px w-5 ${headerBar} transition-transform ${menuOpen ? "translate-y-[7px] rotate-45" : ""}`}
             />
-            <span className={`h-px w-5 bg-cream transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
+            <span className={`h-px w-5 ${headerBar} transition-opacity ${menuOpen ? "opacity-0" : ""}`} />
             <span
-              className={`h-px w-5 bg-cream transition-transform ${menuOpen ? "-translate-y-[7px] -rotate-45" : ""}`}
+              className={`h-px w-5 ${headerBar} transition-transform ${menuOpen ? "-translate-y-[7px] -rotate-45" : ""}`}
             />
           </button>
         </div>
@@ -293,7 +307,7 @@ export function Header() {
 
       {menuOpen && (
         <div className="border-t border-cream/10 bg-ink/95 px-6 py-5 lg:hidden">
-          <nav className="flex flex-col text-[16px]">
+          <nav className="flex flex-col text-[18px]">
             {navLinks.map((link) => (
               <Link
                 key={link.href}
@@ -310,13 +324,16 @@ export function Header() {
               </Link>
             ))}
           </nav>
+          <div className="mt-6 border-t border-cream/10 pt-5 lg:hidden">
+            <LanguageFlags onHero={false} />
+          </div>
           <Link
             href={reserveHref}
             onClick={(event) => {
               setMenuOpen(false);
               if (isJa) onNavClick(event, "/#reserve");
             }}
-            className="mt-5 flex min-h-12 items-center justify-center bg-gold text-[15px] font-bold tracking-[0.05em] text-ink"
+            className="mt-5 flex min-h-12 items-center justify-center bg-gold text-[15px] font-bold tracking-[0.05em] text-on-dark"
           >
             {isJa ? t(copy.nav.reserve) : t(copy.reserve.online)}
           </Link>

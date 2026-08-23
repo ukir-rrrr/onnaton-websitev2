@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { AnimatePresence, motion } from "motion/react";
 import {
   CLIP_COVER,
@@ -34,12 +35,14 @@ export function PageIntro({
           key="intro-logo"
           className="fixed inset-0 z-[120] flex items-center justify-center bg-white"
         >
-          <p className="font-serif-jp flex items-baseline gap-3 text-[28px] font-medium tracking-[0.12em] text-ink sm:gap-4 sm:text-[40px] sm:tracking-[0.16em]">
-            <span>恩納豚</span>
-            <span className="text-[14px] tracking-[0.35em] sm:text-[18px] sm:tracking-[0.4em]">
-              ONNATON
-            </span>
-          </p>
+          <Image
+            src="/images/onnaton-logo.jpg"
+            alt="恩納豚 ONNATON"
+            width={200}
+            height={200}
+            priority
+            className="h-auto w-[120px] object-contain sm:w-[160px] lg:w-[180px]"
+          />
         </motion.div>
       )}
 

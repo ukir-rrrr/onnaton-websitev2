@@ -31,7 +31,7 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
                 {tr(group.heading)}
               </h3>
               {group.note ? (
-                <p className="mb-6 text-[13px] leading-[1.8] tracking-[0.04em] text-wipe/80">
+                <p className="mb-6 text-[13px] leading-[1.8] tracking-[0.04em] text-cream/75">
                   {tr(group.note)}
                 </p>
               ) : null}
@@ -42,14 +42,14 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
                       key={`${item.name}-${item.amount ?? item.price}`}
                       className="flex items-baseline justify-between gap-4 py-3.5"
                     >
-                      <span className="text-[15px] tracking-[0.06em] text-wipe sm:text-[16px]">
+                      <span className="text-[15px] tracking-[0.06em] text-cream sm:text-[16px]">
                         {tr(item.name)}
                         {item.amount ? (
                           <span
                             className={
                               item.emphasizeAmount
-                                ? "ml-3 text-[18px] text-gold sm:text-[20px]"
-                                : "ml-3 text-[13px] text-wipe/70"
+                                ? "ml-3 text-[18px] text-cream sm:text-[20px]"
+                                : "ml-3 text-[13px] text-cream/65"
                             }
                           >
                             {item.amount}

@@ -19,7 +19,7 @@ import { ReserveButton } from "@/components/ui/ReserveButton";
 const initialState: ReservationState = { ok: false };
 
 const fieldClass =
-  "w-full rounded-sm border border-cream/18 bg-ink px-4 py-3.5 text-[15px] text-cream placeholder:text-cream/30 outline-none transition-colors [color-scheme:dark] focus:border-gold";
+  "w-full rounded-sm border border-cream/18 bg-ink-raised px-4 py-3.5 text-[15px] text-cream placeholder:text-cream/30 outline-none transition-colors [color-scheme:light] focus:border-gold";
 
 const labelClass =
   "mb-2 block text-[11px] tracking-[0.18em] text-gold sm:text-[12px]";
@@ -105,7 +105,7 @@ function ReservationFormInner({
       </div>
 
       {isJa ? (
-        <div className="border border-gold/30 bg-ink px-5 py-6 text-center sm:px-8">
+        <div className="border border-gold/30 bg-ink-raised px-5 py-6 text-center sm:px-8">
           <p className="mb-5 text-[14px] leading-[1.9] text-cream/80">
             {t(copy.form.jaPhoneNote)}
           </p>
@@ -262,7 +262,7 @@ function ReservationFormInner({
               ).map(([id, label]) => (
                 <label
                   key={id}
-                  className="flex min-h-12 cursor-pointer items-center justify-center border border-cream/18 bg-ink px-3 text-[13px] tracking-[0.08em] text-cream/80 has-[:checked]:border-gold has-[:checked]:text-gold"
+                  className="flex min-h-12 cursor-pointer items-center justify-center border border-cream/18 bg-ink-raised px-3 text-[13px] tracking-[0.08em] text-cream/80 has-[:checked]:border-gold has-[:checked]:text-gold"
                 >
                   <input
                     type="radio"
@@ -288,7 +288,7 @@ function ReservationFormInner({
           {courseMenus.map((course) => (
             <label
               key={course.id}
-              className="flex cursor-pointer flex-col gap-1 border border-cream/18 bg-ink px-4 py-4 has-[:checked]:border-gold"
+              className="flex cursor-pointer flex-col gap-1 border border-cream/18 bg-ink-raised px-4 py-4 has-[:checked]:border-gold"
             >
               <input
                 type="radio"
@@ -309,7 +309,7 @@ function ReservationFormInner({
               </span>
             </label>
           ))}
-          <label className="flex cursor-pointer items-center border border-cream/18 bg-ink px-4 py-4 has-[:checked]:border-gold sm:col-span-2">
+          <label className="flex cursor-pointer items-center border border-cream/18 bg-ink-raised px-4 py-4 has-[:checked]:border-gold sm:col-span-2">
             <input
               type="radio"
               name="course"

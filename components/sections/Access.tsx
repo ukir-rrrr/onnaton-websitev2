@@ -17,23 +17,23 @@ export function Access() {
   return (
     <section
       id="access"
-      className="scroll-mt-24 grid w-full grid-cols-1 items-start gap-14 px-6 pb-24 sm:px-10 sm:pb-32 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20 lg:px-14 lg:pb-[200px]"
+      className="scroll-mt-24 w-full px-6 pb-24 sm:px-10 sm:pb-32 lg:px-14 lg:pb-[200px]"
     >
-      <div>
-        <motion.div
-          initial={reduceMotion ? false : { opacity: 0, y: 24 }}
-          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-          viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.85, ease }}
-        >
-          <SectionEyebrow
-            eyebrow="ACCESS"
-            heading={t(copy.access.heading)}
-            align="left"
-            className="mb-10 sm:mb-12"
-          />
-        </motion.div>
+      <motion.div
+        initial={reduceMotion ? false : { opacity: 0, y: 24 }}
+        whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+        viewport={{ once: true, amount: 0.4 }}
+        transition={{ duration: 0.85, ease }}
+      >
+        <SectionEyebrow
+          eyebrow="ACCESS"
+          heading={t(copy.access.heading)}
+          align="left"
+          className="mb-10 sm:mb-12"
+        />
+      </motion.div>
 
+      <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
         <motion.div
           className="flex flex-col gap-6"
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
@@ -82,35 +82,35 @@ export function Access() {
             </div>
           ))}
         </motion.div>
-      </div>
 
-      <motion.div
-        className="mt-2 w-full overflow-hidden rounded-sm border border-cream/10 sm:mt-4 lg:mt-16"
-        initial={reduceMotion ? false : { opacity: 0, y: 28 }}
-        whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.2 }}
-        transition={{ duration: 0.95, delay: 0.15, ease }}
-      >
-        <iframe
-          title={t(copy.access.mapTitle)}
-          src={siteConfig.mapEmbedSrc.replace(
-            "hl=ja",
-            `hl=${locale === "zh" ? "zh-CN" : locale}`,
-          )}
-          className="h-[320px] w-full border-0 sm:h-[420px] lg:h-[600px]"
-          loading="lazy"
-          referrerPolicy="no-referrer-when-downgrade"
-          allowFullScreen
-        />
-        <a
-          href={siteConfig.mapLink}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="flex min-h-11 items-center justify-center border-t border-cream/10 bg-ink-raised px-4 py-3.5 text-[13px] tracking-[0.12em] text-cream/70 transition-colors hover:text-gold"
+        <motion.div
+          className="w-full overflow-hidden rounded-sm border border-cream/10"
+          initial={reduceMotion ? false : { opacity: 0, y: 28 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
+          transition={{ duration: 0.95, delay: 0.15, ease }}
         >
-          {t(copy.access.openMap)}
-        </a>
-      </motion.div>
+          <iframe
+            title={t(copy.access.mapTitle)}
+            src={siteConfig.mapEmbedSrc.replace(
+              "hl=ja",
+              `hl=${locale === "zh" ? "zh-CN" : locale}`,
+            )}
+            className="h-[320px] w-full border-0 sm:h-[420px] lg:h-[600px]"
+            loading="lazy"
+            referrerPolicy="no-referrer-when-downgrade"
+            allowFullScreen
+          />
+          <a
+            href={siteConfig.mapLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="flex min-h-11 items-center justify-center border-t border-cream/10 bg-ink-raised px-4 py-3.5 text-[13px] tracking-[0.12em] text-cream/70 transition-colors hover:text-gold"
+          >
+            {t(copy.access.openMap)}
+          </a>
+        </motion.div>
+      </div>
     </section>
   );
 }
