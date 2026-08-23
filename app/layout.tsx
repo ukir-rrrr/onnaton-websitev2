@@ -53,11 +53,6 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: t(locale, copy.meta.homeTitle),
     description: t(locale, copy.meta.homeDesc),
-    icons: {
-      icon: [{ url: "/images/onnaton-logo.jpg", type: "image/jpeg" }],
-      shortcut: "/images/onnaton-logo.jpg",
-      apple: "/images/onnaton-logo.jpg",
-    },
   };
 }
 
