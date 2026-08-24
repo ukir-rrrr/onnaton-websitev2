@@ -343,11 +343,11 @@ const phrases: Record<string, Localized> = {
     "없음 (인근 유료주차장을 이용해 주세요)",
     "无（请使用附近收费停车场）",
   ),
-  "旭橋エリア／MAP CODE：33155442": L(
-    "旭橋エリア／MAP CODE：33155442",
-    "Asahibashi area / MAP CODE: 33155442",
-    "아사히바시 지역 / MAP CODE: 33155442",
-    "旭桥一带／MAP CODE：33155442",
+  "ゆいレール「旭橋駅」より徒歩約9分\n那覇空港より車で約10〜15分": L(
+    "ゆいレール「旭橋駅」より徒歩約9分\n那覇空港より車で約10〜15分",
+    "About 9 min on foot from Yui Rail “Asahibashi Station”\nAbout 10–15 min by car from Naha Airport",
+    "유이레일 「아사히바시역」에서 도보 약 9분\n나하 공항에서 차로 약 10〜15분",
+    "从单轨「旭桥站」步行约9分钟\n从那霸机场驾车约10〜15分钟",
   ),
   "火曜日・水曜日": L("火曜日・水曜日", "Tue & Wed", "화요일·수요일", "周二、周三"),
   "席の種類": L("席の種類", "Seating", "좌석 종류", "座位种类"),

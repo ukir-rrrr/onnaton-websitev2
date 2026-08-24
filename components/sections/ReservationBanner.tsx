@@ -1,25 +1,21 @@
 "use client";
 
 import { motion } from "motion/react";
-import {
-  UtensilsCrossed,
-  CalendarCheck,
-  Clock,
-  Ban,
-  type LucideIcon,
-} from "lucide-react";
+import { MultilineText } from "@/components/i18n/MultilineText";
 import { ReserveButton } from "@/components/ui/ReserveButton";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
 export function ReservationBanner() {
   const { t } = useT();
-  const points: { label: string; icon: LucideIcon }[] = [
-    { label: t(copy.reservationBanner.p1), icon: UtensilsCrossed },
-    { label: t(copy.reservationBanner.p2), icon: CalendarCheck },
-    { label: t(copy.reservationBanner.p3), icon: Clock },
-    { label: t(copy.reservationBanner.p4), icon: Ban },
+  const notices = [
+    copy.reservationBanner.notice1,
+    copy.reservationBanner.notice2,
+    copy.reservationBanner.notice3,
+    copy.reservationBanner.notice4,
+    copy.reservationBanner.notice5,
   ];
+
   return (
     <section className="relative w-full overflow-hidden border-y border-cream/10 bg-ink-raised">
       <div className="relative px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
@@ -36,53 +32,19 @@ export function ReservationBanner() {
           </div>
         </div>
 
-        <motion.ul
-          className="mx-auto grid max-w-5xl grid-cols-1 gap-y-8 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-10 lg:grid-cols-4 lg:gap-6"
-          initial="hidden"
-          whileInView="visible"
-          viewport={{ once: true, amount: 0.35 }}
-          variants={{
-            hidden: {},
-            visible: {
-              transition: { staggerChildren: 0.1 },
-            },
-          }}
-        >
-          {points.map(({ label, icon: Icon }) => (
-            <motion.li
-              key={label}
-              className="flex flex-col items-center gap-3 text-center"
-              variants={{
-                hidden: { opacity: 0, y: 20 },
-                visible: {
-                  opacity: 1,
-                  y: 0,
-                  transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] },
-                },
-              }}
-            >
-              <span className="flex h-12 w-12 items-center justify-center rounded-full border border-cream/25 text-gold">
-                <Icon className="h-5 w-5" strokeWidth={1.5} aria-hidden />
-              </span>
-              <p className="font-serif-jp max-w-[18rem] text-[15px] leading-[1.75] tracking-[0.04em] text-cream/88 sm:max-w-[14rem] sm:text-[16px] sm:leading-[1.8]">
-                {label}
-              </p>
-            </motion.li>
-          ))}
-        </motion.ul>
-
         <motion.div
-          className="mx-auto mt-12 max-w-2xl border-t border-cream/12 pt-10 text-center lg:mt-14 lg:max-w-[42rem] lg:pt-12"
+          className="mx-auto max-w-2xl text-center lg:max-w-[42rem]"
           initial={{ opacity: 0, y: 16 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.4 }}
-          transition={{ duration: 0.5, delay: 0.35, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.5, delay: 0.15, ease: [0.22, 1, 0.36, 1] }}
         >
           <div className="font-serif-jp space-y-5 text-[16px] leading-[2.05] tracking-[0.04em] text-cream/82 sm:space-y-6 sm:text-[18px] sm:leading-[2.15]">
-            <p>{t(copy.reservationBanner.notice1)}</p>
-            <p>{t(copy.reservationBanner.notice2)}</p>
-            <p>{t(copy.reservationBanner.notice3)}</p>
-            <p>{t(copy.reservationBanner.notice4)}</p>
+            {notices.map((notice) => (
+              <p key={notice.ja}>
+                <MultilineText text={t(notice)} />
+              </p>
+            ))}
           </div>
         </motion.div>
 
@@ -94,7 +56,7 @@ export function ReservationBanner() {
           transition={{ duration: 0.5, delay: 0.4, ease: [0.22, 1, 0.36, 1] }}
         >
           <p className="font-serif-jp text-[15px] leading-[1.95] tracking-[0.04em] text-cream/78 sm:text-[16px] sm:leading-[2]">
-            {t(copy.children.lead)}
+            <MultilineText text={t(copy.children.lead)} />
           </p>
           <a
             href="/#children"
@@ -104,7 +66,6 @@ export function ReservationBanner() {
           </a>
         </motion.div>
 
-        {/* Outside the 5-col cells so width is not capped by a narrow column */}
         <motion.div
           className="mx-auto mt-8 flex max-w-5xl justify-center lg:mt-10"
           initial={{ opacity: 0, y: 16 }}

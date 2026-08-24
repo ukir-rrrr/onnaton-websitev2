@@ -3,6 +3,7 @@ import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
 import { ReservationForm } from "@/components/reserve/ReservationForm";
+import { MultilineText } from "@/components/i18n/MultilineText";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { photos } from "@/lib/content/photos";
 import { getLocale } from "@/lib/i18n/getLocale";
@@ -60,7 +61,7 @@ export default async function ReservePage({
           <div className="mx-auto grid w-full max-w-5xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
             <aside className="lg:pt-2">
               <p className="mb-8 text-[14px] leading-[2] tracking-[0.04em] text-cream/80 sm:text-[15px] sm:leading-[2.1]">
-                {t(locale, copy.form.lead)}
+                <MultilineText text={t(locale, copy.form.lead)} />
               </p>
               <ul className="flex flex-col gap-4 border-t border-cream/12 pt-6">
                 {[
@@ -72,7 +73,7 @@ export default async function ReservePage({
                     key={item}
                     className="border-b border-cream/12 pb-4 text-[13px] leading-[1.8] tracking-[0.04em] text-cream/70 sm:text-[14px]"
                   >
-                    {item}
+                    <MultilineText text={item} />
                   </li>
                 ))}
               </ul>

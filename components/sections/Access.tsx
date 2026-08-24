@@ -3,6 +3,7 @@
 import { motion, useReducedMotion } from "motion/react";
 import Link from "next/link";
 import { storeInfoRows, siteConfig } from "@/lib/content/store";
+import { MultilineText } from "@/components/i18n/MultilineText";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
 import { copy } from "@/lib/i18n/copy";
@@ -76,7 +77,7 @@ export function Access() {
                 </a>
               ) : (
                 <span className="py-1 text-[15px] leading-[1.7] text-cream sm:py-0">
-                  {tr(row.value)}
+                  <MultilineText text={tr(row.value)} />
                 </span>
               )}
             </div>

@@ -25,7 +25,7 @@ export const sceneList: Scene[] = [
   },
   {
     title: "海外からのお客様",
-    desc: "世界各国からのお客様にご愛顧いただいています。",
+    desc: "世界各国からのお客様に\nご愛顧いただいています。",
     photo: photos.scene04,
   },
 ];

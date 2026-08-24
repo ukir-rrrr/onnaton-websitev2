@@ -8,6 +8,7 @@ import {
   kodawariList,
   type KodawariFeature,
 } from "@/lib/content/kodawari";
+import { MultilineText } from "@/components/i18n/MultilineText";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { useIsMobile } from "@/lib/hooks/useIsMobile";
 import { copy } from "@/lib/i18n/copy";
@@ -98,12 +99,7 @@ function KodawariFeatureBlock({
         >
           {feature.paragraphs.map((paragraph) => (
             <p key={paragraph}>
-              {tr(paragraph).split("\n").map((line, i) => (
-                <span key={line}>
-                  {i > 0 ? <br /> : null}
-                  {line}
-                </span>
-              ))}
+              <MultilineText text={tr(paragraph)} />
             </p>
           ))}
         </motion.div>
@@ -244,7 +240,7 @@ export function Kodawari() {
               {tr(item.title)}
             </h3>
             <p className="font-serif-jp text-[16px] leading-[2.15] tracking-[0.04em] text-cream/72 sm:text-[18px] sm:leading-[2.3]">
-              {tr(item.desc)}
+              <MultilineText text={tr(item.desc)} />
             </p>
           </motion.div>
         ))}

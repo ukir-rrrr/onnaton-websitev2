@@ -13,6 +13,7 @@ import {
 } from "@/lib/motion/diagonalWipe";
 import { PageIntro, type IntroPhase } from "@/components/hero/PageIntro";
 import { ReserveButton } from "@/components/ui/ReserveButton";
+import { MultilineText } from "@/components/i18n/MultilineText";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
@@ -198,7 +199,7 @@ export function Hero() {
             </h1>
 
             <p className="font-serif-jp mb-6 max-w-[28rem] text-[14px] leading-[1.9] tracking-[0.06em] text-on-dark/95 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-8 sm:text-[15px] sm:leading-[2.1] sm:text-on-dark/85 sm:[text-shadow:none]">
-              {t(copy.hero.body)}
+              <MultilineText text={t(copy.hero.body)} />
             </p>
 
             <ReserveButton
@@ -206,7 +207,7 @@ export function Hero() {
             />
 
             <p className="text-[12px] tracking-[0.04em] text-on-dark/75 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:text-[13px] sm:text-on-dark/55 sm:[text-shadow:none]">
-              {t(copy.hero.note)}
+              <MultilineText text={t(copy.hero.note)} />
             </p>
           </div>
         </motion.div>

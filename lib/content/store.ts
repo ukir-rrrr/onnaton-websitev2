@@ -55,7 +55,8 @@ export const storeInfoRows: StoreInfoRow[] = [
   { label: "駐車場", value: "なし（近隣のコインパーキングをご利用ください）" },
   {
     label: "アクセス",
-    value: "旭橋エリア／MAP CODE：33155442",
+    value:
+      "ゆいレール「旭橋駅」より徒歩約9分\n那覇空港より車で約10〜15分",
   },
   {
     label: "SNS",

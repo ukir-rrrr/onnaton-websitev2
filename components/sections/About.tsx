@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import { photos } from "@/lib/content/photos";
+import { MultilineText } from "@/components/i18n/MultilineText";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
@@ -139,7 +140,7 @@ export function About() {
         id="about-text"
         className="scroll-mt-24 mx-auto grid max-w-[1200px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:grid-cols-2 lg:gap-16 lg:px-14 lg:py-[120px]"
       >
-        <div className="order-2 lg:order-1">
+        <div className="order-2 min-w-0 lg:order-1">
           <motion.p
             className="mb-6 text-[13px] tracking-[0.28em] text-gold sm:mb-8 sm:text-[18px]"
             {...fadeUp(0)}
@@ -151,14 +152,17 @@ export function About() {
             className="font-serif-jp mb-10 text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-12 sm:text-[28px] sm:leading-[2.05] lg:text-[32px]"
             {...fadeUp(0.1)}
           >
-            {t(copy.about.lead)}
+            <MultilineText text={t(copy.about.lead)} keepAll={false} nowrapLastLine />
           </motion.h3>
 
           <motion.div {...fadeUp(0.2)}>
             <div className="font-serif-jp space-y-8 text-[14px] font-normal leading-[2.35] tracking-[0.04em] text-cream/80 sm:text-[18px] sm:leading-[2.5]">
               <p>{t(copy.about.p1)}</p>
               <p>{t(copy.about.p2)}</p>
-              <p>{t(copy.about.p3)}</p>
+              <p>
+                <MultilineText text={t(copy.about.p3)} keepAll={false} />
+              </p>
+              <p>{t(copy.about.p4)}</p>
             </div>
             <p className="font-serif-jp mt-12 text-left text-[14px] tracking-[0.18em] text-cream sm:mt-14 sm:text-[15px]">
               {t(copy.about.chef)}

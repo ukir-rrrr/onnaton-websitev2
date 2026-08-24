@@ -12,6 +12,7 @@ import {
   reservationGuestIds,
   reservationTimeSlots,
 } from "@/lib/content/reservation";
+import { MultilineText } from "@/components/i18n/MultilineText";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 import { ReserveButton } from "@/components/ui/ReserveButton";
@@ -68,7 +69,7 @@ function ReservationFormInner({
           {t(copy.form.successTitle)}
         </h2>
         <p className="mx-auto mb-8 max-w-md text-[14px] leading-[2] tracking-[0.04em] text-cream/75 sm:text-[15px]">
-          {t(copy.form.successBody)}
+          <MultilineText text={t(copy.form.successBody)} />
         </p>
         {state.reference ? (
           <p className="mb-10 text-[13px] tracking-[0.12em] text-gold">

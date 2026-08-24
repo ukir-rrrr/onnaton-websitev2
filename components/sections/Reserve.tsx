@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { photos } from "@/lib/content/photos";
+import { MultilineText } from "@/components/i18n/MultilineText";
 import { ReserveButton } from "@/components/ui/ReserveButton";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { copy } from "@/lib/i18n/copy";
@@ -31,21 +32,23 @@ function PolicyCard({
         {heading}
       </h3>
       <p className="font-serif-jp mb-8 text-[16px] leading-[2.05] tracking-[0.04em] text-cream sm:mb-10 sm:text-[18px] sm:leading-[2.15]">
-        {lead}
+        <MultilineText text={lead} />
       </p>
       <div className="font-serif-jp space-y-6 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/80 sm:space-y-7 sm:text-[18px] sm:leading-[2.2]">
         {paragraphs.map((paragraph) => (
-          <p key={paragraph}>{paragraph}</p>
+          <p key={paragraph}>
+            <MultilineText text={paragraph} />
+          </p>
         ))}
       </div>
       {note ? (
         <p className="mt-8 text-[15px] leading-[2.05] tracking-[0.04em] text-cream/60 sm:mt-10 sm:text-[16px] sm:leading-[2.15]">
-          ※{note}
+          ※<MultilineText text={note} />
         </p>
       ) : null}
       {closing ? (
         <p className="mt-6 text-[16px] leading-[2.05] tracking-[0.04em] text-cream/85 sm:text-[17px] sm:leading-[2.15]">
-          {closing}
+          <MultilineText text={closing} />
         </p>
       ) : null}
     </article>
@@ -76,11 +79,11 @@ export function Reserve() {
           />
 
           <p className="mx-auto mb-6 max-w-[720px] text-[14px] leading-[2] text-on-dark/80 sm:mb-8 sm:text-base">
-            {t(copy.reserveSection.body)}
+            <MultilineText text={t(copy.reserveSection.body)} />
           </p>
           <div className="mx-auto mb-8 max-w-[720px] sm:mb-10">
             <p className="text-[13px] leading-[1.9] tracking-[0.04em] text-gold sm:text-[14px]">
-              {t(copy.children.lead)}
+              <MultilineText text={t(copy.children.lead)} />
             </p>
             <a
               href="#children"
@@ -108,7 +111,6 @@ export function Reserve() {
             paragraphs={[
               t(copy.children.p1),
               t(copy.children.p2),
-              t(copy.children.p3),
             ]}
             note={t(copy.children.note)}
             closing={t(copy.children.closing)}

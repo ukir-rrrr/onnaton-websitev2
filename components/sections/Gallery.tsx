@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { galleryList } from "@/lib/content/gallery";
 import { siteConfig } from "@/lib/content/store";
+import { MultilineText } from "@/components/i18n/MultilineText";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
 import { copy } from "@/lib/i18n/copy";
@@ -214,11 +215,11 @@ export function Gallery() {
       </p>
 
       <div className="mx-auto mt-14 flex max-w-4xl flex-col items-center px-6 text-center sm:mt-20 sm:px-10 lg:mt-24">
-        <p className="font-serif-jp mb-3 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/88 sm:text-[18px] sm:leading-[2.2] lg:whitespace-nowrap">
-          {t(copy.gallery.p1)}
+        <p className="font-serif-jp mb-3 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/88 sm:text-[18px] sm:leading-[2.2]">
+          <MultilineText text={t(copy.gallery.p1)} />
         </p>
-        <p className="font-serif-jp mb-8 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/82 sm:mb-10 sm:text-[18px] sm:leading-[2.2] lg:whitespace-nowrap">
-          {t(copy.gallery.p2)}
+        <p className="font-serif-jp mb-8 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/82 sm:mb-10 sm:text-[18px] sm:leading-[2.2]">
+          <MultilineText text={t(copy.gallery.p2)} />
         </p>
         <a
           href={siteConfig.instagramUrl}
