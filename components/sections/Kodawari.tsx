@@ -16,11 +16,6 @@ import { useT } from "@/components/i18n/LocaleProvider";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const kodawariGridPlacement = [
-  "lg:col-span-2 lg:col-start-2",
-  "lg:col-span-2 lg:col-start-4",
-] as const;
-
 const kodawariFeatures: KodawariFeature[] = [aguFeature, ishigakiFeature];
 
 function KodawariFeatureBlock({
@@ -37,9 +32,9 @@ function KodawariFeatureBlock({
   const imageClass = feature.imageClassName ?? "object-cover object-center";
 
   return (
-    <div className="mb-16 grid grid-cols-1 items-center gap-10 sm:mb-20 sm:gap-12 lg:mb-24 lg:grid-cols-[minmax(0,720px)_1fr] lg:gap-16">
+    <div className="mb-16 grid grid-cols-1 items-center gap-10 sm:mb-20 sm:gap-12 lg:mb-24 xl:grid-cols-[minmax(0,720px)_1fr] xl:gap-16">
       <motion.div
-        className={`relative mx-auto ${aspectClass} w-full max-w-[720px] overflow-hidden rounded-sm lg:mx-0`}
+        className={`relative mx-auto ${aspectClass} w-full max-w-[720px] overflow-hidden rounded-sm xl:mx-0`}
         initial={reduceMotion ? false : { opacity: 0, y: 32 }}
         whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -49,7 +44,7 @@ function KodawariFeatureBlock({
           src={feature.photo}
           alt={tr(feature.photoAlt)}
           fill
-          sizes="(min-width: 1024px) 720px, 100vw"
+          sizes="(min-width: 1280px) 720px, 100vw"
           unoptimized
           className={imageClass}
         />
@@ -63,7 +58,7 @@ function KodawariFeatureBlock({
           {feature.num}
         </motion.p>
         <motion.h3
-          className={`font-serif-jp text-[22px] font-normal leading-[1.7] tracking-[0.06em] text-cream sm:text-[28px] lg:text-[30px] ${
+          className={`font-serif-jp text-[22px] font-normal leading-[1.7] tracking-[0.06em] text-cream sm:text-[28px] xl:text-[30px] ${
             feature.highlights?.length ? "mb-3 sm:mb-4" : "mb-8 sm:mb-10"
           }`}
           {...fadeUp(0.08)}
@@ -151,7 +146,7 @@ export function Kodawari() {
       ))}
 
       <motion.div
-        className="grid grid-cols-1 gap-14 sm:grid-cols-2 sm:gap-x-8 sm:gap-y-16 lg:grid-cols-6 lg:gap-x-10"
+        className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-14 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-16 xl:gap-x-12"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
@@ -162,10 +157,10 @@ export function Kodawari() {
           },
         }}
       >
-        {kodawariList.map((item, index) => (
+        {kodawariList.map((item) => (
           <motion.div
             key={item.num}
-            className={`flex flex-col ${kodawariGridPlacement[index] ?? ""}`}
+            className="flex min-w-0 flex-col"
             variants={
               reduceMotion
                 ? undefined
@@ -211,7 +206,7 @@ export function Kodawari() {
                     alt={tr(item.title)}
                     width={480}
                     height={340}
-                    sizes="(min-width: 1024px) 33vw, (min-width: 640px) 50vw, 100vw"
+                    sizes="(min-width: 640px) 560px, 100vw"
                     quality={90}
                     className={
                       item.imageClassName ?? "h-full w-full object-cover"
@@ -239,7 +234,7 @@ export function Kodawari() {
             <h3 className="font-serif-jp mb-4 text-[19px] font-normal tracking-[0.1em] text-cream sm:text-[28px]">
               {tr(item.title)}
             </h3>
-            <p className="font-serif-jp text-[16px] leading-[2.15] tracking-[0.04em] text-cream/72 sm:text-[18px] sm:leading-[2.3]">
+            <p className="font-serif-jp min-w-0 text-[16px] leading-[2.15] tracking-[0.04em] text-cream/72 sm:text-[18px] sm:leading-[2.3]">
               <MultilineText text={tr(item.desc)} />
             </p>
           </motion.div>

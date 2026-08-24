@@ -58,8 +58,8 @@ export default async function ReservePage({
         </section>
 
         <section className="px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
-          <div className="mx-auto grid w-full max-w-5xl gap-12 lg:grid-cols-[0.85fr_1.15fr] lg:gap-16">
-            <aside className="lg:pt-2">
+          <div className="mx-auto grid w-full max-w-5xl gap-12 xl:grid-cols-[0.85fr_1.15fr] xl:gap-16">
+            <aside className="xl:pt-2">
               <p className="mb-8 text-[14px] leading-[2] tracking-[0.04em] text-cream/80 sm:text-[15px] sm:leading-[2.1]">
                 <MultilineText text={t(locale, copy.form.lead)} />
               </p>

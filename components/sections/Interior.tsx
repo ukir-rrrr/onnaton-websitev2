@@ -29,7 +29,7 @@ export function Interior() {
       </motion.div>
 
       <motion.div
-        className="mb-10 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 lg:grid-cols-[1.1fr_0.9fr]"
+        className="mb-10 grid grid-cols-1 gap-6 sm:grid-cols-2 sm:gap-8 xl:grid-cols-[1.1fr_0.9fr]"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.2 }}
@@ -46,7 +46,7 @@ export function Interior() {
         ].map((photo) => (
           <motion.div
             key={photo.alt}
-            className="relative h-[320px] overflow-hidden rounded-sm sm:h-[420px] lg:h-[520px]"
+            className="relative h-[320px] overflow-hidden rounded-sm sm:h-[420px] xl:h-[520px]"
             variants={
               reduceMotion
                 ? undefined
@@ -88,7 +88,7 @@ export function Interior() {
                 src={photo.src}
                 alt={photo.alt}
                 fill
-                sizes="(min-width: 1024px) 55vw, 100vw"
+                sizes="(min-width: 1280px) 55vw, 100vw"
                 quality={90}
                 className="object-cover"
               />
@@ -98,13 +98,13 @@ export function Interior() {
       </motion.div>
 
       <motion.div
-        className="flex flex-col gap-8 rounded-sm bg-ink-raised p-8 sm:gap-10 lg:flex-row lg:items-center lg:justify-between lg:gap-12 lg:p-12"
+        className="flex flex-col gap-8 rounded-sm bg-ink-raised p-8 sm:gap-10 xl:flex-row xl:items-center xl:justify-between xl:gap-12 xl:p-12"
         initial={reduceMotion ? false : { opacity: 0, y: 24 }}
         whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.35 }}
         transition={{ duration: 0.85, delay: 0.1, ease }}
       >
-        <div className="grid flex-1 grid-cols-2 gap-8 sm:grid-cols-3 lg:grid-cols-5">
+        <div className="grid flex-1 grid-cols-2 gap-8 sm:grid-cols-3 xl:grid-cols-5">
           {interiorFacts.map((fact) => (
             <div key={fact.label}>
               <p className="mb-2.5 text-[13px] text-cream/50">{tr(fact.label)}</p>
@@ -115,7 +115,7 @@ export function Interior() {
 
         <Link
           href="/seats"
-          className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-3 self-stretch border border-cream/55 px-5 py-3 text-[13px] font-medium tracking-[0.28em] text-cream transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold sm:gap-4 sm:self-end sm:px-7 sm:py-3.5 sm:text-[12px] lg:self-center"
+          className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-3 self-stretch border border-cream/55 px-5 py-3 text-[13px] font-medium tracking-[0.28em] text-cream transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold sm:gap-4 sm:self-end sm:px-7 sm:py-3.5 sm:text-[12px] xl:self-center"
         >
           VIEW MORE
           <span

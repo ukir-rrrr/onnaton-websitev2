@@ -45,10 +45,10 @@ export function About() {
 
   return (
     <section id="about" className="scroll-mt-24 w-full pt-24 sm:pt-32 lg:pt-[140px]">
-      <div className="mb-16 flex flex-col justify-between gap-8 px-6 sm:mb-20 sm:px-10 lg:mb-24 lg:flex-row lg:items-start lg:px-14">
+      <div className="mb-16 flex flex-col justify-between gap-8 px-6 sm:mb-20 sm:px-10 lg:mb-24 lg:px-14 xl:flex-row xl:items-start">
         <div>
           <motion.h2
-            className="font-serif text-5xl font-bold italic tracking-[0.01em] text-cream sm:text-7xl lg:text-[76px]"
+            className="font-serif text-5xl font-bold italic tracking-[0.01em] text-cream sm:text-7xl xl:text-[76px]"
             {...fadeUp(0)}
           >
             Concept
@@ -60,7 +60,7 @@ export function About() {
             {t(copy.about.conceptJa)}
           </motion.p>
         </div>
-        <div className="max-w-[420px] lg:pt-6">
+        <div className="max-w-[420px] xl:pt-6">
           <motion.p
             className="font-serif-jp text-lg leading-[2.9] text-cream"
             {...fadeLeft(0.18)}
@@ -76,7 +76,7 @@ export function About() {
         </div>
       </div>
 
-      <div className="relative h-[420px] w-full overflow-hidden sm:h-[520px] lg:h-[680px]">
+      <div className="relative h-[420px] w-full overflow-hidden sm:h-[520px] xl:h-[680px]">
         <motion.div
           className="absolute inset-0"
           initial={reduceMotion ? false : { scale: 1.08 }}
@@ -103,9 +103,9 @@ export function About() {
           Concept
         </motion.span>
 
-        <div className="absolute inset-x-6 bottom-8 sm:inset-x-16 sm:bottom-16 lg:left-[120px] lg:right-auto lg:bottom-[120px] lg:max-w-[1100px]">
+        <div className="absolute inset-x-6 bottom-8 sm:inset-x-16 sm:bottom-16 xl:left-[120px] xl:right-auto xl:bottom-[120px] xl:max-w-[1100px]">
           <motion.p
-            className="font-serif-jp mb-3 text-2xl font-bold text-on-dark sm:mb-4 sm:text-3xl lg:text-[42px]"
+            className="font-serif-jp mb-3 text-2xl font-bold text-on-dark sm:mb-4 sm:text-3xl xl:text-[42px]"
             {...fadeUp(0.2)}
           >
             {t(copy.about.overlay)}
@@ -138,9 +138,9 @@ export function About() {
 
       <div
         id="about-text"
-        className="scroll-mt-24 mx-auto grid max-w-[1200px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:grid-cols-2 lg:gap-16 lg:px-14 lg:py-[120px]"
+        className="scroll-mt-24 mx-auto grid max-w-[1200px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:px-14 lg:py-[120px] xl:grid-cols-2 xl:gap-16"
       >
-        <div className="order-2 min-w-0 lg:order-1">
+        <div className="order-2 min-w-0 xl:order-1">
           <motion.p
             className="mb-6 text-[13px] tracking-[0.28em] text-gold sm:mb-8 sm:text-[18px]"
             {...fadeUp(0)}
@@ -149,7 +149,7 @@ export function About() {
           </motion.p>
 
           <motion.h3
-            className="font-serif-jp mb-10 text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-12 sm:text-[28px] sm:leading-[2.05] lg:text-[32px]"
+            className="font-serif-jp mb-10 text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-12 sm:text-[28px] sm:leading-[2.05] xl:text-[32px]"
             {...fadeUp(0.1)}
           >
             <MultilineText text={t(copy.about.lead)} keepAll={false} nowrapLastLine />
@@ -171,7 +171,7 @@ export function About() {
         </div>
 
         <motion.div
-          className="relative order-1 mx-auto aspect-[3/4] w-full max-w-[420px] overflow-hidden lg:order-2 lg:mx-0 lg:max-w-none"
+          className="relative order-1 mx-auto aspect-[3/4] w-full max-w-[420px] overflow-hidden xl:order-2 xl:mx-0 xl:max-w-none"
           initial={reduceMotion ? false : { opacity: 0, y: 32 }}
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -188,7 +188,7 @@ export function About() {
               src={photos.onnatonAbout}
               alt={t(copy.about.photoAlt)}
               fill
-              sizes="(max-width: 1024px) 100vw, 50vw"
+              sizes="(max-width: 1279px) 100vw, 50vw"
               quality={90}
               className="object-cover"
             />

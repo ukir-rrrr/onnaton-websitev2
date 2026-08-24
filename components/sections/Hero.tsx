@@ -167,7 +167,7 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          className="absolute inset-0 z-10 flex items-start overflow-y-auto overscroll-contain px-5 pb-12 pt-28 sm:items-center sm:overflow-visible sm:px-12 sm:pb-0 sm:pt-14 lg:px-16"
+          className="absolute inset-0 z-10 flex items-start overflow-y-auto overscroll-contain px-5 pb-12 pt-28 sm:items-center sm:overflow-visible sm:px-12 sm:pb-0 sm:pt-14 xl:px-16"
           initial={false}
           animate={{
             opacity: showCopy ? 1 : 0,
@@ -192,7 +192,7 @@ export function Hero() {
               {t(copy.hero.reservation)}
             </p>
 
-            <h1 className="font-serif-jp mb-4 text-[23px] font-medium leading-[1.6] tracking-[0.06em] text-on-dark [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[40px] sm:leading-[1.7] sm:[text-shadow:none] lg:text-[48px]">
+            <h1 className="font-serif-jp mb-4 text-[23px] font-medium leading-[1.6] tracking-[0.06em] text-on-dark [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[40px] sm:leading-[1.7] sm:[text-shadow:none] xl:text-[48px]">
               <span className="block">{t(copy.hero.h1a)}</span>
               <span className="block">{t(copy.hero.h1b)}</span>
               <span className="block">{t(copy.hero.h1c)}</span>

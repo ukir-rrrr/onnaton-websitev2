@@ -59,15 +59,15 @@ export const kodawariList: KodawariItem[] = [
   {
     num: "03",
     title: "しゃぶしゃぶの出汁",
-    desc: "肉と島野菜の旨みを引き出す出汁にこだわり、\n〆の一品まで美味しく召し上がっていただけるよう\nご用意しています。",
+    desc: "肉と島野菜の旨みを引き出す出汁にこだわり、\n〆の一品まで美味しく\n召し上がっていただけるようご用意しています。",
     photo: photos.kodawariShabuDashi,
     imageClassName:
-      "h-full w-full origin-top scale-[1.0] object-cover object-top",
+      "h-full w-full origin-top scale-[1.25] object-cover object-[center_28%] sm:scale-100 sm:object-[center_top] xl:scale-[1.25] xl:object-[center_28%] xl:origin-top",
   },
   {
     num: "04",
     title: "沖縄県産食材",
-    desc: "島野菜をはじめ、沖縄県産の食材を積極的に取り入れ、\n土地の恵みを一皿ごとに感じていただけるよう\n努めています。",
+    desc: "島野菜をはじめ、沖縄県産の食材を\n積極的に取り入れ、\n土地の恵みを一皿ごとに感じていただけるよう努めています。",
     photo: photos.kodawariYasai,
   },
 ];

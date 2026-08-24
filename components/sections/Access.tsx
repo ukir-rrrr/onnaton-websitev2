@@ -34,9 +34,9 @@ export function Access() {
         />
       </motion.div>
 
-      <div className="grid grid-cols-1 items-start gap-14 lg:grid-cols-[0.9fr_1.1fr] lg:gap-20">
+      <div className="grid grid-cols-1 items-start gap-14 xl:grid-cols-[0.9fr_1.1fr] xl:gap-20">
         <motion.div
-          className="flex flex-col gap-6"
+          className="flex min-w-0 flex-col gap-6"
           initial={reduceMotion ? false : { opacity: 0, y: 24 }}
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.25 }}
@@ -45,7 +45,7 @@ export function Access() {
           {storeInfoRows.map((row, i) => (
             <div
               key={row.label}
-              className={`grid grid-cols-[5.5rem_1fr] items-start gap-x-3 py-1 sm:grid-cols-[120px_1fr] sm:gap-x-0 ${
+              className={`grid grid-cols-[5.5rem_minmax(0,1fr)] items-start gap-x-3 py-1 sm:grid-cols-[120px_minmax(0,1fr)] sm:gap-x-0 ${
                 i === 0 ? "border-t border-cream/12 pt-4" : ""
               }`}
             >
@@ -68,16 +68,16 @@ export function Access() {
                       ? "noopener noreferrer"
                       : undefined
                   }
-                  className="inline-flex min-h-11 items-center gap-2.5 py-1 text-[15px] leading-[1.7] text-cream underline-offset-4 transition-colors hover:text-gold hover:underline sm:min-h-0 sm:py-0"
+                  className="inline-flex min-h-11 min-w-0 items-center gap-2.5 py-1 text-[15px] leading-[1.7] text-cream underline-offset-4 transition-colors hover:text-gold hover:underline sm:min-h-0 sm:py-0"
                 >
-                  <span>{tr(row.value)}</span>
+                  <span className="min-w-0">{tr(row.value)}</span>
                   {row.icon === "instagram" ? (
                     <InstagramIcon className="h-[18px] w-[18px] shrink-0" />
                   ) : null}
                 </a>
               ) : (
-                <span className="py-1 text-[15px] leading-[1.7] text-cream sm:py-0">
-                  <MultilineText text={tr(row.value)} />
+                <span className="min-w-0 py-1 text-[15px] leading-[1.7] text-cream sm:py-0">
+                  <MultilineText text={tr(row.value)} keepAll={false} />
                 </span>
               )}
             </div>
@@ -97,7 +97,7 @@ export function Access() {
               "hl=ja",
               `hl=${locale === "zh" ? "zh-CN" : locale}`,
             )}
-            className="h-[320px] w-full border-0 sm:h-[420px] lg:h-[600px]"
+            className="h-[320px] w-full border-0 sm:h-[420px] xl:h-[600px]"
             loading="lazy"
             referrerPolicy="no-referrer-when-downgrade"
             allowFullScreen

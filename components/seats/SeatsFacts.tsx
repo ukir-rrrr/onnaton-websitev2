@@ -7,7 +7,7 @@ export function SeatsFacts() {
   const { tr } = useT();
   return (
     <div className="mt-10 px-6 pb-6 sm:mt-14 sm:px-10 lg:mt-16 lg:px-14">
-      <div className="grid w-full grid-cols-2 gap-8 rounded-sm bg-ink-raised p-8 sm:grid-cols-3 sm:gap-10 sm:p-10 lg:grid-cols-5 lg:p-12">
+      <div className="grid w-full grid-cols-2 gap-8 rounded-sm bg-ink-raised p-8 sm:grid-cols-3 sm:gap-10 sm:p-10 xl:grid-cols-5 xl:p-12">
         {interiorFacts.map((fact) => (
           <div key={fact.label} className="text-center">
             <p className="mb-3 text-[15px] text-cream/60 sm:text-[16px]">{tr(fact.label)}</p>

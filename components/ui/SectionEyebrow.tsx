@@ -31,7 +31,7 @@ export function SectionEyebrow({
         className={`mb-6 h-px w-12 bg-gold/55 ${centered ? "mx-auto" : ""}`}
       />
       <HeadingTag
-        className={`font-display-jp text-[26px] font-medium tracking-[0.14em] ${headingColor} sm:text-[34px] lg:text-[38px]`}
+        className={`font-display-jp text-[26px] font-medium tracking-[0.14em] ${headingColor} sm:text-[34px] xl:text-[38px]`}
       >
         {heading}
       </HeadingTag>

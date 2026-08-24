@@ -26,29 +26,29 @@ function PolicyCard({
   return (
     <article
       id={id}
-      className="scroll-mt-24 rounded-sm border border-cream/10 bg-ink-raised px-6 py-10 sm:px-12 sm:py-14"
+      className="scroll-mt-24 min-w-0 rounded-sm border border-cream/10 bg-ink-raised px-6 py-10 sm:px-12 sm:py-14"
     >
-      <h3 className="font-serif-jp mb-6 text-center text-[24px] font-normal tracking-[0.12em] text-cream sm:mb-8 sm:text-[28px] lg:text-[30px]">
+      <h3 className="font-serif-jp mb-6 text-center text-[24px] font-normal tracking-[0.12em] text-cream sm:mb-8 sm:text-[28px] xl:text-[30px]">
         {heading}
       </h3>
       <p className="font-serif-jp mb-8 text-[16px] leading-[2.05] tracking-[0.04em] text-cream sm:mb-10 sm:text-[18px] sm:leading-[2.15]">
-        <MultilineText text={lead} />
+        <MultilineText text={lead} keepAll={false} />
       </p>
       <div className="font-serif-jp space-y-6 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/80 sm:space-y-7 sm:text-[18px] sm:leading-[2.2]">
         {paragraphs.map((paragraph) => (
           <p key={paragraph}>
-            <MultilineText text={paragraph} />
+            <MultilineText text={paragraph} keepAll={false} />
           </p>
         ))}
       </div>
       {note ? (
         <p className="mt-8 text-[15px] leading-[2.05] tracking-[0.04em] text-cream/60 sm:mt-10 sm:text-[16px] sm:leading-[2.15]">
-          ※<MultilineText text={note} />
+          ※<MultilineText text={note} keepAll={false} />
         </p>
       ) : null}
       {closing ? (
         <p className="mt-6 text-[16px] leading-[2.05] tracking-[0.04em] text-cream/85 sm:text-[17px] sm:leading-[2.15]">
-          <MultilineText text={closing} />
+          <MultilineText text={closing} keepAll={false} />
         </p>
       ) : null}
     </article>
@@ -103,7 +103,7 @@ export function Reserve() {
       </div>
 
       <div className="px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
-        <div className="mx-auto flex w-full max-w-[42rem] flex-col gap-8 sm:gap-10 lg:max-w-[46rem]">
+        <div className="mx-auto flex w-full min-w-0 max-w-[42rem] flex-col gap-8 sm:gap-10 xl:max-w-[46rem]">
           <PolicyCard
             id="children"
             heading={t(copy.children.heading)}

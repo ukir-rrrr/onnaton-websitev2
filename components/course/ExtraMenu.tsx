@@ -24,7 +24,7 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
         {extraGroups.map((group) => (
           <div
             key={group.heading}
-            className="grid grid-cols-1 items-start gap-8 lg:grid-cols-[1fr_0.85fr] lg:gap-14"
+            className="grid grid-cols-1 items-start gap-8 xl:grid-cols-[1fr_0.85fr] xl:gap-14"
           >
             <div>
               <h3 className="font-serif-jp mb-3 border-b border-cream/25 pb-2 text-[20px] tracking-[0.12em] text-cream sm:text-[22px]">
@@ -68,7 +68,7 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
             {group.photos.length > 0 ? (
               <div
                 className={`grid gap-3 ${
-                  group.photos.length > 1 ? "grid-cols-1 sm:grid-cols-3 lg:grid-cols-1" : ""
+                  group.photos.length > 1 ? "grid-cols-1 sm:grid-cols-3 xl:grid-cols-1" : ""
                 }`}
               >
                 {group.photos.map((photo) => (

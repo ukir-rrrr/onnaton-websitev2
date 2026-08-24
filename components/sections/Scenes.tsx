@@ -28,7 +28,7 @@ export function Scenes() {
       </motion.div>
 
       <motion.div
-        className="grid grid-cols-1 gap-7 sm:grid-cols-2 lg:grid-cols-4"
+        className="grid grid-cols-1 gap-7 sm:grid-cols-2 xl:grid-cols-4"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, amount: 0.15 }}
@@ -42,7 +42,7 @@ export function Scenes() {
         {sceneList.map((scene) => (
           <motion.div
             key={scene.title}
-            className="relative h-[320px] overflow-hidden rounded-sm sm:h-[380px] lg:h-[420px]"
+            className="relative h-[320px] overflow-hidden rounded-sm sm:h-[380px] xl:h-[420px]"
             variants={
               reduceMotion
                 ? undefined
@@ -84,7 +84,7 @@ export function Scenes() {
                 src={scene.photo}
                 alt={tr(scene.title)}
                 fill
-                sizes="(min-width: 1024px) 25vw, (min-width: 640px) 50vw, 100vw"
+                sizes="(min-width: 1280px) 25vw, (min-width: 640px) 50vw, 100vw"
                 quality={90}
                 className="object-cover"
               />

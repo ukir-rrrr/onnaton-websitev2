@@ -20,7 +20,7 @@ const SECTION_TO_NAV: { id: string; href: string }[] = [
 
 function navClass(active: boolean, onHero: boolean) {
   const base =
-    "font-serif-jp rounded px-2 py-1.5 text-[14px] tracking-[0.06em] lg:px-2.5 lg:text-[15px] xl:px-3.5 xl:text-[16px]";
+    "font-serif-jp rounded px-2 py-1.5 text-[14px] tracking-[0.06em] xl:px-2.5 xl:text-[15px] 2xl:px-3.5 2xl:text-[16px]";
   const idle = onHero
     ? `${base} text-on-dark hover:bg-on-dark/10 hover:text-gold`
     : `${base} text-cream hover:bg-cream/6 hover:text-gold`;
@@ -247,7 +247,7 @@ export function Header() {
           </span>
         </Link>
 
-        <nav className="hidden min-w-0 items-center gap-3 pr-3 lg:flex lg:gap-4 xl:gap-7 xl:pr-8">
+        <nav className="hidden min-w-0 items-center gap-3 pr-3 xl:flex xl:gap-4 2xl:gap-7 2xl:pr-8">
           <div className="flex items-center">
             {navLinks.map((link, i) => (
               <Fragment key={link.href}>
@@ -276,14 +276,14 @@ export function Header() {
             onClick={(event) => {
               if (isJa) onNavClick(event, "/#reserve");
             }}
-            className="my-3.5 flex shrink-0 items-center rounded-sm bg-gold px-4 text-[13px] font-bold tracking-[0.05em] text-on-dark hover:bg-cream hover:text-on-dark lg:px-5 xl:px-7 xl:text-base"
+            className="my-3.5 flex shrink-0 items-center rounded-sm bg-gold px-4 text-[13px] font-bold tracking-[0.05em] text-on-dark hover:bg-cream hover:text-on-dark xl:px-5 2xl:px-7 2xl:text-base"
             aria-current={pathname === "/reserve" ? "page" : undefined}
           >
             {isJa ? t(copy.nav.reserve) : t(copy.reserve.online)}
           </Link>
         </nav>
 
-        <div className="flex shrink-0 items-center lg:hidden">
+        <div className="flex shrink-0 items-center xl:hidden">
           {!menuOpen ? (
             <LanguageFlags className="pr-1 sm:pr-3" onHero={onHero} />
           ) : null}
@@ -306,7 +306,7 @@ export function Header() {
       </div>
 
       {menuOpen && (
-        <div className="border-t border-cream/10 bg-ink/95 px-6 py-5 lg:hidden">
+        <div className="border-t border-cream/10 bg-ink/95 px-6 py-5 xl:hidden">
           <nav className="flex flex-col text-[18px]">
             {navLinks.map((link) => (
               <Link
@@ -324,7 +324,7 @@ export function Header() {
               </Link>
             ))}
           </nav>
-          <div className="mt-6 border-t border-cream/10 pt-5 lg:hidden">
+          <div className="mt-6 border-t border-cream/10 pt-5 xl:hidden">
             <LanguageFlags onHero={false} />
           </div>
           <Link

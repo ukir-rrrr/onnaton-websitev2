@@ -63,9 +63,9 @@ export function CourseDetail({
 
   return (
     <article id={id} className="scroll-mt-24 w-full overflow-x-clip bg-ink py-12 sm:py-16 lg:py-24">
-      <div className="mx-auto flex w-full flex-col gap-8 px-5 sm:gap-10 sm:px-6 xl:flex-row xl:items-stretch xl:gap-6 xl:px-8 2xl:gap-8 2xl:px-12">
+      <div className="mx-auto flex w-full flex-col gap-8 px-5 sm:gap-10 sm:px-6 xl:flex-row xl:items-stretch xl:gap-4 xl:px-6 min-[1440px]:gap-6 min-[1440px]:px-8">
         {/* ===== LEFT: photo slider ===== */}
-        <div className="relative w-full shrink-0 xl:w-[36%] 2xl:w-[38%]">
+        <div className="relative w-full shrink-0 xl:w-[32%] min-[1440px]:w-[36%]">
           <div className="relative aspect-[3/2] w-full overflow-hidden">
             {c.slides.map((slide, i) => {
               const crop = courseSlideImageCrop[slide.src];
@@ -265,25 +265,25 @@ export function CourseDetail({
           </div>
 
           {/* Desktop: tategaki columns */}
-          <div className={`hidden min-w-0 flex-1 xl:h-full xl:overflow-x-auto xl:overflow-y-visible ${isJa ? "xl:block" : ""}`}>
-            <div className="flex h-full justify-end">
-              <div className="font-serif-jp flex flex-row-reverse items-start gap-3 text-cream 2xl:gap-5">
+          <div className={`hidden min-w-0 flex-1 xl:overflow-x-auto xl:overflow-y-visible ${isJa ? "xl:block" : ""}`}>
+            <div className="flex w-max min-w-full justify-end">
+              <div className="font-serif-jp flex flex-row-reverse items-start gap-2 text-cream min-[1440px]:gap-5">
                 <Heading
-                  className="shrink-0 text-[34px] font-normal tracking-[0.4em] text-cream"
+                  className="shrink-0 text-[28px] font-normal tracking-[0.32em] text-cream min-[1440px]:text-[34px] min-[1440px]:tracking-[0.4em]"
                   style={verticalTextStyle}
                 >
                   {c.nameTategakiLead ? trName(c.nameTategakiLead) : trName(c.name)}
                   {c.nameTategakiRest ? (
-                    <span className="text-[22px] tracking-[0.18em] 2xl:text-[24px]">
+                    <span className="text-[18px] tracking-[0.14em] min-[1440px]:text-[22px] min-[1440px]:tracking-[0.18em]">
                       {tr(c.nameTategakiRest)}
                     </span>
                   ) : null}
                 </Heading>
 
                 {c.subtitle ? (
-                  <div className="flex w-11 shrink-0 justify-center bg-wipe 2xl:w-12">
+                  <div className="flex w-10 shrink-0 justify-center bg-wipe min-[1440px]:w-12">
                     <p
-                      className="py-6 text-[16px] leading-[1.9] tracking-[0.14em] text-black 2xl:text-[18px]"
+                      className="py-5 text-[14px] leading-[1.85] tracking-[0.12em] text-black min-[1440px]:py-6 min-[1440px]:text-[16px] min-[1440px]:leading-[1.9] min-[1440px]:tracking-[0.14em]"
                       style={verticalTextStyle}
                     >
                       {tr(c.subtitle)}
@@ -292,36 +292,36 @@ export function CourseDetail({
                 ) : null}
 
                 <p
-                  className="ml-10 shrink-0 leading-[1.5] 2xl:ml-12"
+                  className="ml-6 shrink-0 leading-[1.45] min-[1440px]:ml-10 min-[1440px]:leading-[1.5] min-[1536px]:ml-12"
                   style={verticalTextStyle}
                 >
                   {c.priceLabel ? (
                     <>
-                      <span className="text-[14px] tracking-[0.12em] text-cream/75">
+                      <span className="text-[12px] tracking-[0.1em] text-cream/75 min-[1440px]:text-[14px] min-[1440px]:tracking-[0.12em]">
                         {tr(c.priceLabel)}
                       </span>
                       <br />
                     </>
                   ) : null}
-                  <span className="text-[28px] tracking-[0.1em] text-cream">
+                  <span className="text-[24px] tracking-[0.08em] text-cream min-[1440px]:text-[28px] min-[1440px]:tracking-[0.1em]">
                     {c.priceMain}
                   </span>
                   <br />
-                  <span className="text-[14px] tracking-[0.12em] text-cream/85">
+                  <span className="text-[12px] tracking-[0.1em] text-cream/85 min-[1440px]:text-[14px] min-[1440px]:tracking-[0.12em]">
                     {c.priceTaxNote}
                   </span>
                   {c.altPrice ? (
                     <>
                       <br />
-                      <span className="text-[14px] tracking-[0.12em] text-cream/75">
+                      <span className="text-[12px] tracking-[0.1em] text-cream/75 min-[1440px]:text-[14px] min-[1440px]:tracking-[0.12em]">
                         {tr(c.altPrice.label)}
                       </span>
                       <br />
-                      <span className="text-[24px] tracking-[0.1em] text-cream">
+                      <span className="text-[20px] tracking-[0.08em] text-cream min-[1440px]:text-[24px] min-[1440px]:tracking-[0.1em]">
                         {c.altPrice.main}
                       </span>
                       <br />
-                      <span className="text-[14px] tracking-[0.12em] text-cream/85">
+                      <span className="text-[12px] tracking-[0.1em] text-cream/85 min-[1440px]:text-[14px] min-[1440px]:tracking-[0.12em]">
                         {c.altPrice.taxNote}
                       </span>
                     </>
@@ -331,18 +331,18 @@ export function CourseDetail({
                 {c.dishes.map((dish) => (
                   <p
                     key={`${dish.name}-${dish.note ?? ""}`}
-                    className="shrink-0 leading-[2] tracking-[0.18em]"
+                    className="shrink-0 leading-[1.85] tracking-[0.14em] min-[1440px]:leading-[2] min-[1440px]:tracking-[0.18em]"
                     style={verticalTextStyle}
                   >
-                    <span className="text-[18px] text-cream 2xl:text-[20px]">
+                    <span className="text-[16px] text-cream min-[1440px]:text-[18px] min-[1536px]:text-[20px]">
                       {trName(dish.name)}
                     </span>
                     {dish.note ? (
                       <span
                         className={
                           dish.emphasizeNote
-                            ? "text-[18px] tracking-[0.08em] text-cream 2xl:text-[20px]"
-                            : "text-[14px] tracking-[0.08em] text-cream/80"
+                            ? "text-[16px] tracking-[0.06em] text-cream min-[1440px]:text-[18px] min-[1440px]:tracking-[0.08em] min-[1536px]:text-[20px]"
+                            : "text-[12px] tracking-[0.06em] text-cream/80 min-[1440px]:text-[14px] min-[1440px]:tracking-[0.08em]"
                         }
                       >
                         {"　"}
