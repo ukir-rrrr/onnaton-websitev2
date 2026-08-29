@@ -37,7 +37,7 @@ function KodawariFeatureBlock({
   const imageClass = feature.imageClassName ?? "object-cover object-center";
 
   return (
-    <div className="mb-16 grid grid-cols-1 items-center gap-10 sm:mb-20 sm:gap-12 lg:mb-24 xl:grid-cols-[minmax(0,720px)_1fr] xl:gap-16">
+    <div className="mb-16 grid min-w-0 grid-cols-1 items-center gap-10 sm:mb-20 sm:gap-12 lg:mb-24 xl:grid-cols-[minmax(0,720px)_1fr] xl:gap-16">
       <motion.div
         className={`relative mx-auto ${aspectClass} w-full max-w-[720px] overflow-hidden rounded-sm xl:mx-0`}
         initial={reduceMotion ? false : { opacity: 0, y: 32 }}
@@ -63,7 +63,7 @@ function KodawariFeatureBlock({
         </motion.div>
       </motion.div>
 
-      <div>
+      <div className="min-w-0 max-w-full">
         <motion.p
           className="font-serif-jp mb-3 text-[13px] tracking-[0.28em] text-gold"
           {...fadeUp(0)}
@@ -71,13 +71,13 @@ function KodawariFeatureBlock({
           {feature.num}
         </motion.p>
         <motion.h3
-          className={`font-serif-jp text-[22px] font-normal leading-[1.7] tracking-[0.06em] text-cream sm:text-[28px] xl:text-[30px] ${
+          className={`font-serif-jp max-w-full break-words text-[19px] font-normal leading-[1.75] tracking-[0.04em] text-cream sm:text-[22px] sm:leading-[1.7] sm:tracking-[0.06em] xl:text-[30px] ${
             feature.highlights?.length ? "mb-3 sm:mb-4" : "mb-8 sm:mb-10"
           }`}
           {...fadeUp(0.08)}
         >
           {feature.heading.map((line) => (
-            <span key={line} className="block">
+            <span key={line} className="block max-w-full break-words">
               {tr(line)}
             </span>
           ))}
@@ -91,9 +91,9 @@ function KodawariFeatureBlock({
             {feature.highlights.map(({ label }) => (
               <span
                 key={label}
-                className="inline-flex border border-gold/45 bg-ink-raised/80 px-3.5 py-2 text-center sm:px-4 sm:py-2.5"
+                className="inline-flex max-w-full border border-gold/45 bg-ink-raised/80 px-3.5 py-2 text-center sm:px-4 sm:py-2.5"
               >
-                <span className="font-serif-jp text-[12px] tracking-[0.1em] text-gold-deep sm:text-[13px]">
+                <span className="font-serif-jp break-words text-[12px] tracking-[0.08em] text-gold-deep sm:text-[13px] sm:tracking-[0.1em]">
                   {tr(label)}
                 </span>
               </span>
@@ -102,7 +102,7 @@ function KodawariFeatureBlock({
         ) : null}
 
         <motion.div
-          className="font-serif-jp space-y-6 text-[16px] leading-[2.2] tracking-[0.04em] text-cream/90 sm:space-y-7 sm:text-[18px] sm:leading-[2.35]"
+          className="font-serif-jp max-w-full space-y-6 break-words text-[16px] leading-[2.2] tracking-[0.04em] text-cream/90 sm:space-y-7 sm:text-[18px] sm:leading-[2.35]"
           {...fadeUp(feature.highlights?.length ? 0.16 : 0.16)}
         >
           {feature.paragraphs.map((paragraph) => (
@@ -133,7 +133,7 @@ export function Kodawari() {
   return (
     <section
       id="kodawari"
-      className="scroll-mt-24 w-full px-6 pb-24 sm:px-10 sm:pb-32 lg:px-14 lg:pb-[200px]"
+      className="scroll-mt-24 w-full min-w-0 overflow-x-clip px-6 pb-24 sm:px-10 sm:pb-32 lg:px-14 lg:pb-[200px]"
     >
       <motion.div
         initial={reduceMotion ? false : { opacity: 0, y: 24 }}

@@ -9,7 +9,7 @@ import { LanguageFlags } from "@/components/layout/LanguageFlags";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
-/** Home-page section id â matching nav href */
+/** Home-page section id → matching nav href */
 const SECTION_TO_NAV: { id: string; href: string }[] = [
   { id: "top", href: "/" },
   { id: "about-text", href: "/#about-text" },
@@ -38,6 +38,15 @@ function scrollToId(id: string) {
   if (!el) return false;
   el.scrollIntoView({ behavior: "smooth", block: "start" });
   return true;
+}
+
+function restoreBodyScroll() {
+  document.body.style.overflow = "";
+}
+
+function afterMenuClose(action: () => void) {
+  restoreBodyScroll();
+  window.requestAnimationFrame(action);
 }
 
 export function Header() {
@@ -152,7 +161,7 @@ export function Header() {
     return () => observer.disconnect();
   }, [pathname]);
 
-  // App Router ã® <Link href="/#section"> ã¯åä¸ãã¼ã¸ã ã¨ã¹ã¯ã­ã¼ã«ããªããã¨ããã
+  // App Router: <Link href="/#section"> does not scroll on the same page.
   useEffect(() => {
     if (pathname !== "/") return;
 
@@ -191,28 +200,34 @@ export function Header() {
   };
 
   const onNavClick = (event: MouseEvent<HTMLAnchorElement>, href: string) => {
+    event.preventDefault();
     setMenuOpen(false);
     setHidden(false);
 
     if (href === "/" && pathname === "/") {
-      event.preventDefault();
-      scrollToTop();
+      afterMenuClose(scrollToTop);
       return;
     }
 
     const hash = href.includes("#") ? href.slice(href.indexOf("#") + 1) : "";
-    if (!hash) return;
-
-    event.preventDefault();
-    if (pathname === "/") {
-      scrollToId(hash);
-      window.history.pushState(null, "", href);
-      setActiveHref(href);
+    if (!hash) {
+      afterMenuClose(() => router.push(href));
       return;
     }
 
-    sessionStorage.setItem(SCROLL_TO_KEY, hash);
-    router.push("/");
+    if (pathname === "/") {
+      afterMenuClose(() => {
+        scrollToId(hash);
+        window.history.pushState(null, "", href);
+        setActiveHref(href);
+      });
+      return;
+    }
+
+    afterMenuClose(() => {
+      sessionStorage.setItem(SCROLL_TO_KEY, hash);
+      router.push("/");
+    });
   };
 
   const onHero = pathname === "/" && !scrolled && !menuOpen;
@@ -223,6 +238,7 @@ export function Header() {
   const headerBar = onHero ? "bg-on-dark" : "bg-cream";
 
   return (
+    <>
     <header
       className={`fixed inset-x-0 top-0 z-50 transition-[transform,background-color,backdrop-filter,border-color] duration-300 ease-out ${
         hidden && !menuOpen ? "-translate-y-full" : "translate-y-0"
@@ -315,56 +331,75 @@ export function Header() {
           </button>
         </div>
       </div>
-
-      <AnimatePresence>
-      {menuOpen ? (
-        <motion.div
-          key="mobile-menu"
-          className="border-t border-cream/10 bg-ink/95 px-6 py-5 xl:hidden"
-          initial={{ opacity: 0, height: 0 }}
-          animate={{ opacity: 1, height: "auto" }}
-          exit={{ opacity: 0, height: 0 }}
-          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-        >
-          <nav className="flex flex-col text-[18px]">
-            {navLinks.map((link, i) => (
-              <motion.div
-                key={link.href}
-                initial={{ opacity: 0, x: -12 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ duration: 0.3, delay: 0.04 + i * 0.04, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <Link
-                  href={link.href}
-                  onClick={(event) => onNavClick(event, link.href)}
-                  aria-current={activeHref === link.href ? "page" : undefined}
-                  className={
-                    activeHref === link.href
-                      ? "flex min-h-11 items-center text-gold"
-                      : "flex min-h-11 items-center text-cream/95 hover:text-cream"
-                  }
-                >
-                  {link.label}
-                </Link>
-              </motion.div>
-            ))}
-          </nav>
-          <div className="mt-6 border-t border-cream/10 pt-5 xl:hidden">
-            <LanguageFlags onHero={false} />
-          </div>
-          <Link
-            href={reserveHref}
-            onClick={(event) => {
-              setMenuOpen(false);
-              if (isJa) onNavClick(event, "/#reserve");
-            }}
-            className="mt-5 flex min-h-12 items-center justify-center bg-gold text-[15px] font-bold tracking-[0.05em] text-on-dark"
-          >
-            {isJa ? t(copy.nav.reserve) : t(copy.reserve.online)}
-          </Link>
-        </motion.div>
-      ) : null}
-      </AnimatePresence>
     </header>
+
+    <AnimatePresence>
+      {menuOpen ? (
+        <>
+          <motion.button
+            type="button"
+            aria-label={t(copy.nav.closeMenu)}
+            className="fixed inset-0 top-20 z-[60] bg-black/45 xl:hidden"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            onClick={() => setMenuOpen(false)}
+          />
+          <motion.div
+            key="mobile-menu"
+            className="fixed inset-x-0 top-20 bottom-0 z-[70] overflow-y-auto overscroll-contain border-t border-cream/10 bg-ink/95 px-6 py-5 xl:hidden"
+            initial={{ opacity: 0, y: -8 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: -8 }}
+            transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+          >
+            <nav className="flex flex-col text-[18px]">
+              {navLinks.map((link, i) => (
+                <motion.div
+                  key={link.href}
+                  initial={{ opacity: 0, x: -12 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ duration: 0.3, delay: 0.04 + i * 0.04, ease: [0.22, 1, 0.36, 1] }}
+                >
+                  <Link
+                    href={link.href}
+                    onClick={(event) => onNavClick(event, link.href)}
+                    aria-current={activeHref === link.href ? "page" : undefined}
+                    className={
+                      activeHref === link.href
+                        ? "flex min-h-11 items-center text-gold"
+                        : "flex min-h-11 items-center text-cream/95 hover:text-cream"
+                    }
+                  >
+                    {link.label}
+                  </Link>
+                </motion.div>
+              ))}
+            </nav>
+            <div className="mt-6 border-t border-cream/10 pt-5 xl:hidden">
+              <LanguageFlags onHero={false} />
+            </div>
+            <Link
+              href={reserveHref}
+              onClick={(event) => {
+                event.preventDefault();
+                if (isJa) {
+                  onNavClick(event, "/#reserve");
+                } else {
+                  setMenuOpen(false);
+                  setHidden(false);
+                  afterMenuClose(() => router.push(reserveHref));
+                }
+              }}
+              className="mt-5 flex min-h-12 items-center justify-center bg-gold text-[15px] font-bold tracking-[0.05em] text-on-dark"
+            >
+              {isJa ? t(copy.nav.reserve) : t(copy.reserve.online)}
+            </Link>
+          </motion.div>
+        </>
+      ) : null}
+    </AnimatePresence>
+    </>
   );
 }

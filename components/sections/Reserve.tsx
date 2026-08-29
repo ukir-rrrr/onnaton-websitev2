@@ -31,16 +31,16 @@ function PolicyCard({
   return (
     <motion.article
       id={id}
-      className="scroll-mt-24 min-w-0 rounded-sm border border-cream/10 bg-ink-raised px-6 py-10 sm:px-12 sm:py-14"
+      className="scroll-mt-24 w-full min-w-0 overflow-x-clip rounded-sm border border-cream/10 bg-ink-raised px-5 py-10 sm:px-12 sm:py-14"
       variants={staggerItem(reduceMotion, 32)}
     >
-      <h3 className="font-serif-jp mb-6 text-center text-[24px] font-normal tracking-[0.12em] text-cream sm:mb-8 sm:text-[28px] xl:text-[30px]">
+      <h3 className="font-serif-jp mb-6 max-w-full break-words text-center text-[18px] font-normal leading-[1.75] tracking-[0.04em] text-cream sm:mb-8 sm:text-[28px] sm:leading-[1.6] sm:tracking-[0.12em] xl:text-[30px]">
         {heading}
       </h3>
-      <p className="font-serif-jp mb-8 text-[16px] leading-[2.05] tracking-[0.04em] text-cream sm:mb-10 sm:text-[18px] sm:leading-[2.15]">
+      <p className="font-serif-jp mb-8 max-w-full break-words text-[15px] leading-[2.05] tracking-[0.04em] text-cream sm:mb-10 sm:text-[18px] sm:leading-[2.15]">
         <MultilineText text={lead} keepAll={false} />
       </p>
-      <div className="font-serif-jp space-y-6 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/92 sm:space-y-7 sm:text-[18px] sm:leading-[2.2]">
+      <div className="font-serif-jp max-w-full space-y-6 break-words text-[15px] leading-[2.1] tracking-[0.04em] text-cream/92 sm:space-y-7 sm:text-[18px] sm:leading-[2.2]">
         {paragraphs.map((paragraph) => (
           <p key={paragraph}>
             <MultilineText text={paragraph} keepAll={false} />
@@ -48,12 +48,12 @@ function PolicyCard({
         ))}
       </div>
       {note ? (
-        <p className="mt-8 text-[15px] leading-[2.05] tracking-[0.04em] text-cream/82 sm:mt-10 sm:text-[16px] sm:leading-[2.15]">
+        <p className="mt-8 max-w-full break-words text-[14px] leading-[2.05] tracking-[0.04em] text-cream/82 sm:mt-10 sm:text-[16px] sm:leading-[2.15]">
           ※<MultilineText text={note} keepAll={false} />
         </p>
       ) : null}
       {closing ? (
-        <p className="mt-6 text-[16px] leading-[2.05] tracking-[0.04em] text-cream/95 sm:text-[17px] sm:leading-[2.15]">
+        <p className="mt-6 max-w-full break-words text-[15px] leading-[2.05] tracking-[0.04em] text-cream/95 sm:text-[17px] sm:leading-[2.15]">
           <MultilineText text={closing} keepAll={false} />
         </p>
       ) : null}
@@ -89,8 +89,8 @@ export function Reserve() {
   ];
 
   return (
-    <section id="reserve" className="scroll-mt-24">
-      <div className="relative min-h-[560px] w-full overflow-hidden text-center sm:aspect-[19/10] sm:min-h-0 sm:max-h-[90vh]">
+    <section id="reserve" className="scroll-mt-24 min-w-0 overflow-x-clip">
+      <div className="relative w-full min-w-0 sm:min-h-[560px] xl:aspect-[19/10] xl:max-h-[min(90vh,820px)]">
         <motion.div className="absolute inset-0" {...revealScale(reduceMotion, 0, 1.06)}>
           <Image
             src={photos.reservation01}
@@ -103,8 +103,8 @@ export function Reserve() {
         </motion.div>
         <div className="absolute inset-0 bg-black/65" />
 
-        <div className="absolute inset-0 flex flex-col items-center justify-center px-6 py-16 sm:px-10 lg:px-14">
-          <Reveal variant="fadeUp" delay={0.08} amount={0.2} className="mb-8">
+        <div className="relative z-10 flex w-full min-w-0 flex-col items-center px-6 py-20 text-center sm:px-10 sm:py-16 md:py-20 lg:px-14 xl:absolute xl:inset-0 xl:justify-center xl:overflow-y-auto xl:py-16">
+          <Reveal variant="fadeUp" delay={0.08} amount={0.2} className="mb-8 w-full min-w-0 max-w-full">
             <SectionEyebrow
               eyebrow="RESERVATION"
               heading={t(copy.reserveSection.heading)}
@@ -112,16 +112,16 @@ export function Reserve() {
             />
           </Reveal>
 
-          <Reveal variant="fadeUp" delay={0.18} amount={0.2}>
-            <p className="mx-auto mb-6 max-w-[720px] text-[14px] leading-[2] text-on-dark/80 sm:mb-8 sm:text-base">
-              <MultilineText text={t(copy.reserveSection.body)} />
+          <Reveal variant="fadeUp" delay={0.18} amount={0.2} className="w-full min-w-0 max-w-full">
+            <p className="mx-auto mb-6 min-w-0 max-w-[720px] break-words text-[14px] leading-[2] text-on-dark/80 sm:mb-8 sm:text-base">
+              <MultilineText text={t(copy.reserveSection.body)} keepAll={false} />
             </p>
           </Reveal>
 
-          <Reveal variant="fadeUp" delay={0.28} amount={0.2}>
-            <div className="mx-auto mb-8 max-w-[720px] sm:mb-10">
-              <p className="text-[13px] leading-[1.9] tracking-[0.04em] text-gold sm:text-[14px]">
-                <MultilineText text={t(copy.children.lead)} />
+          <Reveal variant="fadeUp" delay={0.28} amount={0.2} className="w-full min-w-0 max-w-full">
+            <div className="mx-auto mb-8 min-w-0 max-w-[720px] sm:mb-10">
+              <p className="break-words text-[13px] leading-[1.9] tracking-[0.04em] text-gold sm:text-[14px]">
+                <MultilineText text={t(copy.children.lead)} keepAll={false} />
               </p>
               <a
                 href="#children"
@@ -132,19 +132,19 @@ export function Reserve() {
             </div>
           </Reveal>
 
-          <Reveal variant="fadeUp" delay={0.38} amount={0.2}>
+          <Reveal variant="fadeUp" delay={0.38} amount={0.2} className="w-full min-w-0 max-w-full">
             <ReserveButton
               variant="outline"
               className="min-h-11 w-full max-w-sm px-8 py-3.5 text-[14px] sm:min-w-[320px] sm:w-auto sm:px-16"
             />
-            <p className="mt-6 text-[12px] tracking-[0.04em] text-on-dark/55 sm:text-[13px]">
-              {t(copy.hero.note)}
+            <p className="mx-auto mt-6 max-w-[720px] break-words text-[12px] leading-[1.9] tracking-[0.04em] text-on-dark/55 sm:text-[13px]">
+              <MultilineText text={t(copy.hero.note)} keepAll={false} />
             </p>
           </Reveal>
         </div>
       </div>
 
-      <div className="px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
+      <div className="min-w-0 overflow-x-clip px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
         <motion.div
           className="mx-auto flex w-full min-w-0 max-w-[42rem] flex-col gap-8 sm:gap-10 xl:max-w-[46rem]"
           initial="hidden"

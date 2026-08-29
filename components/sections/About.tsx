@@ -140,23 +140,23 @@ export function About() {
         id="about-text"
         className="scroll-mt-24 mx-auto grid max-w-[1200px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:px-14 lg:py-[120px] xl:grid-cols-2 xl:gap-16"
       >
-        <div className="order-2 min-w-0 xl:order-1">
+        <div className="order-2 min-w-0 max-w-full xl:order-1">
           <motion.p
-            className="mb-6 text-[13px] tracking-[0.28em] text-gold sm:mb-8 sm:text-[18px]"
+            className="mb-6 text-[13px] tracking-[0.18em] text-gold sm:mb-8 sm:text-[18px] sm:tracking-[0.28em]"
             {...fadeUp(0)}
           >
             {t(copy.about.heading)}
           </motion.p>
 
           <motion.h3
-            className="font-serif-jp mb-10 text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-12 sm:text-[28px] sm:leading-[2.05] xl:text-[32px]"
+            className="font-serif-jp mb-10 min-w-0 max-w-full break-words text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-12 sm:text-[28px] sm:leading-[2.05] xl:text-[32px]"
             {...fadeUp(0.1)}
           >
-            <MultilineText text={t(copy.about.lead)} keepAll={false} nowrapLastLine />
+            <MultilineText text={t(copy.about.lead)} keepAll={false} />
           </motion.h3>
 
           <motion.div {...fadeUp(0.2)}>
-            <div className="font-serif-jp space-y-8 text-[14px] font-normal leading-[2.35] tracking-[0.04em] text-cream/92 sm:text-[18px] sm:leading-[2.5]">
+            <div className="font-serif-jp min-w-0 max-w-full space-y-8 break-words text-[14px] font-normal leading-[2.35] tracking-[0.04em] text-cream/92 sm:text-[18px] sm:leading-[2.5]">
               <p>{t(copy.about.p1)}</p>
               <p>{t(copy.about.p2)}</p>
               <p>

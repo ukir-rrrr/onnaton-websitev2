@@ -15,7 +15,9 @@ export function MultilineText({
   nowrapLastLine = false,
 }: MultilineTextProps) {
   const lines = text.split("\n");
-  const keepClass = keepAll ? "break-keep" : "";
+  const keepClass = keepAll
+    ? "max-sm:break-words sm:break-keep"
+    : "break-words";
 
   if (lines.length === 1) {
     return keepAll ? <span className={keepClass}>{text}</span> : text;
@@ -27,7 +29,9 @@ export function MultilineText({
         const isLast = i === lines.length - 1;
         const className = [
           keepClass,
-          nowrapLastLine && isLast ? "whitespace-nowrap" : "",
+          nowrapLastLine && isLast
+            ? "max-sm:whitespace-normal sm:whitespace-nowrap"
+            : "",
         ]
           .filter(Boolean)
           .join(" ");
