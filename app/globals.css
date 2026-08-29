@@ -136,18 +136,31 @@ body {
 }
 
 /*
- * Narrow viewports only (do not use hover/pointer — touch laptops match those
- * and would swap desktop to the CSS tile texture). iOS Safari blurs fixed photos;
- * use one scroll-linked cover on html instead of repeat-y tile seams.
+ * Narrow viewports: iOS Safari blurs background-attachment:fixed on elements.
+ * A dedicated fixed layer renders the photo sharply; content scrolls above it.
  */
+.washi-backdrop {
+  display: none;
+}
+
 @media (max-width: 1023px) {
-  html {
+  .washi-backdrop {
+    display: block;
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
     background-color: var(--color-paper);
     background-image: var(--washi-texture);
     background-size: cover;
-    background-repeat: no-repeat;
     background-position: center top;
-    background-attachment: scroll;
+    background-repeat: no-repeat;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+  }
+
+  html {
+    background-color: var(--color-paper);
   }
 
   .bg-ink {

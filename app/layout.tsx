@@ -48,7 +48,10 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       className={`${notoSerifJp.variable} ${yujiSyuku.variable}`}
     >
       <body>
-        <LocaleProvider locale={locale}>{children}</LocaleProvider>
+        <div className="washi-backdrop" aria-hidden />
+        <div className="relative z-[1] min-h-full">
+          <LocaleProvider locale={locale}>{children}</LocaleProvider>
+        </div>
       </body>
     </html>
   );
