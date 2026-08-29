@@ -38,17 +38,18 @@ Cloudflare Cron から週1回 `GET /api/health` 等を叩く（Phase 5）。
    またはローカルから `npm run deploy`（要 `wrangler login`）
 2. ビルドコマンド: `npm run deploy`（OpenNext adapter）  
    通常の `next build` だけでは Workers 向け出力になりません
-3. **Settings → Variables** に `.env.example` と同じキーを **Production** 用に設定（秘密情報は Encrypt）:
-   - `NEXT_PUBLIC_SUPABASE_URL`
-   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
-   - `SUPABASE_SERVICE_ROLE_KEY`
-   - `SITE_SLUG`
-   - `ONNATON_ADMIN_PASSWORD`
-   - `RESEND_API_KEY`, `RESEND_FROM`, `RESEND_OWNER_TO`, `RESEND_REPLY_TO`（任意）
-4. カスタムドメインを Cloudflare に向ける
-5. **Security → WAF → Rate limiting rules**（推奨）  
+3. **Settings → Variables and secrets** に `.env.example` と同じキーを **Production** 用に設定:
+   - **平文（Text）**: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SITE_SLUG`, `RESEND_FROM`, `RESEND_OWNER_TO`, `RESEND_REPLY_TO`（任意）
+   - **シークレット（Encrypt）**: `SUPABASE_SERVICE_ROLE_KEY`, `ONNATON_ADMIN_PASSWORD`, `RESEND_API_KEY`
+   - Git 連携で **Build** も使う場合は、同じ `NEXT_PUBLIC_*` を **Build variables** にも追加（ビルド時に埋め込まれるため）
+4. **デプロイで変数が消える場合**  
+   Wrangler はデフォルトで「設定ファイルが正」として、Dashboard の**平文**変数をデプロイ時に上書き・削除します（**シークレット**は通常残ります）。  
+   本リポジトリの `wrangler.jsonc` には `"keep_vars": true` を入れてあるので、**この変更をデプロイした後**は Dashboard で追加した平文変数が維持されます。  
+   それ以前に消えた変数は、Dashboard で一度だけ再設定してください。
+5. カスタムドメインを Cloudflare に向ける
+6. **Security → WAF → Rate limiting rules**（推奨）  
    - `/admin/notices` への POST を IP 単位で制限（アプリ側ロックの二重防御）
-6. **Security → Settings → AI bot policies**（2026-09-15 前）  
+7. **Security → Settings → AI bot policies**（2026-09-15 前）  
    - Search クローラーは許可（MEO / Google 検索用）
 
 ローカル確認: `npm run preview`（Workers ランタイム）

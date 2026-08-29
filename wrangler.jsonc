@@ -1,6 +1,8 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
   "name": "onnaton-websitev",
+  // Dashboard で設定した平文の環境変数を、wrangler deploy 時に削除しない
+  "keep_vars": true,
   "main": ".open-next/worker.js",
   "compatibility_date": "2024-12-30",
   "compatibility_flags": [
