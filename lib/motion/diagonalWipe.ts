@@ -20,5 +20,6 @@ export const WIPE_EASE = [0.65, 0, 0.35, 1] as const;
 export const WIPE_DURATION = 0.7;
 
 /** Page-open intro wipes — shorter than hero slide transitions (≈鮨かねさか loader tempo). */
-export const INTRO_WIPE_DURATION = 0.5;
-export const INTRO_LOGO_HOLD_MS = 280;
+export const INTRO_WIPE_DURATION = 0.38;
+/** Static logo (家紋) hold before the brand wipe begins. */
+export const INTRO_LOGO_HOLD_MS = 10;

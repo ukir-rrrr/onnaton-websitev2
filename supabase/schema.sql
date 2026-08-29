@@ -45,6 +45,18 @@ create index if not exists notices_site_id_idx on public.notices (site_id);
 create index if not exists reservation_requests_site_id_idx on public.reservation_requests (site_id);
 create index if not exists reservation_requests_created_at_idx on public.reservation_requests (created_at desc);
 
+-- Rate limiting (service role only; no public access)
+create table if not exists public.rate_limits (
+  bucket_key text primary key,
+  attempt_count int not null default 0,
+  window_start timestamptz not null default now(),
+  locked_until timestamptz,
+  updated_at timestamptz not null default now()
+);
+
+create index if not exists rate_limits_locked_until_idx on public.rate_limits (locked_until)
+  where locked_until is not null;
+
 -- Seed: 恩納豚 (safe to re-run)
 insert into public.sites (slug, name)
 values ('onnaton', '恩納豚')
@@ -76,7 +88,6 @@ create policy "Public read active notices"
     and (visible_until is null or visible_until >= current_date)
   );
 
-create policy "Public insert reservation requests"
-  on public.reservation_requests for insert
-  to anon, authenticated
-  with check (true);
+-- Reservations are inserted only via Server Actions (service role).
+-- Do not allow anon insert (NEXT_PUBLIC_SUPABASE_ANON_KEY is exposed in the browser).
+drop policy if exists "Public insert reservation requests" on public.reservation_requests;

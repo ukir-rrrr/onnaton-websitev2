@@ -5,13 +5,14 @@ import Image from "next/image";
 import { galleryList } from "@/lib/content/gallery";
 import { siteConfig } from "@/lib/content/store";
 import { MultilineText } from "@/components/i18n/MultilineText";
+import { Reveal } from "@/components/motion/Reveal";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
 /** Auto drift speed (px / ms). */
-const AUTO_SPEED = 0.025;
+const AUTO_SPEED = 0.018;
 /** Ignore tiny moves so vertical page scroll still works on phones. */
 const DRAG_THRESHOLD_PX = 8;
 
@@ -177,9 +178,9 @@ export function Gallery() {
 
   return (
     <section className="w-full overflow-hidden py-20 sm:py-32 lg:py-[160px]">
-      <div className="mb-12 px-5 sm:mb-20 sm:px-10 lg:px-14">
+      <Reveal className="mb-12 px-5 sm:mb-20 sm:px-10 lg:px-14" amount={0.4}>
         <SectionEyebrow eyebrow="GALLERY" heading={t(copy.gallery.heading)} />
-      </div>
+      </Reveal>
 
       <div
         ref={viewportRef}
@@ -210,26 +211,32 @@ export function Gallery() {
         </div>
       </div>
 
-      <p className="mt-5 px-5 text-center text-[12px] tracking-[0.08em] text-cream/40 sm:hidden">
+      <p className="mt-5 px-5 text-center text-[12px] tracking-[0.08em] text-cream/65 sm:hidden">
         {t(copy.gallery.swipe)}
       </p>
 
       <div className="mx-auto mt-14 flex max-w-4xl flex-col items-center px-6 text-center sm:mt-20 sm:px-10 lg:mt-24">
-        <p className="font-serif-jp mb-3 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/88 sm:text-[18px] sm:leading-[2.2]">
-          <MultilineText text={t(copy.gallery.p1)} />
-        </p>
-        <p className="font-serif-jp mb-8 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/82 sm:mb-10 sm:text-[18px] sm:leading-[2.2]">
-          <MultilineText text={t(copy.gallery.p2)} />
-        </p>
-        <a
-          href={siteConfig.instagramUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex min-h-11 items-center justify-center gap-3 border border-gold px-8 py-3.5 text-[15px] font-bold tracking-[0.08em] text-gold transition-colors hover:bg-gold hover:text-ink sm:min-w-[280px] sm:px-12 sm:text-[16px]"
-        >
-          <InstagramIcon className="h-[18px] w-[18px]" />
-          {siteConfig.instagramHandle}
-        </a>
+        <Reveal variant="fadeUp" delay={0.05}>
+          <p className="font-serif-jp mb-3 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/95 sm:text-[18px] sm:leading-[2.2]">
+            <MultilineText text={t(copy.gallery.p1)} />
+          </p>
+        </Reveal>
+        <Reveal variant="fadeUp" delay={0.14}>
+          <p className="font-serif-jp mb-8 text-[16px] leading-[2.1] tracking-[0.04em] text-cream/92 sm:mb-10 sm:text-[18px] sm:leading-[2.2]">
+            <MultilineText text={t(copy.gallery.p2)} />
+          </p>
+        </Reveal>
+        <Reveal variant="fadeUp" delay={0.24}>
+          <a
+            href={siteConfig.instagramUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex min-h-11 items-center justify-center gap-3 border border-gold px-8 py-3.5 text-[15px] font-bold tracking-[0.08em] text-gold transition-colors hover:bg-gold hover:text-ink sm:min-w-[280px] sm:px-12 sm:text-[16px]"
+          >
+            <InstagramIcon className="h-[18px] w-[18px]" />
+            {siteConfig.instagramHandle}
+          </a>
+        </Reveal>
       </div>
     </section>
   );

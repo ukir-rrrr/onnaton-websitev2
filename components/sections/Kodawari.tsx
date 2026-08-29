@@ -45,14 +45,22 @@ function KodawariFeatureBlock({
         viewport={{ once: true, amount: 0.3 }}
         transition={{ duration: 1, ease }}
       >
-        <Image
-          src={feature.photo}
-          alt={tr(feature.photoAlt)}
-          fill
-          sizes="(min-width: 1280px) 720px, 100vw"
-          unoptimized
-          className={imageClass}
-        />
+        <motion.div
+          className="absolute inset-0"
+          initial={reduceMotion ? false : { scale: 1.08 }}
+          whileInView={reduceMotion ? undefined : { scale: 1 }}
+          viewport={{ once: true, amount: 0.3 }}
+          transition={{ duration: 1.2, ease }}
+        >
+          <Image
+            src={feature.photo}
+            alt={tr(feature.photoAlt)}
+            fill
+            sizes="(min-width: 1280px) 720px, 100vw"
+            unoptimized
+            className={imageClass}
+          />
+        </motion.div>
       </motion.div>
 
       <div>
@@ -94,7 +102,7 @@ function KodawariFeatureBlock({
         ) : null}
 
         <motion.div
-          className="font-serif-jp space-y-6 text-[16px] leading-[2.2] tracking-[0.04em] text-cream/75 sm:space-y-7 sm:text-[18px] sm:leading-[2.35]"
+          className="font-serif-jp space-y-6 text-[16px] leading-[2.2] tracking-[0.04em] text-cream/90 sm:space-y-7 sm:text-[18px] sm:leading-[2.35]"
           {...fadeUp(feature.highlights?.length ? 0.16 : 0.16)}
         >
           {feature.paragraphs.map((paragraph) => (

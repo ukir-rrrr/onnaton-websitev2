@@ -12,7 +12,7 @@ export function SeatDetail({ seat }: { seat: SeatType }) {
   return (
     <section id={seat.id} className="scroll-mt-24 px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
       {seat.note ? (
-        <p className="mb-8 text-center text-[15px] tracking-[0.04em] text-cream/70 sm:mb-10 sm:text-[16px]">
+        <p className="mb-8 text-center text-[15px] tracking-[0.04em] text-cream/88 sm:mb-10 sm:text-[16px]">
           {tr(seat.note)}
         </p>
       ) : null}

@@ -68,7 +68,7 @@ function ReservationFormInner({
         <h2 className="font-serif-jp mb-5 text-[24px] font-normal tracking-[0.12em] text-cream sm:text-[30px]">
           {t(copy.form.successTitle)}
         </h2>
-        <p className="mx-auto mb-8 max-w-md text-[14px] leading-[2] tracking-[0.04em] text-cream/75 sm:text-[15px]">
+        <p className="mx-auto mb-8 max-w-md text-[14px] leading-[2] tracking-[0.04em] text-cream/90 sm:text-[15px]">
           <MultilineText text={t(copy.form.successBody)} />
         </p>
         {state.reference ? (
@@ -107,7 +107,7 @@ function ReservationFormInner({
 
       {isJa ? (
         <div className="border border-gold/30 bg-ink-raised px-5 py-6 text-center sm:px-8">
-          <p className="mb-5 text-[14px] leading-[1.9] text-cream/80">
+          <p className="mb-5 text-[14px] leading-[1.9] text-cream/92">
             {t(copy.form.jaPhoneNote)}
           </p>
           <ReserveButton className="min-h-11 w-full max-w-sm px-8 py-3.5 text-[14px] sm:w-auto sm:px-12" />
@@ -246,7 +246,7 @@ function ReservationFormInner({
               ))}
             </select>
             {guests === "9plus" ? (
-              <span className="mt-2 block text-[12px] leading-[1.7] text-cream/50">
+              <span className="mt-2 block text-[12px] leading-[1.7] text-cream/75">
                 {t(copy.form.guests9note)}
               </span>
             ) : null}
@@ -263,7 +263,7 @@ function ReservationFormInner({
               ).map(([id, label]) => (
                 <label
                   key={id}
-                  className="flex min-h-12 cursor-pointer items-center justify-center border border-cream/18 bg-ink-raised px-3 text-[13px] tracking-[0.08em] text-cream/80 has-[:checked]:border-gold has-[:checked]:text-gold"
+                  className="flex min-h-12 cursor-pointer items-center justify-center border border-cream/18 bg-ink-raised px-3 text-[13px] tracking-[0.08em] text-cream/92 has-[:checked]:border-gold has-[:checked]:text-gold"
                 >
                   <input
                     type="radio"
@@ -304,7 +304,7 @@ function ReservationFormInner({
               </span>
               <span className="text-[13px] text-gold">
                 {course.priceMainMobile}
-                <span className="ml-2 text-[11px] tracking-[0.08em] text-cream/45">
+                <span className="ml-2 text-[11px] tracking-[0.08em] text-cream/70">
                   {t(copy.form.perPerson)}
                 </span>
               </span>
@@ -319,7 +319,7 @@ function ReservationFormInner({
               required
               className="sr-only"
             />
-            <span className="text-[14px] tracking-[0.06em] text-cream/80">
+            <span className="text-[14px] tracking-[0.06em] text-cream/92">
               {t(copy.form.courseUndecided)}
             </span>
           </label>
@@ -344,7 +344,7 @@ function ReservationFormInner({
           />
         </p>
         <div className="flex flex-col gap-4">
-          <label className="flex cursor-pointer items-start gap-3 text-[13px] leading-[1.8] text-cream/80">
+          <label className="flex cursor-pointer items-start gap-3 text-[13px] leading-[1.8] text-cream/92">
             <input
               type="checkbox"
               name="agreeChildren"
@@ -361,7 +361,7 @@ function ReservationFormInner({
               </Link>
             </span>
           </label>
-          <label className="flex cursor-pointer items-start gap-3 text-[13px] leading-[1.8] text-cream/80">
+          <label className="flex cursor-pointer items-start gap-3 text-[13px] leading-[1.8] text-cream/92">
             <input
               type="checkbox"
               name="agreeTattoo"

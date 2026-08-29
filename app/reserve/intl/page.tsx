@@ -2,8 +2,7 @@ import type { Metadata } from "next";
 import Image from "next/image";
 import { Header } from "@/components/layout/Header";
 import { Footer } from "@/components/layout/Footer";
-import { IntlReservationForm } from "@/components/reserve/IntlReservationForm";
-import { MultilineText } from "@/components/i18n/MultilineText";
+import { IntlReserveMain } from "@/components/reserve/IntlReserveMain";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { SiteNotices } from "@/components/sections/SiteNotices";
 import { photos } from "@/lib/content/photos";
@@ -52,7 +51,10 @@ export default async function IntlReservePage() {
           <div className="absolute inset-0 flex flex-col items-center justify-center px-6 py-16">
             <SectionEyebrow
               eyebrow="RESERVATION"
-              heading={t(locale, copy.intlForm.heading)}
+              heading={t(
+                locale,
+                locale === "ja" ? copy.intlForm.jaHeading : copy.intlForm.heading,
+              )}
               as="h1"
               tone="onDark"
             />
@@ -62,32 +64,7 @@ export default async function IntlReservePage() {
         <SiteNotices />
 
         <section className="px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
-          <div className="mx-auto flex w-full max-w-3xl flex-col gap-10 sm:gap-12">
-            <p className="text-center font-serif-jp text-[17px] font-medium tracking-[0.08em] text-cream sm:text-[19px]">
-              {t(locale, copy.intlForm.closed)}
-            </p>
-
-            <p className="border-y border-cream/12 py-8 text-center text-[14px] leading-[2] tracking-[0.04em] text-cream/80 sm:text-[15px] sm:leading-[2.1]">
-              <MultilineText text={t(locale, copy.intlForm.phoneNotice)} />
-            </p>
-
-            <div>
-              <h2 className="font-serif-jp mb-6 text-center text-[20px] tracking-[0.12em] text-cream sm:text-[22px]">
-                {t(locale, copy.intlForm.policyHeading)}
-              </h2>
-              <ul className="mx-auto max-w-2xl list-disc space-y-3 pl-5 text-[14px] leading-[2] tracking-[0.04em] text-cream/85 sm:text-[15px]">
-                {policies.map((item) => (
-                  <li key={item}>
-                    <MultilineText text={item} />
-                  </li>
-                ))}
-              </ul>
-            </div>
-
-            <div className="border border-cream/10 bg-ink-raised px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
-              <IntlReservationForm />
-            </div>
-          </div>
+          <IntlReserveMain policies={policies} />
         </section>
       </main>
 

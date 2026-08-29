@@ -54,7 +54,9 @@ export async function sendResendEmail(params: {
       return { ok: false };
     }
 
-    console.info(`[${params.logLabel}] email sent`, { to: params.to });
+    console.info(`[${params.logLabel}] email sent`, {
+      ...(process.env.NODE_ENV === "development" ? { to: params.to } : {}),
+    });
     return { ok: true };
   } catch (error) {
     console.error(`[${params.logLabel}] Resend error`, error);

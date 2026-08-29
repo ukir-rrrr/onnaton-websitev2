@@ -10,7 +10,7 @@ export function SeatsFacts() {
       <div className="grid w-full grid-cols-2 gap-8 rounded-sm bg-ink-raised p-8 sm:grid-cols-3 sm:gap-10 sm:p-10 xl:grid-cols-5 xl:p-12">
         {interiorFacts.map((fact) => (
           <div key={fact.label} className="text-center">
-            <p className="mb-3 text-[15px] text-cream/60 sm:text-[16px]">{tr(fact.label)}</p>
+            <p className="mb-3 text-[15px] text-cream/82 sm:text-[16px]">{tr(fact.label)}</p>
             <p className="font-serif-jp text-[16px] leading-[1.75] text-cream sm:text-[18px]">
               {tr(fact.value)}
             </p>

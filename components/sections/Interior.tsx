@@ -107,7 +107,7 @@ export function Interior() {
         <div className="grid flex-1 grid-cols-2 gap-8 sm:grid-cols-3 xl:grid-cols-5">
           {interiorFacts.map((fact) => (
             <div key={fact.label}>
-              <p className="mb-2.5 text-[13px] text-cream/50">{tr(fact.label)}</p>
+              <p className="mb-2.5 text-[13px] text-cream/75">{tr(fact.label)}</p>
               <p className="text-[15px] text-cream sm:text-base">{tr(fact.value)}</p>
             </div>
           ))}

@@ -3,16 +3,18 @@
 import { Fragment, useEffect, useState, type MouseEvent } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
+import { AnimatePresence, motion } from "motion/react";
 import { siteConfig } from "@/lib/content/store";
 import { LanguageFlags } from "@/components/layout/LanguageFlags";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
-/** Home-page section id → matching nav href */
+/** Home-page section id â matching nav href */
 const SECTION_TO_NAV: { id: string; href: string }[] = [
   { id: "top", href: "/" },
   { id: "about-text", href: "/#about-text" },
   { id: "kodawari", href: "/#kodawari" },
+  { id: "notices", href: "/#notices" },
   { id: "course", href: "/course" },
   { id: "interior", href: "/seats" },
   { id: "access", href: "/#access" },
@@ -45,6 +47,7 @@ export function Header() {
     { href: "/", label: t(copy.nav.top) },
     { href: "/#about-text", label: t(copy.nav.about) },
     { href: "/#kodawari", label: t(copy.nav.kodawari) },
+    { href: "/#notices", label: t(copy.nav.notices) },
     { href: "/course", label: t(copy.nav.course) },
     { href: "/seats", label: t(copy.nav.seats) },
     { href: "/#access", label: t(copy.nav.access) },
@@ -149,14 +152,17 @@ export function Header() {
     return () => observer.disconnect();
   }, [pathname]);
 
-  // App Router の <Link href="/#section"> は同一ページだとスクロールしないことがある
+  // App Router ã® <Link href="/#section"> ã¯åä¸ãã¼ã¸ã ã¨ã¹ã¯ã­ã¼ã«ããªããã¨ããã
   useEffect(() => {
     if (pathname !== "/") return;
 
     const stored = sessionStorage.getItem(SCROLL_TO_KEY);
     if (stored) sessionStorage.removeItem(SCROLL_TO_KEY);
     const id = stored || window.location.hash.replace(/^#/, "");
-    if (!id) return;
+    if (!id) {
+      window.scrollTo(0, 0);
+      return;
+    }
 
     const timer = window.setTimeout(() => {
       if (scrollToId(id)) {
@@ -179,6 +185,7 @@ export function Header() {
 
   const scrollToTop = () => {
     window.scrollTo({ top: 0, behavior: "smooth" });
+    window.history.replaceState(null, "", "/");
     setMenuOpen(false);
     setActiveHref("/");
   };
@@ -210,7 +217,7 @@ export function Header() {
 
   const onHero = pathname === "/" && !scrolled && !menuOpen;
   const headerText = onHero ? "text-on-dark" : "text-cream";
-  const headerTextMuted = onHero ? "text-on-dark/70" : "text-cream/70";
+  const headerTextMuted = onHero ? "text-on-dark/70" : "text-cream/88";
   const headerBorder = onHero ? "border-on-dark/20" : "border-cream/20";
   const headerDivider = onHero ? "border-on-dark/35" : "border-cream/35";
   const headerBar = onHero ? "bg-on-dark" : "bg-cream";
@@ -309,23 +316,37 @@ export function Header() {
         </div>
       </div>
 
-      {menuOpen && (
-        <div className="border-t border-cream/10 bg-ink/95 px-6 py-5 xl:hidden">
+      <AnimatePresence>
+      {menuOpen ? (
+        <motion.div
+          key="mobile-menu"
+          className="border-t border-cream/10 bg-ink/95 px-6 py-5 xl:hidden"
+          initial={{ opacity: 0, height: 0 }}
+          animate={{ opacity: 1, height: "auto" }}
+          exit={{ opacity: 0, height: 0 }}
+          transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+        >
           <nav className="flex flex-col text-[18px]">
-            {navLinks.map((link) => (
-              <Link
+            {navLinks.map((link, i) => (
+              <motion.div
                 key={link.href}
-                href={link.href}
-                onClick={(event) => onNavClick(event, link.href)}
-                aria-current={activeHref === link.href ? "page" : undefined}
-                className={
-                  activeHref === link.href
-                    ? "flex min-h-11 items-center text-gold"
-                    : "flex min-h-11 items-center text-cream/85 hover:text-cream"
-                }
+                initial={{ opacity: 0, x: -12 }}
+                animate={{ opacity: 1, x: 0 }}
+                transition={{ duration: 0.3, delay: 0.04 + i * 0.04, ease: [0.22, 1, 0.36, 1] }}
               >
-                {link.label}
-              </Link>
+                <Link
+                  href={link.href}
+                  onClick={(event) => onNavClick(event, link.href)}
+                  aria-current={activeHref === link.href ? "page" : undefined}
+                  className={
+                    activeHref === link.href
+                      ? "flex min-h-11 items-center text-gold"
+                      : "flex min-h-11 items-center text-cream/95 hover:text-cream"
+                  }
+                >
+                  {link.label}
+                </Link>
+              </motion.div>
             ))}
           </nav>
           <div className="mt-6 border-t border-cream/10 pt-5 xl:hidden">
@@ -341,8 +362,9 @@ export function Header() {
           >
             {isJa ? t(copy.nav.reserve) : t(copy.reserve.online)}
           </Link>
-        </div>
-      )}
+        </motion.div>
+      ) : null}
+      </AnimatePresence>
     </header>
   );
 }

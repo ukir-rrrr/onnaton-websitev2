@@ -54,7 +54,7 @@ export function About() {
             Concept
           </motion.h2>
           <motion.p
-            className="mt-3.5 text-[13px] tracking-[0.2em] text-cream/55"
+            className="mt-3.5 text-[13px] tracking-[0.2em] text-cream/78"
             {...fadeUp(0.12)}
           >
             {t(copy.about.conceptJa)}
@@ -156,7 +156,7 @@ export function About() {
           </motion.h3>
 
           <motion.div {...fadeUp(0.2)}>
-            <div className="font-serif-jp space-y-8 text-[14px] font-normal leading-[2.35] tracking-[0.04em] text-cream/80 sm:text-[18px] sm:leading-[2.5]">
+            <div className="font-serif-jp space-y-8 text-[14px] font-normal leading-[2.35] tracking-[0.04em] text-cream/92 sm:text-[18px] sm:leading-[2.5]">
               <p>{t(copy.about.p1)}</p>
               <p>{t(copy.about.p2)}</p>
               <p>

@@ -13,6 +13,13 @@ import {
   updateNotices,
   type NoticeUpdateInput,
 } from "@/lib/supabase/notices";
+import { getClientIp } from "@/lib/security/client-ip";
+import {
+  ADMIN_LOGIN_POLICY,
+  checkLockout,
+  clearRateLimit,
+  recordLockoutFailure,
+} from "@/lib/security/rate-limit";
 
 export type AdminNoticesState = {
   ok: boolean;
@@ -48,10 +55,25 @@ export async function loginAdminForm(formData: FormData): Promise<void> {
   if (!password) {
     redirect("/admin/notices?error=empty");
   }
+
+  const ip = await getClientIp();
+  const loginBucket = `admin_login:ip:${ip}`;
+  const lockStatus = await checkLockout(loginBucket, ADMIN_LOGIN_POLICY);
+  if (!lockStatus.allowed) {
+    const retry = lockStatus.retryAfterSeconds ?? 900;
+    redirect(`/admin/notices?error=locked&retry=${retry}`);
+  }
+
   if (!verifyAdminPassword(password)) {
+    const failure = await recordLockoutFailure(loginBucket, ADMIN_LOGIN_POLICY);
+    if (!failure.allowed) {
+      const retry = failure.retryAfterSeconds ?? 900;
+      redirect(`/admin/notices?error=locked&retry=${retry}`);
+    }
     redirect("/admin/notices?error=bad_password");
   }
 
+  await clearRateLimit(loginBucket);
   await setAdminSession();
   redirect("/admin/notices");
 }

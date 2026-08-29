@@ -132,7 +132,7 @@ export function CourseDetail({
               </p>
             ) : null}
             {c.priceLabel ? (
-              <p className="mb-1 text-[13px] tracking-[0.12em] text-cream/75">
+              <p className="mb-1 text-[13px] tracking-[0.12em] text-cream/90">
                 {tr(c.priceLabel)}
               </p>
             ) : null}
@@ -146,7 +146,7 @@ export function CourseDetail({
                 c.priceMainMobile
               )}
             </p>
-            <p className="mt-1 text-[13px] tracking-[0.08em] text-cream/80 sm:text-[14px]">
+            <p className="mt-1 text-[13px] tracking-[0.08em] text-cream/92 sm:text-[14px]">
               {isJa ? (
                 <>
                   <span className="md:hidden">{c.priceTaxNoteMobile}</span>
@@ -158,7 +158,7 @@ export function CourseDetail({
             </p>
             {c.altPrice ? (
               <div className="mt-4">
-                <p className="mb-1 text-[13px] tracking-[0.12em] text-cream/75">
+                <p className="mb-1 text-[13px] tracking-[0.12em] text-cream/90">
                   {tr(c.altPrice.label)}
                 </p>
                 <p className="font-serif-jp text-[20px] tracking-[0.08em] text-cream sm:text-[24px]">
@@ -171,7 +171,7 @@ export function CourseDetail({
                     c.altPrice.mainMobile
                   )}
                 </p>
-                <p className="mt-1 text-[13px] tracking-[0.08em] text-cream/80 sm:text-[14px]">
+                <p className="mt-1 text-[13px] tracking-[0.08em] text-cream/92 sm:text-[14px]">
                   {isJa ? (
                     <>
                       <span className="md:hidden">{c.altPrice.taxNoteMobile}</span>
@@ -266,7 +266,7 @@ export function CourseDetail({
               >
                 {c.priceLabel ? (
                   <>
-                    <span className="text-[13px] tracking-[0.1em] text-cream/75 min-[1440px]:text-[15px] min-[1440px]:tracking-[0.12em]">
+                    <span className="text-[13px] tracking-[0.1em] text-cream/90 min-[1440px]:text-[15px] min-[1440px]:tracking-[0.12em]">
                       {tr(c.priceLabel)}
                     </span>
                     <br />
@@ -276,13 +276,13 @@ export function CourseDetail({
                   {c.priceMain}
                 </span>
                 <br />
-                <span className="text-[13px] tracking-[0.1em] text-cream/85 min-[1440px]:text-[15px] min-[1440px]:tracking-[0.12em]">
+                <span className="text-[13px] tracking-[0.1em] text-cream/95 min-[1440px]:text-[15px] min-[1440px]:tracking-[0.12em]">
                   {c.priceTaxNote}
                 </span>
                 {c.altPrice ? (
                   <>
                     <br />
-                    <span className="text-[13px] tracking-[0.1em] text-cream/75 min-[1440px]:text-[15px] min-[1440px]:tracking-[0.12em]">
+                    <span className="text-[13px] tracking-[0.1em] text-cream/90 min-[1440px]:text-[15px] min-[1440px]:tracking-[0.12em]">
                       {tr(c.altPrice.label)}
                     </span>
                     <br />
@@ -290,7 +290,7 @@ export function CourseDetail({
                       {c.altPrice.main}
                     </span>
                     <br />
-                    <span className="text-[13px] tracking-[0.1em] text-cream/85 min-[1440px]:text-[15px] min-[1440px]:tracking-[0.12em]">
+                    <span className="text-[13px] tracking-[0.1em] text-cream/95 min-[1440px]:text-[15px] min-[1440px]:tracking-[0.12em]">
                       {c.altPrice.taxNote}
                     </span>
                   </>
@@ -329,7 +329,7 @@ export function CourseDetail({
       {nextCourseHref ? (
         <a
           href={nextCourseHref}
-          className="mt-10 flex min-h-11 items-center justify-center text-[22px] leading-none text-cream/80 transition-colors hover:text-cream sm:mt-14 sm:text-[26px]"
+          className="mt-10 flex min-h-11 items-center justify-center text-[22px] leading-none text-cream/92 transition-colors hover:text-cream sm:mt-14 sm:text-[26px]"
           aria-label={t(copy.coursePage.next)}
         >
           ▽

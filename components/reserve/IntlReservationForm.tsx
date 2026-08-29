@@ -82,7 +82,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
         <h2 className="font-serif-jp mb-5 text-[24px] font-normal tracking-[0.12em] text-cream sm:text-[30px]">
           {t(copy.intlForm.successTitle)}
         </h2>
-        <p className="mx-auto mb-8 max-w-md text-[14px] leading-[2] tracking-[0.04em] text-cream/75 sm:text-[15px]">
+        <p className="mx-auto mb-8 max-w-md text-[14px] leading-[2] tracking-[0.04em] text-cream/90 sm:text-[15px]">
           <MultilineText text={t(copy.intlForm.successBody)} />
         </p>
         {state.reference ? (
@@ -128,7 +128,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
         </p>
       ) : null}
 
-      <label className="flex cursor-pointer items-start gap-3 border-b border-cream/12 pb-8 text-[14px] leading-[1.9] text-cream/85">
+      <label className="flex cursor-pointer items-start gap-3 border-b border-cream/12 pb-8 text-[14px] leading-[1.9] text-cream/95">
         <input
           type="checkbox"
           name="agreePolicy"
@@ -183,7 +183,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
         <legend className="font-serif-jp mb-3 text-[18px] tracking-[0.12em] text-cream sm:text-[20px]">
           {t(copy.intlForm.visit)}
         </legend>
-        <p className="mb-5 text-[13px] leading-[1.9] tracking-[0.04em] text-cream/70 sm:text-[14px]">
+        <p className="mb-5 text-[13px] leading-[1.9] tracking-[0.04em] text-cream/88 sm:text-[14px]">
           {t(copy.intlForm.dateHint)}
         </p>
         <div className="grid gap-5 sm:grid-cols-2">

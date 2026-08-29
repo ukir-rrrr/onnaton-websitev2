@@ -2,9 +2,11 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { motion, useReducedMotion } from "motion/react";
 import { photos } from "@/lib/content/photos";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
+import { revealFadeUp, revealScale } from "@/lib/motion/presets";
 
 /**
  * Top-page course teaser: full-bleed photo → /course.
@@ -12,6 +14,8 @@ import { useT } from "@/components/i18n/LocaleProvider";
  */
 export function CourseMenu() {
   const { t } = useT();
+  const reduceMotion = useReducedMotion() === true;
+
   return (
     <section id="course" className="scroll-mt-24 w-full">
       <Link
@@ -20,23 +24,28 @@ export function CourseMenu() {
         aria-label={t(copy.courseTeaser.cta)}
       >
         <div className="relative h-[50vh] min-h-[300px] w-full sm:h-[90vh] sm:min-h-[360px]">
-          <Image
-            src={photos.courseMenu}
-            alt={t(copy.courseTeaser.alt)}
-            fill
-            sizes="100vw"
-            className="object-cover transition-transform duration-[380ms] ease-out group-hover:scale-[1.03]"
-            priority={false}
-          />
+          <motion.div className="absolute inset-0" {...revealScale(reduceMotion, 0, 1.06)}>
+            <Image
+              src={photos.courseMenu}
+              alt={t(copy.courseTeaser.alt)}
+              fill
+              sizes="100vw"
+              className="object-cover transition-transform duration-[380ms] ease-out group-hover:scale-[1.03]"
+              priority={false}
+            />
+          </motion.div>
         </div>
 
         <div
           className="pointer-events-none absolute inset-x-0 bottom-0 h-1/3 bg-gradient-to-t from-black/40 to-transparent"
           aria-hidden
         />
-        <p className="pointer-events-none absolute bottom-6 left-6 text-xs tracking-[0.35em] text-on-dark/85 transition-opacity duration-[380ms] ease-out sm:bottom-8 sm:left-10 sm:text-[12px] [@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-0">
+        <motion.p
+          className="pointer-events-none absolute bottom-6 left-6 text-xs tracking-[0.35em] text-on-dark/85 transition-opacity duration-[380ms] ease-out sm:bottom-8 sm:left-10 sm:text-[12px] [@media(hover:hover)_and_(pointer:fine)]:group-hover:opacity-0"
+          {...revealFadeUp(reduceMotion, 0.2, 16)}
+        >
           COURSE MENU
-        </p>
+        </motion.p>
 
         <div
           className="pointer-events-none absolute inset-0 hidden bg-black/0 transition-colors duration-[380ms] ease-out group-hover:bg-black/50 [@media(hover:hover)_and_(pointer:fine)]:block"
@@ -54,11 +63,14 @@ export function CourseMenu() {
           </span>
         </div>
 
-        <div className="absolute right-5 bottom-5 left-5 flex justify-end sm:right-10 sm:bottom-8 sm:left-auto [@media(hover:hover)_and_(pointer:fine)]:hidden">
+        <motion.div
+          className="absolute right-5 bottom-5 left-5 flex justify-end sm:right-10 sm:bottom-8 sm:left-auto [@media(hover:hover)_and_(pointer:fine)]:hidden"
+          {...revealFadeUp(reduceMotion, 0.28, 12)}
+        >
           <span className="inline-flex min-h-11 items-center border border-on-dark/70 px-6 py-3 text-[13px] tracking-[0.18em] text-on-dark">
             {t(copy.courseTeaser.cta)}
           </span>
-        </div>
+        </motion.div>
       </Link>
     </section>
   );

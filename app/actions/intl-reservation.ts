@@ -11,6 +11,18 @@ import { isLocale, type Locale } from "@/lib/i18n/config";
 import { copy } from "@/lib/i18n/copy";
 import { t, type Localized } from "@/lib/i18n/types";
 import { insertIntlReservation } from "@/lib/supabase/reservations";
+import { getClientIp } from "@/lib/security/client-ip";
+import {
+  checkQuota,
+  INTL_AUTOREPLY_COOLDOWN_MS,
+  INTL_SUBMIT_EMAIL_MAX,
+  INTL_SUBMIT_EMAIL_WINDOW_MS,
+  INTL_SUBMIT_IP_MAX,
+  INTL_SUBMIT_IP_WINDOW_MS,
+  isWithinCooldown,
+  recordQuota,
+  setCooldown,
+} from "@/lib/security/rate-limit";
 
 export type { IntlReservationFormValues, IntlReservationState } from "@/lib/reserve/intl-form";
 
@@ -105,6 +117,28 @@ export async function submitIntlReservation(
   }
   if (notes.length > 1000) return err(locale, copy.intlForm.errorGeneric, formData);
 
+  const ip = await getClientIp();
+  const ipBucket = `intl_submit:ip:${ip}`;
+  const emailBucket = `intl_submit:email:${email.toLowerCase()}`;
+
+  const ipAllowed = await checkQuota(
+    ipBucket,
+    INTL_SUBMIT_IP_MAX,
+    INTL_SUBMIT_IP_WINDOW_MS,
+  );
+  if (!ipAllowed) {
+    return err(locale, copy.intlForm.errorRateLimit, formData);
+  }
+
+  const emailAllowed = await checkQuota(
+    emailBucket,
+    INTL_SUBMIT_EMAIL_MAX,
+    INTL_SUBMIT_EMAIL_WINDOW_MS,
+  );
+  if (!emailAllowed) {
+    return err(locale, copy.intlForm.errorRateLimit, formData);
+  }
+
   const reference = referenceCode();
   const agreedAt = new Date().toISOString();
   const payload = {
@@ -125,14 +159,24 @@ export async function submitIntlReservation(
   const saved = await insertIntlReservation(payload);
   if (!saved.ok) return err(locale, copy.intlForm.errorGeneric, formData);
 
+  await recordQuota(ipBucket, INTL_SUBMIT_IP_WINDOW_MS);
+  await recordQuota(emailBucket, INTL_SUBMIT_EMAIL_WINDOW_MS);
+
   const ownerEmailed = await notifyOwnerIntlReservation(payload);
   if (!ownerEmailed.ok) {
     console.error("[reservation/intl] saved but owner email failed", reference);
   }
 
-  const customerEmailed = await sendCustomerAutoReply(payload);
-  if (!customerEmailed.ok) {
-    console.error("[reservation/intl] saved but customer auto-reply failed", reference);
+  const autoreplyBucket = `intl_autoreply:email:${email.toLowerCase()}`;
+  if (await isWithinCooldown(autoreplyBucket)) {
+    console.info("[reservation/intl] auto-reply skipped (cooldown)", reference);
+  } else {
+    const customerEmailed = await sendCustomerAutoReply(payload);
+    if (!customerEmailed.ok) {
+      console.error("[reservation/intl] saved but customer auto-reply failed", reference);
+    } else if (!customerEmailed.skipped) {
+      await setCooldown(autoreplyBucket, INTL_AUTOREPLY_COOLDOWN_MS);
+    }
   }
 
   return { ok: true, reference };

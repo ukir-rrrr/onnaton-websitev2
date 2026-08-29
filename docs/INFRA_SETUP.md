@@ -5,7 +5,8 @@
 
 ## 1. Supabase
 
-1. **SQL Editor** で `supabase/schema.sql` の内容を実行
+1. **SQL Editor** で `supabase/schema.sql` の内容を実行  
+   既存プロジェクトは `supabase/migrations/20260829_security_rate_limits.sql` も追加実行（レート制限テーブル + 予約の anon INSERT 削除）
 2. **Settings → API** からコピー:
    - Project URL → `NEXT_PUBLIC_SUPABASE_URL`
    - anon public → `NEXT_PUBLIC_SUPABASE_ANON_KEY`
@@ -45,7 +46,9 @@ Cloudflare Cron から週1回 `GET /api/health` 等を叩く（Phase 5）。
    - `ONNATON_ADMIN_PASSWORD`
    - `RESEND_API_KEY`, `RESEND_FROM`, `RESEND_OWNER_TO`, `RESEND_REPLY_TO`（任意）
 4. カスタムドメインを Cloudflare に向ける
-5. **Security → Settings → AI bot policies**（2026-09-15 前）  
+5. **Security → WAF → Rate limiting rules**（推奨）  
+   - `/admin/notices` への POST を IP 単位で制限（アプリ側ロックの二重防御）
+6. **Security → Settings → AI bot policies**（2026-09-15 前）  
    - Search クローラーは許可（MEO / Google 検索用）
 
 ローカル確認: `npm run preview`（Workers ランタイム）

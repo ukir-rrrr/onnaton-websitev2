@@ -50,7 +50,7 @@ export function Access() {
                 i === 0 ? "border-t border-cream/12 pt-4" : ""
               }`}
             >
-              <span className="pt-0.5 text-[13px] text-cream/50 sm:text-[13px]">
+              <span className="pt-0.5 text-[13px] text-cream/75 sm:text-[13px]">
                 {tr(row.label)}
               </span>
               {row.label === "ご予約" && !isJa ? (
@@ -107,7 +107,7 @@ export function Access() {
             href={siteConfig.mapLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex min-h-11 items-center justify-center border-t border-cream/10 bg-ink-raised px-4 py-3.5 text-[13px] tracking-[0.12em] text-cream/70 transition-colors hover:text-gold"
+            className="flex min-h-11 items-center justify-center border-t border-cream/10 bg-ink-raised px-4 py-3.5 text-[13px] tracking-[0.12em] text-cream/88 transition-colors hover:text-gold"
           >
             {t(copy.access.openMap)}
           </a>

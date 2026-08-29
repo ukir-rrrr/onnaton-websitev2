@@ -511,7 +511,7 @@ const phrases: Record<string, Localized> = {
   "肉と島野菜の旨みを引き出す出汁にこだわり、〆の一品まで美味しく召し上がっていただけるようご用意しています。": L(
     "肉と島野菜の旨みを引き出す出汁にこだわり、〆の一品まで美味しく召し上がっていただけるようご用意しています。",
     "A broth that lifts meat and island vegetables—delicious through the finishing dish.",
-    "고기와 섬 야채의 맛을 살리는 육수에 こだわり, 마무리 요리까지 맛있게 드실 수 있도록 준비합니다.",
+    "고기와 섬 야채의 맛을 살리는 육수에 정성을 다하고, 마무리 요리까지 맛있게 드실 수 있도록 준비합니다.",
     "讲究能带出肉与岛蔬鲜味的高汤，连收尾一品都美味。",
   ),
   "沖縄県産食材": L(
@@ -605,7 +605,7 @@ const phrases: Record<string, Localized> = {
 
 /** Translate a Japanese source string; fall back to the original. */
 export function tr(locale: Locale, ja: string): string {
-  const hit = phrases[ja];
+  const hit = phrases[ja] ?? phrases[ja.replace(/\n/g, "")];
   if (!hit) return ja;
   return t(locale, hit);
 }

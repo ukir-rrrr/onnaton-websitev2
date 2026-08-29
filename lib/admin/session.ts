@@ -17,13 +17,21 @@ function sessionToken(): string | null {
 export function verifyAdminPassword(input: string): boolean {
   const expected = adminPassword();
   const normalized = input.trim().normalize("NFKC");
-  if (!expected || !normalized) return false;
+  if (!expected || !normalized) {
+    const dummy = Buffer.alloc(32, 0);
+    timingSafeEqual(dummy, dummy);
+    return false;
+  }
 
-  const a = Buffer.from(normalized, "utf8");
-  const b = Buffer.from(expected, "utf8");
-  if (a.length !== b.length) return false;
+  const inputBuf = Buffer.from(normalized, "utf8");
+  const expectedBuf = Buffer.from(expected, "utf8");
 
-  return timingSafeEqual(a, b);
+  if (inputBuf.length !== expectedBuf.length) {
+    timingSafeEqual(expectedBuf, expectedBuf);
+    return false;
+  }
+
+  return timingSafeEqual(inputBuf, expectedBuf);
 }
 
 export async function isAdminAuthenticated(): Promise<boolean> {

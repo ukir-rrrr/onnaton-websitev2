@@ -89,7 +89,7 @@ export function Hero() {
 
       <section
         id="top"
-        className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[19/10] sm:max-h-[100vh]"
+        className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[19/10] sm:min-h-[540px] md:min-h-[580px] sm:max-h-[100vh]"
       >
         <motion.div
           className="absolute inset-0"
@@ -167,7 +167,7 @@ export function Hero() {
         </motion.div>
 
         <motion.div
-          className="absolute inset-0 z-10 flex items-start overflow-y-auto overscroll-contain px-5 pb-12 pt-28 sm:items-center sm:overflow-visible sm:px-12 sm:pb-0 sm:pt-14 xl:px-16"
+          className="absolute inset-0 z-10 flex items-start overflow-y-auto overscroll-contain px-5 pb-12 pt-28 sm:items-end sm:overflow-visible sm:px-12 sm:pb-10 sm:pt-20 md:pb-12 xl:items-center xl:px-16 xl:pb-0 xl:pt-14"
           initial={false}
           animate={{
             opacity: showCopy ? 1 : 0,

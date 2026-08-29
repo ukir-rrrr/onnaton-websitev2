@@ -31,7 +31,7 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
                 {tr(group.heading)}
               </h3>
               {group.note ? (
-                <p className="mb-6 text-[13px] leading-[1.8] tracking-[0.04em] text-cream/75">
+                <p className="mb-6 text-[13px] leading-[1.8] tracking-[0.04em] text-cream/90">
                   {tr(group.note)}
                 </p>
               ) : null}
@@ -45,7 +45,7 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
                       <span className="text-[15px] tracking-[0.06em] text-cream sm:text-[16px]">
                         {tr(item.name)}
                         {item.amount ? (
-                          <span className="ml-3 text-[13px] text-cream/65">
+                          <span className="ml-3 text-[13px] text-cream/85">
                             {item.amount}
                           </span>
                         ) : null}

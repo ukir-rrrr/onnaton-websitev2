@@ -1,7 +1,7 @@
 "use client";
 
 import { loginAdminForm } from "@/app/actions/admin-notices";
-import { adminLabelClass, adminMutedClass } from "@/app/admin/adminStyles";
+import { adminLabelClass } from "@/app/admin/adminStyles";
 import { PasswordInput } from "./PasswordInput";
 
 const loginErrors: Record<string, string> = {
@@ -9,20 +9,34 @@ const loginErrors: Record<string, string> = {
     "ONNATON_ADMIN_PASSWORD が読み込まれていません。.env.local を保存して dev サーバーを再起動してください",
   empty: "パスワードを入力してください",
   bad_password: "パスワードが正しくありません",
+  locked: "試行回数の上限に達しました。しばらくしてから再度お試しください。",
 };
 
 type AdminLoginFormProps = {
   error?: string;
+  retryAfterSeconds?: number;
   passwordConfigured: boolean;
-  passwordLength?: number;
 };
+
+function formatLockMessage(retryAfterSeconds?: number): string {
+  if (!retryAfterSeconds || retryAfterSeconds <= 0) {
+    return loginErrors.locked;
+  }
+  const minutes = Math.max(1, Math.ceil(retryAfterSeconds / 60));
+  return `試行回数の上限に達しました。約${minutes}分後に再度お試しください。`;
+}
 
 export function AdminLoginForm({
   error,
+  retryAfterSeconds,
   passwordConfigured,
-  passwordLength,
 }: AdminLoginFormProps) {
-  const message = error ? loginErrors[error] : null;
+  const message =
+    error === "locked"
+      ? formatLockMessage(retryAfterSeconds)
+      : error
+        ? loginErrors[error]
+        : null;
 
   return (
     <div className="mx-auto max-w-sm space-y-4">
@@ -31,15 +45,10 @@ export function AdminLoginForm({
           {loginErrors.config}
         </p>
       ) : null}
-      {/* {passwordConfigured && passwordLength ? (
-        <p className={`text-center text-xs ${adminMutedClass}`}>
-          開発用: ONNATON_ADMIN_PASSWORD は {passwordLength} 文字で読み込まれています
-        </p>
-      ) : null} */}
       <form action={loginAdminForm} className="space-y-4">
         <label className="block space-y-2" htmlFor="admin-password">
           <span className={adminLabelClass}>パスワード</span>
-          <PasswordInput id="admin-password" />
+          <PasswordInput id="admin-password" disabled={error === "locked"} />
         </label>
         {message ? (
           <p
@@ -51,7 +60,8 @@ export function AdminLoginForm({
         ) : null}
         <button
           type="submit"
-          className="w-full rounded bg-gold px-6 py-3 text-sm font-medium tracking-[0.08em] text-ink transition hover:bg-gold/90"
+          disabled={error === "locked"}
+          className="w-full rounded bg-gold px-6 py-3 text-sm font-medium tracking-[0.08em] text-ink transition hover:bg-gold/90 disabled:cursor-not-allowed disabled:opacity-50"
         >
           ログイン
         </button>

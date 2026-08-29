@@ -2,9 +2,11 @@
 
 import { useEffect, useId, useState } from "react";
 import Link from "next/link";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { siteConfig } from "@/lib/content/store";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
+import { modalBackdrop, modalPanel } from "@/lib/motion/presets";
 
 interface ReserveButtonProps {
   variant?: "solid" | "outline";
@@ -30,6 +32,7 @@ export function ReserveButton({
   const titleId = useId();
   const [open, setOpen] = useState(false);
   const [copied, setCopied] = useState(false);
+  const reduceMotion = useReducedMotion() === true;
 
   useEffect(() => {
     if (!open) return;
@@ -91,19 +94,22 @@ export function ReserveButton({
         {label}
       </a>
 
-      {open ? (
-        <div
-          className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 px-6 backdrop-blur-[2px]"
-          onClick={() => setOpen(false)}
-          role="presentation"
-        >
-          <div
-            role="dialog"
-            aria-modal="true"
-            aria-labelledby={titleId}
-            className="max-h-[90dvh] w-full max-w-md overflow-y-auto border border-cream/15 bg-ink-raised px-6 py-9 text-center shadow-2xl sm:px-12 sm:py-12"
-            onClick={(event) => event.stopPropagation()}
+      <AnimatePresence>
+        {open ? (
+          <motion.div
+            className="fixed inset-0 z-[200] flex items-center justify-center bg-black/50 px-6 backdrop-blur-[2px]"
+            onClick={() => setOpen(false)}
+            role="presentation"
+            {...modalBackdrop(reduceMotion)}
           >
+            <motion.div
+              role="dialog"
+              aria-modal="true"
+              aria-labelledby={titleId}
+              className="max-h-[90dvh] w-full max-w-md overflow-y-auto border border-cream/15 bg-ink-raised px-6 py-9 text-center shadow-2xl sm:px-12 sm:py-12"
+              onClick={(event) => event.stopPropagation()}
+              {...modalPanel(reduceMotion)}
+            >
             <p
               id={titleId}
               className="mb-3 text-xs tracking-[0.28em] text-gold sm:text-[12px]"
@@ -113,7 +119,7 @@ export function ReserveButton({
             <p className="font-serif-jp mb-2 text-[30px] font-medium tracking-[0.08em] text-cream sm:text-[42px]">
               {siteConfig.reservationPhoneDisplay}
             </p>
-            <p className="mb-8 text-[13px] leading-[1.8] tracking-[0.04em] text-cream/60">
+            <p className="mb-8 text-[13px] leading-[1.8] tracking-[0.04em] text-cream/82">
               {t(copy.reserve.hours)}
             </p>
 
@@ -134,14 +140,15 @@ export function ReserveButton({
               <button
                 type="button"
                 onClick={() => setOpen(false)}
-                className="mt-1 flex min-h-11 w-full items-center justify-center text-[13px] tracking-[0.12em] text-cream/45 transition-colors hover:text-cream/70"
+                className="mt-1 flex min-h-11 w-full items-center justify-center text-[13px] tracking-[0.12em] text-cream/70 transition-colors hover:text-cream/88"
               >
                 {t(copy.reserve.close)}
               </button>
             </div>
-          </div>
-        </div>
-      ) : null}
+          </motion.div>
+        </motion.div>
+        ) : null}
+      </AnimatePresence>
     </>
   );
 }

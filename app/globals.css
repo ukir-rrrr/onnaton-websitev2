@@ -4,8 +4,8 @@
   /* Warm kinari / washi palette */
   --color-paper: #ebe2d0;
   --color-paper-raised: #e0d4bc;
-  --color-text: #2a2520;
-  --color-text-muted: #5c5348;
+  --color-text: #1e1915;
+  --color-text-muted: #443d36;
   --color-on-dark: #f2ede6;
   --color-ink: var(--color-paper);
   --color-ink-raised: var(--color-paper-raised);
@@ -13,8 +13,17 @@
   --color-gold: #c9a063;
   --color-wipe: #a68c6e;
 
-  /* Layered washi texture — fiber, uneven tone, fine grain */
-  --washi-texture:
+  /* Photo washi (Gemini) — primary surface texture */
+  --washi-photo: url("/textures/washi-bg.jpg");
+  --washi-photo-tint: linear-gradient(
+    rgba(235, 226, 208, 0.1),
+    rgba(235, 226, 208, 0.1)
+  );
+  --washi-texture: var(--washi-photo-tint), var(--washi-photo);
+
+  /* Previous pure-CSS washi (backup — see git history before washi-bg.jpg):
+     SVG feTurbulence noise + radial/repeating gradients. */
+  --washi-texture-css-only:
     url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.72' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.55'/%3E%3C/svg%3E"),
     radial-gradient(
       ellipse 90% 70% at 12% 8%,
@@ -106,33 +115,24 @@ body {
 .bg-ink {
   background-color: var(--color-paper);
   background-image: var(--washi-texture);
-  background-size:
-    512px 512px,
-    100% 100%,
-    100% 100%,
-    100% 100%,
-    100% 100%,
-    100% 4px,
-    100% 100%,
-    100% 100%;
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 .bg-ink-raised {
   background-color: var(--color-paper-raised);
   background-image:
-    url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.4'/%3E%3C/svg%3E"),
-    linear-gradient(165deg, rgba(255, 248, 235, 0.35) 0%, transparent 45%),
-    repeating-linear-gradient(
-      0deg,
-      transparent,
-      transparent 3px,
-      rgba(155, 135, 105, 0.04) 3px,
-      rgba(155, 135, 105, 0.04) 4px
-    );
-  background-size:
-    256px 256px,
-    100% 100%,
-    100% 100%;
+    linear-gradient(
+      rgba(224, 212, 188, 0.62),
+      rgba(224, 212, 188, 0.62)
+    ),
+    var(--washi-photo);
+  background-size: cover;
+  background-position: center top;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
 }
 
 ::selection {

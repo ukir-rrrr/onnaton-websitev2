@@ -10,6 +10,7 @@ type PasswordInputProps = {
   required?: boolean;
   autoComplete?: string;
   className?: string;
+  disabled?: boolean;
 };
 
 export function PasswordInput({
@@ -18,6 +19,7 @@ export function PasswordInput({
   required = true,
   autoComplete = "current-password",
   className = "",
+  disabled = false,
 }: PasswordInputProps) {
   const [visible, setVisible] = useState(false);
 
@@ -28,6 +30,7 @@ export function PasswordInput({
         type={visible ? "text" : "password"}
         name={name}
         required={required}
+        disabled={disabled}
         autoComplete={autoComplete}
         className={`${adminInputClass} py-2 pl-3 pr-11 ${className}`}
       />

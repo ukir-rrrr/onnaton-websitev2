@@ -66,7 +66,8 @@ export const copy = {
   nav: {
     top: L("トップ", "Top", "홈", "首页"),
     about: L("恩納豚について", "About", "온나톤 소개", "关于恩纳豚"),
-    kodawari: L("こだわり", "Our Craft", "こだわり", "匠心"),
+    kodawari: L("こだわり", "Our Craft", "특별함", "匠心"),
+    notices: L("お知らせ", "Notice", "공지", "公告"),
     course: L("コース", "Courses", "코스", "套餐"),
     seats: L("店内", "Interior", "매장", "店内"),
     access: L("アクセス", "Access", "오시는 길", "交通"),
@@ -205,7 +206,16 @@ export const copy = {
     interiorAlt: L("店内", "Dining room", "매장 내부", "店内"),
   },
   kodawari: {
-    heading: L("当店のこだわり", "Our commitment", "저희의 こだわり", "本店的坚持"),
+    heading: L("当店のこだわり", "Our commitment", "저희의 특별함", "本店的坚持"),
+  },
+  siteNotices: {
+    heading: L("お知らせ", "Notice", "공지", "公告"),
+    empty: L(
+      "現在のお知らせはございません",
+      "There are no announcements at this time.",
+      "현재 공지사항이 없습니다.",
+      "目前没有公告。",
+    ),
   },
   reservationBanner: {
     heading: L(
@@ -549,6 +559,36 @@ export const copy = {
       "해외 손님께서는 전화 예약을 받지 않습니다.\n아래 예약 양식으로 신청해 주세요.",
       "恕不接待海外客人电话预约。\n请通过下方预约表单申请。",
     ),
+    jaHeading: L(
+      "ご予約について",
+      "International reservation request",
+      "해외 손님 예약 신청",
+      "海外客人预约申请",
+    ),
+    domesticLead: L(
+      "当店は完全予約制のコース料理専門店です。\n日本国内のお客様は、お電話にてご予約ください。\nご希望の日時・人数・コースをお伝えいただければ、\n空席をご確認のうえご案内いたします。",
+      "We do not take phone reservations for international guests.\nPlease apply using the form below.",
+      "해외 손님께서는 전화 예약을 받지 않습니다.\n아래 예약 양식으로 신청해 주세요.",
+      "恕不接待海外客人电话预约。\n请通过下方预约表单申请。",
+    ),
+    overseasToggle: L(
+      "海外在住・海外からご来店の方",
+      "International reservation request",
+      "해외 손님 예약 신청",
+      "海外客人预约申请",
+    ),
+    overseasToggleHint: L(
+      "オンライン予約フォームをご利用ください",
+      "Please apply using the form below",
+      "아래 예약 양식으로 신청해 주세요",
+      "请通过下方预约表单申请",
+    ),
+    overseasFormNote: L(
+      "※こちらは海外向けの予約フォームです。\n日本国内にお住まいの方は、お電話でのご予約をお願いいたします。",
+      "We do not take phone reservations for international guests.\nPlease apply using the form below.",
+      "해외 손님께서는 전화 예약을 받지 않습니다.\n아래 예약 양식으로 신청해 주세요.",
+      "恕不接待海外客人电话预约。\n请通过下方预约表单申请。",
+    ),
     policyHeading: L(
       "予約前の確認事項",
       "Before you apply",
@@ -649,6 +689,12 @@ export const copy = {
       "Please confirm you understand our policies.",
       "안내에 동의해 주세요.",
       "请确认已了解本店须知。",
+    ),
+    errorRateLimit: L(
+      "送信回数の上限に達しました。しばらく時間をおいて再度お試しください。",
+      "Too many requests. Please wait a while and try again.",
+      "전송 횟수 상한에 도달했습니다. 잠시 후 다시 시도해 주세요.",
+      "提交次数已达上限，请稍后再试。",
     ),
   },
   intlAutoReply: {

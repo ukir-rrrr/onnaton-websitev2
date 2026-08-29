@@ -10,7 +10,7 @@ export function Footer() {
       <span className="font-serif-jp text-xl tracking-[0.08em] text-cream">
         {tr(siteConfig.formalName)}
       </span>
-      <span className="text-[13px] text-cream/40">
+      <span className="text-[13px] text-cream/65">
         © {siteConfig.name} All Rights Reserved.
       </span>
     </footer>

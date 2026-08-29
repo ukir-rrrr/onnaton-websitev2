@@ -14,14 +14,13 @@ export const metadata: Metadata = {
 export default async function AdminNoticesPage({
   searchParams,
 }: {
-  searchParams: Promise<{ error?: string }>;
+  searchParams: Promise<{ error?: string; retry?: string }>;
 }) {
-  const { error } = await searchParams;
+  const { error, retry } = await searchParams;
+  const retryAfterSeconds = retry ? Number.parseInt(retry, 10) : undefined;
   const authed = await isAdminAuthenticated();
   const configuredPassword = readAdminPassword();
   const passwordConfigured = Boolean(configuredPassword);
-  const passwordLength =
-    process.env.NODE_ENV === "development" ? configuredPassword?.length : undefined;
 
   if (!authed) {
     return (
@@ -35,8 +34,10 @@ export default async function AdminNoticesPage({
           </p>
           <AdminLoginForm
             error={error}
+            retryAfterSeconds={
+              Number.isFinite(retryAfterSeconds) ? retryAfterSeconds : undefined
+            }
             passwordConfigured={passwordConfigured}
-            passwordLength={passwordLength}
           />
         </div>
       </div>
