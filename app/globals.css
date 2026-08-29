@@ -137,15 +137,15 @@ body {
 
 /*
  * iOS Safari blurs / mis-scales background-attachment: fixed (photo looks muddy on
- * real phones but fine in Chrome mobile emulation). Use one scroll texture on html
- * and drop duplicate layers from .bg-ink shells.
+ * real phones but fine in Chrome mobile emulation). Use seamless CSS washi on touch
+ * devices — photo repeat-y leaves visible horizontal seams.
  */
 @media (hover: none), (pointer: coarse) {
   html {
     background-color: var(--color-paper);
-    background-image: var(--washi-texture);
-    background-size: 100% auto;
-    background-repeat: repeat-y;
+    background-image: var(--washi-texture-css-only);
+    background-size: 512px 512px;
+    background-repeat: repeat;
     background-position: center top;
     background-attachment: scroll;
   }
@@ -157,10 +157,17 @@ body {
   }
 
   .bg-ink-raised {
+    background-color: var(--color-paper-raised);
+    background-image:
+      linear-gradient(
+        rgba(224, 212, 188, 0.62),
+        rgba(224, 212, 188, 0.62)
+      ),
+      var(--washi-texture-css-only);
+    background-size: auto, 512px 512px;
+    background-repeat: no-repeat, repeat;
     background-attachment: scroll;
-    background-size: cover;
-    background-repeat: no-repeat;
-    background-position: center;
+    background-position: center, center top;
   }
 }
 
@@ -191,21 +198,62 @@ main.font-brush-jp :is(h3, .font-display-jp) {
 }
 
 /* Native date inputs — iOS Safari uses different rendering than Chrome mobile emulation. */
+.date-input-shell {
+  position: relative;
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
+}
+
+.date-input-trigger {
+  position: absolute;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  display: flex;
+  width: 2.75rem;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  padding: 0;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+
 input[type="date"].date-input {
   display: block;
   width: 100%;
   min-width: 0;
   max-width: 100%;
   -webkit-min-logical-width: 0;
+  box-sizing: border-box;
 }
 
 input[type="date"].date-input::-webkit-date-and-time-value {
   min-width: 0;
+  max-width: 100%;
+  overflow: hidden;
   text-align: left;
+}
+
+input[type="date"].date-input::-webkit-calendar-picker-indicator {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 2.75rem;
+  height: 100%;
+  margin: 0;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0;
 }
 
 @supports (-webkit-touch-callout: none) {
   input[type="date"].date-input {
-    padding-right: 0.75rem;
+    appearance: none;
+    -webkit-appearance: none;
   }
 }

@@ -16,7 +16,7 @@ import {
   minBookableDate,
 } from "@/lib/content/reservation";
 import { MultilineText } from "@/components/i18n/MultilineText";
-import { dateInputClass } from "@/components/ui/dateField";
+import { DateField } from "@/components/ui/DateField";
 import { copy } from "@/lib/i18n/copy";
 import { htmlLang } from "@/lib/i18n/config";
 import { useT } from "@/components/i18n/LocaleProvider";
@@ -115,7 +115,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
   }
 
   return (
-    <form action={formAction} className="relative flex flex-col gap-10">
+    <form action={formAction} className="relative flex w-full min-w-0 max-w-full flex-col gap-10 overflow-x-clip">
       <input type="hidden" name="locale" value={locale} />
       <div className="hidden" aria-hidden="true">
         <input name="website" tabIndex={-1} autoComplete="off" />
@@ -181,7 +181,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
         </div>
       </fieldset>
 
-      <fieldset>
+      <fieldset className="min-w-0 w-full max-w-full">
         <legend className="font-serif-jp mb-3 text-[18px] tracking-[0.12em] text-cream sm:text-[20px]">
           {t(copy.intlForm.visit)}
         </legend>
@@ -201,31 +201,29 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
               ["datePreference3", copy.intlForm.date3, false],
             ] as const
           ).map(([key, label, required]) => (
-            <p
+            <div
               key={key}
-              className={`min-w-0 ${key === "datePreference1" ? "sm:col-span-2" : ""}`}
+              className={`min-w-0 max-w-full ${key === "datePreference1" ? "sm:col-span-2" : ""}`}
             >
               <label htmlFor={`intl-${key}`} className={labelClass}>
                 {t(label)} {required ? "*" : ""}
               </label>
-              <input
+              <DateField
                 id={`intl-${key}`}
                 name={dateFieldNames[key]}
-                type="date"
                 lang={htmlLang[locale]}
                 required={required}
                 min={minDate}
                 max={maxDate}
                 value={fields[key]}
                 onChange={(event) => setField(key, event.target.value)}
-                className={dateInputClass}
               />
               {dateHints[key] ? (
                 <span className="mt-2 block text-[12px] leading-[1.7] text-gold/80">
                   {t(copy.intlForm.errorDate)}
                 </span>
               ) : null}
-            </p>
+            </div>
           ))}
           <p>
             <label htmlFor="intl-adults" className={labelClass}>

@@ -619,6 +619,12 @@ export const copy = {
       "형식: Y / M / D",
       "格式：Y / M / D",
     ),
+    openCalendar: L(
+      "カレンダーを開く",
+      "Open calendar",
+      "달력 열기",
+      "打开日历",
+    ),
     details: L("お客様情報", "Your details", "손님 정보", "客人信息"),
     visit: L("ご来店希望", "Preferred visit", "방문 희망", "希望到店"),
     name: L("お名前", "Name", "이름", "姓名"),

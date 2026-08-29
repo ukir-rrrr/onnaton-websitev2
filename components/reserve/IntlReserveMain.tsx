@@ -87,7 +87,7 @@ export function IntlReserveMain({ policies }: { policies: string[] }) {
         </ul>
       </div>
 
-      <div className="border border-cream/10 bg-ink-raised px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
+      <div className="min-w-0 overflow-x-clip border border-cream/10 bg-ink-raised px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
         <IntlReservationForm />
       </div>
     </div>

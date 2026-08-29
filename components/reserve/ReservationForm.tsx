@@ -13,7 +13,7 @@ import {
   reservationTimeSlots,
 } from "@/lib/content/reservation";
 import { MultilineText } from "@/components/i18n/MultilineText";
-import { dateInputClass } from "@/components/ui/dateField";
+import { DateField } from "@/components/ui/DateField";
 import { copy } from "@/lib/i18n/copy";
 import { htmlLang } from "@/lib/i18n/config";
 import { useT } from "@/components/i18n/LocaleProvider";
@@ -178,14 +178,13 @@ function ReservationFormInner({
           {t(copy.form.visit)}
         </legend>
         <div className="grid min-w-0 gap-5 sm:grid-cols-2">
-          <p className="min-w-0">
+          <div className="min-w-0 max-w-full">
             <label htmlFor="reserve-date" className={labelClass}>
               {t(copy.form.date)} *
             </label>
-            <input
+            <DateField
               id="reserve-date"
               name="date"
-              type="date"
               lang={htmlLang[locale]}
               required
               min={minDate}
@@ -201,14 +200,13 @@ function ReservationFormInner({
                 setDateHint(false);
                 setDateValue(next);
               }}
-              className={dateInputClass}
             />
             {dateHint ? (
               <span className="mt-2 block text-[12px] leading-[1.7] text-gold/80">
                 {t(copy.form.errorDate)}
               </span>
             ) : null}
-          </p>
+          </div>
           <p>
             <label htmlFor="reserve-time" className={labelClass}>
               {t(copy.form.time)} *
