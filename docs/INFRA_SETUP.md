@@ -33,11 +33,22 @@ Cloudflare Cron から週1回 `GET /api/health` 等を叩く（Phase 5）。
 
 ## 3. Cloudflare
 
-1. **Workers & Pages** で後日デプロイ（Phase 5）
-2. カスタムドメインを Cloudflare に向ける
-3. **Security → Settings → AI bot policies**（2026-09-15 前）  
+1. **Workers & Pages** で GitHub リポジトリ `onnaton-websitev2` を接続  
+   またはローカルから `npm run deploy`（要 `wrangler login`）
+2. ビルドコマンド: `npm run deploy`（OpenNext adapter）  
+   通常の `next build` だけでは Workers 向け出力になりません
+3. **Settings → Variables** に `.env.example` と同じキーを **Production** 用に設定（秘密情報は Encrypt）:
+   - `NEXT_PUBLIC_SUPABASE_URL`
+   - `NEXT_PUBLIC_SUPABASE_ANON_KEY`
+   - `SUPABASE_SERVICE_ROLE_KEY`
+   - `SITE_SLUG`
+   - `ONNATON_ADMIN_PASSWORD`
+   - `RESEND_API_KEY`, `RESEND_FROM`, `RESEND_OWNER_TO`, `RESEND_REPLY_TO`（任意）
+4. カスタムドメインを Cloudflare に向ける
+5. **Security → Settings → AI bot policies**（2026-09-15 前）  
    - Search クローラーは許可（MEO / Google 検索用）
-4. 環境変数は Pages/Workers の **Settings → Variables** に `.env.example` と同じキーで設定
+
+ローカル確認: `npm run preview`（Workers ランタイム）
 
 ## 4. ローカル開発
 
