@@ -6,7 +6,7 @@ import {
   CLIP_COVER,
   CLIP_OFF_LEFT,
   CLIP_OFF_RIGHT,
-  WIPE_DURATION,
+  INTRO_WIPE_DURATION,
   WIPE_EASE,
 } from "@/lib/motion/diagonalWipe";
 
@@ -54,7 +54,7 @@ export function PageIntro({
           animate={{
             clipPath: phase === "wipeIn" ? CLIP_COVER : CLIP_OFF_LEFT,
           }}
-          transition={{ duration: WIPE_DURATION, ease: WIPE_EASE }}
+          transition={{ duration: INTRO_WIPE_DURATION, ease: WIPE_EASE }}
           onAnimationComplete={() => {
             if (phase === "wipeIn") onWipeInComplete();
             else onWipeOutComplete();

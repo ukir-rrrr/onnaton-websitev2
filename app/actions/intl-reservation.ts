@@ -1,0 +1,139 @@
+"use server";
+
+import { notifyOwnerIntlReservation } from "@/lib/email/ownerNotification";
+import { sendCustomerAutoReply } from "@/lib/email/customerAutoReply";
+import { isBookableDate } from "@/lib/content/reservation";
+import {
+  type IntlReservationState,
+  valuesFromIntlFormData,
+} from "@/lib/reserve/intl-form";
+import { isLocale, type Locale } from "@/lib/i18n/config";
+import { copy } from "@/lib/i18n/copy";
+import { t, type Localized } from "@/lib/i18n/types";
+import { insertIntlReservation } from "@/lib/supabase/reservations";
+
+export type { IntlReservationFormValues, IntlReservationState } from "@/lib/reserve/intl-form";
+
+function str(formData: FormData, key: string): string {
+  return String(formData.get(key) ?? "").trim();
+}
+
+function localeFromForm(formData: FormData): Locale {
+  const value = str(formData, "locale");
+  return isLocale(value) ? value : "en";
+}
+
+function err(
+  locale: Locale,
+  message: Localized,
+  formData: FormData,
+): IntlReservationState {
+  return {
+    ok: false,
+    error: t(locale, message),
+    values: valuesFromIntlFormData(formData),
+  };
+}
+
+function looksLikeEmail(value: string): boolean {
+  return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value);
+}
+
+function referenceCode(): string {
+  const stamp = new Intl.DateTimeFormat("en-CA", {
+    timeZone: "Asia/Tokyo",
+    year: "numeric",
+    month: "2-digit",
+    day: "2-digit",
+  })
+    .format(new Date())
+    .replace(/-/g, "");
+  const rand = Math.random().toString(36).slice(2, 6).toUpperCase();
+  return `ONN-${stamp}-${rand}`;
+}
+
+function parseOptionalDate(value: string): string | null {
+  return value || null;
+}
+
+function parseCount(value: string, min: number, max: number): number | null {
+  const n = Number.parseInt(value, 10);
+  if (!Number.isFinite(n) || n < min || n > max) return null;
+  return n;
+}
+
+export async function submitIntlReservation(
+  _prev: IntlReservationState,
+  formData: FormData,
+): Promise<IntlReservationState> {
+  const locale = localeFromForm(formData);
+
+  if (str(formData, "website")) {
+    return { ok: true, reference: referenceCode() };
+  }
+
+  const values = valuesFromIntlFormData(formData);
+  const name = values.name;
+  const email = values.email;
+  const country = values.country;
+  const date1 = values.datePreference1;
+  const date2 = parseOptionalDate(values.datePreference2);
+  const date3 = parseOptionalDate(values.datePreference3);
+  const adults = parseCount(values.adults, 1, 20);
+  const children = parseCount(values.children, 0, 10);
+  const notes = values.notes;
+  const agreePolicy = values.agreePolicy;
+
+  if (!name || !email || !country || !date1 || adults === null || children === null) {
+    return err(locale, copy.intlForm.errorRequired, formData);
+  }
+  if (!looksLikeEmail(email)) return err(locale, copy.intlForm.errorEmail, formData);
+  if (name.length > 80 || country.length > 80) {
+    return err(locale, copy.intlForm.errorRequired, formData);
+  }
+  if (!isBookableDate(date1)) return err(locale, copy.intlForm.errorDate, formData);
+  if (date2 && !isBookableDate(date2)) return err(locale, copy.intlForm.errorDate, formData);
+  if (date3 && !isBookableDate(date3)) return err(locale, copy.intlForm.errorDate, formData);
+
+  const dates = [date1, date2, date3].filter(Boolean) as string[];
+  if (new Set(dates).size !== dates.length) {
+    return err(locale, copy.intlForm.errorDatesDistinct, formData);
+  }
+
+  if (!agreePolicy) {
+    return err(locale, copy.intlForm.errorAgree, formData);
+  }
+  if (notes.length > 1000) return err(locale, copy.intlForm.errorGeneric, formData);
+
+  const reference = referenceCode();
+  const agreedAt = new Date().toISOString();
+  const payload = {
+    reference,
+    name,
+    email,
+    country,
+    datePreference1: date1,
+    datePreference2: date2,
+    datePreference3: date3,
+    adults,
+    children,
+    notes: notes || null,
+    locale,
+    agreedAt,
+  };
+
+  const saved = await insertIntlReservation(payload);
+  if (!saved.ok) return err(locale, copy.intlForm.errorGeneric, formData);
+
+  const ownerEmailed = await notifyOwnerIntlReservation(payload);
+  if (!ownerEmailed.ok) {
+    console.error("[reservation/intl] saved but owner email failed", reference);
+  }
+
+  const customerEmailed = await sendCustomerAutoReply(payload);
+  if (!customerEmailed.ok) {
+    console.error("[reservation/intl] saved but customer auto-reply failed", reference);
+  }
+
+  return { ok: true, reference };
+}

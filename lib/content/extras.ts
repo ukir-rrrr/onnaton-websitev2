@@ -4,7 +4,6 @@ export interface ExtraItem {
   name: string;
   amount?: string;
   price: string;
-  emphasizeAmount?: boolean;
 }
 
 export interface ExtraGroup {

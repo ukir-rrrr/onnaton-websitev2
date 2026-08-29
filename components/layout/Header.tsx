@@ -40,7 +40,7 @@ function scrollToId(id: string) {
 
 export function Header() {
   const { t, isJa } = useT();
-  const reserveHref = isJa ? "/#reserve" : "/reserve";
+  const reserveHref = isJa ? "/#reserve" : "/reserve/intl";
   const navLinks = [
     { href: "/", label: t(copy.nav.top) },
     { href: "/#about-text", label: t(copy.nav.about) },
@@ -93,8 +93,8 @@ export function Header() {
       setActiveHref("/seats");
       return;
     }
-    if (pathname === "/reserve") {
-      setActiveHref("/reserve");
+    if (pathname === "/reserve" || pathname === "/reserve/intl") {
+      setActiveHref("/reserve/intl");
       return;
     }
     if (pathname !== "/") {
@@ -277,7 +277,11 @@ export function Header() {
               if (isJa) onNavClick(event, "/#reserve");
             }}
             className="my-3.5 flex shrink-0 items-center rounded-sm bg-gold px-4 text-[13px] font-bold tracking-[0.05em] text-on-dark hover:bg-cream hover:text-on-dark xl:px-5 2xl:px-7 2xl:text-base"
-            aria-current={pathname === "/reserve" ? "page" : undefined}
+            aria-current={
+              pathname === "/reserve" || pathname === "/reserve/intl"
+                ? "page"
+                : undefined
+            }
           >
             {isJa ? t(copy.nav.reserve) : t(copy.reserve.online)}
           </Link>

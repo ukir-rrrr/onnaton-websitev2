@@ -4,19 +4,24 @@ import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
 import {
   aguFeature,
+  dashiFeature,
   ishigakiFeature,
-  kodawariList,
+  okinawaFoodFeature,
   type KodawariFeature,
 } from "@/lib/content/kodawari";
 import { MultilineText } from "@/components/i18n/MultilineText";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
-import { useIsMobile } from "@/lib/hooks/useIsMobile";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
 const ease = [0.22, 1, 0.36, 1] as const;
 
-const kodawariFeatures: KodawariFeature[] = [aguFeature, ishigakiFeature];
+const kodawariFeatures: KodawariFeature[] = [
+  aguFeature,
+  ishigakiFeature,
+  dashiFeature,
+  okinawaFoodFeature,
+];
 
 function KodawariFeatureBlock({
   feature,
@@ -106,7 +111,6 @@ function KodawariFeatureBlock({
 export function Kodawari() {
   const { t, tr } = useT();
   const reduceMotion = useReducedMotion() === true;
-  const isMobile = useIsMobile();
 
   const fadeUp = (delay = 0) =>
     reduceMotion
@@ -145,101 +149,6 @@ export function Kodawari() {
         />
       ))}
 
-      <motion.div
-        className="mx-auto grid w-full max-w-[1200px] grid-cols-1 gap-14 sm:grid-cols-2 sm:gap-x-10 sm:gap-y-16 xl:gap-x-12"
-        initial="hidden"
-        whileInView="visible"
-        viewport={{ once: true, amount: 0.15 }}
-        variants={{
-          hidden: {},
-          visible: {
-            transition: { staggerChildren: isMobile ? 0.08 : 0.12 },
-          },
-        }}
-      >
-        {kodawariList.map((item) => (
-          <motion.div
-            key={item.num}
-            className="flex min-w-0 flex-col"
-            variants={
-              reduceMotion
-                ? undefined
-                : {
-                    hidden: isMobile ? { opacity: 0 } : { opacity: 0, y: 32 },
-                    visible: {
-                      opacity: 1,
-                      y: 0,
-                      transition: {
-                        duration: isMobile ? 0.55 : 0.85,
-                        ease,
-                      },
-                    },
-                  }
-            }
-          >
-            <div className="mb-7 h-[260px] overflow-hidden rounded-sm sm:h-[300px] lg:h-[340px]">
-              {item.photo ? (
-                <motion.div
-                  className="h-full w-full"
-                  initial={
-                    reduceMotion
-                      ? false
-                      : isMobile
-                        ? { opacity: 0 }
-                        : { scale: 1.1 }
-                  }
-                  whileInView={
-                    reduceMotion
-                      ? undefined
-                      : isMobile
-                        ? { opacity: 1 }
-                        : { scale: 1 }
-                  }
-                  viewport={{ once: true, amount: 0.35 }}
-                  transition={{
-                    duration: isMobile ? 0.6 : 1.25,
-                    ease,
-                  }}
-                >
-                  <Image
-                    src={item.photo}
-                    alt={tr(item.title)}
-                    width={480}
-                    height={340}
-                    sizes="(min-width: 640px) 560px, 100vw"
-                    quality={90}
-                    className={
-                      item.imageClassName ?? "h-full w-full object-cover"
-                    }
-                  />
-                </motion.div>
-              ) : (
-                <div
-                  className="flex h-full w-full items-center justify-center"
-                  style={{
-                    background:
-                      "repeating-linear-gradient(135deg,#ddd0b8,#ddd0b8 14px,#e5d9c4 14px,#e5d9c4 28px)",
-                  }}
-                >
-                  <span className="font-mono text-xs tracking-[0.05em] text-cream/45">
-                    {item.placeholderLabel}
-                  </span>
-                </div>
-              )}
-            </div>
-
-            <p className="font-serif-jp mb-3 text-[13px] tracking-[0.28em] text-gold">
-              {item.num}
-            </p>
-            <h3 className="font-serif-jp mb-4 text-[19px] font-normal tracking-[0.1em] text-cream sm:text-[28px]">
-              {tr(item.title)}
-            </h3>
-            <p className="font-serif-jp min-w-0 text-[16px] leading-[2.15] tracking-[0.04em] text-cream/72 sm:text-[18px] sm:leading-[2.3]">
-              <MultilineText text={tr(item.desc)} />
-            </p>
-          </motion.div>
-        ))}
-      </motion.div>
     </section>
   );
 }

@@ -1,10 +1,5 @@
 import type { Metadata, Viewport } from "next";
-import {
-  Sawarabi_Mincho,
-  Noto_Sans_JP,
-  Noto_Serif_JP,
-  Zen_Maru_Gothic,
-} from "next/font/google";
+import { Noto_Serif_JP, Yuji_Syuku } from "next/font/google";
 import "./globals.css";
 import { getLocale } from "@/lib/i18n/getLocale";
 import { htmlLang } from "@/lib/i18n/config";
@@ -12,26 +7,9 @@ import { copy } from "@/lib/i18n/copy";
 import { t } from "@/lib/i18n/types";
 import { LocaleProvider } from "@/components/i18n/LocaleProvider";
 
-const sawarabiMincho = Sawarabi_Mincho({
-  variable: "--font-sawarabi-mincho",
-  subsets: ["latin"],
-  weight: "400",
-  display: "swap",
-});
-
-const notoSansJp = Noto_Sans_JP({
-  variable: "--font-noto-sans-jp",
-  subsets: ["latin"],
-  weight: ["300", "400", "500", "700"],
-  display: "swap",
-});
-
 /**
- * Noto Serif JP — used specifically for vertical-rl (tategaki) text.
- * It ships proper `vert` OpenType alternates so full-width parentheses,
- * commas, and the ideographic zero「〇」align correctly in vertical columns.
- * (Sawarabi Mincho, our primary JP serif, does not include those alternates,
- * which is why 〇 was shifted right and parentheses looked rotated wrong.)
+ * Noto Serif JP — vertical-rl (tategaki) fallback and non-Windows fallback
+ * when Yu Kyokasho is unavailable.
  */
 const notoSerifJp = Noto_Serif_JP({
   variable: "--font-noto-serif-jp",
@@ -40,11 +18,11 @@ const notoSerifJp = Noto_Serif_JP({
   display: "swap",
 });
 
-/** Soft rounded JP display face — section headings only (e.g. 当店のこだわり). */
-const zenMaruGothic = Zen_Maru_Gothic({
-  variable: "--font-zen-maru-gothic",
+/** 達筆-style brush for the course menu page (由字粛). */
+const yujiSyuku = Yuji_Syuku({
+  variable: "--font-yuji-syuku",
   subsets: ["latin"],
-  weight: ["400", "500"],
+  weight: "400",
   display: "swap",
 });
 
@@ -67,7 +45,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang={htmlLang[locale]}
-      className={`${sawarabiMincho.variable} ${notoSansJp.variable} ${notoSerifJp.variable} ${zenMaruGothic.variable}`}
+      className={`${notoSerifJp.variable} ${yujiSyuku.variable}`}
     >
       <body>
         <LocaleProvider locale={locale}>{children}</LocaleProvider>

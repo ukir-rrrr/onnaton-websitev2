@@ -11,10 +11,8 @@ export const courseSlideImageCrop: Partial<
 
 export interface ExecutiveDish {
   name: string;
-  /** Same column as name; smaller / lighter annotation */
+  /** Same column as name (e.g. １００ｇ, 補足文) */
   note?: string;
-  /** Render `note` at dish-name size (e.g. ２００ｇ) */
-  emphasizeNote?: boolean;
   /** Phone-only line breaks (md+ / tategaki keep `name` + `note`) */
   nameMobileLines?: readonly [string, string];
 }
@@ -39,6 +37,10 @@ export interface CourseMenuData {
   nameTategakiRest?: string;
   /** Short line under the title (e.g. 増量コース) */
   subtitle?: string;
+  /** Prominent label near the course name (e.g. 人気) */
+  badge?: string;
+  /** Tategaki only: horizontal tail after vertical badge (e.g. No.1) */
+  badgeTail?: string;
   priceLabel?: string;
   priceMain: string;
   priceTaxNote: string;
@@ -104,8 +106,14 @@ const chateaubriandSlides = [
   { src: photos.course020, alt: "特選石垣牛" },
 ] as const;
 
-const umiNote = "（海ぶどうが未入荷の時は代わりものをお出しします）";
+const umiNote = "（海ぶどうが未入荷の際は代わりものをお出しします）";
 const wagyuPrefix = "沖縄県産ブランド黒毛和牛";
+const g50 = "５０ｇ";
+const g100 = "１００ｇ";
+const g200 = "２００ｇ";
+const approxG50 = "≒　５０ｇ";
+const approxG100 = "≒　１００ｇ";
+const approxG200 = "≒　２００ｇ";
 
 export const executiveCourse: CourseMenuData = {
   id: "executive",
@@ -123,10 +131,10 @@ export const executiveCourse: CourseMenuData = {
     { name: "紅しゃぶスープ" },
     {
       name: `${wagyuPrefix}　もとぶ牛（Ａ５ランク）`,
-      note: "１００ｇ",
+      note: approxG100,
       nameMobileLines: [wagyuPrefix, "もとぶ牛（Ａ５ランク）"],
     },
-    { name: "あぐー豚", note: "１００ｇ" },
+    { name: "あぐー豚", note: approxG100 },
     { name: "お野菜" },
     { name: "手ごねのあぐーつくね" },
     { name: "目の前で焼き上げる焼きチーズリゾット" },
@@ -151,10 +159,10 @@ export const hanaCourse: CourseMenuData = {
     { name: "紅しゃぶスープ" },
     {
       name: `${wagyuPrefix}　もとぶ牛（Ａ５ランク）`,
-      note: "１００ｇ",
+      note: approxG100,
       nameMobileLines: [wagyuPrefix, "もとぶ牛（Ａ５ランク）"],
     },
-    { name: "あぐー豚", note: "２００ｇ", emphasizeNote: true },
+    { name: "あぐー豚", note: approxG200 },
     { name: "お野菜" },
     { name: "手ごねのあぐーつくね" },
     { name: "目の前で焼き上げる焼きチーズリゾット" },
@@ -165,6 +173,7 @@ export const hanaCourse: CourseMenuData = {
 export const kiwamiCourse: CourseMenuData = {
   id: "kiwami",
   name: "エグゼクティブ　極-kiwami-",
+  badge: "初めての方におすすめコース",
   priceLabel: "コースお一人様",
   priceMain: "一四、八〇〇円",
   priceTaxNote: "（税込 一六、二八〇円）",
@@ -185,20 +194,20 @@ export const kiwamiCourse: CourseMenuData = {
     { name: "紅しゃぶスープ" },
     {
       name: `${wagyuPrefix}　もとぶ牛（Ａ５ランク）`,
-      note: "５０ｇ",
+      note: g50,
       nameMobileLines: [wagyuPrefix, "もとぶ牛（Ａ５ランク）"],
     },
     {
       name: `${wagyuPrefix}　山城牛（Ａ５ランク）`,
-      note: "５０ｇ",
+      note: g50,
       nameMobileLines: [wagyuPrefix, "山城牛（Ａ５ランク）"],
     },
     {
       name: `${wagyuPrefix}　特選石垣牛（Ａ５ランク）`,
-      note: "５０ｇ",
+      note: g50,
       nameMobileLines: [wagyuPrefix, "特選石垣牛（Ａ５ランク）"],
     },
-    { name: "あぐー豚", note: "１００ｇ" },
+    { name: "あぐー豚", note: g100 },
     { name: "お野菜" },
     { name: "手ごねのあぐーつくね" },
     { name: "目の前で焼き上げる焼きチーズリゾット" },
@@ -209,6 +218,8 @@ export const kiwamiCourse: CourseMenuData = {
 export const kouCourse: CourseMenuData = {
   id: "kou",
   name: "エグゼクティブ　煌-kou-",
+  badge: "ご常連様人気",
+  badgeTail: "No.1",
   priceLabel: "コースお一人様",
   priceMain: "一八、五〇〇円",
   priceTaxNote: "（税込 二〇、三五〇円）",
@@ -228,20 +239,20 @@ export const kouCourse: CourseMenuData = {
     { name: "久米島産海ぶどう", note: umiNote },
     {
       name: `${wagyuPrefix}　特選石垣牛（Ａ５ランク）`,
-      note: "１００ｇ",
+      note: approxG100,
       nameMobileLines: [wagyuPrefix, "特選石垣牛（Ａ５ランク）"],
     },
     {
       name: `${wagyuPrefix}　もとぶ牛（Ａ５ランク）`,
-      note: "１００ｇ",
+      note: approxG100,
       nameMobileLines: [wagyuPrefix, "もとぶ牛（Ａ５ランク）"],
     },
     {
       name: `${wagyuPrefix}　山城牛（Ａ５ランク）`,
-      note: "５０ｇ",
+      note: approxG50,
       nameMobileLines: [wagyuPrefix, "山城牛（Ａ５ランク）"],
     },
-    { name: "あぐー豚", note: "５０ｇ" },
+    { name: "あぐー豚", note: approxG50 },
     { name: "紅しゃぶスープ" },
     { name: "お野菜" },
     { name: "手ごねのあぐーつくね" },
@@ -252,9 +263,8 @@ export const kouCourse: CourseMenuData = {
 
 export const chateaubriandCourse: CourseMenuData = {
   id: "chateaubriand",
-  name: "エグゼクティブ　極　withシャトーブリアン",
-  nameTategakiLead: "エグゼクティブ",
-  nameTategakiRest: "　極　withシャトーブリアン",
+  name: "エグゼクティブ極",
+  nameTategakiRest: "（with シャトーブリアン）",
   priceLabel: "コースお一人様",
   priceMain: "二五、八〇〇円",
   priceTaxNote: "（税込 二八、三八〇円）",
@@ -267,29 +277,29 @@ export const chateaubriandCourse: CourseMenuData = {
     { name: "久米島産海ぶどう", note: umiNote },
     {
       name: "特選石垣牛（Ａ５ランク）シャトーブリアンステーキ",
-      note: "１００ｇ",
+      note: approxG100,
       nameMobileLines: [
         "特選石垣牛（Ａ５ランク）",
         "シャトーブリアンステーキ",
       ],
     },
-    { name: "高級ワイン「Rindo」を元に作ったソースと共に" },
+    { name: "高級ワイン「Rindo」などを元に作ったソースと共に" },
     {
       name: `${wagyuPrefix}　特選石垣牛（Ａ５ランク）`,
-      note: "５０ｇ",
+      note: approxG50,
       nameMobileLines: [wagyuPrefix, "特選石垣牛（Ａ５ランク）"],
     },
     {
       name: `${wagyuPrefix}　もとぶ牛（Ａ５ランク）`,
-      note: "５０ｇ",
+      note: approxG50,
       nameMobileLines: [wagyuPrefix, "もとぶ牛（Ａ５ランク）"],
     },
     {
       name: `${wagyuPrefix}　山城牛（Ａ５ランク）`,
-      note: "５０ｇ",
+      note: approxG50,
       nameMobileLines: [wagyuPrefix, "山城牛（Ａ５ランク）"],
     },
-    { name: "あぐー豚", note: "５０ｇ" },
+    { name: "あぐー豚", note: approxG50 },
     { name: "紅しゃぶスープ" },
     { name: "お野菜" },
     { name: "手ごねのあぐーつくね" },

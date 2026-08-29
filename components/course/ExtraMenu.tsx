@@ -45,13 +45,7 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
                       <span className="text-[15px] tracking-[0.06em] text-cream sm:text-[16px]">
                         {tr(item.name)}
                         {item.amount ? (
-                          <span
-                            className={
-                              item.emphasizeAmount
-                                ? "ml-3 text-[18px] text-cream sm:text-[20px]"
-                                : "ml-3 text-[13px] text-cream/65"
-                            }
-                          >
+                          <span className="ml-3 text-[13px] text-cream/65">
                             {item.amount}
                           </span>
                         ) : null}

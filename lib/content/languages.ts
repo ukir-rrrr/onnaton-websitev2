@@ -1,11 +1,13 @@
 /**
- * Languages shown as flag buttons in the header.
+ * Languages shown in the header language menu.
  * Japanese is the site default. Switching is persisted in a cookie.
  */
-export const languageFlags = [
-  { code: "en", label: "English", flag: "us" },
-  { code: "ko", label: "한국어", flag: "kr" },
-  { code: "zh", label: "中文", flag: "cn" },
+export const languageOptions = [
+  { code: "ja", label: "日本語" },
+  { code: "en", label: "English" },
+  { code: "yue", label: "廣東話" },
+  { code: "zhTw", label: "繁體中文" },
+  { code: "ko", label: "한국어" },
 ] as const;
 
-export type LanguageFlagCode = (typeof languageFlags)[number]["code"];
+export type LanguageOptionCode = (typeof languageOptions)[number]["code"];

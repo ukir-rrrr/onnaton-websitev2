@@ -13,11 +13,13 @@ export const navLinks: NavLink[] = [
 ];
 
 /**
- * Visual-only legacy labels — prefer `languageFlags` in the header.
+ * Visual-only legacy labels — prefer `languageOptions` in the header.
  * Keep until real locale routing is wired.
  */
 export const languageOptions = [
-  { code: "en", label: "EN" },
+  { code: "ja", label: "日本語" },
+  { code: "en", label: "English" },
+  { code: "yue", label: "廣東話" },
+  { code: "zhTw", label: "繁體中文" },
   { code: "ko", label: "한국어" },
-  { code: "zh", label: "中文" },
 ] as const;

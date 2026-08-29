@@ -59,9 +59,7 @@ export function ReserveButton({
       : "border border-gold text-gold hover:bg-gold hover:text-ink";
 
   if (!isJa) {
-    const href = courseId
-      ? `/reserve?course=${encodeURIComponent(courseId)}`
-      : "/reserve";
+    const href = "/reserve/intl";
     return (
       <Link href={href} className={`${base} ${styles} ${className}`}>
         {label}

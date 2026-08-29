@@ -25,7 +25,7 @@ export default function CoursePage() {
         <div className="h-20 bg-ink" aria-hidden />
       </div>
 
-      <main>
+      <main className="font-brush-jp">
         {courseMenus.map((course, i) => {
           const next = courseMenus[i + 1];
           return (

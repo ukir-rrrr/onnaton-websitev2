@@ -1,14 +1,5 @@
 import { photos } from "./photos";
 
-export interface KodawariItem {
-  num: string;
-  title: string;
-  desc: string;
-  photo: string | null;
-  placeholderLabel?: string;
-  imageClassName?: string;
-}
-
 export interface KodawariFeature {
   num: string;
   heading: readonly string[];
@@ -42,7 +33,11 @@ export const ishigakiFeature: KodawariFeature = {
   heading: ["特選 石垣牛"] as const,
   photo: photos.ishigakiBeef,
   photoAlt: "特選 石垣牛のしゃぶしゃぶ",
-  highlights: [{ label: "特選ラベル" }, { label: "A5ランクのみ使用" }] as const,
+  highlights: [
+    { label: "特選ラベル" },
+    { label: "A5ランクのみ使用" },
+    { label: "石垣牛認定店" },
+  ] as const,
   paragraphs: [
     "沖縄が誇るブランド和牛「石垣牛」",
     "ひと口に石垣牛といっても、品質によって\n「特選ラベル」と「銘産ラベル」に分けられ、\nその基準は異なります。",
@@ -54,20 +49,32 @@ export const ishigakiFeature: KodawariFeature = {
   imageClassName: "object-cover object-center",
 };
 
-/** 当店のこだわり — 特集の下に並ぶ項目 */
-export const kodawariList: KodawariItem[] = [
-  {
-    num: "03",
-    title: "しゃぶしゃぶの出汁",
-    desc: "肉と島野菜の旨みを引き出す出汁にこだわり、\n〆の一品まで美味しく\n召し上がっていただけるようご用意しています。",
-    photo: photos.kodawariShabuDashi,
-    imageClassName:
-      "h-full w-full origin-top scale-[1.25] object-cover object-[center_28%] sm:scale-100 sm:object-[center_top] xl:scale-[1.25] xl:object-[center_28%] xl:origin-top",
-  },
-  {
-    num: "04",
-    title: "沖縄県産食材",
-    desc: "島野菜をはじめ、沖縄県産の食材を\n積極的に取り入れ、\n土地の恵みを一皿ごとに感じていただけるよう努めています。",
-    photo: photos.kodawariYasai,
-  },
-];
+/** こだわり03 — 唯一無二のお出汁 */
+export const dashiFeature: KodawariFeature = {
+  num: "03",
+  heading: ["唯一無二のお出汁"] as const,
+  photo: photos.kodawariShabuDashi,
+  photoAlt: "唯一無二のお出汁",
+  paragraphs: [
+    "最初に感じるのは、ほどよいピリ辛さ。\nそこへ良質なお肉の旨みと脂の甘みが溶け込むことで、\n食べ進めるほどに出汁の味わいが変化し、\n最後には皆さまが驚くほど甘くまろやかな味わいへと仕上がっていきます。",
+    "一つの鍋の中で変化していく、\n恩納豚ならではのお出汁をぜひお楽しみください。",
+    "※出汁の変更はできません。\n辛いものが極度に苦手な方はご遠慮ください。",
+  ],
+  imageAspectClass: "aspect-[5/3]",
+  imageClassName:
+    "object-cover object-[center_28%] sm:object-[center_top]",
+};
+
+/** こだわり04 — おきなわ食材の認定店 */
+export const okinawaFoodFeature: KodawariFeature = {
+  num: "04",
+  heading: ["おきなわ食材の認定店"] as const,
+  photo: photos.kodawariYasai,
+  photoAlt: "おきなわ食材の認定店",
+  paragraphs: [
+    "ご提供する食材のほとんどは沖縄県産。\n島野菜をはじめ、沖縄で育まれた食材を積極的に取り入れています。",
+    "そのほかの食材についても、使用するものはすべて国内産。\n一皿一皿を通して、沖縄と日本の豊かな恵みをお楽しみください。",
+  ],
+  imageAspectClass: "aspect-[5/3]",
+  imageClassName: "object-cover object-center",
+};

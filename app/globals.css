@@ -66,10 +66,17 @@
   --color-gold: var(--color-gold);
   --color-wipe: var(--color-wipe);
   --color-on-dark: var(--color-on-dark);
-  --font-serif-jp: var(--font-sawarabi-mincho);
-  --font-serif-jp-tategaki: var(--font-noto-serif-jp);
-  --font-sans-jp: var(--font-noto-sans-jp);
-  --font-display-jp: var(--font-zen-maru-gothic);
+  --font-yu-kyokasho: "YuKyokasho Yoko", "Yu Kyokasho Yoko", "游教科書体 横",
+    "YuKyokasho", "Yu Mincho", "Hiragino Mincho ProN", var(--font-noto-serif-jp),
+    serif;
+  --font-serif-jp: var(--font-yu-kyokasho);
+  --font-sans-jp: var(--font-yu-kyokasho);
+  --font-display-jp: var(--font-yu-kyokasho);
+  --font-serif-jp-tategaki: var(--font-noto-serif-jp), var(--font-yu-kyokasho);
+  --font-brush-jp: var(--font-yuji-syuku), var(--font-noto-serif-jp),
+    var(--font-yu-kyokasho);
+  --font-brush-display-jp: var(--font-yuji-syuku), var(--font-noto-serif-jp),
+    var(--font-yu-kyokasho);
 }
 
 html {
@@ -81,22 +88,11 @@ html {
   -webkit-text-size-adjust: 100%;
   text-size-adjust: 100%;
   background-color: var(--color-paper);
-  background-image: var(--washi-texture);
-  background-size:
-    512px 512px,
-    100% 100%,
-    100% 100%,
-    100% 100%,
-    100% 100%,
-    100% 4px,
-    100% 100%,
-    100% 100%;
-  background-attachment: fixed;
 }
 
 body {
   color: var(--color-cream);
-  font-family: var(--font-sans-jp), sans-serif;
+  font-family: var(--font-yu-kyokasho);
   -webkit-font-smoothing: antialiased;
   /* Comfortable tap highlight on iOS */
   -webkit-tap-highlight-color: color-mix(
@@ -142,4 +138,25 @@ body {
 ::selection {
   background: var(--color-gold);
   color: var(--color-on-dark);
+}
+
+/* Course menu page — unified 達筆 typography (Yuji Syuku). */
+main.font-brush-jp,
+main.font-brush-jp .font-serif-jp,
+main.font-brush-jp .font-sans-jp,
+main.font-brush-jp .font-display-jp {
+  font-family: var(--font-brush-jp);
+  letter-spacing: 0.05em;
+}
+
+main.font-brush-jp :is(h1, h2) {
+  font-family: var(--font-brush-display-jp);
+  font-weight: 400;
+  letter-spacing: 0.18em;
+}
+
+main.font-brush-jp :is(h3, .font-display-jp) {
+  font-family: var(--font-brush-display-jp);
+  font-weight: 400;
+  letter-spacing: 0.12em;
 }

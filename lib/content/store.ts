@@ -3,7 +3,7 @@ import { childrenPolicy } from "./childrenPolicy";
 /**
  * Store-wide facts (name, phone, address, hours, ...).
  * `reservationPhoneHref` drives Japanese "電話で予約する" buttons.
- * EN / KO / ZH use the online form at `/reserve`.
+ * EN / KO / ZH use the online form at `/reserve/intl`.
  *
  * Source: Google Business Profile + https://www.onnaton.com/access/
  */
@@ -73,8 +73,8 @@ export interface InteriorFact {
 
 /** 店内・お席の基本情報 */
 export const interiorFacts: InteriorFact[] = [
-  { label: "席の種類", value: "お座敷 ／ テーブル席" },
-  { label: "席数", value: "" },
+  { label: "席の種類", value: "テーブル席 ／ お座敷" },
+  { label: "席数", value: "42席" },
   { label: "貸切", value: "可能（お問い合わせください）" },
   { label: "個室", value: "なし" },
   { label: "喫煙の可否", value: "全席禁煙" },

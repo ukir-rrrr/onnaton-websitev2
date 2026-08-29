@@ -20,8 +20,8 @@ const phrases: Record<string, Localized> = {
     "구메지마산 바다포도",
     "久米岛海葡萄",
   ),
-  "（海ぶどうが未入荷の時は代わりものをお出しします）": L(
-    "（海ぶどうが未入荷の時は代わりものをお出しします）",
+  "（海ぶどうが未入荷の際は代わりものをお出しします）": L(
+    "（海ぶどうが未入荷の際は代わりものをお出しします）",
     "(If sea grapes are unavailable, a substitute will be served.)",
     "(바다포도가 없을 때는 대체 요리를 냅니다.)",
     "（海葡萄缺货时将提供替代料理。）",
@@ -89,15 +89,18 @@ const phrases: Record<string, Localized> = {
     "특선 이시가키 소 (A5) 샤토브리앙 스테이크",
     "特选石垣牛（A5）菲力牛排",
   ),
-  "高級ワイン「Rindo」を元に作ったソースと共に": L(
-    "高級ワイン「Rindo」を元に作ったソースと共に",
-    "With a sauce made from fine wine “Rindo”",
-    "고급 와인 「Rindo」로 만든 소스와 함께",
-    "配以高级葡萄酒「Rindo」制成的酱汁",
+  "高級ワイン「Rindo」などを元に作ったソースと共に": L(
+    "高級ワイン「Rindo」などを元に作ったソースと共に",
+    "With a sauce made from fine wines including “Rindo”",
+    "고급 와인 「Rindo」 등으로 만든 소스와 함께",
+    "配以高级葡萄酒「Rindo」等制成的酱汁",
   ),
   "１００ｇ": L("１００ｇ", "100g", "100g", "100g"),
   "２００ｇ": L("２００ｇ", "200g", "200g", "200g"),
   "５０ｇ": L("５０ｇ", "50g", "50g", "50g"),
+  "≒　１００ｇ": L("≒　１００ｇ", "≒ 100g", "≒ 100g", "≒ 100g"),
+  "≒　２００ｇ": L("≒　２００ｇ", "≒ 200g", "≒ 200g", "≒ 200g"),
+  "≒　５０ｇ": L("≒　５０ｇ", "≒ 50g", "≒ 50g", "≒ 50g"),
   "お一人様": L("お一人様", "per person", "1인", "每位"),
   "コースお一人様": L(
     "コースお一人様",
@@ -141,18 +144,29 @@ const phrases: Record<string, Localized> = {
     "이그제큐티브 황-kou-",
     "Executive 煌-kou-",
   ),
-  "エグゼクティブ　極　withシャトーブリアン": L(
-    "エグゼクティブ　極　withシャトーブリアン",
-    "Executive Kiwami with chateaubriand",
-    "이그제큐티브 극 with 샤토브리앙",
-    "Executive 极 with 菲力",
+  "エグゼクティブ極": L(
+    "エグゼクティブ極",
+    "Executive Kiwami",
+    "이그제큐티브 극",
+    "Executive 极",
   ),
-  "エグゼクティブ": L("エグゼクティブ", "Executive", "이그제큐티브", "Executive"),
-  "　極　withシャトーブリアン": L(
-    "　極　withシャトーブリアン",
-    " Kiwami with chateaubriand",
-    " 극 with 샤토브리앙",
-    " 极 with 菲力",
+  "（with シャトーブリアン）": L(
+    "（with シャトーブリアン）",
+    "(with chateaubriand)",
+    "(with 샤토브리앙)",
+    "（with 菲力）",
+  ),
+  "ご常連様人気": L(
+    "ご常連様人気",
+    "Regulars’ favorite",
+    "단골 인기",
+    "老顾客人气",
+  ),
+  "初めての方におすすめコース": L(
+    "初めての方におすすめコース",
+    "Recommended for first-time guests",
+    "처음 방문하시는 분께 추천",
+    "首次光临推荐套餐",
   ),
   "海ぶどう": L("海ぶどう", "Sea grapes", "바다포도", "海葡萄"),
   "もずく酢": L("もずく酢", "Vinegared mozuku", "모즈쿠 초무침", "海蕴醋"),
@@ -351,12 +365,13 @@ const phrases: Record<string, Localized> = {
   ),
   "火曜日・水曜日": L("火曜日・水曜日", "Tue & Wed", "화요일·수요일", "周二、周三"),
   "席の種類": L("席の種類", "Seating", "좌석 종류", "座位种类"),
-  "お座敷 ／ テーブル席": L(
-    "お座敷 ／ テーブル席",
-    "Tatami / tables",
-    "자시키 / 테이블석",
-    "榻榻米／餐桌",
+  "テーブル席 ／ お座敷": L(
+    "テーブル席 ／ お座敷",
+    "Tables / tatami",
+    "테이블석 / 자시키",
+    "餐桌／榻榻米",
   ),
+  "42席": L("42席", "42 seats", "42석", "42 席"),
   "席数": L("席数", "Capacity", "좌석 수", "座位数"),
   "貸切": L("貸切", "Private hire", "대관", "包场"),
   "可能（お問い合わせください）": L(
@@ -414,6 +429,12 @@ const phrases: Record<string, Localized> = {
     "A5 등급만 사용",
     "仅使用 A5 等级",
   ),
+  "石垣牛認定店": L(
+    "石垣牛認定店",
+    "Certified Ishigaki beef restaurant",
+    "이시가키 소 인정점",
+    "石垣牛认证店",
+  ),
   "沖縄が誇るブランド和牛「石垣牛」。": L(
     "沖縄が誇るブランド和牛「石垣牛」。",
     "Ishigaki beef—Okinawa’s brand wagyu.",
@@ -463,6 +484,30 @@ const phrases: Record<string, Localized> = {
     "샤브샤브 육수",
     "涮涮锅高汤",
   ),
+  "唯一無二のお出汁": L(
+    "唯一無二のお出汁",
+    "Our one-of-a-kind broth",
+    "하나뿐인 육수",
+    "独一无二的高汤",
+  ),
+  "最初に感じるのは、ほどよいピリ辛さ。\nそこへ良質なお肉の旨みと脂の甘みが溶け込むことで、\n食べ進めるほどに出汁の味わいが変化し、\n最後には皆さまが驚くほど甘くまろやかな味わいへと仕上がっていきます。": L(
+    "最初に感じるのは、ほどよいピリ辛さ。\nそこへ良質なお肉の旨みと脂の甘みが溶け込むことで、\n食べ進めるほどに出汁の味わいが変化し、\n最後には皆さまが驚くほど甘くまろやかな味わいへと仕上がっていきます。",
+    "The first note is a gentle heat. As fine meat and its sweet fat melt in, the broth evolves with every bite—ending in a surprisingly mellow sweetness.",
+    "처음 느껴지는 것은 적당한 매콤함입니다.\n양질의 고기 감칠맛과 지방의 단맛이 스며들며\n먹어 갈수록 육수의 맛이 변화해\n마지막에는 놀라울 정도로 달콤하고 부드러운 맛으로 완성됩니다.",
+    "最初感受到的是适度的辛辣。\n优质肉类的鲜味与油脂的甜味融入其中，\n越吃高汤的风味越变化，\n最后会完成令人惊讶的甘醇柔和之味。",
+  ),
+  "一つの鍋の中で変化していく、\n恩納豚ならではのお出汁をぜひお楽しみください。": L(
+    "一つの鍋の中で変化していく、\n恩納豚ならではのお出汁をぜひお楽しみください。",
+    "In one pot, the flavor keeps changing—please enjoy ONNATON’s signature broth.",
+    "하나의 냄비 안에서 변화하는\n온나톤만의 육수를 꼭 즐겨 주세요.",
+    "在一口锅中不断变化，\n请尽情品味恩纳豚独有的高汤。",
+  ),
+  "※出汁の変更はできません。\n辛いものが極度に苦手な方はご遠慮ください。": L(
+    "※出汁の変更はできません。\n辛いものが極度に苦手な方はご遠慮ください。",
+    "※The broth cannot be changed.\nGuests who strongly dislike spicy food are kindly asked to refrain.",
+    "※육수 변경은 불가합니다.\n매운 것을 매우 싫어하시는 분은 양해 부탁드립니다.",
+    "※无法更换高汤。\n极度不擅长辣味的客人敬请谅解。",
+  ),
   "肉と島野菜の旨みを引き出す出汁にこだわり、〆の一品まで美味しく召し上がっていただけるようご用意しています。": L(
     "肉と島野菜の旨みを引き出す出汁にこだわり、〆の一品まで美味しく召し上がっていただけるようご用意しています。",
     "A broth that lifts meat and island vegetables—delicious through the finishing dish.",
@@ -475,11 +520,23 @@ const phrases: Record<string, Localized> = {
     "오키나와산 식재료",
     "冲绳产食材",
   ),
-  "島野菜をはじめ、沖縄県産の食材を積極的に取り入れ、土地の恵みを一皿ごとに感じていただけるよう努めています。": L(
-    "島野菜をはじめ、沖縄県産の食材を積極的に取り入れ、土地の恵みを一皿ごとに感じていただけるよう努めています。",
-    "From island vegetables on, we use Okinawan produce so you taste the land in every plate.",
-    "섬 야채를 비롯해 오키나와산 식재료를 적극 사용해, 땅의 은혜를 접시마다 느끼시도록 힘씁니다.",
-    "以岛蔬为首，积极采用冲绳食材，让每一盘都能感受到土地的馈赠。",
+  "おきなわ食材の認定店": L(
+    "おきなわ食材の認定店",
+    "Certified Okinawa Ingredients Restaurant",
+    "오키나와 식재료 인정점",
+    "冲绳食材认证店",
+  ),
+  "ご提供する食材のほとんどは沖縄県産。\n島野菜をはじめ、沖縄で育まれた食材を積極的に取り入れています。": L(
+    "ご提供する食材のほとんどは沖縄県産。\n島野菜をはじめ、沖縄で育まれた食材を積極的に取り入れています。",
+    "Most of what we serve is from Okinawa Prefecture—from island vegetables to other produce grown on the islands.",
+    "제공하는 식재료의 대부분은 오키나와현산입니다.\n섬 야채를 비롯해 오키나와에서 자란 식재료를 적극적으로 사용합니다.",
+    "所提供的食材大多为冲绳县产。\n以岛蔬为首，积极采用冲绳培育的食材。",
+  ),
+  "そのほかの食材についても、使用するものはすべて国内産。\n一皿一皿を通して、沖縄と日本の豊かな恵みをお楽しみください。": L(
+    "そのほかの食材についても、使用するものはすべて国内産。\n一皿一皿を通して、沖縄と日本の豊かな恵みをお楽しみください。",
+    "Everything else we use is also domestically sourced. Through each dish, enjoy the bounty of Okinawa and Japan.",
+    "그 밖의 식재료도 모두 국내산만 사용합니다.\n한 접시 한 접시를 통해 오키나와와 일본의 풍요로운 은혜를 즐겨 주세요.",
+    "其余食材也全部使用国产。\n请通过每一道菜，品味冲绳与日本的丰富馈赠。",
   ),
   "沖縄旅行の特別な夕食": L(
     "沖縄旅行の特別な夕食",

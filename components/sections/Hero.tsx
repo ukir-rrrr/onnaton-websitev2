@@ -8,6 +8,7 @@ import {
   CLIP_COVER,
   CLIP_FULL,
   CLIP_OFF_RIGHT,
+  INTRO_LOGO_HOLD_MS,
   WIPE_DURATION,
   WIPE_EASE,
 } from "@/lib/motion/diagonalWipe";
@@ -17,7 +18,6 @@ import { MultilineText } from "@/components/i18n/MultilineText";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
-const LOGO_HOLD_MS = 400;
 const SLIDE_INTERVAL_MS = 6000;
 
 export function Hero() {
@@ -36,7 +36,7 @@ export function Hero() {
   // ① logo hold → ② wipe in
   useEffect(() => {
     if (reduceMotion || phase !== "logo") return;
-    const id = window.setTimeout(() => setPhase("wipeIn"), LOGO_HOLD_MS);
+    const id = window.setTimeout(() => setPhase("wipeIn"), INTRO_LOGO_HOLD_MS);
     return () => window.clearTimeout(id);
   }, [phase, reduceMotion]);
 
@@ -151,7 +151,7 @@ export function Hero() {
           className="absolute bottom-6 right-6 z-20 flex items-center gap-2 sm:bottom-8 sm:right-8"
           initial={{ opacity: 0 }}
           animate={{ opacity: showCopy ? 1 : 0 }}
-          transition={{ duration: 0.5, delay: showCopy ? 0.55 : 0 }}
+          transition={{ duration: 0.45, delay: showCopy ? 0.35 : 0 }}
           aria-label={`スライド ${activeDot + 1} / ${heroSlides.length}`}
         >
           {heroSlides.map((_, i) => (
@@ -174,8 +174,8 @@ export function Hero() {
             y: showCopy ? 0 : 56,
           }}
           transition={{
-            duration: 0.85,
-            delay: showCopy ? 0.25 : 0,
+            duration: 0.65,
+            delay: showCopy ? 0.12 : 0,
             ease: [0.22, 1, 0.36, 1],
           }}
         >

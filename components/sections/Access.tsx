@@ -6,6 +6,7 @@ import { storeInfoRows, siteConfig } from "@/lib/content/store";
 import { MultilineText } from "@/components/i18n/MultilineText";
 import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { InstagramIcon } from "@/components/ui/InstagramIcon";
+import { mapEmbedLang } from "@/lib/i18n/config";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
@@ -54,7 +55,7 @@ export function Access() {
               </span>
               {row.label === "ご予約" && !isJa ? (
                 <Link
-                  href="/reserve"
+                  href="/reserve/intl"
                   className="inline-flex min-h-11 items-center py-1 text-[15px] leading-[1.7] text-cream underline-offset-4 transition-colors hover:text-gold hover:underline sm:min-h-0 sm:py-0"
                 >
                   {t(copy.access.reserveOnline)}
@@ -95,7 +96,7 @@ export function Access() {
             title={t(copy.access.mapTitle)}
             src={siteConfig.mapEmbedSrc.replace(
               "hl=ja",
-              `hl=${locale === "zh" ? "zh-CN" : locale}`,
+              `hl=${mapEmbedLang[locale]}`,
             )}
             className="h-[320px] w-full border-0 sm:h-[420px] xl:h-[600px]"
             loading="lazy"

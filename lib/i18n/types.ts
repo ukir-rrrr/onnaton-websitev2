@@ -1,6 +1,7 @@
 import type { Locale } from "./config";
+import { resolveContentLocale } from "./config";
 
-export type Localized = Record<Locale, string>;
+export type Localized = Record<"ja" | "en" | "ko" | "zh", string>;
 
 export function L(
   ja: string,
@@ -12,5 +13,6 @@ export function L(
 }
 
 export function t(locale: Locale, text: Localized): string {
-  return text[locale] || text.ja;
+  const key = resolveContentLocale(locale);
+  return text[key] || text.ja;
 }

@@ -4,6 +4,7 @@ import { Hero } from "@/components/sections/Hero";
 import { About } from "@/components/sections/About";
 import { Kodawari } from "@/components/sections/Kodawari";
 import { ReservationBanner } from "@/components/sections/ReservationBanner";
+import { SiteNotices } from "@/components/sections/SiteNotices";
 import { CourseMenu } from "@/components/sections/CourseMenu";
 import { Scenes } from "@/components/sections/Scenes";
 import { Interior } from "@/components/sections/Interior";
@@ -19,6 +20,7 @@ export default function Home() {
       <About />
       <Kodawari />
       <ReservationBanner />
+      <SiteNotices />
       <CourseMenu />
       <Scenes />
       <Interior />
