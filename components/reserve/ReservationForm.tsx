@@ -13,7 +13,9 @@ import {
   reservationTimeSlots,
 } from "@/lib/content/reservation";
 import { MultilineText } from "@/components/i18n/MultilineText";
+import { dateInputClass } from "@/components/ui/dateField";
 import { copy } from "@/lib/i18n/copy";
+import { htmlLang } from "@/lib/i18n/config";
 import { useT } from "@/components/i18n/LocaleProvider";
 import { ReserveButton } from "@/components/ui/ReserveButton";
 
@@ -175,8 +177,8 @@ function ReservationFormInner({
         <legend className="font-serif-jp mb-5 text-[18px] tracking-[0.12em] text-cream sm:text-[20px]">
           {t(copy.form.visit)}
         </legend>
-        <div className="grid gap-5 sm:grid-cols-2">
-          <p>
+        <div className="grid min-w-0 gap-5 sm:grid-cols-2">
+          <p className="min-w-0">
             <label htmlFor="reserve-date" className={labelClass}>
               {t(copy.form.date)} *
             </label>
@@ -184,6 +186,7 @@ function ReservationFormInner({
               id="reserve-date"
               name="date"
               type="date"
+              lang={htmlLang[locale]}
               required
               min={minDate}
               max={maxDate}
@@ -198,7 +201,7 @@ function ReservationFormInner({
                 setDateHint(false);
                 setDateValue(next);
               }}
-              className={fieldClass}
+              className={dateInputClass}
             />
             {dateHint ? (
               <span className="mt-2 block text-[12px] leading-[1.7] text-gold/80">

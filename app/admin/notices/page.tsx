@@ -44,7 +44,16 @@ export default async function AdminNoticesPage({
     );
   }
 
-  const notices = await getNoticesForAdmin();
+  const loadResult = await getNoticesForAdmin();
+
+  const loadErrorMessage =
+    loadResult.status === "supabase_not_configured"
+      ? "Supabase の環境変数が Cloudflare に設定されていません。NEXT_PUBLIC_SUPABASE_URL と SUPABASE_SERVICE_ROLE_KEY を Variables and secrets に追加し、再デプロイしてください。"
+      : loadResult.status === "site_not_found"
+        ? `Supabase に site slug「${loadResult.siteSlug}」が見つかりません。SITE_SLUG の値と supabase/schema.sql の seed を確認してください。`
+        : loadResult.status === "query_failed"
+          ? "Supabase からお知らせを取得できませんでした。ダッシュボードのログと RLS / テーブル設定を確認してください。"
+          : null;
 
   return (
     <div className="min-h-screen bg-ink px-6 py-16 text-[#2a2520]">
@@ -55,14 +64,14 @@ export default async function AdminNoticesPage({
         <p className={`mb-10 text-center ${adminMutedClass}`}>
           恩納豚 — トップページ お知らせ セクション
         </p>
-        {notices.length === 0 ? (
-          <p className={`text-center ${adminMutedClass}`}>
-            お知らせデータを読み込めませんでした。Supabase の設定を確認してください。
+        {loadResult.status !== "ok" ? (
+          <p className={`text-center leading-relaxed ${adminMutedClass}`}>
+            {loadErrorMessage}
           </p>
         ) : (
           <AdminNoticesClient
-            notices={notices}
-            formKey={notices.map((n) => n.updatedAt).join("-")}
+            notices={loadResult.notices}
+            formKey={loadResult.notices.map((n) => n.updatedAt).join("-")}
           />
         )}
       </div>

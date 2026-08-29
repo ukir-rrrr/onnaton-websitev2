@@ -135,6 +135,35 @@ body {
   background-attachment: fixed;
 }
 
+/*
+ * iOS Safari blurs / mis-scales background-attachment: fixed (photo looks muddy on
+ * real phones but fine in Chrome mobile emulation). Use one scroll texture on html
+ * and drop duplicate layers from .bg-ink shells.
+ */
+@media (hover: none), (pointer: coarse) {
+  html {
+    background-color: var(--color-paper);
+    background-image: var(--washi-texture);
+    background-size: 100% auto;
+    background-repeat: repeat-y;
+    background-position: center top;
+    background-attachment: scroll;
+  }
+
+  .bg-ink {
+    background-color: transparent;
+    background-image: none;
+    background-attachment: scroll;
+  }
+
+  .bg-ink-raised {
+    background-attachment: scroll;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center;
+  }
+}
+
 ::selection {
   background: var(--color-gold);
   color: var(--color-on-dark);
@@ -159,4 +188,24 @@ main.font-brush-jp :is(h3, .font-display-jp) {
   font-family: var(--font-brush-display-jp);
   font-weight: 400;
   letter-spacing: 0.12em;
+}
+
+/* Native date inputs — iOS Safari uses different rendering than Chrome mobile emulation. */
+input[type="date"].date-input {
+  display: block;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
+  -webkit-min-logical-width: 0;
+}
+
+input[type="date"].date-input::-webkit-date-and-time-value {
+  min-width: 0;
+  text-align: left;
+}
+
+@supports (-webkit-touch-callout: none) {
+  input[type="date"].date-input {
+    padding-right: 0.75rem;
+  }
 }

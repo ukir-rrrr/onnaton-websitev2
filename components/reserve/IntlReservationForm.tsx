@@ -16,7 +16,9 @@ import {
   minBookableDate,
 } from "@/lib/content/reservation";
 import { MultilineText } from "@/components/i18n/MultilineText";
+import { dateInputClass } from "@/components/ui/dateField";
 import { copy } from "@/lib/i18n/copy";
+import { htmlLang } from "@/lib/i18n/config";
 import { useT } from "@/components/i18n/LocaleProvider";
 
 const initialState: IntlReservationState = { ok: false };
@@ -186,7 +188,12 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
         <p className="mb-5 text-[13px] leading-[1.9] tracking-[0.04em] text-cream/88 sm:text-[14px]">
           {t(copy.intlForm.dateHint)}
         </p>
-        <div className="grid gap-5 sm:grid-cols-2">
+        {locale !== "ja" ? (
+          <p className="mb-5 text-[12px] tracking-[0.06em] text-cream/65 sm:text-[13px]">
+            {t(copy.intlForm.dateFormat)}
+          </p>
+        ) : null}
+        <div className="grid min-w-0 gap-5 sm:grid-cols-2">
           {(
             [
               ["datePreference1", copy.intlForm.date1, true],
@@ -196,7 +203,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
           ).map(([key, label, required]) => (
             <p
               key={key}
-              className={key === "datePreference1" ? "sm:col-span-2" : undefined}
+              className={`min-w-0 ${key === "datePreference1" ? "sm:col-span-2" : ""}`}
             >
               <label htmlFor={`intl-${key}`} className={labelClass}>
                 {t(label)} {required ? "*" : ""}
@@ -205,12 +212,13 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
                 id={`intl-${key}`}
                 name={dateFieldNames[key]}
                 type="date"
+                lang={htmlLang[locale]}
                 required={required}
                 min={minDate}
                 max={maxDate}
                 value={fields[key]}
                 onChange={(event) => setField(key, event.target.value)}
-                className={fieldClass}
+                className={dateInputClass}
               />
               {dateHints[key] ? (
                 <span className="mt-2 block text-[12px] leading-[1.7] text-gold/80">

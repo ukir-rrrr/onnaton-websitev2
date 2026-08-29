@@ -78,14 +78,20 @@ export async function getActiveNotices(
 }
 
 /** All notice slots for admin (includes disabled / empty). */
+export type AdminNoticesLoadResult =
+  | { status: "ok"; notices: AdminNotice[] }
+  | { status: "supabase_not_configured" }
+  | { status: "site_not_found"; siteSlug: string }
+  | { status: "query_failed" };
+
 export async function getNoticesForAdmin(
   siteSlug = getSiteSlug(),
-): Promise<AdminNotice[]> {
+): Promise<AdminNoticesLoadResult> {
   const supabase = getSupabaseAdmin();
-  if (!supabase) return [];
+  if (!supabase) return { status: "supabase_not_configured" };
 
   const siteId = await getSiteId(siteSlug);
-  if (!siteId) return [];
+  if (!siteId) return { status: "site_not_found", siteSlug };
 
   const { data, error } = await supabase
     .from("notices")
@@ -95,18 +101,21 @@ export async function getNoticesForAdmin(
 
   if (error || !data) {
     console.error("[notices/admin]", error);
-    return [];
+    return { status: "query_failed" };
   }
 
-  return data.map((row) => ({
-    id: row.id,
-    sortOrder: row.sort_order,
-    enabled: row.enabled,
-    bodyEn: row.body_en,
-    bodyJa: row.body_ja,
-    visibleUntil: row.visible_until,
-    updatedAt: row.updated_at,
-  }));
+  return {
+    status: "ok",
+    notices: data.map((row) => ({
+      id: row.id,
+      sortOrder: row.sort_order,
+      enabled: row.enabled,
+      bodyEn: row.body_en,
+      bodyJa: row.body_ja,
+      visibleUntil: row.visible_until,
+      updatedAt: row.updated_at,
+    })),
+  };
 }
 
 export type NoticeUpdateInput = {
