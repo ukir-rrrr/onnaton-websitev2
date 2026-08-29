@@ -136,16 +136,16 @@ body {
 }
 
 /*
- * iOS Safari blurs / mis-scales background-attachment: fixed (photo looks muddy on
- * real phones but fine in Chrome mobile emulation). Use seamless CSS washi on touch
- * devices — photo repeat-y leaves visible horizontal seams.
+ * Narrow viewports only (do not use hover/pointer — touch laptops match those
+ * and would swap desktop to the CSS tile texture). iOS Safari blurs fixed photos;
+ * use one scroll-linked cover on html instead of repeat-y tile seams.
  */
-@media (hover: none), (pointer: coarse) {
+@media (max-width: 1023px) {
   html {
     background-color: var(--color-paper);
-    background-image: var(--washi-texture-css-only);
-    background-size: 512px 512px;
-    background-repeat: repeat;
+    background-image: var(--washi-texture);
+    background-size: cover;
+    background-repeat: no-repeat;
     background-position: center top;
     background-attachment: scroll;
   }
@@ -157,17 +157,10 @@ body {
   }
 
   .bg-ink-raised {
-    background-color: var(--color-paper-raised);
-    background-image:
-      linear-gradient(
-        rgba(224, 212, 188, 0.62),
-        rgba(224, 212, 188, 0.62)
-      ),
-      var(--washi-texture-css-only);
-    background-size: auto, 512px 512px;
-    background-repeat: no-repeat, repeat;
     background-attachment: scroll;
-    background-position: center, center top;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
   }
 }
 
