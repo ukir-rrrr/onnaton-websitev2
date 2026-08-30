@@ -46,7 +46,7 @@ export const seatsIntro =
 /** 店内写真 — ワイドとペアを交互にして雑誌のようなリズムにする */
 export const tennaiGallery: TennaiShot[] = [
   {
-    src: photos.tennai01,
+    src: photos.rouka001,
     alt: "色紙が並ぶ店内の通路",
     className: "sm:col-span-12 aspect-[16/9] lg:aspect-[2.15/1]",
   },

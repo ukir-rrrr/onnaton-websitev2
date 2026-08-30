@@ -22,10 +22,14 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
       />
 
       <div className="mx-auto flex max-w-5xl flex-col gap-16 sm:gap-20">
-        {extraGroups.map((group) => (
+        {extraGroups.map((group) => {
+          const photoAspect = group.photoAspectClass ?? "aspect-[4/3]";
+          const photoClass = group.photoClassName ?? "object-cover object-center";
+
+          return (
           <div
             key={group.heading}
-            className="grid grid-cols-1 items-start gap-8 xl:grid-cols-[1fr_0.85fr] xl:gap-14"
+            className={`grid grid-cols-1 items-start gap-8 xl:grid-cols-[1fr_0.85fr] xl:gap-14 ${group.sectionClassName ?? ""}`}
           >
             <div>
               <h3 className="font-serif-jp mb-3 border-b border-cream/25 pb-2 text-[20px] tracking-[0.12em] text-cream sm:text-[22px]">
@@ -69,7 +73,7 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
                 {group.photos.map((photo) => (
                   <div
                     key={photo.src + photo.alt}
-                    className="relative aspect-[4/3] overflow-hidden"
+                    className={`relative overflow-hidden ${photoAspect}`}
                   >
                     <Image
                       src={photo.src}
@@ -77,14 +81,15 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
                       fill
                       sizes="(min-width: 1024px) 40vw, 100vw"
                       quality={90}
-                      className="object-cover"
+                      className={photoClass}
                     />
                   </div>
                 ))}
               </div>
             ) : null}
           </div>
-        ))}
+          );
+        })}
       </div>
 
       <div className="mt-12 flex justify-center">

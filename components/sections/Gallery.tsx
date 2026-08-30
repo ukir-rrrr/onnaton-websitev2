@@ -3,6 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import { galleryList } from "@/lib/content/gallery";
+import { galleryFrameProps } from "@/lib/content/galleryFrame";
 import { siteConfig } from "@/lib/content/store";
 import { MultilineText } from "@/components/i18n/MultilineText";
 import { Reveal } from "@/components/motion/Reveal";
@@ -191,23 +192,28 @@ export function Gallery() {
         aria-label={t(copy.gallery.aria)}
       >
         <div ref={trackRef} className="flex w-max will-change-transform">
-          {loopPhotos.map((item, i) => (
+          {loopPhotos.map((item, i) => {
+            const frame = galleryFrameProps(item);
+            return (
             <div
               key={`${item.src}-${i}`}
-              className="relative h-[48vh] w-[78vw] min-h-[240px] max-w-[340px] shrink-0 overflow-hidden border-r border-ink sm:h-[68vh] sm:w-[36vw] sm:min-w-[260px] sm:max-w-none lg:h-[72vh] lg:w-[24vw]"
+              className={frame.className}
+              style={frame.style}
             >
               <Image
                 src={item.src}
                 alt={item.alt}
                 fill
-                sizes="(min-width: 1024px) 24vw, (min-width: 640px) 36vw, 78vw"
+                sizes={frame.sizes}
                 quality={90}
+                unoptimized={frame.unoptimized}
                 className="pointer-events-none select-none object-cover [-webkit-user-drag:none]"
                 draggable={false}
                 onLoadingComplete={measureLoopWidth}
               />
             </div>
-          ))}
+            );
+          })}
         </div>
       </div>
 

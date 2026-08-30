@@ -1,9 +1,11 @@
-import { photos } from "@/lib/content/photos";
+import { photos } from "./photos";
 
-/** Four hero slideshow frames — swap paths here when new photography lands. */
+/** Top-page hero slideshow — swap paths in photos.ts when photography updates. */
 export const heroSlides = [
-  { src: photos.aguPorkHero, alt: "あぐー豚のしゃぶしゃぶ" },
-  { src: photos.ishigakiBeef, alt: "特選石垣牛" },
-  { src: photos.shabuDashi, alt: "しゃぶしゃぶの出汁" },
-  { src: photos.yamashiroBeef, alt: "山城牛" },
+  { src: photos.top001, alt: "恩納豚" },
+  { src: photos.top002, alt: "恩納豚" },
+  { src: photos.top003, alt: "恩納豚" },
+  { src: photos.top004, alt: "恩納豚" },
+  { src: photos.top005, alt: "恩納豚" },
+  { src: photos.top006, alt: "恩納豚" },
 ] as const;

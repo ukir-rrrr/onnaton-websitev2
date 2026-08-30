@@ -9,8 +9,13 @@
  */
 export const photos = {
   aguPork: "/images/kodawari_agu_01.jpg",
-  /** Hero image — meat and soup pot both framed. */
-  aguPorkHero: "/images/kodawari_agu_01_upscaledcopy.jpg",
+  /** Top-page hero slideshow */
+  top001: "/images/top_001.jpg",
+  top002: "/images/top_002.jpg",
+  top003: "/images/top_003.jpg",
+  top004: "/images/top_004.jpg",
+  top005: "/images/top_005.jpg",
+  top006: "/images/top_006.jpg",
   /** Top-page course teaser (full-bleed). */
   courseMenu: "/images/course_menu.jpg",
   /** Executive course photography */
@@ -39,14 +44,14 @@ export const photos = {
   shabuDashi: "/images/shabu-dashi.jpg",
   yamashiroBeef: "/images/yamashiro-beef.jpg",
   interiorKaiseki: "/images/interior-kaiseki.jpg",
+  /** About — Concept hero. */
+  concept01: "/images/concept_01.jpg",
   interiorTatami: "/images/interior-tatami.jpg",
   interiorTable: "/images/interior-table.jpg",
-  galleryExtra: "/images/gallery-extra.jpg",
   /**
-   * Dedicated gallery shots — drop files in /public/images/gallery/
-   * then register them in lib/content/gallery.ts (preferred) or here.
+   * Dedicated gallery shots live in lib/content/gallery.ts
+   * (public/連番写真_全147枚/).
    */
-  // gallery01: "/images/gallery/01.jpg",
   /** ご利用シーン */
   scene01: "/images/scene_01.jpg",
   scene02: "/images/scene_02.jpg",
@@ -59,12 +64,15 @@ export const photos = {
   /** About / 恩納豚について — vertical portrait. */
   onnatonAbout: "/images/onnnaton_tuite.jpg",
   // 当店のこだわり
-  kodawariAguPork: "/images/kodawariagubuta.jpg",
+  /** こだわり01 — あぐー豚 */
+  kodawari01: "/images/kodawari_001.jpg",
   kodawariAguButa: "/images/kodawari_agu_buta.jpg",
-  kodawariShabuDashi:"/images/kodawari_03.jpg",
+  /** こだわり03 — お出汁 */
+  kodawari03: "/images/kodawari_003.jpg",
   kodawariYasai:"/images/kodawari_04.jpg",
   /** お席ページ — 店内写真 */
-  tennai01: "/images/tennai_01.jpg",
+  /** 店内ギャラリー先頭 — 廊下 */
+  rouka001: "/images/rouka_001.jpg",
   tennai02: "/images/tennai_02.jpg",
   tennai03: "/images/tennai_03.jpg",
   tennai04: "/images/tennai_04.jpg",

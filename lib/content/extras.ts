@@ -11,6 +11,11 @@ export interface ExtraGroup {
   note?: string;
   items: ExtraItem[];
   photos: { src: string; alt: string }[];
+  /** Tailwind aspect class for photo tiles (default aspect-[4/3]) */
+  photoAspectClass?: string;
+  photoClassName?: string;
+  /** Extra spacing above this group */
+  sectionClassName?: string;
 }
 
 /** 追加料理 */
@@ -37,12 +42,15 @@ export const extraGroups: ExtraGroup[] = [
       { name: "あぐー豚", amount: "100g", price: "1,800円" },
       { name: "あぐー豚つくね", amount: "150g", price: "1,200円" },
     ],
-    photos: [{ src: photos.kodawariAguPork, alt: "あぐー豚" }],
+    photos: [{ src: photos.kodawari01, alt: "あぐー豚" }],
+    photoAspectClass: "aspect-[5/6]",
+    photoClassName: "object-cover object-center",
   },
   {
     heading: "追加牛肉",
-    note: "ご注文されたコースに入ってないお肉は追加できません",
+    note: "ご注文されたコースに入っていないお肉は追加できません",
     items: [],
     photos: [{ src: photos.tuika04, alt: "追加牛肉" }],
+    sectionClassName: "mt-10 sm:mt-14 lg:mt-20",
   },
 ];

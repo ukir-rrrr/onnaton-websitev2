@@ -10,21 +10,26 @@ export interface KodawariFeature {
   /** Tailwind aspect class */
   imageAspectClass?: string;
   imageClassName?: string;
+  /** Optional max-width override for portrait / art-directed crops */
+  imageWrapperClassName?: string;
+  imageSizes?: string;
 }
 
 /** こだわり01 — 認定ブランド「あぐー豚」 */
 export const aguFeature: KodawariFeature = {
   num: "01",
   heading: ["「アグー豚」ではなく、", "認定ブランド「あぐー豚」"] as const,
-  photo: photos.kodawariAguButa,
+  photo: photos.kodawari01,
   photoAlt: "認定ブランド あぐー豚のしゃぶしゃぶ",
   paragraphs: [
     "恩納豚で使用しているのは、\nJAおきなわの品質基準をクリアした、\n認定ブランドの「あぐー豚」です。",
     "沖縄でよく目にする「アグー豚」という呼び方とは異なり、ひらがなの「あぐー」は、JAおきなわが商標を管理するブランド名称。\n定められた品質基準を満たし、認定された豚肉だけが「あぐー」として流通します。",
     "恩納豚では、この認定された「あぐー豚」を使用しています。\n脂に上品な甘みがあり、しゃぶしゃぶにすることで\n柔らかさと旨みが際立ちます。\n沖縄が誇る上質な味わいを、存分にお楽しみください。",
   ],
-  imageAspectClass: "aspect-[5/3]",
-  imageClassName: "object-cover object-[center_top]",
+  imageAspectClass: "aspect-[5/6]",
+  imageClassName: "object-cover object-center",
+  imageWrapperClassName: "max-w-[540px] sm:max-w-[580px] xl:max-w-[600px]",
+  imageSizes: "(min-width: 1280px) 600px, (min-width: 640px) 580px, 540px",
 };
 
 /** こだわり02 — 特選 石垣牛 */
@@ -53,7 +58,7 @@ export const ishigakiFeature: KodawariFeature = {
 export const dashiFeature: KodawariFeature = {
   num: "03",
   heading: ["唯一無二のお出汁"] as const,
-  photo: photos.kodawariShabuDashi,
+  photo: photos.kodawari03,
   photoAlt: "唯一無二のお出汁",
   paragraphs: [
     "最初に感じるのは、ほどよいピリ辛さ。\nそこへ良質なお肉の旨みと脂の甘みが溶け込むことで、\n食べ進めるほどに出汁の味わいが変化し、\n最後には皆さまが驚くほど甘くまろやかな味わいへと仕上がっていきます。",

@@ -35,11 +35,14 @@ function KodawariFeatureBlock({
   const { tr } = useT();
   const aspectClass = feature.imageAspectClass ?? "aspect-[5/3]";
   const imageClass = feature.imageClassName ?? "object-cover object-center";
+  const wrapperClass = feature.imageWrapperClassName ?? "max-w-[720px]";
+  const imageSizes =
+    feature.imageSizes ?? "(min-width: 1280px) 720px, 100vw";
 
   return (
-    <div className="mb-16 grid min-w-0 grid-cols-1 items-center gap-10 sm:mb-20 sm:gap-12 lg:mb-24 xl:grid-cols-[minmax(0,720px)_1fr] xl:gap-16">
+    <div className="mb-16 grid min-w-0 grid-cols-1 items-start gap-10 sm:mb-20 sm:gap-12 lg:mb-24 xl:grid-cols-[minmax(0,720px)_1fr] xl:gap-16">
       <motion.div
-        className={`relative mx-auto ${aspectClass} w-full max-w-[720px] overflow-hidden rounded-sm xl:mx-0`}
+        className={`relative mx-auto ${aspectClass} w-full ${wrapperClass} overflow-hidden rounded-sm xl:mx-0`}
         initial={reduceMotion ? false : { opacity: 0, y: 32 }}
         whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
         viewport={{ once: true, amount: 0.3 }}
@@ -56,7 +59,7 @@ function KodawariFeatureBlock({
             src={feature.photo}
             alt={tr(feature.photoAlt)}
             fill
-            sizes="(min-width: 1280px) 720px, 100vw"
+            sizes={imageSizes}
             unoptimized
             className={imageClass}
           />

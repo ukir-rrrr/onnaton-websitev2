@@ -76,7 +76,7 @@ export function About() {
         </div>
       </div>
 
-      <div className="relative h-[420px] w-full overflow-hidden sm:h-[520px] xl:h-[680px]">
+      <div className="relative aspect-[4/2] min-h-[420px] w-full overflow-hidden sm:min-h-[520px]">
         <motion.div
           className="absolute inset-0"
           initial={reduceMotion ? false : { scale: 1.08 }}
@@ -85,12 +85,12 @@ export function About() {
           transition={{ duration: 1.4, ease }}
         >
           <Image
-            src={photos.interiorKaiseki}
+            src={photos.concept01}
             alt={t(copy.about.interiorAlt)}
             fill
             sizes="100vw"
             quality={90}
-            className="object-cover brightness-[0.65]"
+            className="object-cover object-[78%_center] brightness-[0.85]"
           />
         </motion.div>
         <div className="absolute inset-0 bg-gradient-to-b from-black/25 to-black/55" />
