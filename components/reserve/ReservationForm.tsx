@@ -15,7 +15,6 @@ import {
 import { MultilineText } from "@/components/i18n/MultilineText";
 import { DateField } from "@/components/ui/DateField";
 import { copy } from "@/lib/i18n/copy";
-import { htmlLang } from "@/lib/i18n/config";
 import { useT } from "@/components/i18n/LocaleProvider";
 import { ReserveButton } from "@/components/ui/ReserveButton";
 
@@ -185,7 +184,6 @@ function ReservationFormInner({
             <DateField
               id="reserve-date"
               name="date"
-              lang={htmlLang[locale]}
               required
               min={minDate}
               max={maxDate}

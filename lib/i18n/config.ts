@@ -2,8 +2,8 @@ export const locales = ["ja", "en", "yue", "zhTw", "ko"] as const;
 
 export type Locale = (typeof locales)[number];
 
-/** Maps UI locales to copy keys in Localized strings (ja / en / ko / zh). */
-export type ContentLocale = "ja" | "en" | "ko" | "zh";
+/** Maps UI locales to copy keys in Localized strings. */
+export type ContentLocale = "ja" | "en" | "ko" | "yue" | "zhTw";
 
 export const defaultLocale: Locale = "ja";
 
@@ -12,9 +12,18 @@ export const localeCookie = "onnaton-locale";
 export const htmlLang: Record<Locale, string> = {
   ja: "ja",
   en: "en",
-  yue: "yue",
-  zhTw: "zh-Hant",
+  yue: "zh-HK",
+  zhTw: "zh-TW",
   ko: "ko",
+};
+
+/** BCP 47 tag for native date inputs (browser calendar UI). */
+export const dateInputLang: Record<Locale, string> = {
+  ja: "ja-JP",
+  en: "en-US",
+  yue: "zh-HK",
+  zhTw: "zh-TW",
+  ko: "ko-KR",
 };
 
 export const mapEmbedLang: Record<Locale, string> = {
@@ -36,6 +45,5 @@ export function normalizeLocale(value: string | undefined): Locale {
 }
 
 export function resolveContentLocale(locale: Locale): ContentLocale {
-  if (locale === "yue" || locale === "zhTw") return "zh";
   return locale;
 }

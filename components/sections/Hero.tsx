@@ -21,7 +21,7 @@ import { useT } from "@/components/i18n/LocaleProvider";
 const SLIDE_INTERVAL_MS = 6000;
 
 export function Hero() {
-  const { t } = useT();
+  const { t, locale } = useT();
   const reduceMotion = useReducedMotion() === true;
   const [phase, setPhase] = useState<IntroPhase>("logo");
   const [current, setCurrent] = useState(0);
@@ -179,27 +179,56 @@ export function Hero() {
             ease: [0.22, 1, 0.36, 1],
           }}
         >
-          <div className="w-full max-w-[36rem]">
-            <p className="font-serif-jp mb-1.5 text-[17px] font-normal tracking-[0.12em] text-[#e0c89a] [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-2.5 sm:text-[20px] sm:text-[#c4a574] sm:[text-shadow:none]">
+          <div
+            className={`w-full ${locale === "en" ? "max-w-[42rem]" : "max-w-[36rem]"}`}
+          >
+            <p
+              className={`font-serif-jp mb-1.5 font-normal tracking-[0.12em] text-[#e0c89a] [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-2.5 sm:text-[#c4a574] sm:[text-shadow:none] ${
+                locale === "en"
+                  ? "text-[15px] leading-[1.5] sm:text-[18px] sm:tracking-[0.08em]"
+                  : "text-[17px] sm:text-[20px]"
+              }`}
+            >
               {t(copy.hero.kicker)}
             </p>
 
-            <p className="font-serif-jp mb-4 text-[13px] font-normal tracking-[0.12em] text-[#e0c89a] [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[16px] sm:text-[#c4a574] sm:[text-shadow:none]">
-              {t(copy.hero.specialty)}
-              <span className="mx-2 text-[#e0c89a]/80 sm:text-[#c4a574]/70" aria-hidden>
+            <p
+              className={`font-serif-jp mb-4 font-normal tracking-[0.12em] text-[#e0c89a] [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[#c4a574] sm:[text-shadow:none] ${
+                locale === "en"
+                  ? "flex max-w-full flex-wrap items-center gap-x-2 gap-y-1 text-[12px] leading-[1.5] sm:text-[15px]"
+                  : "text-[13px] sm:text-[16px]"
+              }`}
+            >
+              <span>{t(copy.hero.specialty)}</span>
+              <span
+                className="text-[#e0c89a]/80 sm:text-[#c4a574]/70"
+                aria-hidden
+              >
                 ｜
               </span>
-              {t(copy.hero.reservation)}
+              <span>{t(copy.hero.reservation)}</span>
             </p>
 
-            <h1 className="font-serif-jp mb-4 text-[23px] font-medium leading-[1.6] tracking-[0.06em] text-on-dark [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:text-[40px] sm:leading-[1.7] sm:[text-shadow:none] xl:text-[48px]">
+            <h1
+              className={`font-serif-jp mb-4 font-medium leading-[1.6] tracking-[0.06em] text-on-dark [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-6 sm:leading-[1.7] sm:[text-shadow:none] ${
+                locale === "en"
+                  ? "text-[21px] sm:text-[36px] xl:text-[44px]"
+                  : "text-[23px] sm:text-[40px] xl:text-[48px]"
+              }`}
+            >
               <span className="block">{t(copy.hero.h1a)}</span>
               <span className="block">{t(copy.hero.h1b)}</span>
               <span className="block">{t(copy.hero.h1c)}</span>
             </h1>
 
-            <p className="font-serif-jp mb-6 max-w-[28rem] text-[14px] leading-[1.9] tracking-[0.06em] text-on-dark/95 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-8 sm:text-[15px] sm:leading-[2.1] sm:text-on-dark/85 sm:[text-shadow:none]">
-              <MultilineText text={t(copy.hero.body)} />
+            <p
+              className={`font-serif-jp mb-6 max-w-[28rem] leading-[1.9] tracking-[0.06em] text-on-dark/95 [text-shadow:0_1px_3px_rgba(0,0,0,0.5)] sm:mb-8 sm:text-on-dark/85 sm:[text-shadow:none] ${
+                locale === "en"
+                  ? "max-w-none break-words text-[13px] leading-[1.85] sm:text-[14px] sm:leading-[2]"
+                  : "text-[14px] sm:text-[15px] sm:leading-[2.1]"
+              }`}
+            >
+              <MultilineText text={t(copy.hero.body)} keepAll={locale !== "en"} />
             </p>
 
             <ReserveButton

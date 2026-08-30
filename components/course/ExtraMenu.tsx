@@ -6,9 +6,10 @@ import { SectionEyebrow } from "@/components/ui/SectionEyebrow";
 import { ReserveButton } from "@/components/ui/ReserveButton";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
+import { formatMenuPrice } from "@/lib/i18n/prices";
 
 export function ExtraMenu({ nextHref }: { nextHref?: string }) {
-  const { t, tr } = useT();
+  const { t, tr, locale, isJa } = useT();
   return (
     <section
       id="extras"
@@ -51,7 +52,7 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
                         ) : null}
                       </span>
                       <span className="shrink-0 text-[15px] tracking-[0.04em] text-cream sm:text-[16px]">
-                        {item.price}
+                        {isJa ? item.price : formatMenuPrice(locale, item.price)}
                       </span>
                     </li>
                   ))}

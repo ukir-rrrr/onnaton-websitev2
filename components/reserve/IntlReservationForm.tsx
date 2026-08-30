@@ -18,7 +18,6 @@ import {
 import { MultilineText } from "@/components/i18n/MultilineText";
 import { DateField } from "@/components/ui/DateField";
 import { copy } from "@/lib/i18n/copy";
-import { htmlLang } from "@/lib/i18n/config";
 import { useT } from "@/components/i18n/LocaleProvider";
 
 const initialState: IntlReservationState = { ok: false };
@@ -211,7 +210,6 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
               <DateField
                 id={`intl-${key}`}
                 name={dateFieldNames[key]}
-                lang={htmlLang[locale]}
                 required={required}
                 min={minDate}
                 max={maxDate}

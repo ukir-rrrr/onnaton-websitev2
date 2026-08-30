@@ -7,6 +7,10 @@ import {
 import { ReserveButton } from "@/components/ui/ReserveButton";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
+import {
+  formatCoursePriceMain,
+  formatCoursePriceTax,
+} from "@/lib/i18n/prices";
 
 /**
  * Mobile / tablet: horizontal (yokogaki) dish list.
@@ -101,7 +105,7 @@ export function CourseDetail({
   nextCourseHref?: string;
 }) {
   const c = course;
-  const { t, tr, trName, isJa } = useT();
+  const { t, tr, trName, isJa, locale } = useT();
   const Heading = headingAs;
 
   return (
@@ -143,7 +147,7 @@ export function CourseDetail({
                   <span className="hidden md:inline">{c.priceMain}</span>
                 </>
               ) : (
-                c.priceMainMobile
+                formatCoursePriceMain(locale, c.priceMainMobile)
               )}
             </p>
             <p className="mt-1 text-[13px] tracking-[0.08em] text-cream/92 sm:text-[14px]">
@@ -153,7 +157,7 @@ export function CourseDetail({
                   <span className="hidden md:inline">{c.priceTaxNote}</span>
                 </>
               ) : (
-                c.priceTaxNoteMobile
+                formatCoursePriceTax(locale, c.priceTaxNoteMobile)
               )}
             </p>
             {c.altPrice ? (
@@ -168,7 +172,7 @@ export function CourseDetail({
                       <span className="hidden md:inline">{c.altPrice.main}</span>
                     </>
                   ) : (
-                    c.altPrice.mainMobile
+                    formatCoursePriceMain(locale, c.altPrice.mainMobile)
                   )}
                 </p>
                 <p className="mt-1 text-[13px] tracking-[0.08em] text-cream/92 sm:text-[14px]">
@@ -178,7 +182,7 @@ export function CourseDetail({
                       <span className="hidden md:inline">{c.altPrice.taxNote}</span>
                     </>
                   ) : (
-                    c.altPrice.taxNoteMobile
+                    formatCoursePriceTax(locale, c.altPrice.taxNoteMobile)
                   )}
                 </p>
               </div>

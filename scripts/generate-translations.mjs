@@ -1,0 +1,693 @@
+/**
+ * Generates lib/i18n/locales/translations.json from scripts/_i18n-keys.json
+ * Run: node scripts/generate-translations.mjs
+ */
+import { readFileSync, writeFileSync, mkdirSync } from "node:fs";
+import { dirname, join } from "node:path";
+import { fileURLToPath } from "node:url";
+
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const keys = JSON.parse(readFileSync(join(__dirname, "_i18n-keys.json"), "utf8"));
+
+/** @type {Record<string, { yue: string, zhTw: string }>} */
+const phraseT = {
+  "沖縄県産もずく": { yue: "沖繩縣產水雲", zhTw: "沖繩縣產水雲" },
+  "ミミガーの和え物": { yue: "豬耳涼拌", zhTw: "豬耳涼拌" },
+  "久米島産海ぶどう": { yue: "久米島產海葡萄", zhTw: "久米島產海葡萄" },
+  "（海ぶどうが未入荷の際は代わりものをお出しします）": {
+    yue: "（海葡萄缺貨時將提供替代料理。）",
+    zhTw: "（海葡萄缺貨時將提供替代料理。）",
+  },
+  "紅しゃぶスープ": { yue: "紅涮湯", zhTw: "紅涮湯" },
+  "沖縄県産ブランド黒毛和牛": { yue: "沖繩縣產品牌黑毛和牛", zhTw: "沖繩縣產品牌黑毛和牛" },
+  "もとぶ牛（Ａ５ランク）": { yue: "本部牛（A5）", zhTw: "本部牛（A5）" },
+  "山城牛（Ａ５ランク）": { yue: "山城牛（A5）", zhTw: "山城牛（A5）" },
+  "特選石垣牛（Ａ５ランク）": { yue: "特選石垣牛（A5）", zhTw: "特選石垣牛（A5）" },
+  "あぐー豚": { yue: "阿古豬", zhTw: "阿古豬" },
+  "お野菜": { yue: "蔬菜", zhTw: "蔬菜" },
+  "手ごねのあぐーつくね": { yue: "手搓阿古豬肉丸", zhTw: "手捏阿古豬肉丸" },
+  "目の前で焼き上げる焼きチーズリゾット": {
+    yue: "即場燒製嘅芝士燴飯",
+    zhTw: "當面烤製的芝士燴飯",
+  },
+  "バニラアイスクリーム": { yue: "雲呢拿雪糕", zhTw: "香草冰淇淋" },
+  "バニラアイス": { yue: "雲呢拿雪糕", zhTw: "香草冰淇淋" },
+  "沖縄県産黒蜜きな粉バニラアイスクリーム": {
+    yue: "沖繩黑糖黃豆粉雲呢拿雪糕",
+    zhTw: "沖繩黑糖黃豆粉香草冰淇淋",
+  },
+  "特選石垣牛（Ａ５ランク）シャトーブリアンステーキ": {
+    yue: "特選石垣牛（A5）菲力牛扒",
+    zhTw: "特選石垣牛（A5）菲力牛排",
+  },
+  "高級ワイン「Rindo」などを元に作ったソースと共に": {
+    yue: "配以高級葡萄酒「Rindo」等製成嘅醬汁",
+    zhTw: "搭配以高級葡萄酒「Rindo」等製成的醬汁",
+  },
+  "１００ｇ": { yue: "100g", zhTw: "100g" },
+  "２００ｇ": { yue: "200g", zhTw: "200g" },
+  "５０ｇ": { yue: "50g", zhTw: "50g" },
+  "≒　１００ｇ": { yue: "≒ 100g", zhTw: "≒ 100g" },
+  "≒　２００ｇ": { yue: "≒ 200g", zhTw: "≒ 200g" },
+  "≒　５０ｇ": { yue: "≒ 50g", zhTw: "≒ 50g" },
+  "お一人様": { yue: "每位", zhTw: "每位" },
+  "コースお一人様": { yue: "套餐 每位", zhTw: "套餐 每位" },
+  "セットお一人様": { yue: "套餐組合 每位", zhTw: "套餐組合 每位" },
+  "エグゼクティブコース": { yue: "Executive 套餐", zhTw: "Executive 套餐" },
+  "エグゼクティブコース　華-hana-": { yue: "Executive 套餐 華-hana-", zhTw: "Executive 套餐 華-hana-" },
+  "エグゼクティブコースよりあぐー豚１００ｇ増量コース": {
+    yue: "較 Executive 套餐阿古豬加 100g 套餐",
+    zhTw: "較 Executive 套餐阿古豬加量 100g 套餐",
+  },
+  "エグゼクティブ　極-kiwami-": { yue: "Executive 極-kiwami-", zhTw: "Executive 極-kiwami-" },
+  "エグゼクティブ　煌-kou-": { yue: "Executive 煌-kou-", zhTw: "Executive 煌-kou-" },
+  "エグゼクティブ極": { yue: "Executive 極", zhTw: "Executive 極" },
+  "（with シャトーブリアン）": { yue: "（with 菲力）", zhTw: "（with 菲力）" },
+  "ご常連様人気": { yue: "熟客最愛", zhTw: "老顧客最愛" },
+  "初めての方におすすめコース": { yue: "首次光臨推薦套餐", zhTw: "首次光臨推薦套餐" },
+  "海ぶどう": { yue: "海葡萄", zhTw: "海葡萄" },
+  "もずく酢": { yue: "水雲醋", zhTw: "水雲醋" },
+  "野菜盛り合わせ": { yue: "雜錦蔬菜", zhTw: "綜合蔬菜" },
+  "ゴーヤのピクルス": { yue: "苦瓜酸瓜", zhTw: "苦瓜醃漬" },
+  "あぐー豚つくね": { yue: "阿古豬肉丸", zhTw: "阿古豬肉丸" },
+  "追加のお料理": { yue: "追加料理", zhTw: "追加料理" },
+  "追加あぐー豚": { yue: "追加阿古豬", zhTw: "追加阿古豬" },
+  "追加牛肉": { yue: "追加牛肉", zhTw: "追加牛肉" },
+  "ご注文されたコースに入ってないお肉は追加できません": {
+    yue: "未包含喺所點套餐入面嘅肉類無法追加。",
+    zhTw: "未包含在所點套餐中的肉品無法追加。",
+  },
+  "ビール・サワー・梅酒": { yue: "啤酒、梳打、梅酒", zhTw: "啤酒、沙瓦、梅酒" },
+  "アサヒプレミアム生ビール「熟撰JYUKUSEN」": {
+    yue: "朝日 Premium 生啤「熟撰 JYUKUSEN」",
+    zhTw: "朝日 Premium 生啤酒「熟撰 JYUKUSEN」",
+  },
+  "甘くない手作りシークヮーサー果汁100％サワー": {
+    yue: "無糖手作香檸 100% 梳打",
+    zhTw: "無糖手作香檸 100% 沙瓦",
+  },
+  "沖縄限定 泡盛梅酒ソーダ（度数は低いです）": {
+    yue: "沖繩限定 泡盛梅酒梳打（酒精度較低）",
+    zhTw: "沖繩限定 泡盛梅酒蘇打（酒精度較低）",
+  },
+  "ウヰスキー（各銘柄ボトルキープもございます）": {
+    yue: "威士忌（各品牌可寄存酒瓶）",
+    zhTw: "威士忌（各品牌可寄存整瓶）",
+  },
+  "山崎ハイボール": { yue: "山崎 Highball", zhTw: "山崎 Highball" },
+  "白州ハイボール": { yue: "白州 Highball", zhTw: "白州 Highball" },
+  "響ハイボール": { yue: "響 Highball", zhTw: "響 Highball" },
+  "デュワーズハイボール": { yue: "Dewar's Highball", zhTw: "Dewar's Highball" },
+  "グラスワイン（赤・白）90ml / 120ml / 150ml": {
+    yue: "杯裝葡萄酒（紅/白）90ml / 120ml / 150ml",
+    zhTw: "杯裝葡萄酒（紅/白）90ml / 120ml / 150ml",
+  },
+  "グラスワイン": { yue: "杯裝葡萄酒", zhTw: "杯裝葡萄酒" },
+  "ボトルワイン（赤・白）（ハウスワイン）": {
+    yue: "瓶裝葡萄酒（紅/白，店內酒）",
+    zhTw: "瓶裝葡萄酒（紅/白，店內酒）",
+  },
+  "ボトルワイン": { yue: "瓶裝葡萄酒", zhTw: "瓶裝葡萄酒" },
+  "その他ワインはワインリストをご覧ください": {
+    yue: "其他葡萄酒請參閱酒單",
+    zhTw: "其他葡萄酒請參閱酒單",
+  },
+  "泡盛古酒": { yue: "泡盛陳年酒", zhTw: "泡盛陳年酒" },
+  "瑞泉 KING 10年古酒（グラス100ml / ボトル）": {
+    yue: "瑞泉 KING 10 年陳釀（杯 100ml / 瓶）",
+    zhTw: "瑞泉 KING 10 年陳釀（杯 100ml / 瓶）",
+  },
+  "焼酎（100ml）": { yue: "燒酎（100ml）", zhTw: "燒酎（100ml）" },
+  "プレミアム芋焼酎（村尾）数量限定": {
+    yue: "高級芋燒酎（村尾）限量供應",
+    zhTw: "頂級芋燒酎（村尾）限量供應",
+  },
+  "芋焼酎": { yue: "芋燒酎", zhTw: "芋燒酎" },
+  "麦焼酎": { yue: "麥燒酎", zhTw: "麥燒酎" },
+  "ソフトドリンク": { yue: "軟飲", zhTw: "軟性飲料" },
+  "さんぴん茶(ジャスミン茶)・ウーロン茶": {
+    yue: "三瓶茶（茉莉）·烏龍茶",
+    zhTw: "三瓶茶（茉莉）·烏龍茶",
+  },
+  "コーラ": { yue: "可樂", zhTw: "可樂" },
+  "ペリエ（スパークリングウォーター）500ml": { yue: "Perrier 500ml", zhTw: "Perrier 500ml" },
+  "アクアパンナミネラルウォーター500ml": { yue: "Acqua Panna 500ml", zhTw: "Acqua Panna 500ml" },
+  "完全無添加ノンアルコールビール": { yue: "完全無添加無酒精啤酒", zhTw: "完全無添加無酒精啤酒" },
+  "ノンアルコール梅酒": { yue: "無酒精梅酒", zhTw: "無酒精梅酒" },
+  "店名": { yue: "店名", zhTw: "店名" },
+  "住所": { yue: "地址", zhTw: "地址" },
+  "電話番号": { yue: "電話", zhTw: "電話" },
+  "営業時間": { yue: "營業時間", zhTw: "營業時間" },
+  "定休日": { yue: "休息日", zhTw: "公休日" },
+  "形態": { yue: "業態", zhTw: "型態" },
+  "ご予約": { yue: "預約", zhTw: "預約" },
+  "お子様連れ": { yue: "攜同小童", zhTw: "攜帶兒童" },
+  "未就学児のご入店はご遠慮いただいております": {
+    yue: "恕不接待學齡前兒童",
+    zhTw: "恕不接待學齡前兒童",
+  },
+  "駐車場": { yue: "泊車", zhTw: "停車" },
+  "アクセス": { yue: "交通", zhTw: "交通" },
+  SNS: { yue: "SNS", zhTw: "SNS" },
+  "沖縄しゃぶしゃぶ恩納豚 那覇｜あぐー豚×特選石垣牛": {
+    yue: "沖繩 Shabu-shabu 恩納豚 那霸｜阿古豬×特選石垣牛",
+    zhTw: "沖繩 Shabu-shabu 恩納豚 那霸｜阿古豬×特選石垣牛",
+  },
+  "〒900-0037 沖縄県那覇市辻1-2-5": {
+    yue: "〒900-0037 沖繩縣那霸市辻 1-2-5",
+    zhTw: "〒900-0037 沖繩縣那霸市辻 1-2-5",
+  },
+  "コース料理専門店・完全予約制（前日まで要予約）": {
+    yue: "套餐專門店·完全預約制（須提前一天預約）",
+    zhTw: "套餐專門店·完全預約制（須提前一天預約）",
+  },
+  "お電話のみ／受付 13:30〜21:00（1ヶ月前〜）": {
+    yue: "網上預約表／須提前一天（可提前 1 個月）",
+    zhTw: "線上預約表／須提前一天（可提前 1 個月）",
+  },
+  "なし（近隣のコインパーキングをご利用ください）": {
+    yue: "無（請使用附近咪錶泊車場）",
+    zhTw: "無（請使用附近計時停車場）",
+  },
+  "ゆいレール「旭橋駅」より徒歩約9分\\n那覇空港より車で約10〜15分": {
+    yue: "由單軌「旭橋站」步行約 9 分鐘n由那霸機場駕車約 10–15 分鐘",
+    zhTw: "由單軌「旭橋站」步行約 9 分鐘n由那霸機場開車約 10–15 分鐘",
+  },
+  "火曜日・水曜日": { yue: "星期二、星期三", zhTw: "星期二、星期三" },
+  "席の種類": { yue: "座位種類", zhTw: "座位種類" },
+  "テーブル席 ／ お座敷": { yue: "餐桌／榻榻米", zhTw: "餐桌／榻榻米" },
+  "42席": { yue: "42 席", zhTw: "42 席" },
+  "席数": { yue: "座位數", zhTw: "座位數" },
+  "貸切": { yue: "包場", zhTw: "包場" },
+  "可能（お問い合わせください）": { yue: "可以（請查詢）", zhTw: "可以（請洽詢）" },
+  "個室": { yue: "包廂", zhTw: "包廂" },
+  "なし": { yue: "無", zhTw: "無" },
+  "喫煙の可否": { yue: "吸煙", zhTw: "吸菸" },
+  "全席禁煙": { yue: "全席禁煙", zhTw: "全席禁菸" },
+  "「アグー豚」ではなく、": { yue: "並非泛稱「阿古豬」，", zhTw: "並非泛稱「阿古豬」，" },
+  "認定ブランド「あぐー豚」": { yue: "認證品牌「阿古豬」", zhTw: "認證品牌「阿古豬」" },
+  "恩納豚で使用しているのは、JAおきなわの品質基準をクリアした、認定ブランドの「あぐー豚」です。": {
+    yue: "恩納豚使用嘅係通過 JA 沖繩品質標準嘅認證品牌「阿古豬」。",
+    zhTw: "恩納豚使用的是通過 JA 沖繩品質標準的認證品牌「阿古豬」。",
+  },
+  "沖縄でよく目にする「アグー豚」という呼び方とは異なり、ひらがなの「あぐー」は、JAおきなわが商標を管理するブランド名称。\\n定められた品質基準を満たし、認定された豚肉だけが「あぐー」として流通します。": {
+    yue: "有別於沖繩常見嘅泛稱，平假名「あぐー」係 JA 沖繩管理嘅品牌名稱。n只有達到規定標準並獲認證嘅豬肉，先可以「阿古」名義流通。",
+    zhTw: "有別於沖繩常見的泛稱，平假名「あぐー」是 JA 沖繩管理的品牌名稱。n只有達到規定標準並獲認證的豬肉，才能以「阿古」名義流通。",
+  },
+  "恩納豚では、この認定された「あぐー豚」を使用しています。脂に上品な甘みがあり、しゃぶしゃぶにすることで柔らかさと旨みが際立ちます。沖縄が誇る上質な味わいを、存分にお楽しみください。": {
+    yue: "恩納豚使用嘅正係呢款認證阿古豬。油脂帶有雅致甜味，以 Shabu-shabu 方式更能突顯柔軟同鮮味。請盡情享受沖繩引以為傲嘅上乘滋味。",
+    zhTw: "恩納豚使用的正是這款認證阿古豬。油脂帶有雅緻甜味，以 Shabu-shabu 方式更能突顯柔軟與鮮味。請盡情享受沖繩引以為傲的上乘滋味。",
+  },
+  "認定ブランド あぐー豚のしゃぶしゃぶ": {
+    yue: "認證品牌阿古豬 Shabu-shabu",
+    zhTw: "認證品牌阿古豬 Shabu-shabu",
+  },
+  "特選": { yue: "特選", zhTw: "特選" },
+  "石垣牛": { yue: "石垣牛", zhTw: "石垣牛" },
+  "特選ラベル": { yue: "特選標籤", zhTw: "特選標籤" },
+  "A5ランクのみ使用": { yue: "只使用 A5 等級", zhTw: "僅使用 A5 等級" },
+  "石垣牛認定店": { yue: "石垣牛認證店", zhTw: "石垣牛認證店" },
+  "沖縄が誇るブランド和牛「石垣牛」。": {
+    yue: "沖繩引以為傲嘅品牌和牛「石垣牛」。",
+    zhTw: "沖繩引以為傲的品牌和牛「石垣牛」。",
+  },
+  "ひと口に石垣牛といっても、品質によって「特選ラベル」と「銘産ラベル」に分けられ、その基準は異なります。": {
+    yue: "即使同樣叫石垣牛，亦會按品質分為「特選標籤」同「名產標籤」，標準各有不同。",
+    zhTw: "即使同樣稱為石垣牛，也會依品質分為「特選標籤」與「名產標籤」，標準各不相同。",
+  },
+  "当店で使用するのは、その中でも上位に位置する「特選ラベル」の石垣牛。さらに、肉質等級5・歩留等級AのA5ランクのみを厳選しています。": {
+    yue: "本店使用嘅係當中上位嘅「特選標籤」石垣牛，並只嚴選肉品等級 5、產肉等級 A 嘅 A5 級。",
+    zhTw: "本店使用的是其中上位的「特選標籤」石垣牛，並僅嚴選肉品等級 5、產肉等級 A 的 A5 級。",
+  },
+  "仕入れた肉はそのまま使用せず、余分な脂や筋を丁寧に取り除く「グルムキ」を施し、石垣牛本来のきめ細かな肉質、上品な脂の甘み、とろけるような柔らかさを存分に味わっていただける状態に整えてご提供します。": {
+    yue: "購入嘅肉唔會直接使用，會經過仔細去除多餘油脂同筋膜嘅「Gurumuki」處理，令您充分品味石垣牛原有嘅細緻肉質、油脂嘅雅致甜味同入口即化嘅柔軟。",
+    zhTw: "購入的肉不會直接使用，會經過仔細去除多餘油脂與筋膜的「Gurumuki」處理，讓您充分品味石垣牛原有的細緻肉質、油脂的雅緻甜味與入口即化的柔軟。",
+  },
+  "石垣牛ならではの本物の味わいを、ぜひしゃぶしゃぶでご堪能ください。": {
+    yue: "請務必以 Shabu-shabu 品嚐石垣牛獨有嘅真味。",
+    zhTw: "請務必以 Shabu-shabu 品嚐石垣牛獨有的真味。",
+  },
+  "特選 石垣牛のしゃぶしゃぶ": { yue: "特選石垣牛 Shabu-shabu", zhTw: "特選石垣牛 Shabu-shabu" },
+  "特選 石垣牛": { yue: "特選石垣牛", zhTw: "特選石垣牛" },
+  "沖縄を代表する和牛、石垣牛。きめ細やかな霜降りと、噛むほどに広がる濃厚な味わいを、存分にお楽しみいただけます。": {
+    yue: "沖繩代表性嘅和牛石垣牛。細緻雪花同越嚼越濃嘅滋味，請盡情享用。",
+    zhTw: "沖繩代表性的和牛石垣牛。細緻雪花與越嚼越濃的滋味，請盡情享用。",
+  },
+  "しゃぶしゃぶの出汁": { yue: "Shabu-shabu 湯底", zhTw: "Shabu-shabu 湯底" },
+  "唯一無二のお出汁": { yue: "獨一無二嘅湯底", zhTw: "獨一無二的湯底" },
+  "最初に感じるのは、ほどよいピリ辛さ。\\nそこへ良質なお肉の旨みと脂の甘みが溶け込むことで、\\n食べ進めるほどに出汁の味わいが変化し、\\n最後には皆さまが驚くほど甘くまろやかな味わいへと仕上がっていきます。": {
+    yue: "最初感受到嘅係適度嘅辛辣。n優質肉類嘅鮮味同油脂嘅甜味融入其中，n越食湯底嘅風味越變化，n最後會完成令人驚訝嘅甘醇柔和之味。",
+    zhTw: "最初感受到的是適度的辛辣。n優質肉品的鮮味與油脂的甜味融入其中，n越吃湯底的風味越變化，n最後會完成令人驚訝的甘醇柔和之味。",
+  },
+  "一つの鍋の中で変化していく、\\n恩納豚ならではのお出汁をぜひお楽しみください。": {
+    yue: "喺一口鍋入面不斷變化，n請盡情品味恩納豚獨有嘅湯底。",
+    zhTw: "在一口鍋中不斷變化，n請盡情品味恩納豚獨有的湯底。",
+  },
+  "※出汁の変更はできません。\\n辛いものが極度に苦手な方はご遠慮ください。": {
+    yue: "※無法更換湯底。n極度不擅長辣味嘅客人敬請見諒。",
+    zhTw: "※無法更換湯底。n極度不擅長辣味的客人敬請見諒。",
+  },
+  "肉と島野菜の旨みを引き出す出汁にこだわり、〆の一品まで美味しく召し上がっていただけるようご用意しています。": {
+    yue: "講究能帶出肉同島蔬鮮味嘅湯底，連收尾一品都美味。",
+    zhTw: "講究能帶出肉與島蔬鮮味的湯底，連收尾一品都美味。",
+  },
+  "沖縄県産食材": { yue: "沖繩縣產食材", zhTw: "沖繩縣產食材" },
+  "おきなわ食材の認定店": { yue: "沖繩食材認證店", zhTw: "沖繩食材認證店" },
+  "ご提供する食材のほとんどは沖縄県産。\\n島野菜をはじめ、沖縄で育まれた食材を積極的に取り入れています。": {
+    yue: "所提供嘅食材大多數係沖繩縣產。n以島蔬為首，積極採用沖繩培育嘅食材。",
+    zhTw: "所提供的食材大多數為沖繩縣產。n以島蔬為首，積極採用沖繩培育的食材。",
+  },
+  "そのほかの食材についても、使用するものはすべて国内産。\\n一皿一皿を通して、沖縄と日本の豊かな恵みをお楽しみください。": {
+    yue: "其餘食材亦全部使用國產。n請透過每一道菜，品味沖繩同日本嘅豐富饋贈。",
+    zhTw: "其餘食材也全部使用國產。n請透過每一道菜，品味沖繩與日本的豐富饋贈。",
+  },
+  "沖縄旅行の特別な夕食": { yue: "沖繩旅行中嘅特別晚餐", zhTw: "沖繩旅行中的特別晚餐" },
+  "旅の思い出に残る、上質な一夜を。": { yue: "留下旅途回憶嘅一夜。", zhTw: "留下旅途回憶的一夜。" },
+  "記念日・誕生日": { yue: "紀念日·生日", zhTw: "紀念日·生日" },
+  "大切な日を、特別なコースでお祝いします。": {
+    yue: "以特別套餐慶祝重要日子。",
+    zhTw: "以特別套餐慶祝重要日子。",
+  },
+  "接待・会食": { yue: "宴請·聚餐", zhTw: "宴請·聚餐" },
+  "落ち着いた空間で、大切な方にも。": { yue: "喺寧靜空間招待重要嘅人。", zhTw: "在寧靜空間招待重要的人。" },
+  "海外からのお客様": { yue: "海外客人", zhTw: "海外客人" },
+  "世界各国からのお客様にご愛顧いただいています。": {
+    yue: "承蒙來自世界各地嘅客人光顧。",
+    zhTw: "承蒙來自世界各地的客人光顧。",
+  },
+  "お座敷": { yue: "榻榻米座席", zhTw: "榻榻米座席" },
+  "テーブル席": { yue: "餐桌座位", zhTw: "餐桌座位" },
+  "ゆったりとくつろげるお座敷席。ご家族やご友人との団らん、記念日のお食事など、落ち着いた時間をお過ごしいただけます。": {
+    yue: "寬敞舒適嘅榻榻米座席。適合家人朋友聚會、紀念日用餐，度過從容時光。",
+    zhTw: "寬敞舒適的榻榻米座席。適合家人朋友團聚、紀念日用餐，度過從容時光。",
+  },
+  "会食や接待にも使いやすいテーブル席。しゃぶしゃぶを囲みながら、会話を楽しむひとときをお届けします。": {
+    yue: "適合聚餐宴請嘅餐桌座位。圍住 Shabu-shabu 享受交談。",
+    zhTw: "適合聚餐宴請的餐桌座位。圍著 Shabu-shabu 享受交談。",
+  },
+  "お座敷でのくつろぎの時間。テーブル席での団らん。恩納豚では、記念日・会食・接待など、シーンに合わせてお席をお選びいただけます。": {
+    yue: "榻榻米上嘅從容，餐桌邊嘅團聚。紀念日、聚餐、宴請，皆可按場景選座。",
+    zhTw: "榻榻米上的從容，餐桌邊的團聚。紀念日、聚餐、宴請，皆可依場合選座。",
+  },
+};
+
+/** @type {Record<string, { yue: string, zhTw: string }>} */
+const copyT = {
+  "meta.homeTitle": {
+    yue: "恩納豚 | 沖繩 Shabu-shabu 完全預約制套餐專門店",
+    zhTw: "恩納豚 | 沖繩 Shabu-shabu 完全預約制套餐專門店",
+  },
+  "meta.homeDesc": {
+    yue: "阿古豬×特選石垣牛。沖繩那霸完全預約制 Shabu-shabu 套餐專門店「恩納豚」。",
+    zhTw: "阿古豬×特選石垣牛。沖繩那霸完全預約制 Shabu-shabu 套餐專門店「恩納豚」。",
+  },
+  "meta.courseTitle": { yue: "套餐 | 恩納豚", zhTw: "套餐 | 恩納豚" },
+  "meta.courseDesc": {
+    yue: "品嚐本部牛與阿古豬嘅恩納豚套餐。Executive、華、極、煌、菲力。完全預約制。",
+    zhTw: "品嚐本部牛與阿古豬的恩納豚套餐。Executive、華、極、煌、菲力。完全預約制。",
+  },
+  "meta.seatsTitle": { yue: "座位介紹 | 恩納豚", zhTw: "座位介紹 | 恩納豚" },
+  "meta.seatsDesc": {
+    yue: "榻榻米同餐桌座位介紹。完全預約制。",
+    zhTw: "榻榻米與餐桌座位介紹。完全預約制。",
+  },
+  "meta.reserveTitle": { yue: "線上預約 | 恩納豚", zhTw: "線上預約 | 恩納豚" },
+  "meta.reserveDesc": {
+    yue: "恩納豚線上預約表。請告知希望日期、人數同套餐。",
+    zhTw: "恩納豚線上預約表。請告知希望日期、人數與套餐。",
+  },
+  "meta.intlReserveTitle": { yue: "海外預約 | 恩納豚", zhTw: "海外預約 | 恩納豚" },
+  "meta.intlReserveDesc": {
+    yue: "海外客人預約申請，最多三個希望日期。",
+    zhTw: "海外客人預約申請，最多三個希望日期。",
+  },
+  "nav.top": { yue: "主頁", zhTw: "首頁" },
+  "nav.about": { yue: "關於恩納豚", zhTw: "關於恩納豚" },
+  "nav.kodawari": { yue: "匠心", zhTw: "堅持" },
+  "nav.notices": { yue: "公告", zhTw: "公告" },
+  "nav.course": { yue: "套餐", zhTw: "套餐" },
+  "nav.seats": { yue: "店內", zhTw: "店內" },
+  "nav.access": { yue: "交通", zhTw: "交通" },
+  "nav.reserve": { yue: "預約·查詢", zhTw: "預約·洽詢" },
+  "nav.openMenu": { yue: "打開選單", zhTw: "開啟選單" },
+  "nav.closeMenu": { yue: "關閉選單", zhTw: "關閉選單" },
+  "lang.ja": { yue: "日文", zhTw: "日文" },
+  "lang.en": { yue: "English", zhTw: "English" },
+  "lang.yue": { yue: "廣東話", zhTw: "廣東話" },
+  "lang.zhTw": { yue: "繁體中文", zhTw: "繁體中文" },
+  "lang.ko": { yue: "한국어", zhTw: "한국어" },
+  "lang.switchTo": { yue: "切換至", zhTw: "切換至" },
+  "lang.menuButton": { yue: "選擇語言", zhTw: "選擇語言" },
+  "reserve.call": { yue: "電話預約", zhTw: "電話預約" },
+  "reserve.online": { yue: "線上預約", zhTw: "線上預約" },
+  "reserve.phoneLabel": { yue: "預約電話", zhTw: "預約電話" },
+  "reserve.hours": {
+    yue: "受理 13:30–21:00（完全預約制·只限電話）",
+    zhTw: "受理 13:30–21:00（完全預約制·僅限電話）",
+  },
+  "reserve.copy": { yue: "複製號碼", zhTw: "複製號碼" },
+  "reserve.copied": { yue: "已複製", zhTw: "已複製" },
+  "reserve.dial": { yue: "撥打電話", zhTw: "撥打電話" },
+  "reserve.close": { yue: "關閉", zhTw: "關閉" },
+  "hero.kicker": { yue: "沖繩 Shabu-shabu 恩納豚 那霸", zhTw: "沖繩 Shabu-shabu 恩納豚 那霸" },
+  "hero.specialty": { yue: "套餐專門店", zhTw: "套餐專門店" },
+  "hero.reservation": { yue: "完全預約制", zhTw: "完全預約制" },
+  "hero.h1a": { yue: "阿古豬 × 特選石垣牛", zhTw: "阿古豬 × 特選石垣牛" },
+  "hero.h1b": { yue: "沖繩嘅饋贈，", zhTw: "沖繩的饋贈，" },
+  "hero.h1c": { yue: "以上乘 Shabu-shabu 呈現。", zhTw: "以上乘 Shabu-shabu 呈現。" },
+  "hero.body": {
+    yue: "以島嶼水土孕育嘅品牌豬同和牛，n喺本店獨有嘅湯底中品味獨一無二嘅 Shabu-shabu。n令旅途中嘅一夜，成為難忘時光。",
+    zhTw: "以島嶼水土孕育的品牌豬與和牛，n在本店獨有的湯底中品味獨一無二的 Shabu-shabu。n讓旅途中的一夜，成為難忘時光。",
+  },
+  "hero.note": {
+    yue: "完全預約制，n請提前一天預約。",
+    zhTw: "完全預約制，n請提前一天預約。",
+  },
+  "about.conceptJa": { yue: "理念", zhTw: "理念" },
+  "about.line1": { yue: "好嘢自有其道理。", zhTw: "好東西自有其道理。" },
+  "about.line2": {
+    yue: "沖繩嘅饋贈，用恩納豚獨有嘅湯底。",
+    zhTw: "沖繩的饋贈，以恩納豚獨有的湯底。",
+  },
+  "about.overlay": {
+    yue: "沖繩嘅饋贈，以上乘 Shabu-shabu 呈現。",
+    zhTw: "沖繩的饋贈，以上乘 Shabu-shabu 呈現。",
+  },
+  "about.overlayEn": {
+    yue: "Okinawa's finest ingredients, served as exquisite shabu-shabu.",
+    zhTw: "Okinawa's finest ingredients, served as exquisite shabu-shabu.",
+  },
+  "about.heading": { yue: "關於恩納豚", zhTw: "關於恩納豚" },
+  "about.lead": {
+    yue: "阿古豬同沖繩三大品牌黑毛和牛。n以數週熟成嘅恩納豚原創湯底n品味沖繩培育嘅阿古豬同品牌黑毛和牛，n獨一無二嘅 Shabu-shabu 專門店。",
+    zhTw: "阿古豬與沖繩三大品牌黑毛和牛。n以數週熟成的恩納豚原創湯底n品味沖繩培育的阿古豬與品牌黑毛和牛，n獨一無二的 Shabu-shabu 專門店。",
+  },
+  "about.p1": {
+    yue: "阿古豬同特選石垣牛比普通肉更甘、更鮮。為與之相配，我哋準備咗熟成數週、醇厚嘅原創湯底。",
+    zhTw: "阿古豬與特選石垣牛比普通肉更甘、更鮮。為與之相配，我們準備了熟成數週、醇厚的原創湯底。",
+  },
+  "about.p2": {
+    yue: "唔係醋醬油或芝麻醬，而係用呢碗湯底帶出肉本身嘅美味。",
+    zhTw: "不是醋醬油或芝麻醬，而是用這碗湯底帶出肉本身的美味。",
+  },
+  "about.p3": {
+    yue: "約 95% 嘅食材產自沖繩。n本店獲沖繩縣農林水產部認證為「沖繩食材之店」。",
+    zhTw: "約 95% 的食材產自沖繩。n本店獲沖繩縣農林水產部認證為「沖繩食材之店」。",
+  },
+  "about.p4": {
+    yue: "好菜需要相應嘅功夫同時間。願您連同每一盤背後嘅心意一齊品嚐。",
+    zhTw: "好菜需要相應的功夫與時間。願您連同每一盤背後的心意一併品嚐。",
+  },
+  "about.chef": { yue: "恩納豚  店主", zhTw: "恩納豚  店主" },
+  "about.photoAlt": { yue: "關於恩納豚", zhTw: "關於恩納豚" },
+  "about.interiorAlt": { yue: "店內", zhTw: "店內" },
+  "kodawari.heading": { yue: "本店嘅堅持", zhTw: "本店的堅持" },
+  "siteNotices.heading": { yue: "公告", zhTw: "公告" },
+  "siteNotices.empty": { yue: "目前沒有公告。", zhTw: "目前沒有公告。" },
+  "reservationBanner.heading": {
+    yue: "套餐專門店 · 事前預約制",
+    zhTw: "套餐專門店 · 事前預約制",
+  },
+  "reservationBanner.notice1": {
+    yue: "為使每組客人喺最佳狀態下享用料理，n我哋按預約n採購同準備食材。",
+    zhTw: "為使每組客人在最佳狀態下享用料理，n我們依預約n採購並準備食材。",
+  },
+  "reservationBanner.notice2": {
+    yue: "此外，Shabu-shabu 所需嘅湯底n會花時間熬製、靜置熟成n後再奉上。",
+    zhTw: "此外，Shabu-shabu 所需的湯底n會花時間熬製、靜置熟成n後再奉上。",
+  },
+  "reservationBanner.notice3": {
+    yue: "因此本店實行完全預約制，n原則上請提前一天預約。",
+    zhTw: "因此本店實行完全預約制，n原則上請提前一天預約。",
+  },
+  "reservationBanner.notice4": {
+    yue: "此外，僅在食材準備、料理籌備同座位條件允許時，n亦可能接受當日預約。",
+    zhTw: "此外，僅在食材準備、料理籌備與座位條件允許時，n亦可能接受當日預約。",
+  },
+  "reservationBanner.notice5": {
+    yue: "若希望當日來店，請致電查詢。",
+    zhTw: "若希望當日來店，請致電洽詢。",
+  },
+  "courseTeaser.heading": { yue: "套餐菜單", zhTw: "套餐菜單" },
+  "courseTeaser.body": { yue: "按當日食材準備套餐", zhTw: "依當日食材準備套餐" },
+  "courseTeaser.cta": { yue: "查看套餐", zhTw: "查看套餐" },
+  "courseTeaser.alt": { yue: "套餐菜單", zhTw: "套餐菜單" },
+  "scenes.heading": { yue: "適用場景", zhTw: "適用場合" },
+  "interior.heading": { yue: "店內·座位", zhTw: "店內·座位" },
+  "interior.tatami": { yue: "榻榻米座席", zhTw: "榻榻米座席" },
+  "interior.table": { yue: "餐桌座位", zhTw: "餐桌座位" },
+  "interior.more": { yue: "座位介紹", zhTw: "座位介紹" },
+  "reserveSection.heading": { yue: "預約須知", zhTw: "預約須知" },
+  "reserveSection.body": {
+    yue: "本店為完全預約制套餐專門店。n請透過線上預約表提交。n告知希望日期、人數同套餐後，n我哋會確認空位並以電郵回覆。n套餐內容亦歡迎隨時查詢。",
+    zhTw: "本店為完全預約制套餐專門店。n請透過線上預約表提交。n告知希望日期、人數與套餐後，n我們會確認空位並以電子郵件回覆。n套餐內容也歡迎隨時洽詢。",
+  },
+  "children.heading": { yue: "攜同小童客人須知", zhTw: "攜帶兒童客人須知" },
+  "children.lead": { yue: "恕不接待學齡前兒童。", zhTw: "恕不接待學齡前兒童。" },
+  "children.p1": {
+    yue: "我哋希望您喺沖繩旅行、紀念日等重要時刻，n喺寧靜空間中n從容享用 Shabu-shabu。",
+    zhTw: "我們希望您在沖繩旅行、紀念日等重要時刻，n在寧靜空間中n從容享用 Shabu-shabu。",
+  },
+  "children.p2": {
+    yue: "套餐約兩小時。n為營造舒適嘅用餐環境，n特此說明，敬請見諒。",
+    zhTw: "套餐約兩小時。n為營造舒適的用餐環境，n特此說明，敬請見諒。",
+  },
+  "children.note": {
+    yue: "若小童人數超過大人，n即使 5 歲以上亦可能需要另行商議。",
+    zhTw: "若兒童人數超過大人，n即使 5 歲以上亦可能需要另行商議。",
+  },
+  "children.closing": { yue: "敬請見諒。", zhTw: "敬請見諒。" },
+  "children.more": { yue: "原因與詳情", zhTw: "原因與詳情" },
+  "children.accessValue": { yue: "恕不接待學齡前兒童", zhTw: "恕不接待學齡前兒童" },
+  "tattoo.heading": { yue: "關於紋身", zhTw: "關於刺青" },
+  "tattoo.lead": {
+    yue: "請避免露出紋身。一小處無妨。",
+    zhTw: "請避免露出刺青。一小處無妨。",
+  },
+  "tattoo.p1": {
+    yue: "本店並無偏見，n但部分客人可能會感到驚訝。n敬請見諒。",
+    zhTw: "本店並無偏見，n但部分客人可能會感到驚訝。n敬請見諒。",
+  },
+  "fragrance.heading": { yue: "關於香水與香氣", zhTw: "關於香水與香氣" },
+  "fragrance.lead": {
+    yue: "為讓您充分感受料理同湯底本身嘅香氣，n請勿噴灑過濃嘅香水、n使用香氣強烈嘅整髮產品等，n並以較強香氣來訪。",
+    zhTw: "為讓您充分感受料理與湯底本身的香氣，n請勿噴灑過濃的香水、n使用香氣強烈的整髮產品等，n並以較強香氣來訪。",
+  },
+  "fragrance.p1": {
+    yue: "Shabu-shabu 之中，食材同湯底嘅細膩香氣n亦係風味嘅一部分。n敬請理解同配合，n以便各位舒適用餐。",
+    zhTw: "Shabu-shabu 之中，食材與湯底的細膩香氣n也是風味的一部分。n敬請理解與配合，n以便各位舒適用餐。",
+  },
+  "gallery.heading": { yue: "相簿", zhTw: "相簿" },
+  "gallery.aria": { yue: "相簿（可左右滑動）", zhTw: "相簿（可左右滑動）" },
+  "gallery.swipe": { yue: "← 滑動查看更多 →", zhTw: "← 滑動查看更多 →" },
+  "gallery.p1": { yue: "許多名人亦曾光臨。", zhTw: "許多名人亦曾光臨。" },
+  "gallery.p2": {
+    yue: "亦可喺 Instagram 查看店內光景。n歡迎睇睇。",
+    zhTw: "亦可在 Instagram 查看店內光景。n歡迎看看。",
+  },
+  "access.heading": { yue: "店舖資料·交通", zhTw: "店舖資訊·交通" },
+  "access.mapTitle": { yue: "恩納豚地圖", zhTw: "恩納豚地圖" },
+  "access.openMap": { yue: "喺 Google 地圖打開 →", zhTw: "在 Google 地圖開啟 →" },
+  "access.reserveOnline": { yue: "線上預約表 →", zhTw: "線上預約表 →" },
+  "form.heading": { yue: "線上預約", zhTw: "線上預約" },
+  "form.lead": {
+    yue: "請告知希望日期、人數同套餐。n此為預約申請，n確認空位後將以電郵回覆。",
+    zhTw: "請告知希望日期、人數與套餐。n此為預約申請，n確認空位後將以電子郵件回覆。",
+  },
+  "form.jaPhoneNote": {
+    yue: "日語客人請電話預約。",
+    zhTw: "日語客人請電話預約。",
+  },
+  "form.closed": { yue: "休息日：星期二、星期三", zhTw: "公休日：星期二、星期三" },
+  "form.advance": {
+    yue: "須提前一天預約（可提前 1 個月）",
+    zhTw: "須提前一天預約（可提前 1 個月）",
+  },
+  "form.hours": {
+    yue: "營業時間 17:30–21:00（套餐約兩小時）",
+    zhTw: "營業時間 17:30–21:00（套餐約兩小時）",
+  },
+  "form.details": { yue: "客人資料", zhTw: "客人資料" },
+  "form.visit": { yue: "到店", zhTw: "到店" },
+  "form.courseHeading": { yue: "套餐", zhTw: "套餐" },
+  "form.notesHeading": { yue: "需求與須知", zhTw: "需求與須知" },
+  "form.name": { yue: "姓名", zhTw: "姓名" },
+  "form.email": { yue: "電郵", zhTw: "電子郵件" },
+  "form.phone": { yue: "電話", zhTw: "電話" },
+  "form.date": { yue: "希望日期", zhTw: "希望日期" },
+  "form.time": { yue: "希望時間", zhTw: "希望時間" },
+  "form.guests": { yue: "人數", zhTw: "人數" },
+  "form.seating": { yue: "座位偏好", zhTw: "座位偏好" },
+  "form.seatingTatami": { yue: "榻榻米", zhTw: "榻榻米" },
+  "form.seatingTable": { yue: "餐桌", zhTw: "餐桌" },
+  "form.seatingEither": { yue: "由店方安排", zhTw: "由店方安排" },
+  "form.courseUndecided": { yue: "未定／希望諮詢", zhTw: "未定／希望諮詢" },
+  "form.perPerson": { yue: "每位", zhTw: "每位" },
+  "form.notes": { yue: "需求（選填）", zhTw: "需求（選填）" },
+  "form.notesPh": {
+    yue: "如有過敏、紀念日或其他需求請填寫",
+    zhTw: "如有過敏、紀念日或其他需求請填寫",
+  },
+  "form.guests9": { yue: "9 人以上", zhTw: "9 人以上" },
+  "form.guests9note": {
+    yue: "9 人以上請喺需求欄填寫人數。",
+    zhTw: "9 人以上請在需求欄填寫人數。",
+  },
+  "form.agreeChildren": {
+    yue: "我了解恕不接待學齡前兒童",
+    zhTw: "我了解恕不接待學齡前兒童",
+  },
+  "form.agreeTattoo": {
+    yue: "我了解請避免露出紋身（一小處無妨）",
+    zhTw: "我了解請避免露出刺青（一小處無妨）",
+  },
+  "form.childrenLink": { yue: "攜同小童須知", zhTw: "攜帶兒童須知" },
+  "form.tattooLink": { yue: "關於紋身", zhTw: "關於刺青" },
+  "form.submit": { yue: "提交預約申請", zhTw: "提交預約申請" },
+  "form.sending": { yue: "提交中…", zhTw: "提交中…" },
+  "form.successKicker": { yue: "REQUEST RECEIVED", zhTw: "REQUEST RECEIVED" },
+  "form.successTitle": { yue: "已收到您的預約申請", zhTw: "已收到您的預約申請" },
+  "form.successBody": {
+    yue: "我哋會確認空位後以電郵聯絡。n喺收到確認前，預約尚未確定。",
+    zhTw: "我們會確認空位後以電子郵件聯絡。n在收到確認前，預約尚未確定。",
+  },
+  "form.reference": { yue: "受理編號", zhTw: "受理編號" },
+  "form.home": { yue: "返回主頁", zhTw: "返回首頁" },
+  "form.another": { yue: "再提交一次", zhTw: "再提交一次" },
+  "form.errorGeneric": {
+    yue: "提交失敗，請稍後再試。",
+    zhTw: "提交失敗，請稍後再試。",
+  },
+  "form.errorRequired": { yue: "請填寫必填項。", zhTw: "請填寫必填項。" },
+  "form.errorEmail": { yue: "請輸入有效電郵。", zhTw: "請輸入有效電子郵件。" },
+  "form.errorPhone": { yue: "請輸入有效電話號碼。", zhTw: "請輸入有效電話號碼。" },
+  "form.errorDate": {
+    yue: "希望日期請選明天起一個月內，並避開星期二、星期三。",
+    zhTw: "希望日期請選明天起一個月內，並避開星期二、星期三。",
+  },
+  "form.errorTime": { yue: "請選擇希望時間。", zhTw: "請選擇希望時間。" },
+  "form.errorCourse": { yue: "請選擇套餐。", zhTw: "請選擇套餐。" },
+  "form.errorAgree": { yue: "請確認已了解本店須知。", zhTw: "請確認已了解本店須知。" },
+  "intlForm.heading": { yue: "海外客人預約申請", zhTw: "海外客人預約申請" },
+  "intlForm.closed": { yue: "休息日：星期二、星期三", zhTw: "公休日：星期二、星期三" },
+  "intlForm.phoneNotice": {
+    yue: "恕不接待海外客人電話預約。n請透過下方預約表單申請。",
+    zhTw: "恕不接待海外客人電話預約。n請透過下方預約表單申請。",
+  },
+  "intlForm.jaHeading": { yue: "海外客人預約申請", zhTw: "海外客人預約申請" },
+  "intlForm.domesticLead": {
+    yue: "恕不接待海外客人電話預約。n請透過下方預約表單申請。",
+    zhTw: "恕不接待海外客人電話預約。n請透過下方預約表單申請。",
+  },
+  "intlForm.overseasToggle": { yue: "海外客人預約申請", zhTw: "海外客人預約申請" },
+  "intlForm.overseasToggleHint": {
+    yue: "請透過下方預約表單申請",
+    zhTw: "請透過下方預約表單申請",
+  },
+  "intlForm.overseasFormNote": {
+    yue: "恕不接待海外客人電話預約。n請透過下方預約表單申請。",
+    zhTw: "恕不接待海外客人電話預約。n請透過下方預約表單申請。",
+  },
+  "intlForm.policyHeading": { yue: "預約前須知", zhTw: "預約前須知" },
+  "intlForm.policyItems": {
+    yue: "本店為完全預約制。n只接受套餐預約。n套餐 18:00 開始。n*21:00 打烊n湯底起初略辣，加入肉同蔬菜後會變得溫和。n恕不接待學齡前兒童。n請遮蓋紋身。n*一小處紋身無妨",
+    zhTw: "本店為完全預約制。n僅接受套餐預約。n套餐 18:00 開始。n*21:00 打烊n湯底起初略辣，加入肉與蔬菜後會變得溫和。n恕不接待學齡前兒童。n請遮蓋刺青。n*一小處刺青無妨",
+  },
+  "intlForm.agreePolicy": { yue: "我已閱讀並同意以上內容", zhTw: "我已閱讀並同意以上內容" },
+  "intlForm.dateHint": {
+    yue: "因食材採購同準備，如能選擇多個希望日期將不勝感激。",
+    zhTw: "因食材採購與準備，如能選擇多個希望日期將不勝感激。",
+  },
+  "intlForm.dateFormat": { yue: "格式：Y / M / D", zhTw: "格式：Y / M / D" },
+  "intlForm.openCalendar": { yue: "打開日曆", zhTw: "開啟日曆" },
+  "intlForm.details": { yue: "客人資料", zhTw: "客人資料" },
+  "intlForm.visit": { yue: "希望到店", zhTw: "希望到店" },
+  "intlForm.name": { yue: "姓名", zhTw: "姓名" },
+  "intlForm.email": { yue: "電郵", zhTw: "電子郵件" },
+  "intlForm.country": { yue: "國家/地區", zhTw: "國家/地區" },
+  "intlForm.date1": { yue: "第一希望日期", zhTw: "第一希望日期" },
+  "intlForm.date2": { yue: "第二希望（選填）", zhTw: "第二希望（選填）" },
+  "intlForm.date3": { yue: "第三希望（選填）", zhTw: "第三希望（選填）" },
+  "intlForm.adults": { yue: "大人", zhTw: "大人" },
+  "intlForm.children": { yue: "小童（不可攜同學齡前兒童）", zhTw: "兒童（不可攜帶學齡前兒童）" },
+  "intlForm.notesHeading": { yue: "其他需求", zhTw: "其他需求" },
+  "intlForm.notes": { yue: "需求（選填）", zhTw: "需求（選填）" },
+  "intlForm.notesPh": {
+    yue: "過敏、紀念日、希望套餐等",
+    zhTw: "過敏、紀念日、希望套餐等",
+  },
+  "intlForm.submit": { yue: "發送預約申請", zhTw: "送出預約申請" },
+  "intlForm.sending": { yue: "提交中…", zhTw: "提交中…" },
+  "intlForm.successKicker": { yue: "REQUEST RECEIVED", zhTw: "REQUEST RECEIVED" },
+  "intlForm.successTitle": { yue: "已收到您的預約申請", zhTw: "已收到您的預約申請" },
+  "intlForm.successBody": {
+    yue: "此時預約尚未確定。n請查收本店確認電郵並回覆後，預約方可確定。",
+    zhTw: "此時預約尚未確定。n請查收本店確認電子郵件並回覆後，預約方可確定。",
+  },
+  "intlForm.reference": { yue: "受理編號", zhTw: "受理編號" },
+  "intlForm.home": { yue: "返回主頁", zhTw: "返回首頁" },
+  "intlForm.another": { yue: "再提交一次", zhTw: "再提交一次" },
+  "intlForm.errorGeneric": {
+    yue: "提交失敗，請稍後再試。",
+    zhTw: "提交失敗，請稍後再試。",
+  },
+  "intlForm.errorRequired": { yue: "請填寫必填項。", zhTw: "請填寫必填項。" },
+  "intlForm.errorEmail": { yue: "請輸入有效電郵。", zhTw: "請輸入有效電子郵件。" },
+  "intlForm.errorDate": {
+    yue: "希望日期請選明天起一個月內，並避開星期二、星期三。",
+    zhTw: "希望日期請選明天起一個月內，並避開星期二、星期三。",
+  },
+  "intlForm.errorDatesDistinct": { yue: "請選擇不同的希望日期。", zhTw: "請選擇不同的希望日期。" },
+  "intlForm.errorAgree": { yue: "請確認已了解本店須知。", zhTw: "請確認已了解本店須知。" },
+  "intlForm.errorRateLimit": {
+    yue: "提交次數已達上限，請稍後再試。",
+    zhTw: "提交次數已達上限，請稍後再試。",
+  },
+  "intlAutoReply.subject": {
+    yue: "[恩納豚] 已收到您的預約申請（{reference}）",
+    zhTw: "[恩納豚] 已收到您的預約申請（{reference}）",
+  },
+  "intlAutoReply.body": {
+    yue: "尊敬的 {name}：nn感謝您的預約申請。nn此時預約尚未確定。我哋會確認空位後，喺數個工作天內以電郵聯絡您。nn受理編號：{reference}nn請等候本店確認電郵，回覆後方為預約確定。nn恩納豚（ONNATON）n沖繩·那霸",
+    zhTw: "尊敬的 {name}：nn感謝您的預約申請。nn此時預約尚未確定。我們會確認空位後，在數個工作天內以電子郵件聯絡您。nn受理編號：{reference}nn請等候本店確認電子郵件，回覆後方為預約確定。nn恩納豚（ONNATON）n沖繩·那霸",
+  },
+  "extras.heading": { yue: "追加料理", zhTw: "追加料理" },
+  "extras.next": { yue: "查看飲品", zhTw: "查看飲品" },
+  "drinks.heading": { yue: "飲品", zhTw: "飲品" },
+  "drinks.tax": { yue: "價格含稅。", zhTw: "價格含稅。" },
+  "coursePage.next": { yue: "下一套餐", zhTw: "下一套餐" },
+  "coursePage.prevPhoto": { yue: "上一張", zhTw: "上一張" },
+  "coursePage.nextPhoto": { yue: "下一張", zhTw: "下一張" },
+  "coursePage.photoN": { yue: "照片", zhTw: "照片" },
+  "seatsPage.heading": { yue: "座位介紹", zhTw: "座位介紹" },
+  "seatsPage.navAria": { yue: "座位類型", zhTw: "座位類型" },
+  "seatsPage.galleryCta": { yue: "店內光景", zhTw: "店內光景" },
+  "seatsPage.galleryHeading": { yue: "店內光景", zhTw: "店內光景" },
+};
+
+const out = { phrases: {}, copy: {} };
+const missing = [];
+
+for (const { key } of keys.phrases) {
+  const t = phraseT[key];
+  if (!t) missing.push(`phrase: ${key}`);
+  else out.phrases[key] = t;
+}
+
+for (const { path } of keys.copy) {
+  const t = copyT[path];
+  if (!t) missing.push(`copy: ${path}`);
+  else out.copy[path] = t;
+}
+
+if (missing.length) {
+  console.error("Missing translations:\n" + missing.join("\n"));
+  process.exit(1);
+}
+
+const outPath = join(__dirname, "../lib/i18n/locales/translations.json");
+mkdirSync(dirname(outPath), { recursive: true });
+writeFileSync(outPath, JSON.stringify(out, null, 2) + "\n", "utf8");
+
+console.log(`Wrote ${outPath}`);
+console.log(`phrases: ${Object.keys(out.phrases).length}, copy: ${Object.keys(out.copy).length}`);

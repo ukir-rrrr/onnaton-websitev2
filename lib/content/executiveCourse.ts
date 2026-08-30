@@ -218,8 +218,7 @@ export const kiwamiCourse: CourseMenuData = {
 export const kouCourse: CourseMenuData = {
   id: "kou",
   name: "エグゼクティブ　煌-kou-",
-  badge: "ご常連様人気",
-  badgeTail: "No.1",
+  badge: "ご常連様一番人気",
   priceLabel: "コースお一人様",
   priceMain: "一八、五〇〇円",
   priceTaxNote: "（税込 二〇、三五〇円）",
