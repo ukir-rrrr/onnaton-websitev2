@@ -14,9 +14,19 @@
 3. **Settings → Database** でパスワードを vault に保存
 4. 制作担当を **Project Settings → Team** から Invite（Developer 以上）
 
-### 休止防止（後で）
+### 休止防止（Cloudflare Cron）
 
-Cloudflare Cron から週1回 `GET /api/health` 等を叩く（Phase 5）。
+Supabase 無料プランは **約7日間アクセスがないとプロジェクトが一時停止** します。  
+本番 Worker に **Cloudflare Cron** を設定済みです（`wrangler.jsonc` → 月・木 03:00 UTC）。
+
+- Cron 実行時: `cloudflare-worker.ts` の `scheduled` → Supabase `sites` テーブルを1件読む
+- 手動確認: `GET /api/health` → `{ "ok": true, "supabase": "ok" }`
+
+ローカルで Cron を試す場合（`npm run preview` 後）:
+
+```bash
+curl "http://localhost:8787/cdn-cgi/handler/scheduled?cron=0+3+*+*+1"
+```
 
 ## 2. Resend
 

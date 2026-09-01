@@ -22,7 +22,7 @@ export function PageIntro({ phase, onFadeOutComplete }: PageIntroProps) {
           className="fixed inset-0 z-[120] flex items-center justify-center bg-white"
           initial={{ opacity: 1 }}
           animate={{ opacity: phase === "fadeOut" ? 0 : 1 }}
-          transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1] }}
+          transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
           onAnimationComplete={() => {
             if (phase === "fadeOut") onFadeOutComplete();
           }}

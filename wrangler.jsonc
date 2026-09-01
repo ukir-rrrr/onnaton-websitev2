@@ -3,7 +3,12 @@
   "name": "onnaton-websitev",
   // Dashboard で設定した平文の環境変数を、wrangler deploy 時に削除しない
   "keep_vars": true,
-  "main": ".open-next/worker.js",
+  // Custom worker adds a scheduled handler for Supabase keep-alive (see cloudflare-worker.ts).
+  "main": "cloudflare-worker.ts",
+  "triggers": {
+    // Mon & Thu 03:00 UTC — within Supabase free-tier 7-day inactivity window.
+    "crons": ["0 3 * * 1,4"]
+  },
   "compatibility_date": "2024-12-30",
   "compatibility_flags": [
     "nodejs_compat",
