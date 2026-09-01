@@ -20,12 +20,29 @@ Cloudflare Cron から週1回 `GET /api/health` 等を叩く（Phase 5）。
 
 ## 2. Resend
 
-1. **Domains** で送信ドメインを追加（例: `onnaton.jp`）
-2. 表示された **DNS レコード** をドメイン管理側に追加
+### アドレス構成の結論（Gmail は 1つでよい）
+
+自動返信メールの送信元（From）に **Gmail は指定できない**（Resend は DNS 認証済みの自ドメインしか From に使えず、`gmail.com` は認証不可）。
+Cloudflare Workers 上では生の SMTP も事実上使えないため、送信はすべて Resend の HTTP API 経由となる。
+→ **From は必ずドメインのアドレス**（例 `reservations@onnaton.com`）。ただし**送信専用で受信箱は不要**（Resend で SPF/DKIM を設定するだけ）。
+→ **Gmail の役割は受信のみ**。予約通知・お客様の返信・確認メールの手動送信をすべて **1つの Gmail** に集約すると、⑩の5段階フローが1スレッドにまとまり取りこぼしが起きにくい。
+
+| 役割 | 使うアドレス | 環境変数 |
+|---|---|---|
+| 自動返信メールの From | ドメインのアドレス（送信専用・受信箱不要） | `RESEND_FROM=reservations@onnaton.com` |
+| オーナーが予約内容を受け取る宛先 | Gmail（1つ） | `RESEND_OWNER_TO=onnaton.reserve@gmail.com` |
+| 自動返信メールの Reply-To | 同じ Gmail | `RESEND_REPLY_TO=onnaton.reserve@gmail.com` |
+| オーナーが確認メールを手動送信する時 | 同じ Gmail | （運用のみ・設定不要） |
+
+### 手順
+
+1. **Domains** で送信ドメイン `onnaton.com` を追加
+2. 表示された **DNS レコード（SPF / DKIM）** をドメイン管理側に追加（送信元ドメイン認証・1回のみ）
 3. 認証完了後 **API Keys** を作成 → `RESEND_API_KEY`
-4. 送信元: `RESEND_FROM=reservations@onnaton.jp`（認証済みドメイン）
-5. 通知先: `RESEND_OWNER_TO=` オーナー or 管理会社の受信箱
-6. （任意）返信先: `RESEND_REPLY_TO=` お客様自動返信の Reply-To（未設定時は `RESEND_OWNER_TO`）
+4. 送信元: `RESEND_FROM=reservations@onnaton.com`（**認証済みドメイン必須**。Gmail 不可）
+5. 通知先: `RESEND_OWNER_TO=onnaton.reserve@gmail.com`（**Gmail 可**）
+6. 返信先: `RESEND_REPLY_TO=onnaton.reserve@gmail.com`（**Gmail 可**・未設定時は `RESEND_OWNER_TO` にフォールバック）
+7. これらのキーは **Cloudflare ダッシュボードの Production 変数にも同じ値を設定**する（`RESEND_API_KEY` はシークレット、他は平文で可。`wrangler.jsonc` に `keep_vars: true` があるためデプロイ後も平文変数は維持される）。
 
 ※ フォーム送信時:
    - **オーナー**へ新規リクエスト通知
