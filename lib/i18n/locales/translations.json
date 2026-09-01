@@ -1409,6 +1409,30 @@
     "intlForm.age0to5Note": {
       "yue": "※0至5歲嘅小朋友原則上恕不招待。即使填寫亦可提交申請，能否接待會以電郵通知。",
       "zhTw": "※0至5歲的孩童原則上恕不接待。即使填寫仍可送出申請，能否接待將以電子郵件通知。"
+    },
+    "intlForm.referralLabel": {
+      "yue": "您係點樣得知本店？",
+      "zhTw": "您是如何得知本店的？"
+    },
+    "intlForm.referralPh": {
+      "yue": "請選擇",
+      "zhTw": "請選擇"
+    },
+    "intlForm.repeater": {
+      "yue": "回頭客",
+      "zhTw": "回頭客"
+    },
+    "intlForm.sns": {
+      "yue": "社交媒體",
+      "zhTw": "社群媒體"
+    },
+    "intlForm.internet": {
+      "yue": "網上搜尋",
+      "zhTw": "網路搜尋"
+    },
+    "intlForm.referral": {
+      "yue": "朋友介紹",
+      "zhTw": "朋友介紹"
     }
   }
 }

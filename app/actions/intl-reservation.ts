@@ -4,6 +4,7 @@ import { notifyOwnerIntlReservation } from "@/lib/email/ownerNotification";
 import { sendCustomerAutoReply } from "@/lib/email/customerAutoReply";
 import { isBookableDate } from "@/lib/content/reservation";
 import { findCountryDialCode } from "@/lib/content/countryCodes";
+import { isReferralSourceId } from "@/lib/content/referralSources";
 import {
   type IntlReservationState,
   valuesFromIntlFormData,
@@ -98,6 +99,7 @@ export async function submitIntlReservation(
   const age0to5 = parseCount(values.age0to5, 0, 10);
   const age6to12 = parseCount(values.age6to12, 0, 10);
   const age13to19 = parseCount(values.age13to19, 0, 10);
+  const referralSource = values.referralSource;
   const notes = values.notes;
   const agreePolicy = values.agreePolicy;
 
@@ -107,12 +109,16 @@ export async function submitIntlReservation(
     !phoneCountry ||
     !phoneNationalInput ||
     !country ||
+    !referralSource ||
     !date1 ||
     adults === null ||
     age0to5 === null ||
     age6to12 === null ||
     age13to19 === null
   ) {
+    return err(locale, copy.intlForm.errorRequired, formData);
+  }
+  if (!isReferralSourceId(referralSource)) {
     return err(locale, copy.intlForm.errorRequired, formData);
   }
   if (!looksLikeEmail(email)) return err(locale, copy.intlForm.errorEmail, formData);
@@ -184,6 +190,7 @@ export async function submitIntlReservation(
     age6to12,
     age13to19,
     children,
+    referralSource,
     notes: notes || null,
     locale,
     agreedAt,

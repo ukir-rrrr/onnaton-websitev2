@@ -11,6 +11,7 @@ export type IntlReservationFormValues = {
   age0to5: string;
   age6to12: string;
   age13to19: string;
+  referralSource: string;
   notes: string;
   agreePolicy: boolean;
 };
@@ -35,6 +36,7 @@ export const defaultIntlReservationFormValues: IntlReservationFormValues = {
   age0to5: "0",
   age6to12: "0",
   age13to19: "0",
+  referralSource: "",
   notes: "",
   agreePolicy: false,
 };
@@ -58,6 +60,7 @@ export function valuesFromIntlFormData(formData: FormData): IntlReservationFormV
     age0to5: age0to5 || "0",
     age6to12: age6to12 || "0",
     age13to19: age13to19 || "0",
+    referralSource: str("referral_source"),
     notes: str("notes"),
     agreePolicy: formData.get("agreePolicy") === "on",
   };

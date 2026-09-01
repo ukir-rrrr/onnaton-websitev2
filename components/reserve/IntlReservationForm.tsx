@@ -16,6 +16,7 @@ import {
   minBookableDate,
 } from "@/lib/content/reservation";
 import { countryDialCodes } from "@/lib/content/countryCodes";
+import { referralSourceIds } from "@/lib/content/referralSources";
 import { MultilineText } from "@/components/i18n/MultilineText";
 import { DateField } from "@/components/ui/DateField";
 import { copy } from "@/lib/i18n/copy";
@@ -345,6 +346,28 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
             onChange={(event) => setField("country", event.target.value)}
             className={fieldClass}
           />
+        </p>
+        <p className="mb-5">
+          <label htmlFor="intl-referral" className={labelClass}>
+            {t(copy.intlForm.referralLabel)} *
+          </label>
+          <select
+            id="intl-referral"
+            name="referral_source"
+            required
+            value={fields.referralSource}
+            onChange={(event) => setField("referralSource", event.target.value)}
+            className={fieldClass}
+          >
+            <option value="" disabled>
+              {t(copy.intlForm.referralPh)}
+            </option>
+            {referralSourceIds.map((id) => (
+              <option key={id} value={id}>
+                {t(copy.intlForm[id])}
+              </option>
+            ))}
+          </select>
         </p>
         <p>
           <label htmlFor="intl-notes" className={labelClass}>
