@@ -1381,6 +1381,22 @@
     "seatsPage.galleryHeading": {
       "yue": "店內光景",
       "zhTw": "店內光景"
+    },
+    "intlForm.phone": {
+      "yue": "電話號碼",
+      "zhTw": "電話號碼"
+    },
+    "intlForm.phoneCountry": {
+      "yue": "國家代碼",
+      "zhTw": "國碼"
+    },
+    "intlForm.phoneCountryPh": {
+      "yue": "請選擇國家代碼",
+      "zhTw": "請選擇國碼"
+    },
+    "intlForm.errorPhone": {
+      "yue": "請輸入有效嘅電話號碼。",
+      "zhTw": "請輸入有效的電話號碼。"
     }
   }
 }

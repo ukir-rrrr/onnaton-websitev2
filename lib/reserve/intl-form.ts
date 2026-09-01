@@ -1,6 +1,8 @@
 export type IntlReservationFormValues = {
   name: string;
   email: string;
+  phoneCountry: string;
+  phoneNational: string;
   country: string;
   datePreference1: string;
   datePreference2: string;
@@ -21,6 +23,8 @@ export type IntlReservationState = {
 export const defaultIntlReservationFormValues: IntlReservationFormValues = {
   name: "",
   email: "",
+  phoneCountry: "",
+  phoneNational: "",
   country: "",
   datePreference1: "",
   datePreference2: "",
@@ -38,6 +42,8 @@ export function valuesFromIntlFormData(formData: FormData): IntlReservationFormV
   return {
     name: str("name"),
     email: str("email"),
+    phoneCountry: str("phone_country"),
+    phoneNational: str("phone_national"),
     country: str("country"),
     datePreference1: str("date_preference_1"),
     datePreference2: str("date_preference_2"),

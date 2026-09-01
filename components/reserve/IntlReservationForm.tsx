@@ -15,6 +15,7 @@ import {
   maxBookableDate,
   minBookableDate,
 } from "@/lib/content/reservation";
+import { countryDialCodes } from "@/lib/content/countryCodes";
 import { MultilineText } from "@/components/i18n/MultilineText";
 import { DateField } from "@/components/ui/DateField";
 import { copy } from "@/lib/i18n/copy";
@@ -176,6 +177,43 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
               onChange={(event) => setField("email", event.target.value)}
               className={fieldClass}
             />
+          </p>
+          <p className="sm:col-span-2">
+            <label htmlFor="intl-phone-national" className={labelClass}>
+              {t(copy.intlForm.phone)} *
+            </label>
+            <span className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)]">
+              <select
+                id="intl-phone-country"
+                name="phone_country"
+                required
+                aria-label={t(copy.intlForm.phoneCountry)}
+                value={fields.phoneCountry}
+                onChange={(event) => setField("phoneCountry", event.target.value)}
+                className={fieldClass}
+              >
+                <option value="" disabled>
+                  {t(copy.intlForm.phoneCountryPh)}
+                </option>
+                {countryDialCodes.map((code) => (
+                  <option key={code.id} value={code.id}>
+                    {`${code.name} (${code.dial})`}
+                  </option>
+                ))}
+              </select>
+              <input
+                id="intl-phone-national"
+                name="phone_national"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel-national"
+                required
+                maxLength={20}
+                value={fields.phoneNational}
+                onChange={(event) => setField("phoneNational", event.target.value)}
+                className={fieldClass}
+              />
+            </span>
           </p>
         </div>
       </fieldset>

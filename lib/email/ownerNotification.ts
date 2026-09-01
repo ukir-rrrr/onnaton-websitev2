@@ -1,4 +1,5 @@
 import type { IntlReservationInput } from "@/lib/supabase/reservations";
+import { findCountryDialCode } from "@/lib/content/countryCodes";
 import { getResendReplyTo, sendResendEmail } from "./resend";
 
 function formatDates(input: IntlReservationInput): string {
@@ -27,6 +28,7 @@ export async function notifyOwnerIntlReservation(
     `受付番号: ${input.reference}`,
     `お名前: ${input.name}`,
     `メール: ${input.email}`,
+    `電話番号: ${input.phoneCountryCode} ${input.phoneNational} （${findCountryDialCode(input.phoneCountry)?.name ?? input.phoneCountry}）`,
     `国・地域: ${input.country}`,
     `locale: ${input.locale ?? "—"}`,
     "",

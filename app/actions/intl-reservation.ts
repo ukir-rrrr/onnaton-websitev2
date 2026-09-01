@@ -3,6 +3,7 @@
 import { notifyOwnerIntlReservation } from "@/lib/email/ownerNotification";
 import { sendCustomerAutoReply } from "@/lib/email/customerAutoReply";
 import { isBookableDate } from "@/lib/content/reservation";
+import { findCountryDialCode } from "@/lib/content/countryCodes";
 import {
   type IntlReservationState,
   valuesFromIntlFormData,
@@ -87,6 +88,8 @@ export async function submitIntlReservation(
   const values = valuesFromIntlFormData(formData);
   const name = values.name;
   const email = values.email;
+  const phoneCountry = values.phoneCountry;
+  const phoneNationalInput = values.phoneNational;
   const country = values.country;
   const date1 = values.datePreference1;
   const date2 = parseOptionalDate(values.datePreference2);
@@ -96,12 +99,31 @@ export async function submitIntlReservation(
   const notes = values.notes;
   const agreePolicy = values.agreePolicy;
 
-  if (!name || !email || !country || !date1 || adults === null || children === null) {
+  if (
+    !name ||
+    !email ||
+    !phoneCountry ||
+    !phoneNationalInput ||
+    !country ||
+    !date1 ||
+    adults === null ||
+    children === null
+  ) {
     return err(locale, copy.intlForm.errorRequired, formData);
   }
   if (!looksLikeEmail(email)) return err(locale, copy.intlForm.errorEmail, formData);
   if (name.length > 80 || country.length > 80) {
     return err(locale, copy.intlForm.errorRequired, formData);
+  }
+
+  const dialInfo = findCountryDialCode(phoneCountry);
+  if (!dialInfo) return err(locale, copy.intlForm.errorPhone, formData);
+  if (!/^[0-9\s()-]+$/.test(phoneNationalInput)) {
+    return err(locale, copy.intlForm.errorPhone, formData);
+  }
+  const phoneNational = phoneNationalInput.replace(/\D/g, "");
+  if (phoneNational.length < 6 || phoneNational.length > 15) {
+    return err(locale, copy.intlForm.errorPhone, formData);
   }
   if (!isBookableDate(date1)) return err(locale, copy.intlForm.errorDate, formData);
   if (date2 && !isBookableDate(date2)) return err(locale, copy.intlForm.errorDate, formData);
@@ -145,6 +167,9 @@ export async function submitIntlReservation(
     reference,
     name,
     email,
+    phoneCountry,
+    phoneCountryCode: dialInfo.dial,
+    phoneNational,
     country,
     datePreference1: date1,
     datePreference2: date2,
