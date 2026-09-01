@@ -7,8 +7,9 @@ import { ReserveButton } from "@/components/ui/ReserveButton";
 import { siteConfig } from "@/lib/content/store";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
+import type { ReservationPolicy } from "@/lib/content/reservationPolicy";
 
-export function IntlReserveMain({ policies }: { policies: string[] }) {
+export function IntlReserveMain({ policy }: { policy: ReservationPolicy }) {
   const { t, isJa } = useT();
   const [showOverseasForm, setShowOverseasForm] = useState(false);
 
@@ -79,12 +80,21 @@ export function IntlReserveMain({ policies }: { policies: string[] }) {
           {t(copy.intlForm.policyHeading)}
         </h2>
         <ul className="mx-auto max-w-2xl list-disc space-y-3 pl-5 text-[14px] leading-[2] tracking-[0.04em] text-cream/95 sm:text-[15px]">
-          {policies.map((item) => (
+          {policy.bullets.map((item) => (
             <li key={item}>
-              <MultilineText text={item} />
+              <MultilineText text={item} keepAll={false} />
             </li>
           ))}
         </ul>
+        {policy.notes.length > 0 ? (
+          <div className="mx-auto mt-4 max-w-2xl space-y-2 text-[13px] leading-[1.9] tracking-[0.04em] text-cream/75">
+            {policy.notes.map((note) => (
+              <p key={note}>
+                <MultilineText text={note} keepAll={false} />
+              </p>
+            ))}
+          </div>
+        ) : null}
       </div>
 
       <div className="min-w-0 overflow-x-clip border border-cream/10 bg-ink-raised px-5 py-8 sm:px-8 sm:py-10 lg:px-10 lg:py-12">
