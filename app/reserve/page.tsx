@@ -77,7 +77,7 @@ export default async function ReservePage({
                     key={item}
                     className="border-b border-cream/12 pb-4 text-[13px] leading-[1.8] tracking-[0.04em] text-cream/88 sm:text-[14px]"
                   >
-                    <MultilineText text={item} />
+                    <MultilineText text={item} keepAll={false} />
                   </li>
                 ))}
               </ul>
