@@ -221,7 +221,7 @@ export function DatePickerCalendar({
                   : disabled
                     ? "cursor-not-allowed text-cream/25"
                     : isToday
-                      ? "border border-gold/45 text-gold hover:bg-gold/15"
+                      ? "border border-gold-ink/45 text-gold-ink hover:bg-gold-ink/15"
                       : "text-cream/92 hover:bg-cream/10 hover:text-cream"
               }`}
             >
@@ -245,7 +245,7 @@ export function DatePickerCalendar({
         <button
           type="button"
           onClick={jumpToToday}
-          className="min-h-9 px-2 text-[12px] tracking-[0.08em] text-gold transition-colors hover:text-cream sm:text-[13px]"
+          className="min-h-9 px-2 text-[12px] tracking-[0.08em] text-gold-ink transition-colors hover:text-cream sm:text-[13px]"
         >
           {labels.today}
         </button>

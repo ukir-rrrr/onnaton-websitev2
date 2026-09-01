@@ -25,9 +25,9 @@ function navClass(active: boolean, onHero: boolean) {
     "font-serif-jp rounded px-2 py-1.5 text-[14px] tracking-[0.06em] xl:px-2.5 xl:text-[15px] 2xl:px-3.5 2xl:text-[16px]";
   const idle = onHero
     ? `${base} text-on-dark hover:bg-on-dark/10 hover:text-gold`
-    : `${base} text-cream hover:bg-cream/6 hover:text-gold`;
+    : `${base} text-cream hover:bg-cream/6 hover:text-gold-ink`;
   return active
-    ? `${base} text-gold bg-cream/8`
+    ? `${base} ${onHero ? "text-gold" : "text-gold-ink"} bg-cream/8`
     : idle;
 }
 
@@ -368,7 +368,7 @@ export function Header() {
                     aria-current={activeHref === link.href ? "page" : undefined}
                     className={
                       activeHref === link.href
-                        ? "flex min-h-11 items-center text-gold"
+                        ? "flex min-h-11 items-center text-gold-ink"
                         : "flex min-h-11 items-center text-cream/95 hover:text-cream"
                     }
                   >

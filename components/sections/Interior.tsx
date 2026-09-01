@@ -115,7 +115,7 @@ export function Interior() {
 
         <Link
           href="/seats"
-          className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-3 self-stretch border border-cream/55 px-5 py-3 text-[13px] font-medium tracking-[0.28em] text-cream transition-colors hover:border-gold hover:bg-gold/10 hover:text-gold sm:gap-4 sm:self-end sm:px-7 sm:py-3.5 sm:text-[12px] xl:self-center"
+          className="group inline-flex min-h-11 shrink-0 items-center justify-center gap-3 self-stretch border border-cream/55 px-5 py-3 text-[13px] font-medium tracking-[0.28em] text-cream transition-colors hover:border-gold-ink hover:bg-gold/10 hover:text-gold-ink sm:gap-4 sm:self-end sm:px-7 sm:py-3.5 sm:text-[12px] xl:self-center"
         >
           VIEW MORE
           <span

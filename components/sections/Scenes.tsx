@@ -97,11 +97,11 @@ export function Scenes() {
               viewport={{ once: true, amount: 0.5 }}
               transition={{ duration: 0.75, delay: isMobile ? 0.05 : 0.2, ease }}
             >
-              <h3 className="font-serif-jp mb-2 text-lg font-semibold text-on-dark sm:text-[19px]">
+              <h3 className="font-serif-jp mb-2 min-w-0 break-words text-lg font-semibold text-on-dark sm:text-[19px]">
                 {tr(scene.title)}
               </h3>
               <p className="min-h-[2lh] text-[13px] leading-[1.7] text-on-dark/80 sm:text-[13px]">
-                <MultilineText text={tr(scene.desc)} />
+                <MultilineText text={tr(scene.desc)} keepAll={false} />
               </p>
             </motion.div>
           </motion.div>

@@ -35,6 +35,7 @@ export default function CoursePage() {
               headingAs={i === 0 ? "h1" : "h2"}
               id={course.id}
               nextCourseHref={next ? `#${next.id}` : "#extras"}
+              showServiceFeeNote={i === courseMenus.length - 1}
             />
           );
         })}

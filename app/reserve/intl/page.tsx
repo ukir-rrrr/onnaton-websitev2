@@ -9,6 +9,7 @@ import { photos } from "@/lib/content/photos";
 import { getLocale } from "@/lib/i18n/getLocale";
 import { copy } from "@/lib/i18n/copy";
 import { t } from "@/lib/i18n/types";
+import { splitReservationPolicy } from "@/lib/content/reservationPolicy";
 
 export async function generateMetadata(): Promise<Metadata> {
   const locale = await getLocale();
@@ -18,16 +19,9 @@ export async function generateMetadata(): Promise<Metadata> {
   };
 }
 
-function policyBullets(text: string): string[] {
-  return text
-    .split("\n")
-    .map((line) => line.trim())
-    .filter(Boolean);
-}
-
 export default async function IntlReservePage() {
   const locale = await getLocale();
-  const policies = policyBullets(t(locale, copy.intlForm.policyItems));
+  const policy = splitReservationPolicy(t(locale, copy.intlForm.policyItems));
 
   return (
     <div className="relative w-full overflow-x-clip bg-ink text-cream">
@@ -64,7 +58,7 @@ export default async function IntlReservePage() {
         <SiteNotices />
 
         <section className="px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
-          <IntlReserveMain policies={policies} />
+          <IntlReserveMain policy={policy} />
         </section>
       </main>
 

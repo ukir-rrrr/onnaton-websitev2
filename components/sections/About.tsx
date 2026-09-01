@@ -142,7 +142,7 @@ export function About() {
       >
         <div className="order-2 min-w-0 max-w-full xl:order-1">
           <motion.p
-            className="mb-6 text-[13px] tracking-[0.18em] text-gold sm:mb-8 sm:text-[18px] sm:tracking-[0.28em]"
+            className="mb-6 text-[13px] tracking-[0.18em] text-gold-ink sm:mb-8 sm:text-[18px] sm:tracking-[0.28em]"
             {...fadeUp(0)}
           >
             {t(copy.about.heading)}

@@ -15,6 +15,8 @@ import {
   maxBookableDate,
   minBookableDate,
 } from "@/lib/content/reservation";
+import { countryDialCodes } from "@/lib/content/countryCodes";
+import { referralSourceIds } from "@/lib/content/referralSources";
 import { MultilineText } from "@/components/i18n/MultilineText";
 import { DateField } from "@/components/ui/DateField";
 import { copy } from "@/lib/i18n/copy";
@@ -26,7 +28,7 @@ const fieldClass =
   "w-full rounded-sm border border-cream/18 bg-ink-raised px-4 py-3.5 text-[15px] text-cream placeholder:text-cream/30 outline-none transition-colors [color-scheme:light] focus:border-gold";
 
 const labelClass =
-  "mb-2 block text-[11px] tracking-[0.18em] text-gold sm:text-[12px]";
+  "mb-2 block text-[11px] tracking-[0.18em] text-gold-ink sm:text-[12px]";
 
 type DateFieldKey = "datePreference1" | "datePreference2" | "datePreference3";
 
@@ -76,24 +78,19 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
   if (state.ok) {
     return (
       <div className="px-1 py-8 text-center sm:py-10">
-        <p className="mb-4 text-[11px] tracking-[0.32em] text-gold sm:text-[12px]">
+        <p className="mb-4 text-[11px] tracking-[0.32em] text-gold-ink sm:text-[12px]">
           {t(copy.intlForm.successKicker)}
         </p>
-        <div className="mx-auto mb-6 h-px w-12 bg-gold/55" />
+        <div className="mx-auto mb-6 h-px w-12 bg-gold-ink/55" />
         <h2 className="font-serif-jp mb-5 text-[24px] font-normal tracking-[0.12em] text-cream sm:text-[30px]">
           {t(copy.intlForm.successTitle)}
         </h2>
         <p className="mx-auto mb-8 max-w-md text-[14px] leading-[2] tracking-[0.04em] text-cream/90 sm:text-[15px]">
-          <MultilineText text={t(copy.intlForm.successBody)} />
+          <MultilineText text={t(copy.intlForm.successBody)} keepAll={false} />
         </p>
-        {state.reference ? (
-          <p className="mb-10 text-[13px] tracking-[0.12em] text-gold">
-            {t(copy.intlForm.reference)}
-            <span className="mt-2 block font-serif-jp text-[20px] tracking-[0.14em] text-cream">
-              {state.reference}
-            </span>
-          </p>
-        ) : null}
+        <p className="mx-auto mb-10 max-w-md border-y border-gold-ink/40 py-4 text-[14px] font-medium leading-[1.9] tracking-[0.04em] text-gold-ink sm:text-[15px]">
+          <MultilineText text={t(copy.intlForm.successFinalNote)} keepAll={false} />
+        </p>
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Link
             href="/"
@@ -104,7 +101,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-cream/25 px-8 text-[14px] font-bold tracking-[0.08em] text-cream transition-colors hover:border-gold hover:text-gold sm:w-auto"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-cream/25 px-8 text-[14px] font-bold tracking-[0.08em] text-cream transition-colors hover:border-gold-ink hover:text-gold-ink sm:w-auto"
           >
             {t(copy.intlForm.another)}
           </button>
@@ -123,7 +120,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
       {state.error ? (
         <p
           role="alert"
-          className="border border-gold/40 bg-gold/10 px-4 py-3 text-center text-[13px] leading-[1.8] text-gold"
+          className="border border-gold-ink/40 bg-gold/10 px-4 py-3 text-center text-[13px] leading-[1.8] text-gold-ink"
         >
           {state.error}
         </p>
@@ -177,6 +174,43 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
               className={fieldClass}
             />
           </p>
+          <p className="sm:col-span-2">
+            <label htmlFor="intl-phone-national" className={labelClass}>
+              {t(copy.intlForm.phone)} *
+            </label>
+            <span className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)]">
+              <select
+                id="intl-phone-country"
+                name="phone_country"
+                required
+                aria-label={t(copy.intlForm.phoneCountry)}
+                value={fields.phoneCountry}
+                onChange={(event) => setField("phoneCountry", event.target.value)}
+                className={fieldClass}
+              >
+                <option value="" disabled>
+                  {t(copy.intlForm.phoneCountryPh)}
+                </option>
+                {countryDialCodes.map((code) => (
+                  <option key={code.id} value={code.id}>
+                    {`${code.name} (${code.dial})`}
+                  </option>
+                ))}
+              </select>
+              <input
+                id="intl-phone-national"
+                name="phone_national"
+                type="tel"
+                inputMode="tel"
+                autoComplete="tel-national"
+                required
+                maxLength={20}
+                value={fields.phoneNational}
+                onChange={(event) => setField("phoneNational", event.target.value)}
+                className={fieldClass}
+              />
+            </span>
+          </p>
         </div>
       </fieldset>
 
@@ -217,7 +251,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
                 onChange={(event) => setField(key, event.target.value)}
               />
               {dateHints[key] ? (
-                <span className="mt-2 block text-[12px] leading-[1.7] text-gold/80">
+                <span className="mt-2 block text-[12px] leading-[1.7] text-gold-ink/80">
                   {t(copy.intlForm.errorDate)}
                 </span>
               ) : null}
@@ -240,18 +274,50 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
             />
           </p>
           <p>
-            <label htmlFor="intl-children" className={labelClass}>
-              {t(copy.intlForm.children)} *
+            <label htmlFor="intl-age-0-5" className={labelClass}>
+              {t(copy.intlForm.age0to5)}
             </label>
             <input
-              id="intl-children"
-              name="children"
+              id="intl-age-0-5"
+              name="age_0_5"
               type="number"
-              required
               min={0}
               max={10}
-              value={fields.children}
-              onChange={(event) => setField("children", event.target.value)}
+              value={fields.age0to5}
+              onChange={(event) => setField("age0to5", event.target.value)}
+              className={fieldClass}
+            />
+            <span className="mt-2 block text-[12px] leading-[1.7] text-cream/70">
+              <MultilineText text={t(copy.intlForm.age0to5Note)} keepAll={false} />
+            </span>
+          </p>
+          <p>
+            <label htmlFor="intl-age-6-12" className={labelClass}>
+              {t(copy.intlForm.age6to12)}
+            </label>
+            <input
+              id="intl-age-6-12"
+              name="age_6_12"
+              type="number"
+              min={0}
+              max={10}
+              value={fields.age6to12}
+              onChange={(event) => setField("age6to12", event.target.value)}
+              className={fieldClass}
+            />
+          </p>
+          <p>
+            <label htmlFor="intl-age-13-19" className={labelClass}>
+              {t(copy.intlForm.age13to19)}
+            </label>
+            <input
+              id="intl-age-13-19"
+              name="age_13_19"
+              type="number"
+              min={0}
+              max={10}
+              value={fields.age13to19}
+              onChange={(event) => setField("age13to19", event.target.value)}
               className={fieldClass}
             />
           </p>
@@ -276,20 +342,27 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
             className={fieldClass}
           />
         </p>
-        <p>
-          <label htmlFor="intl-notes" className={labelClass}>
-            {t(copy.intlForm.notes)}
+        <p className="mb-5">
+          <label htmlFor="intl-referral" className={labelClass}>
+            {t(copy.intlForm.referralLabel)} *
           </label>
-          <textarea
-            id="intl-notes"
-            name="notes"
-            rows={4}
-            maxLength={1000}
-            placeholder={t(copy.intlForm.notesPh)}
-            value={fields.notes}
-            onChange={(event) => setField("notes", event.target.value)}
-            className={`${fieldClass} resize-y`}
-          />
+          <select
+            id="intl-referral"
+            name="referral_source"
+            required
+            value={fields.referralSource}
+            onChange={(event) => setField("referralSource", event.target.value)}
+            className={fieldClass}
+          >
+            <option value="" disabled>
+              {t(copy.intlForm.referralPh)}
+            </option>
+            {referralSourceIds.map((id) => (
+              <option key={id} value={id}>
+                {t(copy.intlForm[id])}
+              </option>
+            ))}
+          </select>
         </p>
       </fieldset>
 

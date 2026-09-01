@@ -4,12 +4,19 @@ export type IntlReservationInput = {
   reference: string;
   name: string;
   email: string;
+  phoneCountry: string;
+  phoneCountryCode: string;
+  phoneNational: string;
   country: string;
   datePreference1: string;
   datePreference2: string | null;
   datePreference3: string | null;
   adults: number;
+  age0to5: number;
+  age6to12: number;
+  age13to19: number;
   children: number;
+  referralSource: string;
   notes: string | null;
   locale: string | null;
   agreedAt: string;
@@ -44,12 +51,19 @@ export async function insertIntlReservation(
     status: "pending",
     name: input.name,
     email: input.email,
+    phone_country: input.phoneCountry,
+    phone_country_code: input.phoneCountryCode,
+    phone_national: input.phoneNational,
     country: input.country,
     date_preference_1: input.datePreference1,
     date_preference_2: input.datePreference2,
     date_preference_3: input.datePreference3,
     adults: input.adults,
+    age_0_5: input.age0to5,
+    age_6_12: input.age6to12,
+    age_13_19: input.age13to19,
     children: input.children,
+    referral_source: input.referralSource,
     notes: input.notes,
     locale: input.locale,
     agreed_at: input.agreedAt,

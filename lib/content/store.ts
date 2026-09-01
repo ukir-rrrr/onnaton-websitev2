@@ -44,7 +44,10 @@ export const storeInfoRows: StoreInfoRow[] = [
     label: "営業時間",
     value: "17:30〜21:00",
   },
-  { label: "定休日", value: "火曜日・水曜日" },
+  {
+    label: "通常定休日",
+    value: "火曜日・水曜日\n※臨時営業・臨時休業については、お知らせをご確認ください。",
+  },
   { label: "形態", value: "コース料理専門店・完全予約制（前日まで要予約）" },
   { label: "ご予約", value: "お電話のみ／受付 13:30〜21:00（1ヶ月前〜）" },
   {

@@ -29,7 +29,7 @@ export function SiteNoticesBody({
         className="mb-8 flex flex-col items-center gap-3 sm:mb-10 sm:gap-4"
         {...revealFadeUp(reduceMotion, 0, 20)}
       >
-        <p className="text-base font-medium tracking-[0.35em] text-gold sm:text-[18px]">
+        <p className="text-base font-medium tracking-[0.35em] text-gold-ink sm:text-[18px]">
           NOTICE
         </p>
         <div className="flex items-center gap-4">

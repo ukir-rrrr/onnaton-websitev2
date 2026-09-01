@@ -14,18 +14,45 @@
 3. **Settings → Database** でパスワードを vault に保存
 4. 制作担当を **Project Settings → Team** から Invite（Developer 以上）
 
-### 休止防止（後で）
+### 休止防止（Cloudflare Cron）
 
-Cloudflare Cron から週1回 `GET /api/health` 等を叩く（Phase 5）。
+Supabase 無料プランは **約7日間アクセスがないとプロジェクトが一時停止** します。  
+本番 Worker に **Cloudflare Cron** を設定済みです（`wrangler.jsonc` → 月・木 03:00 UTC）。
+
+- Cron 実行時: `cloudflare-worker.ts` の `scheduled` → Supabase `sites` テーブルを1件読む
+- 手動確認: `GET /api/health` → `{ "ok": true, "supabase": "ok" }`
+
+ローカルで Cron を試す場合（`npm run preview` 後）:
+
+```bash
+curl "http://localhost:8787/cdn-cgi/handler/scheduled?cron=0+3+*+*+1"
+```
 
 ## 2. Resend
 
-1. **Domains** で送信ドメインを追加（例: `onnaton.jp`）
-2. 表示された **DNS レコード** をドメイン管理側に追加
+### アドレス構成の結論（Gmail は 1つでよい）
+
+自動返信メールの送信元（From）に **Gmail は指定できない**（Resend は DNS 認証済みの自ドメインしか From に使えず、`gmail.com` は認証不可）。
+Cloudflare Workers 上では生の SMTP も事実上使えないため、送信はすべて Resend の HTTP API 経由となる。
+→ **From は必ずドメインのアドレス**（例 `reservations@onnaton.com`）。ただし**送信専用で受信箱は不要**（Resend で SPF/DKIM を設定するだけ）。
+→ **Gmail の役割は受信のみ**。予約通知・お客様の返信・確認メールの手動送信をすべて **1つの Gmail** に集約すると、⑩の5段階フローが1スレッドにまとまり取りこぼしが起きにくい。
+
+| 役割 | 使うアドレス | 環境変数 |
+|---|---|---|
+| 自動返信メールの From | ドメインのアドレス（送信専用・受信箱不要） | `RESEND_FROM=reservations@onnaton.com` |
+| オーナーが予約内容を受け取る宛先 | Gmail（1つ） | `RESEND_OWNER_TO=onnaton.reserve@gmail.com` |
+| 自動返信メールの Reply-To | 同じ Gmail | `RESEND_REPLY_TO=onnaton.reserve@gmail.com` |
+| オーナーが確認メールを手動送信する時 | 同じ Gmail | （運用のみ・設定不要） |
+
+### 手順
+
+1. **Domains** で送信ドメイン `onnaton.com` を追加
+2. 表示された **DNS レコード（SPF / DKIM）** をドメイン管理側に追加（送信元ドメイン認証・1回のみ）
 3. 認証完了後 **API Keys** を作成 → `RESEND_API_KEY`
-4. 送信元: `RESEND_FROM=reservations@onnaton.jp`（認証済みドメイン）
-5. 通知先: `RESEND_OWNER_TO=` オーナー or 管理会社の受信箱
-6. （任意）返信先: `RESEND_REPLY_TO=` お客様自動返信の Reply-To（未設定時は `RESEND_OWNER_TO`）
+4. 送信元: `RESEND_FROM=reservations@onnaton.com`（**認証済みドメイン必須**。Gmail 不可）
+5. 通知先: `RESEND_OWNER_TO=onnaton.reserve@gmail.com`（**Gmail 可**）
+6. 返信先: `RESEND_REPLY_TO=onnaton.reserve@gmail.com`（**Gmail 可**・未設定時は `RESEND_OWNER_TO` にフォールバック）
+7. これらのキーは **Cloudflare ダッシュボードの Production 変数にも同じ値を設定**する（`RESEND_API_KEY` はシークレット、他は平文で可。`wrangler.jsonc` に `keep_vars: true` があるためデプロイ後も平文変数は維持される）。
 
 ※ フォーム送信時:
    - **オーナー**へ新規リクエスト通知
@@ -36,8 +63,11 @@ Cloudflare Cron から週1回 `GET /api/health` 等を叩く（Phase 5）。
 
 1. **Workers & Pages** で GitHub リポジトリ `onnaton-websitev2` を接続  
    またはローカルから `npm run deploy`（要 `wrangler login`）
-2. ビルドコマンド: `npm run deploy`（OpenNext adapter）  
-   通常の `next build` だけでは Workers 向け出力になりません
+2. **Workers Builds（Git 連携）の設定**
+   - **Build command:** `npm run build`（内部で `opennextjs-cloudflare build` → `.open-next/` を生成）
+   - **Deploy command:** `npx wrangler versions upload`
+   - `npm run build` が `next build` だけだと `.open-next/assets` が無く deploy が失敗します
+   - ローカルから一発デプロイ: `npm run deploy`（要 `wrangler login`）
 3. **Settings → Variables and secrets** に `.env.example` と同じキーを **Production** 用に設定:
    - **平文（Text）**: `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, `SITE_SLUG`, `RESEND_FROM`, `RESEND_OWNER_TO`, `RESEND_REPLY_TO`（任意）
    - **シークレット（Encrypt）**: `SUPABASE_SERVICE_ROLE_KEY`, `ONNATON_ADMIN_PASSWORD`, `RESEND_API_KEY`

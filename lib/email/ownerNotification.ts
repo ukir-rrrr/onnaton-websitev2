@@ -1,4 +1,9 @@
 import type { IntlReservationInput } from "@/lib/supabase/reservations";
+import { findCountryDialCode } from "@/lib/content/countryCodes";
+import {
+  isReferralSourceId,
+  referralSourceLabelJa,
+} from "@/lib/content/referralSources";
 import { getResendReplyTo, sendResendEmail } from "./resend";
 
 function formatDates(input: IntlReservationInput): string {
@@ -19,24 +24,37 @@ export async function notifyOwnerIntlReservation(
     return { ok: true, skipped: true };
   }
 
-  const subject = `[恩納豚] 海外予約リクエスト ${input.reference}`;
+  const hasInfants = input.age0to5 > 0;
+  const referralLabel = isReferralSourceId(input.referralSource)
+    ? referralSourceLabelJa[input.referralSource]
+    : input.referralSource;
+  const subject = `[恩納豚] 海外予約リクエスト ${input.reference}${
+    hasInfants ? "【0〜5歳あり】" : ""
+  }`;
   const text = [
     "海外向け予約リクエストが届きました。",
+    ...(hasInfants
+      ? [
+          `【要確認】0〜5歳のお子様 ${input.age0to5} 名を含むリクエストです。受け入れ可否をご判断のうえ、\nお客様へのご返信でご案内ください。`,
+        ]
+      : []),
     "空席確認後、お客様へ確認メールをお送りください。",
     "",
     `受付番号: ${input.reference}`,
     `お名前: ${input.name}`,
     `メール: ${input.email}`,
+    `電話番号: ${input.phoneCountryCode} ${input.phoneNational} （${findCountryDialCode(input.phoneCountry)?.name ?? input.phoneCountry}）`,
     `国・地域: ${input.country}`,
+    `当店を知ったきっかけ: ${referralLabel}`,
     `locale: ${input.locale ?? "—"}`,
     "",
     "希望日（第1〜3希望）:",
     formatDates(input),
     "",
     `大人: ${input.adults} 名`,
-    `お子様: ${input.children} 名`,
-    "",
-    input.notes ? `備考:\n${input.notes}` : "備考: —",
+    `0〜5歳: ${input.age0to5} 名`,
+    `6〜12歳: ${input.age6to12} 名`,
+    `13〜19歳: ${input.age13to19} 名`,
     "",
     `同意日時: ${input.agreedAt}`,
     "",
