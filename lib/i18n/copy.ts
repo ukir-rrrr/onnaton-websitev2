@@ -882,6 +882,13 @@ export const copy = {
     tax: L("税込表記です。", "Prices include tax.", "세금 포함 가격입니다.", "价格含税。", "价格含税。"),
   },
   coursePage: {
+    serviceFee: L(
+      "※サービス料として5％を頂戴しております。現金でお支払いの場合はサービス料を免除いたします。",
+      "*A 5% service charge applies. The service charge is waived for cash payments.",
+      "※서비스 요금으로 5%를 받고 있습니다. 현금으로 결제하시는 경우 서비스 요금은 면제됩니다.",
+      "※本店收取 5% 服務費。以現金付款則豁免服務費。",
+      "※本店收取 5% 服務費。若以現金付款，則免收服務費。",
+    ),
     next: L("次のコースを見る", "Next course", "다음 코스", "下一套餐", "下一套餐"),
     prevPhoto: L("前の写真", "Previous photo", "이전 사진", "上一张", "上一张"),
     nextPhoto: L("次の写真", "Next photo", "다음 사진", "下一张", "下一张"),

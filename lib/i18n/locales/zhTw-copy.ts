@@ -211,6 +211,7 @@ export const zhTwCopyValues: Record<string, string> = {
   "intlForm.sns": "社群媒體",
   "intlForm.internet": "網路搜尋",
   "intlForm.referral": "朋友介紹",
+  "coursePage.serviceFee": "※本店收取 5% 服務費。若以現金付款，則免收服務費。",
 };
 
 function setByPath(obj: Record<string, unknown>, path: string, value: string): void {

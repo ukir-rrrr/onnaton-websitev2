@@ -211,6 +211,7 @@ export const yueCopyValues: Record<string, string> = {
   "intlForm.sns": "社交媒體",
   "intlForm.internet": "網上搜尋",
   "intlForm.referral": "朋友介紹",
+  "coursePage.serviceFee": "※本店收取 5% 服務費。以現金付款則豁免服務費。",
 };
 
 function setByPath(obj: Record<string, unknown>, path: string, value: string): void {

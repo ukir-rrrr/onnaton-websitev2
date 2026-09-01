@@ -98,11 +98,13 @@ export function CourseDetail({
   headingAs = "h2",
   id,
   nextCourseHref,
+  showServiceFeeNote = false,
 }: {
   course: CourseMenuData;
   headingAs?: "h1" | "h2";
   id?: string;
   nextCourseHref?: string;
+  showServiceFeeNote?: boolean;
 }) {
   const c = course;
   const { t, tr, trName, isJa, locale } = useT();
@@ -328,6 +330,11 @@ export function CourseDetail({
             className="min-h-11 w-full max-w-sm px-8 py-3.5 text-[14px] tracking-[0.14em] hover:bg-wipe hover:text-cream sm:w-auto sm:min-w-[280px]"
           />
         </div>
+        {showServiceFeeNote ? (
+          <p className="mx-auto mt-5 max-w-[36rem] text-center text-[13px] leading-[1.9] tracking-[0.08em] text-cream/85 sm:text-[14px]">
+            {t(copy.coursePage.serviceFee)}
+          </p>
+        ) : null}
       </div>
 
       {nextCourseHref ? (
