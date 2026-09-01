@@ -1310,14 +1310,6 @@
       "yue": "提交次數已達上限，請稍後再試。",
       "zhTw": "提交次數已達上限，請稍後再試。"
     },
-    "intlAutoReply.subject": {
-      "yue": "[恩納豚] 已收到您的預約申請（{reference}）",
-      "zhTw": "[恩納豚] 已收到您的預約申請（{reference}）"
-    },
-    "intlAutoReply.body": {
-      "yue": "尊敬的 {name}：nn感謝您的預約申請。nn此時預約尚未確定。我哋會確認空位後，喺數個工作天內以電郵聯絡您。nn受理編號：{reference}nn請等候本店確認電郵，回覆後方為預約確定。nn恩納豚（ONNATON）n沖繩·那霸",
-      "zhTw": "尊敬的 {name}：nn感謝您的預約申請。nn此時預約尚未確定。我們會確認空位後，在數個工作天內以電子郵件聯絡您。nn受理編號：{reference}nn請等候本店確認電子郵件，回覆後方為預約確定。nn恩納豚（ONNATON）n沖繩·那霸"
-    },
     "extras.heading": {
       "yue": "追加料理",
       "zhTw": "追加料理"

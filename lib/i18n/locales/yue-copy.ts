@@ -183,8 +183,6 @@ export const yueCopyValues: Record<string, string> = {
   "intlForm.errorDatesDistinct": "請選擇不同的希望日期。",
   "intlForm.errorAgree": "請確認已了解本店須知。",
   "intlForm.errorRateLimit": "提交次數已達上限，請稍後再試。",
-  "intlAutoReply.subject": "[恩納豚] 已收到您的預約申請（{reference}）",
-  "intlAutoReply.body": "尊敬的 {name}：nn感謝您的預約申請。nn此時預約尚未確定。我哋會確認空位後，喺數個工作天內以電郵聯絡您。nn受理編號：{reference}nn請等候本店確認電郵，回覆後方為預約確定。nn恩納豚（ONNATON）n沖繩·那霸",
   "extras.heading": "追加料理",
   "extras.next": "查看飲品",
   "drinks.heading": "飲品",

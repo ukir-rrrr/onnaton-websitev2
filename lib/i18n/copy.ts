@@ -857,22 +857,6 @@ export const copy = {
       "提交次数已达上限，请稍后再试。",
     ),
   },
-  intlAutoReply: {
-    subject: L(
-      "[恩納豚] 予約リクエストを受け付けました（{reference}）",
-      "[ONNATON] Reservation request received ({reference})",
-      "[ONNATON] 예약 요청을 접수했습니다 ({reference})",
-      "[恩纳豚] 已收到您的预约申请（{reference}）",
-      "[恩纳豚] 已收到您的预约申请（{reference}）",
-    ),
-    body: L(
-      "{name} 様\n\nこの度はご予約リクエストをお送りいただき、ありがとうございます。\n\nこの時点では予約は確定しておりません。空席を確認のうえ、数日以内にメールにてご連絡いたします。\n\n受付番号: {reference}\n\n店舗からの確認メールをお待ちいただき、ご返信いただいた時点で予約確定となります。\n\n恩納豚（ONNATON）\n沖縄・那覇",
-      "Dear {name},\n\nThank you for your reservation request.\n\nThis is not a confirmed booking yet. We will check availability and contact you by email within a few business days.\n\nReference: {reference}\n\nPlease wait for our confirmation email and reply to confirm your booking.\n\nONNATON\nNaha, Okinawa",
-      "{name} 님\n\n예약 요청을 보내 주셔서 감사합니다.\n\n아직 예약이 확정되지 않았습니다. 자리를 확인한 뒤, 영업일 기준 며칠 이내에 이메일로 연락드리겠습니다.\n\n접수 번호: {reference}\n\n매장의 확인 메일을 기다려 주시고, 회신해 주시면 예약이 확정됩니다.\n\nONNATON\n오키나와 나하",
-      "尊敬的 {name}：\n\n感谢您的预约申请。\n\n此时预约尚未确定。我们将确认空位后，在数个工作日内以邮件联系您。\n\n受理编号：{reference}\n\n请等候本店确认邮件，回复后方为预约确定。\n\n恩纳豚（ONNATON）\n冲绳·那霸",
-      "尊敬的 {name}：\n\n感谢您的预约申请。\n\n此时预约尚未确定。我们将确认空位后，在数个工作日内以邮件联系您。\n\n受理编号：{reference}\n\n请等候本店确认邮件，回复后方为预约确定。\n\n恩纳豚（ONNATON）\n冲绳·那霸",
-    ),
-  },
   extras: {
     heading: L("追加のお料理", "Additional dishes", "추가 요리", "追加料理", "追加料理"),
     next: L("お飲み物を見る", "See drinks", "음료 보기", "查看饮品", "查看饮品"),
