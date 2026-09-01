@@ -99,7 +99,7 @@ export function ExtraMenu({ nextHref }: { nextHref?: string }) {
       {nextHref ? (
         <a
           href={nextHref}
-          className="mt-10 flex min-h-11 items-center justify-center text-[22px] leading-none text-gold/80 transition-colors hover:text-gold sm:mt-12 sm:text-[26px]"
+          className="mt-10 flex min-h-11 items-center justify-center text-[22px] leading-none text-gold-ink/80 transition-colors hover:text-gold-ink sm:mt-12 sm:text-[26px]"
           aria-label={t(copy.extras.next)}
         >
           ▽

@@ -56,7 +56,7 @@ export function Access() {
               {row.label === "ご予約" && !isJa ? (
                 <Link
                   href="/reserve/intl"
-                  className="inline-flex min-h-11 items-center py-1 text-[15px] leading-[1.7] text-cream underline-offset-4 transition-colors hover:text-gold hover:underline sm:min-h-0 sm:py-0"
+                  className="inline-flex min-h-11 items-center py-1 text-[15px] leading-[1.7] text-cream underline-offset-4 transition-colors hover:text-gold-ink hover:underline sm:min-h-0 sm:py-0"
                 >
                   {t(copy.access.reserveOnline)}
                 </Link>
@@ -69,7 +69,7 @@ export function Access() {
                       ? "noopener noreferrer"
                       : undefined
                   }
-                  className="inline-flex min-h-11 min-w-0 items-center gap-2.5 py-1 text-[15px] leading-[1.7] text-cream underline-offset-4 transition-colors hover:text-gold hover:underline sm:min-h-0 sm:py-0"
+                  className="inline-flex min-h-11 min-w-0 items-center gap-2.5 py-1 text-[15px] leading-[1.7] text-cream underline-offset-4 transition-colors hover:text-gold-ink hover:underline sm:min-h-0 sm:py-0"
                 >
                   <span className="min-w-0">{tr(row.value)}</span>
                   {row.icon === "instagram" ? (
@@ -107,7 +107,7 @@ export function Access() {
             href={siteConfig.mapLink}
             target="_blank"
             rel="noopener noreferrer"
-            className="flex min-h-11 items-center justify-center border-t border-cream/10 bg-ink-raised px-4 py-3.5 text-[13px] tracking-[0.12em] text-cream/88 transition-colors hover:text-gold"
+            className="flex min-h-11 items-center justify-center border-t border-cream/10 bg-ink-raised px-4 py-3.5 text-[13px] tracking-[0.12em] text-cream/88 transition-colors hover:text-gold-ink"
           >
             {t(copy.access.openMap)}
           </a>

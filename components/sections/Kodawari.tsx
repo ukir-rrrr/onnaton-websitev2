@@ -68,7 +68,7 @@ function KodawariFeatureBlock({
 
       <div className="min-w-0 max-w-full">
         <motion.p
-          className="font-serif-jp mb-3 text-[13px] tracking-[0.28em] text-gold"
+          className="font-serif-jp mb-3 text-[13px] tracking-[0.28em] text-gold-ink"
           {...fadeUp(0)}
         >
           {feature.num}
@@ -96,7 +96,7 @@ function KodawariFeatureBlock({
                 key={label}
                 className="inline-flex max-w-full border border-gold/45 bg-ink-raised/80 px-3.5 py-2 text-center sm:px-4 sm:py-2.5"
               >
-                <span className="font-serif-jp break-words text-[12px] tracking-[0.08em] text-gold-deep sm:text-[13px] sm:tracking-[0.1em]">
+                <span className="font-serif-jp break-words text-[12px] tracking-[0.08em] text-gold-ink sm:text-[13px] sm:tracking-[0.1em]">
                   {tr(label)}
                 </span>
               </span>

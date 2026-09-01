@@ -10,7 +10,8 @@
   --color-ink: var(--color-paper);
   --color-ink-raised: var(--color-paper-raised);
   --color-cream: var(--color-text);
-  --color-gold: #c9a063;
+  --color-gold: #c9a063; /* 塗り・枠線・濃色/写真背景上の文字用（変更なし） */
+  --color-gold-ink: #74581a; /* 和紙背景の上に置く文字・ラベル用（AA 4.5:1 以上） */
   --color-wipe: #a68c6e;
 
   /* Photo washi (Gemini) — primary surface texture */
@@ -73,6 +74,7 @@
   --color-ink-raised: var(--color-ink-raised);
   --color-cream: var(--color-cream);
   --color-gold: var(--color-gold);
+  --color-gold-ink: var(--color-gold-ink);
   --color-wipe: var(--color-wipe);
   --color-on-dark: var(--color-on-dark);
   --font-yu-kyokasho: "YuKyokasho Yoko", "Yu Kyokasho Yoko", "游教科書体 横",

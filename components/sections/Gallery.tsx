@@ -231,7 +231,7 @@ export function Gallery() {
             href={siteConfig.instagramUrl}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-flex w-full max-w-sm min-h-11 items-center justify-center gap-3 border border-gold px-5 py-3.5 text-[14px] font-bold tracking-[0.06em] text-gold transition-colors hover:bg-gold hover:text-ink sm:w-auto sm:min-w-[280px] sm:px-12 sm:text-[16px] sm:tracking-[0.08em]"
+            className="inline-flex w-full max-w-sm min-h-11 items-center justify-center gap-3 border border-gold-ink px-5 py-3.5 text-[14px] font-bold tracking-[0.06em] text-gold-ink transition-colors hover:bg-gold-ink hover:text-on-dark sm:w-auto sm:min-w-[280px] sm:px-12 sm:text-[16px] sm:tracking-[0.08em]"
           >
             <InstagramIcon className="h-[18px] w-[18px]" />
             {siteConfig.instagramHandle}

@@ -135,6 +135,7 @@ export function Reserve() {
           <Reveal variant="fadeUp" delay={0.38} amount={0.2} className="w-full min-w-0 max-w-full">
             <ReserveButton
               variant="outline"
+              tone="onDark"
               className="min-h-11 w-full max-w-sm px-8 py-3.5 text-[14px] sm:min-w-[320px] sm:w-auto sm:px-16"
             />
             <p className="mx-auto mt-6 max-w-[720px] break-words text-[12px] leading-[1.9] tracking-[0.04em] text-on-dark/55 sm:text-[13px]">

@@ -24,7 +24,7 @@ const fieldClass =
   "w-full rounded-sm border border-cream/18 bg-ink-raised px-4 py-3.5 text-[15px] text-cream placeholder:text-cream/30 outline-none transition-colors [color-scheme:light] focus:border-gold";
 
 const labelClass =
-  "mb-2 block text-[11px] tracking-[0.18em] text-gold sm:text-[12px]";
+  "mb-2 block text-[11px] tracking-[0.18em] text-gold-ink sm:text-[12px]";
 
 export function ReservationForm({ initialCourse = "" }: { initialCourse?: string }) {
   const [formKey, setFormKey] = useState(0);
@@ -62,10 +62,10 @@ function ReservationFormInner({
   if (state.ok) {
     return (
       <div className="px-1 py-8 text-center sm:py-10">
-        <p className="mb-4 text-[11px] tracking-[0.32em] text-gold sm:text-[12px]">
+        <p className="mb-4 text-[11px] tracking-[0.32em] text-gold-ink sm:text-[12px]">
           {t(copy.form.successKicker)}
         </p>
-        <div className="mx-auto mb-6 h-px w-12 bg-gold/55" />
+        <div className="mx-auto mb-6 h-px w-12 bg-gold-ink/55" />
         <h2 className="font-serif-jp mb-5 text-[24px] font-normal tracking-[0.12em] text-cream sm:text-[30px]">
           {t(copy.form.successTitle)}
         </h2>
@@ -73,7 +73,7 @@ function ReservationFormInner({
           <MultilineText text={t(copy.form.successBody)} />
         </p>
         {state.reference ? (
-          <p className="mb-10 text-[13px] tracking-[0.12em] text-gold">
+          <p className="mb-10 text-[13px] tracking-[0.12em] text-gold-ink">
             {t(copy.form.reference)}
             <span className="mt-2 block font-serif-jp text-[20px] tracking-[0.14em] text-cream">
               {state.reference}
@@ -90,7 +90,7 @@ function ReservationFormInner({
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-cream/25 px-8 text-[14px] font-bold tracking-[0.08em] text-cream transition-colors hover:border-gold hover:text-gold sm:w-auto"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-cream/25 px-8 text-[14px] font-bold tracking-[0.08em] text-cream transition-colors hover:border-gold-ink hover:text-gold-ink sm:w-auto"
           >
             {t(copy.form.another)}
           </button>
@@ -118,7 +118,7 @@ function ReservationFormInner({
       {state.error ? (
         <p
           role="alert"
-          className="border border-gold/40 bg-gold/10 px-4 py-3 text-center text-[13px] leading-[1.8] text-gold"
+          className="border border-gold-ink/40 bg-gold/10 px-4 py-3 text-center text-[13px] leading-[1.8] text-gold-ink"
         >
           {state.error}
         </p>
@@ -200,7 +200,7 @@ function ReservationFormInner({
               }}
             />
             {dateHint ? (
-              <span className="mt-2 block text-[12px] leading-[1.7] text-gold/80">
+              <span className="mt-2 block text-[12px] leading-[1.7] text-gold-ink/80">
                 {t(copy.form.errorDate)}
               </span>
             ) : null}
@@ -262,7 +262,7 @@ function ReservationFormInner({
               ).map(([id, label]) => (
                 <label
                   key={id}
-                  className="flex min-h-12 cursor-pointer items-center justify-center border border-cream/18 bg-ink-raised px-3 text-[13px] tracking-[0.08em] text-cream/92 has-[:checked]:border-gold has-[:checked]:text-gold"
+                  className="flex min-h-12 cursor-pointer items-center justify-center border border-cream/18 bg-ink-raised px-3 text-[13px] tracking-[0.08em] text-cream/92 has-[:checked]:border-gold-ink has-[:checked]:text-gold-ink"
                 >
                   <input
                     type="radio"
@@ -301,7 +301,7 @@ function ReservationFormInner({
               <span className="font-serif-jp text-[15px] tracking-[0.06em] text-cream">
                 {trName(course.name)}
               </span>
-              <span className="text-[13px] text-gold">
+              <span className="text-[13px] text-gold-ink">
                 {course.priceMainMobile}
                 <span className="ml-2 text-[11px] tracking-[0.08em] text-cream/70">
                   {t(copy.form.perPerson)}
@@ -354,7 +354,7 @@ function ReservationFormInner({
               {t(copy.form.agreeChildren)}
               <Link
                 href="/#children"
-                className="ml-2 text-gold underline-offset-4 hover:underline"
+                className="ml-2 text-gold-ink underline-offset-4 hover:underline"
               >
                 {t(copy.form.childrenLink)}
               </Link>
@@ -371,7 +371,7 @@ function ReservationFormInner({
               {t(copy.form.agreeTattoo)}
               <Link
                 href="/#tattoo"
-                className="ml-2 text-gold underline-offset-4 hover:underline"
+                className="ml-2 text-gold-ink underline-offset-4 hover:underline"
               >
                 {t(copy.form.tattooLink)}
               </Link>

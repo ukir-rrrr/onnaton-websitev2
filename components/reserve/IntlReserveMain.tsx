@@ -25,7 +25,7 @@ export function IntlReserveMain({ policy }: { policy: ReservationPolicy }) {
             <MultilineText text={t(copy.intlForm.domesticLead)} />
           </p>
 
-          <p className="mb-2 text-xs tracking-[0.28em] text-gold sm:text-[12px]">
+          <p className="mb-2 text-xs tracking-[0.28em] text-gold-ink sm:text-[12px]">
             {t(copy.reserve.phoneLabel)}
           </p>
           <p className="font-serif-jp mb-3 text-[32px] font-medium tracking-[0.08em] text-cream sm:text-[42px]">
@@ -45,7 +45,7 @@ export function IntlReserveMain({ policy }: { policy: ReservationPolicy }) {
           <button
             type="button"
             onClick={() => setShowOverseasForm(true)}
-            className="group inline-flex min-h-11 flex-col items-center justify-center gap-1 px-4 py-2 text-[13px] tracking-[0.06em] text-cream/75 transition-colors hover:text-gold sm:text-[14px]"
+            className="group inline-flex min-h-11 flex-col items-center justify-center gap-1 px-4 py-2 text-[13px] tracking-[0.06em] text-cream/75 transition-colors hover:text-gold-ink sm:text-[14px]"
           >
             <span className="underline-offset-4 group-hover:underline">
               {t(copy.intlForm.overseasToggle)}
@@ -66,7 +66,7 @@ export function IntlReserveMain({ policy }: { policy: ReservationPolicy }) {
       </p>
 
       {isJa ? (
-        <p className="border-y border-cream/12 py-8 text-center text-[14px] leading-[2] tracking-[0.04em] text-gold/95 sm:text-[15px] sm:leading-[2.1]">
+        <p className="border-y border-cream/12 py-8 text-center text-[14px] leading-[2] tracking-[0.04em] text-gold-ink/95 sm:text-[15px] sm:leading-[2.1]">
           <MultilineText text={t(copy.intlForm.overseasFormNote)} />
         </p>
       ) : (

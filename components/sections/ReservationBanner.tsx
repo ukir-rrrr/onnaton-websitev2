@@ -76,7 +76,7 @@ export function ReservationBanner() {
           </p>
           <a
             href="/#children"
-            className="mt-2 inline-flex min-h-11 items-center text-[14px] tracking-[0.06em] text-gold underline-offset-4 transition-colors hover:text-cream hover:underline sm:mt-3 sm:text-[15px]"
+            className="mt-2 inline-flex min-h-11 items-center text-[14px] tracking-[0.06em] text-gold-ink underline-offset-4 transition-colors hover:text-cream hover:underline sm:mt-3 sm:text-[15px]"
           >
             {t(copy.children.more)} →
           </a>

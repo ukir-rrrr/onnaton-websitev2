@@ -28,7 +28,7 @@ const fieldClass =
   "w-full rounded-sm border border-cream/18 bg-ink-raised px-4 py-3.5 text-[15px] text-cream placeholder:text-cream/30 outline-none transition-colors [color-scheme:light] focus:border-gold";
 
 const labelClass =
-  "mb-2 block text-[11px] tracking-[0.18em] text-gold sm:text-[12px]";
+  "mb-2 block text-[11px] tracking-[0.18em] text-gold-ink sm:text-[12px]";
 
 type DateFieldKey = "datePreference1" | "datePreference2" | "datePreference3";
 
@@ -78,10 +78,10 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
   if (state.ok) {
     return (
       <div className="px-1 py-8 text-center sm:py-10">
-        <p className="mb-4 text-[11px] tracking-[0.32em] text-gold sm:text-[12px]">
+        <p className="mb-4 text-[11px] tracking-[0.32em] text-gold-ink sm:text-[12px]">
           {t(copy.intlForm.successKicker)}
         </p>
-        <div className="mx-auto mb-6 h-px w-12 bg-gold/55" />
+        <div className="mx-auto mb-6 h-px w-12 bg-gold-ink/55" />
         <h2 className="font-serif-jp mb-5 text-[24px] font-normal tracking-[0.12em] text-cream sm:text-[30px]">
           {t(copy.intlForm.successTitle)}
         </h2>
@@ -101,7 +101,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
           <button
             type="button"
             onClick={onReset}
-            className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-cream/25 px-8 text-[14px] font-bold tracking-[0.08em] text-cream transition-colors hover:border-gold hover:text-gold sm:w-auto"
+            className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-cream/25 px-8 text-[14px] font-bold tracking-[0.08em] text-cream transition-colors hover:border-gold-ink hover:text-gold-ink sm:w-auto"
           >
             {t(copy.intlForm.another)}
           </button>
@@ -120,7 +120,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
       {state.error ? (
         <p
           role="alert"
-          className="border border-gold/40 bg-gold/10 px-4 py-3 text-center text-[13px] leading-[1.8] text-gold"
+          className="border border-gold-ink/40 bg-gold/10 px-4 py-3 text-center text-[13px] leading-[1.8] text-gold-ink"
         >
           {state.error}
         </p>
@@ -251,7 +251,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
                 onChange={(event) => setField(key, event.target.value)}
               />
               {dateHints[key] ? (
-                <span className="mt-2 block text-[12px] leading-[1.7] text-gold/80">
+                <span className="mt-2 block text-[12px] leading-[1.7] text-gold-ink/80">
                   {t(copy.intlForm.errorDate)}
                 </span>
               ) : null}

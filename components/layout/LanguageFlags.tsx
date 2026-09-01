@@ -58,7 +58,7 @@ export function LanguageFlags({ className = "", onHero = false }: LanguageFlagsP
 
   const buttonIdle = onHero
     ? "text-on-dark hover:bg-on-dark/10 hover:text-gold"
-    : "text-cream hover:bg-cream/6 hover:text-gold";
+    : "text-cream hover:bg-cream/6 hover:text-gold-ink";
 
   return (
     <div ref={rootRef} className={`relative ${className}`}>
@@ -70,7 +70,7 @@ export function LanguageFlags({ className = "", onHero = false }: LanguageFlagsP
         aria-label={t(copy.lang.menuButton)}
         disabled={pending}
         className={`font-serif-jp flex min-h-11 items-center gap-1 rounded px-2 py-1.5 text-[14px] tracking-[0.06em] transition-colors focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold sm:gap-1.5 sm:px-3.5 sm:text-[16px] ${buttonIdle} ${
-          open ? "text-gold" : ""
+          open ? (onHero ? "text-gold" : "text-gold-ink") : ""
         } ${pending ? "pointer-events-none opacity-60" : ""}`}
       >
         <span className="hidden sm:inline">Language</span>

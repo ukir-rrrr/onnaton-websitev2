@@ -10,6 +10,8 @@ import { modalBackdrop, modalPanel } from "@/lib/motion/presets";
 
 interface ReserveButtonProps {
   variant?: "solid" | "outline";
+  /** Use gold (not gold-ink) for the outline over dark photo backgrounds. */
+  tone?: "default" | "onDark";
   className?: string;
   children?: React.ReactNode;
   /** Pre-select this course on the online form (EN / KO / ZH). */
@@ -23,6 +25,7 @@ function isDesktopPointer() {
 /** JA: phone reservation. EN / KO / ZH: online reservation form. */
 export function ReserveButton({
   variant = "solid",
+  tone = "default",
   className = "",
   children,
   courseId,
@@ -56,10 +59,12 @@ export function ReserveButton({
 
   const base =
     "inline-flex items-center justify-center rounded-sm text-[14px] font-bold tracking-[0.05em] transition-colors";
+  const outlineStyles =
+    tone === "onDark"
+      ? "border border-gold text-gold hover:bg-gold hover:text-ink"
+      : "border border-gold-ink text-gold-ink hover:bg-gold-ink hover:text-on-dark";
   const styles =
-    variant === "solid"
-      ? "bg-gold text-ink hover:bg-cream"
-      : "border border-gold text-gold hover:bg-gold hover:text-ink";
+    variant === "solid" ? "bg-gold text-ink hover:bg-cream" : outlineStyles;
 
   if (!isJa) {
     const href = "/reserve/intl";
@@ -112,7 +117,7 @@ export function ReserveButton({
             >
             <p
               id={titleId}
-              className="mb-3 text-xs tracking-[0.28em] text-gold sm:text-[12px]"
+              className="mb-3 text-xs tracking-[0.28em] text-gold-ink sm:text-[12px]"
             >
               {t(copy.reserve.phoneLabel)}
             </p>
@@ -133,7 +138,7 @@ export function ReserveButton({
               </button>
               <a
                 href={siteConfig.reservationPhoneHref}
-                className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-cream/25 px-6 py-3.5 text-[14px] font-bold tracking-[0.14em] text-cream transition-colors hover:border-gold hover:text-gold"
+                className="inline-flex min-h-11 w-full items-center justify-center rounded-sm border border-cream/25 px-6 py-3.5 text-[14px] font-bold tracking-[0.14em] text-cream transition-colors hover:border-gold-ink hover:text-gold-ink"
               >
                 {t(copy.reserve.dial)}
               </a>

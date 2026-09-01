@@ -24,7 +24,7 @@ export function CourseGrid() {
             <h2 className="font-serif-jp mb-3 text-xl font-semibold text-cream sm:text-[23px]">
               {course.name}
             </h2>
-            <p className="mb-5 text-xl font-semibold text-gold sm:text-[22px]">
+            <p className="mb-5 text-xl font-semibold text-gold-ink sm:text-[22px]">
               {course.price}
             </p>
             <div className="mb-4 flex flex-col gap-1.5 text-[13px] text-cream/85">
