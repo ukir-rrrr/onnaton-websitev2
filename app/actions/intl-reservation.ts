@@ -95,7 +95,9 @@ export async function submitIntlReservation(
   const date2 = parseOptionalDate(values.datePreference2);
   const date3 = parseOptionalDate(values.datePreference3);
   const adults = parseCount(values.adults, 1, 20);
-  const children = parseCount(values.children, 0, 10);
+  const age0to5 = parseCount(values.age0to5, 0, 10);
+  const age6to12 = parseCount(values.age6to12, 0, 10);
+  const age13to19 = parseCount(values.age13to19, 0, 10);
   const notes = values.notes;
   const agreePolicy = values.agreePolicy;
 
@@ -107,7 +109,9 @@ export async function submitIntlReservation(
     !country ||
     !date1 ||
     adults === null ||
-    children === null
+    age0to5 === null ||
+    age6to12 === null ||
+    age13to19 === null
   ) {
     return err(locale, copy.intlForm.errorRequired, formData);
   }
@@ -163,6 +167,7 @@ export async function submitIntlReservation(
 
   const reference = referenceCode();
   const agreedAt = new Date().toISOString();
+  const children = age0to5 + age6to12 + age13to19;
   const payload = {
     reference,
     name,
@@ -175,6 +180,9 @@ export async function submitIntlReservation(
     datePreference2: date2,
     datePreference3: date3,
     adults,
+    age0to5,
+    age6to12,
+    age13to19,
     children,
     notes: notes || null,
     locale,

@@ -278,18 +278,50 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
             />
           </p>
           <p>
-            <label htmlFor="intl-children" className={labelClass}>
-              {t(copy.intlForm.children)} *
+            <label htmlFor="intl-age-0-5" className={labelClass}>
+              {t(copy.intlForm.age0to5)}
             </label>
             <input
-              id="intl-children"
-              name="children"
+              id="intl-age-0-5"
+              name="age_0_5"
               type="number"
-              required
               min={0}
               max={10}
-              value={fields.children}
-              onChange={(event) => setField("children", event.target.value)}
+              value={fields.age0to5}
+              onChange={(event) => setField("age0to5", event.target.value)}
+              className={fieldClass}
+            />
+            <span className="mt-2 block text-[12px] leading-[1.7] text-cream/70">
+              <MultilineText text={t(copy.intlForm.age0to5Note)} keepAll={false} />
+            </span>
+          </p>
+          <p>
+            <label htmlFor="intl-age-6-12" className={labelClass}>
+              {t(copy.intlForm.age6to12)}
+            </label>
+            <input
+              id="intl-age-6-12"
+              name="age_6_12"
+              type="number"
+              min={0}
+              max={10}
+              value={fields.age6to12}
+              onChange={(event) => setField("age6to12", event.target.value)}
+              className={fieldClass}
+            />
+          </p>
+          <p>
+            <label htmlFor="intl-age-13-19" className={labelClass}>
+              {t(copy.intlForm.age13to19)}
+            </label>
+            <input
+              id="intl-age-13-19"
+              name="age_13_19"
+              type="number"
+              min={0}
+              max={10}
+              value={fields.age13to19}
+              onChange={(event) => setField("age13to19", event.target.value)}
               className={fieldClass}
             />
           </p>

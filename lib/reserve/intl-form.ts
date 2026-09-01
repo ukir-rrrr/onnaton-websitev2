@@ -8,7 +8,9 @@ export type IntlReservationFormValues = {
   datePreference2: string;
   datePreference3: string;
   adults: string;
-  children: string;
+  age0to5: string;
+  age6to12: string;
+  age13to19: string;
   notes: string;
   agreePolicy: boolean;
 };
@@ -30,7 +32,9 @@ export const defaultIntlReservationFormValues: IntlReservationFormValues = {
   datePreference2: "",
   datePreference3: "",
   adults: "2",
-  children: "0",
+  age0to5: "0",
+  age6to12: "0",
+  age13to19: "0",
   notes: "",
   agreePolicy: false,
 };
@@ -38,7 +42,9 @@ export const defaultIntlReservationFormValues: IntlReservationFormValues = {
 export function valuesFromIntlFormData(formData: FormData): IntlReservationFormValues {
   const str = (key: string) => String(formData.get(key) ?? "").trim();
   const adults = str("adults");
-  const children = str("children");
+  const age0to5 = str("age_0_5");
+  const age6to12 = str("age_6_12");
+  const age13to19 = str("age_13_19");
   return {
     name: str("name"),
     email: str("email"),
@@ -49,7 +55,9 @@ export function valuesFromIntlFormData(formData: FormData): IntlReservationFormV
     datePreference2: str("date_preference_2"),
     datePreference3: str("date_preference_3"),
     adults: adults || "2",
-    children: children || "0",
+    age0to5: age0to5 || "0",
+    age6to12: age6to12 || "0",
+    age13to19: age13to19 || "0",
     notes: str("notes"),
     agreePolicy: formData.get("agreePolicy") === "on",
   };

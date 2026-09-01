@@ -168,7 +168,6 @@ export const zhTwCopyValues: Record<string, string> = {
   "intlForm.date2": "第二希望（選填）",
   "intlForm.date3": "第三希望（選填）",
   "intlForm.adults": "大人",
-  "intlForm.children": "兒童（不可攜帶學齡前兒童）",
   "intlForm.notesHeading": "其他需求",
   "intlForm.notes": "需求（選填）",
   "intlForm.notesPh": "過敏、紀念日、希望套餐等",
@@ -205,6 +204,10 @@ export const zhTwCopyValues: Record<string, string> = {
   "intlForm.phoneCountry": "國碼",
   "intlForm.phoneCountryPh": "請選擇國碼",
   "intlForm.errorPhone": "請輸入有效的電話號碼。",
+  "intlForm.age0to5": "0至5歲",
+  "intlForm.age6to12": "6至12歲",
+  "intlForm.age13to19": "13至19歲",
+  "intlForm.age0to5Note": "※0至5歲的孩童原則上恕不接待。即使填寫仍可送出申請，能否接待將以電子郵件通知。",
 };
 
 function setByPath(obj: Record<string, unknown>, path: string, value: string): void {

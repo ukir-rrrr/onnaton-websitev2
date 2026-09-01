@@ -168,7 +168,6 @@ export const yueCopyValues: Record<string, string> = {
   "intlForm.date2": "第二希望（選填）",
   "intlForm.date3": "第三希望（選填）",
   "intlForm.adults": "大人",
-  "intlForm.children": "小童（不可攜同學齡前兒童）",
   "intlForm.notesHeading": "其他需求",
   "intlForm.notes": "需求（選填）",
   "intlForm.notesPh": "過敏、紀念日、希望套餐等",
@@ -205,6 +204,10 @@ export const yueCopyValues: Record<string, string> = {
   "intlForm.phoneCountry": "國家代碼",
   "intlForm.phoneCountryPh": "請選擇國家代碼",
   "intlForm.errorPhone": "請輸入有效嘅電話號碼。",
+  "intlForm.age0to5": "0至5歲",
+  "intlForm.age6to12": "6至12歲",
+  "intlForm.age13to19": "13至19歲",
+  "intlForm.age0to5Note": "※0至5歲嘅小朋友原則上恕不招待。即使填寫亦可提交申請，能否接待會以電郵通知。",
 };
 
 function setByPath(obj: Record<string, unknown>, path: string, value: string): void {

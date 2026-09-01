@@ -1250,10 +1250,6 @@
       "yue": "大人",
       "zhTw": "大人"
     },
-    "intlForm.children": {
-      "yue": "小童（不可攜同學齡前兒童）",
-      "zhTw": "兒童（不可攜帶學齡前兒童）"
-    },
     "intlForm.notesHeading": {
       "yue": "其他需求",
       "zhTw": "其他需求"
@@ -1397,6 +1393,22 @@
     "intlForm.errorPhone": {
       "yue": "請輸入有效嘅電話號碼。",
       "zhTw": "請輸入有效的電話號碼。"
+    },
+    "intlForm.age0to5": {
+      "yue": "0至5歲",
+      "zhTw": "0至5歲"
+    },
+    "intlForm.age6to12": {
+      "yue": "6至12歲",
+      "zhTw": "6至12歲"
+    },
+    "intlForm.age13to19": {
+      "yue": "13至19歲",
+      "zhTw": "13至19歲"
+    },
+    "intlForm.age0to5Note": {
+      "yue": "※0至5歲嘅小朋友原則上恕不招待。即使填寫亦可提交申請，能否接待會以電郵通知。",
+      "zhTw": "※0至5歲的孩童原則上恕不接待。即使填寫仍可送出申請，能否接待將以電子郵件通知。"
     }
   }
 }

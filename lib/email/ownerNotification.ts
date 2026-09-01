@@ -20,9 +20,17 @@ export async function notifyOwnerIntlReservation(
     return { ok: true, skipped: true };
   }
 
-  const subject = `[恩納豚] 海外予約リクエスト ${input.reference}`;
+  const hasInfants = input.age0to5 > 0;
+  const subject = `[恩納豚] 海外予約リクエスト ${input.reference}${
+    hasInfants ? "【0〜5歳あり】" : ""
+  }`;
   const text = [
     "海外向け予約リクエストが届きました。",
+    ...(hasInfants
+      ? [
+          `【要確認】0〜5歳のお子様 ${input.age0to5} 名を含むリクエストです。受け入れ可否をご判断のうえ、\nお客様へのご返信でご案内ください。`,
+        ]
+      : []),
     "空席確認後、お客様へ確認メールをお送りください。",
     "",
     `受付番号: ${input.reference}`,
@@ -36,7 +44,9 @@ export async function notifyOwnerIntlReservation(
     formatDates(input),
     "",
     `大人: ${input.adults} 名`,
-    `お子様: ${input.children} 名`,
+    `0〜5歳: ${input.age0to5} 名`,
+    `6〜12歳: ${input.age6to12} 名`,
+    `13〜19歳: ${input.age13to19} 名`,
     "",
     input.notes ? `備考:\n${input.notes}` : "備考: —",
     "",
