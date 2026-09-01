@@ -4,7 +4,6 @@ import { useState } from "react";
 import { IntlReservationForm } from "@/components/reserve/IntlReservationForm";
 import { MultilineText } from "@/components/i18n/MultilineText";
 import { ReserveButton } from "@/components/ui/ReserveButton";
-import { siteConfig } from "@/lib/content/store";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 import type { ReservationPolicy } from "@/lib/content/reservationPolicy";
@@ -27,9 +26,6 @@ export function IntlReserveMain({ policy }: { policy: ReservationPolicy }) {
 
           <p className="mb-2 text-xs tracking-[0.28em] text-gold-ink sm:text-[12px]">
             {t(copy.reserve.phoneLabel)}
-          </p>
-          <p className="font-serif-jp mb-3 text-[32px] font-medium tracking-[0.08em] text-cream sm:text-[42px]">
-            {siteConfig.reservationPhoneDisplay}
           </p>
           <p className="mb-10 text-[13px] leading-[1.8] tracking-[0.04em] text-cream/82">
             {t(copy.reserve.hours)}
