@@ -171,9 +171,8 @@ export const yueCopyValues: Record<string, string> = {
   "intlForm.submit": "發送預約申請",
   "intlForm.sending": "提交中…",
   "intlForm.successKicker": "REQUEST RECEIVED",
-  "intlForm.successTitle": "已收到您的預約申請",
-  "intlForm.successBody": "此時預約尚未確定。n請查收本店確認電郵並回覆後，預約方可確定。",
-  "intlForm.reference": "受理編號",
+  "intlForm.successTitle": "Thank you for your reservation request.",
+  "intlForm.successBody": "We will send an automated email to the email address you provided.\n\nAfter reviewing your request, we will send you a confirmation email.\nPlease read the email carefully and reply to us.\n\nOnce we receive your reply, we will send you a final reservation confirmation email.",
   "intlForm.home": "返回主頁",
   "intlForm.another": "再提交一次",
   "intlForm.errorGeneric": "提交失敗，請稍後再試。",
@@ -210,6 +209,7 @@ export const yueCopyValues: Record<string, string> = {
   "intlForm.internet": "網上搜尋",
   "intlForm.referral": "朋友介紹",
   "coursePage.serviceFee": "※本店收取 5% 服務費。以現金付款則豁免服務費。",
+  "intlForm.successFinalNote": "Your reservation is not confirmed until you receive the final confirmation email from us.",
 };
 
 function setByPath(obj: Record<string, unknown>, path: string, value: string): void {

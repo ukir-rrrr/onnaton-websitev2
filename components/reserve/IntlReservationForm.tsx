@@ -86,16 +86,11 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
           {t(copy.intlForm.successTitle)}
         </h2>
         <p className="mx-auto mb-8 max-w-md text-[14px] leading-[2] tracking-[0.04em] text-cream/90 sm:text-[15px]">
-          <MultilineText text={t(copy.intlForm.successBody)} />
+          <MultilineText text={t(copy.intlForm.successBody)} keepAll={false} />
         </p>
-        {state.reference ? (
-          <p className="mb-10 text-[13px] tracking-[0.12em] text-gold">
-            {t(copy.intlForm.reference)}
-            <span className="mt-2 block font-serif-jp text-[20px] tracking-[0.14em] text-cream">
-              {state.reference}
-            </span>
-          </p>
-        ) : null}
+        <p className="mx-auto mb-10 max-w-md border-y border-gold-ink/40 py-4 text-[14px] font-medium leading-[1.9] tracking-[0.04em] text-gold-ink sm:text-[15px]">
+          <MultilineText text={t(copy.intlForm.successFinalNote)} keepAll={false} />
+        </p>
         <div className="flex flex-col items-center gap-3 sm:flex-row sm:justify-center">
           <Link
             href="/"
