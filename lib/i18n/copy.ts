@@ -466,11 +466,11 @@ export const copy = {
       "日语客人请电话预约。",
     ),
     closed: L(
-      "定休日：火曜日・水曜日",
-      "Closed Tuesdays and Wednesdays",
-      "정기휴일: 화요일·수요일",
-      "休息日：星期二、星期三",
-      "休息日：星期二、星期三",
+      "通常定休日：火曜日・水曜日\n※臨時営業・臨時休業については、お知らせをご確認ください。",
+      "Regular closing days: Tuesdays and Wednesdays\n*Please check our Notices for special opening or closing days.",
+      "정기휴일: 화요일·수요일\n※임시 영업 및 임시 휴업은 공지를 확인해 주세요.",
+      "固定休息日：星期二、星期三\n※臨時營業或臨時休息，請參閱公告。",
+      "固定公休日：星期二、星期三\n※臨時營業或臨時休業，請參閱公告。",
     ),
     advance: L(
       "前日までのご予約（1ヶ月前から受付）",
@@ -620,11 +620,11 @@ export const copy = {
       "海外客人预约申请",
     ),
     closed: L(
-      "定休日：火曜日・水曜日",
-      "Closed Tuesdays and Wednesdays",
-      "정기휴일: 화요일·수요일",
-      "休息日：星期二、星期三",
-      "休息日：星期二、星期三",
+      "通常定休日：火曜日・水曜日\n※臨時営業・臨時休業については、お知らせをご確認ください。",
+      "Regular closing days: Tuesdays and Wednesdays\n*Please check our Notices for special opening or closing days.",
+      "정기휴일: 화요일·수요일\n※임시 영업 및 임시 휴업은 공지를 확인해 주세요.",
+      "固定休息日：星期二、星期三\n※臨時營業或臨時休息，請參閱公告。",
+      "固定公休日：星期二、星期三\n※臨時營業或臨時休業，請參閱公告。",
     ),
     phoneNotice: L(
       "海外のお客様は、電話でのご予約は受け付けておりません。\n下記予約フォームよりお申し込みください。",

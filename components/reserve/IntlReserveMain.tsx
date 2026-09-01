@@ -17,7 +17,7 @@ export function IntlReserveMain({ policy }: { policy: ReservationPolicy }) {
     return (
       <div className="mx-auto flex w-full max-w-3xl flex-col gap-10 sm:gap-12">
         <p className="text-center font-serif-jp text-[17px] font-medium tracking-[0.08em] text-cream sm:text-[19px]">
-          {t(copy.intlForm.closed)}
+          <MultilineText text={t(copy.intlForm.closed)} keepAll={false} />
         </p>
 
         <div className="border border-cream/10 bg-ink-raised px-5 py-10 text-center sm:px-8 sm:py-12 lg:px-10 lg:py-14">
@@ -62,7 +62,7 @@ export function IntlReserveMain({ policy }: { policy: ReservationPolicy }) {
   return (
     <div className="mx-auto flex w-full max-w-3xl flex-col gap-10 sm:gap-12">
       <p className="text-center font-serif-jp text-[17px] font-medium tracking-[0.08em] text-cream sm:text-[19px]">
-        {t(copy.intlForm.closed)}
+        <MultilineText text={t(copy.intlForm.closed)} keepAll={false} />
       </p>
 
       {isJa ? (
