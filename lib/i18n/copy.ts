@@ -774,15 +774,6 @@ export const copy = {
       "朋友介紹",
       "朋友介紹",
     ),
-    notesHeading: L("ご要望", "Requests", "요청 사항", "其他需求", "其他需求"),
-    notes: L("ご要望（任意）", "Requests (optional)", "요청 (선택)", "需求（选填）", "需求（选填）"),
-    notesPh: L(
-      "アレルギー、記念日、希望コースなど",
-      "Allergies, celebrations, course preferences, etc.",
-      "알레르기, 기념일, 희망 코스 등",
-      "过敏、纪念日、希望套餐等",
-      "过敏、纪念日、希望套餐等",
-    ),
     submit: L(
       "予約リクエストを送信",
       "Send reservation request",

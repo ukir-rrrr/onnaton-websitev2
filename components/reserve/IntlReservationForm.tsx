@@ -369,21 +369,6 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
             ))}
           </select>
         </p>
-        <p>
-          <label htmlFor="intl-notes" className={labelClass}>
-            {t(copy.intlForm.notes)}
-          </label>
-          <textarea
-            id="intl-notes"
-            name="notes"
-            rows={4}
-            maxLength={1000}
-            placeholder={t(copy.intlForm.notesPh)}
-            value={fields.notes}
-            onChange={(event) => setField("notes", event.target.value)}
-            className={`${fieldClass} resize-y`}
-          />
-        </p>
       </fieldset>
 
       <button

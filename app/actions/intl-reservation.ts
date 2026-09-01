@@ -100,7 +100,6 @@ export async function submitIntlReservation(
   const age6to12 = parseCount(values.age6to12, 0, 10);
   const age13to19 = parseCount(values.age13to19, 0, 10);
   const referralSource = values.referralSource;
-  const notes = values.notes;
   const agreePolicy = values.agreePolicy;
 
   if (
@@ -147,7 +146,6 @@ export async function submitIntlReservation(
   if (!agreePolicy) {
     return err(locale, copy.intlForm.errorAgree, formData);
   }
-  if (notes.length > 1000) return err(locale, copy.intlForm.errorGeneric, formData);
 
   const ip = await getClientIp();
   const ipBucket = `intl_submit:ip:${ip}`;
@@ -191,7 +189,7 @@ export async function submitIntlReservation(
     age13to19,
     children,
     referralSource,
-    notes: notes || null,
+    notes: null,
     locale,
     agreedAt,
   };

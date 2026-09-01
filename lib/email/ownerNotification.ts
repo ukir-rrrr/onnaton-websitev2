@@ -56,8 +56,6 @@ export async function notifyOwnerIntlReservation(
     `6〜12歳: ${input.age6to12} 名`,
     `13〜19歳: ${input.age13to19} 名`,
     "",
-    input.notes ? `備考:\n${input.notes}` : "備考: —",
-    "",
     `同意日時: ${input.agreedAt}`,
     "",
     "※ お客様には受付確認の自動返信メールを送信済みです。",
