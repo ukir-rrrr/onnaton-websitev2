@@ -33,10 +33,10 @@ export function Hero() {
     currentRef.current = current;
   }, [current]);
 
-  // ① logo hold → ② wipe in
+  // ① logo hold → ② fade out (cross-fade to hero)
   useEffect(() => {
     if (reduceMotion || phase !== "logo") return;
-    const id = window.setTimeout(() => setPhase("wipeIn"), INTRO_LOGO_HOLD_MS);
+    const id = window.setTimeout(() => setPhase("fadeOut"), INTRO_LOGO_HOLD_MS);
     return () => window.clearTimeout(id);
   }, [phase, reduceMotion]);
 
@@ -73,7 +73,7 @@ export function Hero() {
   }, [effectivePhase]);
 
   const showHeroMotion =
-    effectivePhase === "wipeOut" || effectivePhase === "ready";
+    effectivePhase === "fadeOut" || effectivePhase === "ready";
   const activeDot = incoming ?? current;
   const showCopy = effectivePhase === "ready";
 
@@ -82,8 +82,7 @@ export function Hero() {
       {effectivePhase !== "ready" && (
         <PageIntro
           phase={effectivePhase}
-          onWipeInComplete={() => setPhase("wipeOut")}
-          onWipeOutComplete={() => setPhase("ready")}
+          onFadeOutComplete={() => setPhase("ready")}
         />
       )}
 
