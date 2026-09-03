@@ -12,7 +12,7 @@ import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 
 /** Auto drift speed (px / ms). */
-const AUTO_SPEED = 0.026;
+const AUTO_SPEED = 0.034;
 /** Ignore tiny moves so vertical page scroll still works on phones. */
 const DRAG_THRESHOLD_PX = 8;
 

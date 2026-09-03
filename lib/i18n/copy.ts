@@ -201,7 +201,7 @@ export const copy = {
       "阿古豬與沖繩三大品牌黑毛和牛。",
     ),
     leadBody: L(
-      "沖縄が育んだあぐー豚と\nブランド黒毛和牛を、\n数週間熟成させた恩納豚オリジナル\nの出汁でいただく、唯一無二の\nしゃぶしゃぶ専門店です。",
+      "沖縄が育んだあぐー豚と、ブランド黒毛和牛を、数週間熟成させた恩納豚オリジナルの出汁でいただく唯一無二のしゃぶしゃぶ専門店です。",
       "Raised in Okinawa, enjoyed in our original dashi broth aged for several weeks—a Shabu-shabu house like no other.",
       "오키나와에서 길러진 아구 돼지와 브랜드 흑모와규를 수 주간 숙성시킨 온나톤 오리지널 육수로 즐기는 하나뿐인 샤브샤부 전문점입니다.",
       "以數週熟成嘅恩納豚原創湯底，品味沖繩培育嘅阿古豬同品牌黑毛和牛，獨一無二嘅 Shabu-shabu 專門店。",

@@ -143,7 +143,7 @@ export function About() {
 
       <div
         id="about-text"
-        className="scroll-mt-24 mx-auto grid max-w-[1240px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:px-14 lg:py-[120px] xl:grid-cols-[1.12fr_0.88fr] xl:gap-16"
+        className="scroll-mt-24 mx-auto grid max-w-[1240px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:px-14 lg:py-[120px] xl:grid-cols-[1.25fr_0.75fr] xl:gap-16"
       >
         <div className="order-2 min-w-0 max-w-full xl:order-1">
           <motion.p
@@ -166,15 +166,11 @@ export function About() {
           </motion.h3>
 
           <motion.p
-            className="font-serif-jp mb-10 min-w-0 max-w-full break-words text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-12 sm:text-[28px] sm:leading-[2.05] xl:text-[32px]"
+            className="font-serif-jp mb-10 min-w-0 max-w-full break-words text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream max-sm:text-pretty sm:mb-12 sm:text-[28px] sm:leading-[2.05] xl:text-[32px]"
             {...fadeUp(0.16)}
           >
-            <span className="sm:hidden">
-              <MultilineText text={t(copy.about.leadBody)} keepAll={false} />
-            </span>
-            <span className="hidden text-pretty sm:inline">
-              {t(copy.about.leadBody).replace(/\n/g, "")}
-            </span>
+            <span className="sm:hidden">{t(copy.about.leadBody)}</span>
+            <span className="hidden text-pretty sm:inline">{t(copy.about.leadBody)}</span>
           </motion.p>
 
           <motion.div {...fadeUp(0.2)}>
