@@ -88,7 +88,7 @@ export function Hero() {
 
       <section
         id="top"
-        className="relative aspect-[4/5] w-full overflow-hidden sm:aspect-[19/10] sm:min-h-[540px] md:min-h-[580px] sm:max-h-[100vh]"
+        className="relative aspect-[4/5] min-h-[560px] w-full overflow-hidden sm:aspect-[19/10] sm:min-h-[540px] md:min-h-[580px] sm:max-h-[100vh]"
       >
         <motion.div
           className="absolute inset-0"
