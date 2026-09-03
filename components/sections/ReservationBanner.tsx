@@ -8,7 +8,7 @@ import { useT } from "@/components/i18n/LocaleProvider";
 import { revealFadeUp, staggerContainer, staggerItem } from "@/lib/motion/presets";
 
 export function ReservationBanner() {
-  const { t } = useT();
+  const { t, isJa } = useT();
   const reduceMotion = useReducedMotion() === true;
   const notices = [
     copy.reservationBanner.notice1,
@@ -16,7 +16,7 @@ export function ReservationBanner() {
     copy.reservationBanner.notice3,
     copy.reservationBanner.notice4,
     copy.reservationBanner.notice5,
-  ];
+  ] as const;
 
   return (
     <section className="relative w-full min-w-0 overflow-x-clip border-y border-cream/10 bg-ink-raised">
@@ -59,9 +59,21 @@ export function ReservationBanner() {
           variants={staggerContainer(0.1)}
         >
           <div className="font-serif-jp space-y-5 break-words text-[16px] leading-[2.05] tracking-[0.04em] text-cream/92 sm:space-y-6 sm:text-[18px] sm:leading-[2.15]">
-            {notices.map((notice) => (
+            {notices.map((notice, index) => (
               <motion.p key={notice.ja} variants={staggerItem(reduceMotion, 14)}>
-                <MultilineText text={t(notice)} keepAll={false} />
+                <span className="sm:hidden">
+                  <MultilineText
+                    text={t(
+                      index === 0 && isJa
+                        ? copy.reservationBanner.notice1Mobile
+                        : notice,
+                    )}
+                    keepAll={false}
+                  />
+                </span>
+                <span className="hidden sm:inline">
+                  <MultilineText text={t(notice)} keepAll={false} />
+                </span>
               </motion.p>
             ))}
           </div>

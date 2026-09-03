@@ -267,6 +267,14 @@ export const copy = {
       "为使每组客人在最佳状态下享用料理，\n我们按预约\n采购并准备食材。",
       "为使每组客人在最佳状态下享用料理，\n我们按预约\n采购并准备食材。",
     ),
+    /** JA mobile-only line breaks for notice1. */
+    notice1Mobile: L(
+      "当店では、一組一組のお客様に\n最高の状態でお料理を\nお楽しみいただけるよう、\nご予約に合わせて食材の仕入れや仕込みを行っております。",
+      "For each party,\nwe source and prepare ingredients according to your reservation\nso you can enjoy your meal at its very best.",
+      "저희는 한 팀 한 팀 손님께\n최상의 상태로 요리를 즐기실 수 있도록,\n예약에 맞춰 식재료를 조달하고 준비합니다.",
+      "为使每组客人在最佳状态下享用料理，\n我们按预约\n采购并准备食材。",
+      "为使每组客人在最佳状态下享用料理，\n我们按预约\n采购并准备食材。",
+    ),
     notice2: L(
       "また、しゃぶしゃぶの要となる出汁は、\n時間をかけて仕込み、寝かせて熟成させて\nご用意しております。",
       "Our Shabu-shabu dashi broth is prepared over time,\nrested, and matured\nbefore it reaches your table.",

@@ -16,9 +16,11 @@
 
   /* Photo washi (Gemini) — primary surface texture */
   --washi-photo: url("/textures/washi-bg.jpg");
+  /* Higher = softer / less visible grain (0.1 was original) */
+  --washi-texture-fade: 0.52;
   --washi-photo-tint: linear-gradient(
-    rgba(235, 226, 208, 0.1),
-    rgba(235, 226, 208, 0.1)
+    rgba(235, 226, 208, var(--washi-texture-fade)),
+    rgba(235, 226, 208, var(--washi-texture-fade))
   );
   --washi-texture: var(--washi-photo-tint), var(--washi-photo);
 
@@ -127,8 +129,8 @@ body {
   background-color: var(--color-paper-raised);
   background-image:
     linear-gradient(
-      rgba(224, 212, 188, 0.62),
-      rgba(224, 212, 188, 0.62)
+      rgba(224, 212, 188, 0.86),
+      rgba(224, 212, 188, 0.86)
     ),
     var(--washi-photo);
   background-size: cover;

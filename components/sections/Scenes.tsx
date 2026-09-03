@@ -12,7 +12,7 @@ import { useT } from "@/components/i18n/LocaleProvider";
 const ease = [0.22, 1, 0.36, 1] as const;
 
 export function Scenes() {
-  const { t, tr } = useT();
+  const { t, tr, isJa } = useT();
   const reduceMotion = useReducedMotion() === true;
   const isMobile = useIsMobile();
 
@@ -101,7 +101,13 @@ export function Scenes() {
                 {tr(scene.title)}
               </h3>
               <p className="min-h-[2lh] text-[13px] leading-[1.7] text-on-dark/80 sm:text-[13px]">
-                <MultilineText text={tr(scene.desc)} keepAll={false} />
+                <span className="sm:hidden">
+                  <MultilineText
+                    text={tr(isJa && scene.descMobile ? scene.descMobile : scene.desc)}
+                    keepAll={false}
+                  />
+                </span>
+                <span className="hidden sm:inline">{tr(scene.desc)}</span>
               </p>
             </motion.div>
           </motion.div>

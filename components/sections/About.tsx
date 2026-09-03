@@ -2,7 +2,7 @@
 
 import Image from "next/image";
 import { motion, useReducedMotion } from "motion/react";
-import { photos } from "@/lib/content/photos";
+import { photos, videos } from "@/lib/content/photos";
 import { MultilineText } from "@/components/i18n/MultilineText";
 import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
@@ -143,7 +143,7 @@ export function About() {
 
       <div
         id="about-text"
-        className="scroll-mt-24 mx-auto grid max-w-[1240px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:px-14 lg:py-[120px] xl:grid-cols-[1.25fr_0.75fr] xl:gap-16"
+        className="scroll-mt-24 mx-auto grid max-w-[1240px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:px-14 lg:py-[120px] xl:grid-cols-[1.1fr_0.9fr] xl:gap-16"
       >
         <div className="order-2 min-w-0 max-w-full xl:order-1">
           <motion.p
@@ -189,7 +189,7 @@ export function About() {
         </div>
 
         <motion.div
-          className="relative order-1 mx-auto aspect-[3/4] w-full max-w-[420px] overflow-hidden xl:order-2 xl:mx-0 xl:max-w-none"
+          className="relative order-1 mx-auto aspect-[3/4] w-full max-w-[500px] overflow-hidden sm:max-w-[540px] xl:order-2 xl:mx-0 xl:max-w-none"
           initial={reduceMotion ? false : { opacity: 0, y: 32 }}
           whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
@@ -202,13 +202,16 @@ export function About() {
             viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 1.35, ease }}
           >
-            <Image
-              src={photos.onnatonAbout}
-              alt={t(copy.about.photoAlt)}
-              fill
-              sizes="(max-width: 1279px) 100vw, 50vw"
-              quality={90}
-              className="object-cover"
+            <video
+              src={videos.onnatonAbout}
+              poster={photos.onnatonAbout}
+              autoPlay={!reduceMotion}
+              muted
+              loop
+              playsInline
+              preload={reduceMotion ? "none" : "metadata"}
+              aria-label={t(copy.about.photoAlt)}
+              className="absolute inset-0 h-full w-full object-cover"
             />
           </motion.div>
         </motion.div>

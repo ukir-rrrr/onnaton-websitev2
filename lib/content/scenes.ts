@@ -3,6 +3,8 @@ import { photos } from "./photos";
 export interface Scene {
   title: string;
   desc: string;
+  /** JA mobile-only line breaks; falls back to `desc` on sm+ and other locales. */
+  descMobile?: string;
   photo: string;
 }
 
@@ -26,6 +28,7 @@ export const sceneList: Scene[] = [
   {
     title: "海外からのお客様",
     desc: "世界各国からのお客様にご愛顧いただいています。",
+    descMobile: "世界各国のお客様に\nご愛顧いただいています。",
     photo: photos.scene04,
   },
 ];

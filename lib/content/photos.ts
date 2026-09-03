@@ -63,7 +63,6 @@ export const photos = {
   reservation01: "/images/yoyaku_01.jpg",
   /** About / 恩納豚について — vertical portrait. */
   onnatonAbout: "/images/onnnaton_tuite.jpg",
-  // 当店のこだわり
   /** こだわり01 — あぐー豚（トップ「当店のこだわり」） */
   kodawari01Section: "/images/kodawari_001v1.jpg",
   /** 追加あぐー豚（コースページ） */
@@ -91,3 +90,9 @@ export const photos = {
 } as const;
 
 export type PhotoKey = keyof typeof photos;
+
+/** Drop MP4 files into /public/videos and register paths here. */
+export const videos = {
+  /** About / 恩納豚について — vertical portrait loop. */
+  onnatonAbout: "/videos/店のインスタ広告.mp4",
+} as const;

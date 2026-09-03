@@ -178,7 +178,7 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
             <label htmlFor="intl-phone-national" className={labelClass}>
               {t(copy.intlForm.phone)} *
             </label>
-            <span className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,11rem)_minmax(0,1fr)]">
+            <span className="grid grid-cols-1 gap-3 sm:grid-cols-[minmax(0,16rem)_minmax(0,1fr)]">
               <select
                 id="intl-phone-country"
                 name="phone_country"
