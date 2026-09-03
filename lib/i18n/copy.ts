@@ -179,7 +179,7 @@ export const copy = {
       "冲绳的馈赠，用恩纳豚独有的高汤。",
     ),
     overlay: L(
-      "沖縄の恵みを、極上のしゃぶしゃぶで。",
+      "沖縄の恵みを、\n極上のしゃぶしゃぶで。",
       "Okinawa's finest, as exquisite Shabu-shabu.",
       "오키나와의 은혜를, 극상의 샤브샤브로.",
       "冲绳的馈赠，以上乘涮涮锅呈现。",

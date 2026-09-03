@@ -108,7 +108,12 @@ export function About() {
             className="font-serif-jp mb-3 text-2xl font-bold text-on-dark sm:mb-4 sm:text-3xl xl:text-[42px]"
             {...fadeUp(0.2)}
           >
-            {t(copy.about.overlay)}
+            <span className="sm:hidden">
+              <MultilineText text={t(copy.about.overlay)} keepAll={false} />
+            </span>
+            <span className="hidden sm:inline">
+              {t(copy.about.overlay).replace(/\n/g, "")}
+            </span>
           </motion.p>
           <motion.p
             className="text-[13px] tracking-[0.02em] text-on-dark/75 sm:text-sm"
