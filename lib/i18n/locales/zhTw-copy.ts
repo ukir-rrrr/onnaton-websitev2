@@ -171,8 +171,8 @@ export const zhTwCopyValues: Record<string, string> = {
   "intlForm.submit": "送出預約申請",
   "intlForm.sending": "提交中…",
   "intlForm.successKicker": "REQUEST RECEIVED",
-  "intlForm.successTitle": "Thank you for your reservation request.",
-  "intlForm.successBody": "We will send an automated email to the email address you provided.\n\nAfter reviewing your request, we will send you a confirmation email.\nPlease read the email carefully and reply to us.\n\nOnce we receive your reply, we will send you a final reservation confirmation email.",
+  "intlForm.successTitle": "感謝您的預約申請。",
+  "intlForm.successBody": "系統會先寄送一封自動回覆郵件至您填寫的電子郵件地址。\n\n我們確認您的預約內容後，會再另外寄送一封確認郵件給您。\n\n請仔細閱讀該郵件內容，並回覆我們。\n\n收到您的回覆後，我們會再寄送最終的預約確認郵件。",
   "intlForm.home": "返回首頁",
   "intlForm.another": "再提交一次",
   "intlForm.errorGeneric": "提交失敗，請稍後再試。",
@@ -208,7 +208,7 @@ export const zhTwCopyValues: Record<string, string> = {
   "intlForm.internet": "網路搜尋",
   "intlForm.referral": "朋友介紹",
   "coursePage.serviceFee": "※本店收取 5% 服務費。若以現金付款，則免收服務費。",
-  "intlForm.successFinalNote": "Your reservation is not confirmed until you receive the final confirmation email from us.",
+  "intlForm.successFinalNote": "只有在收到本店寄出的最終預約確認郵件後，預約才正式成立。",
   "intlForm.submitDisclaimer": "送出此表單並不代表預約已確認。\n請確認本店審核您的預約內容後另行寄出的確認郵件。",
 };
 
