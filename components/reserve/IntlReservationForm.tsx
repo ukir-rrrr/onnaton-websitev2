@@ -287,9 +287,6 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
               onChange={(event) => setField("age0to5", event.target.value)}
               className={fieldClass}
             />
-            <span className="mt-2 block text-[12px] leading-[1.7] text-cream/70">
-              <MultilineText text={t(copy.intlForm.age0to5Note)} keepAll={false} />
-            </span>
           </p>
           <p>
             <label htmlFor="intl-age-6-12" className={labelClass}>

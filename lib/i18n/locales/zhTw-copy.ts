@@ -201,7 +201,6 @@ export const zhTwCopyValues: Record<string, string> = {
   "intlForm.age0to5": "0至5歲",
   "intlForm.age6to12": "6至12歲",
   "intlForm.age13to19": "13至19歲",
-  "intlForm.age0to5Note": "※0至5歲的孩童原則上恕不接待。即使填寫仍可送出申請，能否接待將以電子郵件通知。",
   "intlForm.referralLabel": "您是如何得知本店的？",
   "intlForm.referralPh": "請選擇",
   "intlForm.repeater": "回頭客",

@@ -731,13 +731,6 @@ export const copy = {
     age0to5: L("0歳〜5歳", "Ages 0-5", "0~5세", "0至5歲", "0至5歲"),
     age6to12: L("6歳〜12歳", "Ages 6-12", "6~12세", "6至12歲", "6至12歲"),
     age13to19: L("13歳〜19歳", "Ages 13-19", "13~19세", "13至19歲", "13至19歲"),
-    age0to5Note: L(
-      "※未就学児（0〜5歳）のお子様は、原則ご入店いただけません。ご入力いただいた場合もリクエストは送信できますが、受け入れ可否はメールにてご案内いたします。",
-      "*Children aged 0-5 are generally not permitted. You may still submit your request; we will let you know by email whether we can accommodate them.",
-      "※0~5세 어린이는 원칙적으로 입장하실 수 없습니다. 입력하셔도 요청은 전송되며, 수용 가능 여부는 이메일로 안내드립니다.",
-      "※0至5歲嘅小朋友原則上恕不招待。即使填寫亦可提交申請，能否接待會以電郵通知。",
-      "※0至5歲的孩童原則上恕不接待。即使填寫仍可送出申請，能否接待將以電子郵件通知。",
-    ),
     referralLabel: L(
       "当店を何でお知りになりましたか",
       "How did you hear about us?",
