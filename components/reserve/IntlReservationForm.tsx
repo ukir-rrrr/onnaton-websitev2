@@ -287,9 +287,6 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
               onChange={(event) => setField("age0to5", event.target.value)}
               className={fieldClass}
             />
-            <span className="mt-2 block text-[12px] leading-[1.7] text-cream/70">
-              <MultilineText text={t(copy.intlForm.age0to5Note)} keepAll={false} />
-            </span>
           </p>
           <p>
             <label htmlFor="intl-age-6-12" className={labelClass}>
@@ -366,13 +363,18 @@ function IntlReservationFormInner({ onReset }: { onReset: () => void }) {
         </p>
       </fieldset>
 
-      <button
-        type="submit"
-        disabled={pending}
-        className="inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-gold px-8 text-[14px] font-bold tracking-[0.14em] text-ink transition-colors hover:bg-cream disabled:cursor-wait disabled:opacity-70 sm:w-auto sm:min-w-[280px] sm:self-center"
-      >
-        {pending ? t(copy.intlForm.sending) : t(copy.intlForm.submit)}
-      </button>
+      <div className="flex flex-col items-center gap-3">
+        <button
+          type="submit"
+          disabled={pending}
+          className="inline-flex min-h-12 w-full items-center justify-center rounded-sm bg-gold px-8 text-[14px] font-bold tracking-[0.14em] text-ink transition-colors hover:bg-cream disabled:cursor-wait disabled:opacity-70 sm:w-auto sm:min-w-[280px]"
+        >
+          {pending ? t(copy.intlForm.sending) : t(copy.intlForm.submit)}
+        </button>
+        <p className="max-w-md text-center text-[12px] leading-[1.75] tracking-[0.02em] text-cream/70">
+          <MultilineText text={t(copy.intlForm.submitDisclaimer)} keepAll={false} />
+        </p>
+      </div>
     </form>
   );
 }

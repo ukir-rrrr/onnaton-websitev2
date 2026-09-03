@@ -69,7 +69,7 @@ function KodawariFeatureBlock({
 
         {feature.photoMark ? (
           <motion.div
-            className="mt-4 flex justify-start sm:mt-5"
+            className="mt-4 flex justify-center sm:mt-5"
             initial={reduceMotion ? false : { opacity: 0, y: 16 }}
             whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
             viewport={{ once: true, amount: 0.3 }}
@@ -81,7 +81,7 @@ function KodawariFeatureBlock({
               width={320}
               height={140}
               unoptimized
-              className="h-auto w-auto max-w-[240px] object-contain object-left sm:max-w-[280px] lg:max-w-[320px]"
+              className="h-auto w-auto max-w-[240px] object-contain object-center sm:max-w-[280px] lg:max-w-[320px]"
             />
           </motion.div>
         ) : null}

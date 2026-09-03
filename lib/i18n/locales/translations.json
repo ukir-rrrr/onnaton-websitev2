@@ -778,10 +778,6 @@
       "yue": "關於恩納豚",
       "zhTw": "關於恩納豚"
     },
-    "about.lead": {
-      "yue": "阿古豬同沖繩三大品牌黑毛和牛。n以數週熟成嘅恩納豚原創湯底n品味沖繩培育嘅阿古豬同品牌黑毛和牛，n獨一無二嘅 Shabu-shabu 專門店。",
-      "zhTw": "阿古豬與沖繩三大品牌黑毛和牛。n以數週熟成的恩納豚原創湯底n品味沖繩培育的阿古豬與品牌黑毛和牛，n獨一無二的 Shabu-shabu 專門店。"
-    },
     "about.p1": {
       "yue": "阿古豬同特選石垣牛比普通肉更甘、更鮮。為與之相配，我哋準備咗熟成數週、醇厚嘅原創湯底。",
       "zhTw": "阿古豬與特選石垣牛比普通肉更甘、更鮮。為與之相配，我們準備了熟成數週、醇厚的原創湯底。"
@@ -1271,12 +1267,12 @@
       "zhTw": "REQUEST RECEIVED"
     },
     "intlForm.successTitle": {
-      "yue": "Thank you for your reservation request.",
-      "zhTw": "Thank you for your reservation request."
+      "yue": "多謝您的預約申請。",
+      "zhTw": "感謝您的預約申請。"
     },
     "intlForm.successBody": {
-      "yue": "We will send an automated email to the email address you provided.\n\nAfter reviewing your request, we will send you a confirmation email.\nPlease read the email carefully and reply to us.\n\nOnce we receive your reply, we will send you a final reservation confirmation email.",
-      "zhTw": "We will send an automated email to the email address you provided.\n\nAfter reviewing your request, we will send you a confirmation email.\nPlease read the email carefully and reply to us.\n\nOnce we receive your reply, we will send you a final reservation confirmation email."
+      "yue": "系統會先向您填寫的電郵地址發送一封自動回覆郵件。\n\n我們確認您的預約內容後，會再另外發送一封確認郵件給您。\n\n請仔細閱讀該郵件內容，並回覆我們。\n\n收到您的回覆後，我們會再發送最終的預約確認郵件。",
+      "zhTw": "系統會先寄送一封自動回覆郵件至您填寫的電子郵件地址。\n\n我們確認您的預約內容後，會再另外寄送一封確認郵件給您。\n\n請仔細閱讀該郵件內容，並回覆我們。\n\n收到您的回覆後，我們會再寄送最終的預約確認郵件。"
     },
     "intlForm.home": {
       "yue": "返回主頁",
@@ -1390,10 +1386,6 @@
       "yue": "13至19歲",
       "zhTw": "13至19歲"
     },
-    "intlForm.age0to5Note": {
-      "yue": "※0至5歲嘅小朋友原則上恕不招待。即使填寫亦可提交申請，能否接待會以電郵通知。",
-      "zhTw": "※0至5歲的孩童原則上恕不接待。即使填寫仍可送出申請，能否接待將以電子郵件通知。"
-    },
     "intlForm.referralLabel": {
       "yue": "您係點樣得知本店？",
       "zhTw": "您是如何得知本店的？"
@@ -1423,8 +1415,20 @@
       "zhTw": "※本店收取 5% 服務費。若以現金付款，則免收服務費。"
     },
     "intlForm.successFinalNote": {
-      "yue": "Your reservation is not confirmed until you receive the final confirmation email from us.",
-      "zhTw": "Your reservation is not confirmed until you receive the final confirmation email from us."
+      "yue": "只有在收到本店發出的最終預約確認郵件後，預約才正式成立。",
+      "zhTw": "只有在收到本店寄出的最終預約確認郵件後，預約才正式成立。"
+    },
+    "intlForm.submitDisclaimer": {
+      "yue": "提交此表格並不代表預約已確認。\n請確認本店審核您的預約內容後另行發送的確認郵件。",
+      "zhTw": "送出此表單並不代表預約已確認。\n請確認本店審核您的預約內容後另行寄出的確認郵件。"
+    },
+    "about.leadHeading": {
+      "yue": "阿古豬同沖繩三大品牌黑毛和牛。",
+      "zhTw": "阿古豬與沖繩三大品牌黑毛和牛。"
+    },
+    "about.leadBody": {
+      "yue": "以數週熟成嘅恩納豚原創湯底，品味沖繩培育嘅阿古豬同品牌黑毛和牛，獨一無二嘅 Shabu-shabu 專門店。",
+      "zhTw": "以數週熟成的恩納豚原創湯底，品味沖繩培育的阿古豬與品牌黑毛和牛，獨一無二的 Shabu-shabu 專門店。"
     }
   }
 }
