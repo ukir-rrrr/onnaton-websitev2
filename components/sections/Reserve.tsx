@@ -11,6 +11,21 @@ import { copy } from "@/lib/i18n/copy";
 import { useT } from "@/components/i18n/LocaleProvider";
 import { revealFadeUp, revealScale, staggerContainer, staggerItem } from "@/lib/motion/presets";
 
+/**
+ * ⑫ Mobile shows the text as one naturally-wrapped block (text-pretty avoids
+ * mid-phrase breaks and 1-2 char orphans); PC keeps the designed `\n` breaks.
+ */
+function CardText({ text }: { text: string }) {
+  return (
+    <>
+      <span className="sm:hidden">{text.replace(/\n/g, "")}</span>
+      <span className="hidden sm:inline">
+        <MultilineText text={text} keepAll={false} />
+      </span>
+    </>
+  );
+}
+
 function PolicyCard({
   id,
   heading,
@@ -37,24 +52,24 @@ function PolicyCard({
       <h3 className="font-serif-jp mb-6 max-w-full break-words text-center text-[18px] font-normal leading-[1.75] tracking-[0.04em] text-cream sm:mb-8 sm:text-[28px] sm:leading-[1.6] sm:tracking-[0.12em] xl:text-[30px]">
         {heading}
       </h3>
-      <p className="font-serif-jp mb-8 max-w-full break-words text-[15px] leading-[2.05] tracking-[0.04em] text-cream sm:mb-10 sm:text-[18px] sm:leading-[2.15]">
-        <MultilineText text={lead} keepAll={false} />
+      <p className="font-serif-jp mb-8 max-w-full text-pretty break-words text-[15px] leading-[2.05] tracking-[0.04em] text-cream sm:mb-10 sm:text-[18px] sm:leading-[2.15]">
+        <CardText text={lead} />
       </p>
-      <div className="font-serif-jp max-w-full space-y-6 break-words text-[15px] leading-[2.1] tracking-[0.04em] text-cream/92 sm:space-y-7 sm:text-[18px] sm:leading-[2.2]">
+      <div className="font-serif-jp max-w-full space-y-6 text-pretty break-words text-[15px] leading-[2.1] tracking-[0.04em] text-cream/92 sm:space-y-7 sm:text-[18px] sm:leading-[2.2]">
         {paragraphs.map((paragraph) => (
           <p key={paragraph}>
-            <MultilineText text={paragraph} keepAll={false} />
+            <CardText text={paragraph} />
           </p>
         ))}
       </div>
       {note ? (
-        <p className="mt-8 max-w-full break-words text-[14px] leading-[2.05] tracking-[0.04em] text-cream/82 sm:mt-10 sm:text-[16px] sm:leading-[2.15]">
-          ※<MultilineText text={note} keepAll={false} />
+        <p className="mt-8 max-w-full text-pretty break-words text-[14px] leading-[2.05] tracking-[0.04em] text-cream/82 sm:mt-10 sm:text-[16px] sm:leading-[2.15]">
+          ※<CardText text={note} />
         </p>
       ) : null}
       {closing ? (
-        <p className="mt-6 max-w-full break-words text-[15px] leading-[2.05] tracking-[0.04em] text-cream/95 sm:text-[17px] sm:leading-[2.15]">
-          <MultilineText text={closing} keepAll={false} />
+        <p className="mt-6 max-w-full text-pretty break-words text-[15px] leading-[2.05] tracking-[0.04em] text-cream/95 sm:text-[17px] sm:leading-[2.15]">
+          <CardText text={closing} />
         </p>
       ) : null}
     </motion.article>
