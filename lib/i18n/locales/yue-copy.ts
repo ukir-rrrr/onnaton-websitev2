@@ -209,6 +209,7 @@ export const yueCopyValues: Record<string, string> = {
   "intlForm.referral": "朋友介紹",
   "coursePage.serviceFee": "※本店收取 5% 服務費。以現金付款則豁免服務費。",
   "intlForm.successFinalNote": "Your reservation is not confirmed until you receive the final confirmation email from us.",
+  "intlForm.submitDisclaimer": "提交此表格並不代表預約已確認。\n請確認本店審核您的預約內容後另行發送的確認郵件。",
 };
 
 function setByPath(obj: Record<string, unknown>, path: string, value: string): void {

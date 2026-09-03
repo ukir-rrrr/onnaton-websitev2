@@ -775,6 +775,13 @@ export const copy = {
       "发送预约申请",
     ),
     sending: L("送信中…", "Sending…", "전송 중…", "提交中…", "提交中…"),
+    submitDisclaimer: L(
+      "このフォームの送信時点では予約は確定しません。\n内容確認後に店舗からお送りする確認メールを必ずご確認ください。",
+      "Submitting this form does not confirm your reservation.\nPlease check the confirmation email we send after reviewing your request.",
+      "이 양식을 제출해도 예약이 확정되는 것은 아닙니다.\n예약 내용을 확인한 후 매장에서 보내드리는 확인 이메일을 반드시 확인해 주세요.",
+      "提交此表格並不代表預約已確認。\n請確認本店審核您的預約內容後另行發送的確認郵件。",
+      "送出此表單並不代表預約已確認。\n請確認本店審核您的預約內容後另行寄出的確認郵件。",
+    ),
     successKicker: L("REQUEST RECEIVED", "REQUEST RECEIVED", "REQUEST RECEIVED", "REQUEST RECEIVED", "REQUEST RECEIVED"),
     successTitle: L(
       "Thank you for your reservation request.",
