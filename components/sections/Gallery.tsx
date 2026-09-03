@@ -17,7 +17,7 @@ const AUTO_SPEED = 0.034;
 const DRAG_THRESHOLD_PX = 8;
 
 export function Gallery() {
-  const { t } = useT();
+  const { t, isJa } = useT();
   const viewportRef = useRef<HTMLDivElement>(null);
   const trackRef = useRef<HTMLDivElement>(null);
   const offsetRef = useRef(0);
@@ -218,12 +218,28 @@ export function Gallery() {
       <div className="mx-auto mt-14 flex w-full min-w-0 max-w-4xl flex-col items-center px-5 text-center sm:mt-20 sm:px-10 lg:mt-24">
         <Reveal variant="fadeUp" delay={0.05}>
           <p className="font-serif-jp mb-3 w-full min-w-0 max-w-full break-words text-[16px] leading-[2.1] tracking-[0.04em] text-cream/95 sm:text-[18px] sm:leading-[2.2]">
-            <MultilineText text={t(copy.gallery.p1)} keepAll={false} />
+            <span className="max-[398px]:hidden">
+              <MultilineText text={t(copy.gallery.p1)} keepAll={false} />
+            </span>
+            <span className="hidden max-[398px]:inline">
+              <MultilineText
+                text={t(isJa ? copy.gallery.p1Mobile : copy.gallery.p1)}
+                keepAll={false}
+              />
+            </span>
           </p>
         </Reveal>
         <Reveal variant="fadeUp" delay={0.14}>
           <p className="font-serif-jp mb-8 w-full min-w-0 max-w-full break-words text-[16px] leading-[2.1] tracking-[0.04em] text-cream/92 sm:mb-10 sm:text-[18px] sm:leading-[2.2]">
-            <MultilineText text={t(copy.gallery.p2)} keepAll={false} />
+            <span className="max-[398px]:hidden">
+              <MultilineText text={t(copy.gallery.p2)} keepAll={false} />
+            </span>
+            <span className="hidden max-[398px]:inline">
+              <MultilineText
+                text={t(isJa ? copy.gallery.p2Mobile : copy.gallery.p2)}
+                keepAll={false}
+              />
+            </span>
           </p>
         </Reveal>
         <Reveal variant="fadeUp" delay={0.24}>

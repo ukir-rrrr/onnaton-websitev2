@@ -18,6 +18,13 @@ export function ReservationBanner() {
     copy.reservationBanner.notice5,
   ] as const;
 
+  const mobileNotice = (index: number, notice: (typeof notices)[number]) => {
+    if (!isJa) return notice;
+    if (index === 0) return copy.reservationBanner.notice1Mobile;
+    if (index === 2) return copy.reservationBanner.notice3Mobile;
+    return notice;
+  };
+
   return (
     <section className="relative w-full min-w-0 overflow-x-clip border-y border-cream/10 bg-ink-raised">
       <div className="relative min-w-0 px-6 py-16 sm:px-10 sm:py-20 lg:px-14 lg:py-24">
@@ -63,11 +70,7 @@ export function ReservationBanner() {
               <motion.p key={notice.ja} variants={staggerItem(reduceMotion, 14)}>
                 <span className="sm:hidden">
                   <MultilineText
-                    text={t(
-                      index === 0 && isJa
-                        ? copy.reservationBanner.notice1Mobile
-                        : notice,
-                    )}
+                    text={t(mobileNotice(index, notice))}
                     keepAll={false}
                   />
                 </span>

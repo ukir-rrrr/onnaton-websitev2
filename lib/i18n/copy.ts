@@ -289,6 +289,14 @@ export const copy = {
       "因此本店实行完全预约制，\n原则上请在前一天之前预约。",
       "因此本店实行完全预约制，\n原则上请在前一天之前预约。",
     ),
+    /** JA mobile-only line breaks for notice3. */
+    notice3Mobile: L(
+      "そのため、当店は完全予約制とし、\nご予約は原則として前日までに\nお願いしております。",
+      "For this reason we operate by reservation only,\nand generally ask that you book by the day before.",
+      "이에 따라 저희는 완전예약제로 운영하며,\n예약은 원칙적으로 전날까지 부탁드립니다.",
+      "因此本店实行完全预约制，\n原则上请在前一天之前预约。",
+      "因此本店实行完全预约制，\n原则上请在前一天之前预约。",
+    ),
     notice4: L(
       "なお、食材のご用意や仕込み、\nお席の状況が整っている場合に限り、\n当日のご予約を承れることもございます。",
       "When ingredients, prep, and seating allow,\nwe may sometimes accept same-day reservations.",
@@ -444,8 +452,24 @@ export const copy = {
       "许多知名人士也曾光临。",
       "许多知名人士也曾光临。",
     ),
+    /** JA ≤398px line breaks for p1. */
+    p1Mobile: L(
+      "多くの著名人にも\nお越しいただいております。",
+      "We are honored to welcome many well-known guests.",
+      "많은 유명 인사분들께서도 찾아주십니다.",
+      "许多知名人士也曾光临。",
+      "许多知名人士也曾光临。",
+    ),
     p2: L(
       "Instagramでも店内の様子をご覧いただけます。\nぜひチェックしてみてください。",
+      "See more of the dining room on Instagram.",
+      "인스타그램에서도 매장 모습을 보실 수 있습니다.",
+      "也可在 Instagram 查看店内光景。",
+      "也可在 Instagram 查看店内光景。",
+    ),
+    /** JA ≤398px line breaks for p2. */
+    p2Mobile: L(
+      "Instagramでも店内の様子を\nご覧いただけます。\nぜひチェックしてみてください。",
       "See more of the dining room on Instagram.",
       "인스타그램에서도 매장 모습을 보실 수 있습니다.",
       "也可在 Instagram 查看店内光景。",

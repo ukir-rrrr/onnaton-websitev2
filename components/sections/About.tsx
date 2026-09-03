@@ -143,7 +143,7 @@ export function About() {
 
       <div
         id="about-text"
-        className="scroll-mt-24 mx-auto grid max-w-[1240px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:px-14 lg:py-[120px] xl:grid-cols-[1.1fr_0.9fr] xl:gap-16"
+        className="scroll-mt-24 mx-auto grid max-w-[1280px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:px-14 lg:py-[120px] xl:grid-cols-[1.2fr_0.8fr] xl:gap-16"
       >
         <div className="order-2 min-w-0 max-w-full xl:order-1">
           <motion.p
@@ -154,7 +154,7 @@ export function About() {
           </motion.p>
 
           <motion.h3
-            className="font-serif-jp mb-4 min-w-0 max-w-full break-words text-center text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-5 sm:text-left sm:text-[28px] sm:leading-[2.05] xl:text-[32px]"
+            className="font-serif-jp mb-4 min-w-0 max-w-full break-words text-center text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-5 sm:text-left sm:text-[28px] sm:leading-[2.05] xl:text-[32px] xl:tracking-[0.02em]"
             {...fadeUp(0.1)}
           >
             <span className="sm:hidden">
