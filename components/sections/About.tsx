@@ -138,7 +138,7 @@ export function About() {
 
       <div
         id="about-text"
-        className="scroll-mt-24 mx-auto grid max-w-[1200px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:px-14 lg:py-[120px] xl:grid-cols-2 xl:gap-16"
+        className="scroll-mt-24 mx-auto grid max-w-[1240px] items-center gap-10 px-6 py-16 sm:gap-12 sm:px-10 sm:py-24 lg:px-14 lg:py-[120px] xl:grid-cols-[1.12fr_0.88fr] xl:gap-16"
       >
         <div className="order-2 min-w-0 max-w-full xl:order-1">
           <motion.p
