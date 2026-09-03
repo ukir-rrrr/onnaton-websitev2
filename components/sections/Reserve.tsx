@@ -98,7 +98,7 @@ export function Reserve() {
             fill
             aria-hidden
             sizes="100vw"
-            className="object-cover"
+            className="object-cover object-[100%_52%] sm:object-[90%_52%] xl:object-[50%_85%]"
           />
         </motion.div>
         <div className="absolute inset-0 bg-black/65" />

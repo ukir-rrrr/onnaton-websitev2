@@ -60,13 +60,17 @@ export const photos = {
 
 
   /** ご予約について */
-  reservation01: "/images/reservation_01.jpg",
+  reservation01: "/images/yoyaku_01.jpg",
   /** About / 恩納豚について — vertical portrait. */
   onnatonAbout: "/images/onnnaton_tuite.jpg",
   // 当店のこだわり
-  /** こだわり01 — あぐー豚 */
+  /** こだわり01 — あぐー豚（トップ「当店のこだわり」） */
+  kodawari01Section: "/images/kodawari_001v1.jpg",
+  /** 追加あぐー豚（コースページ） */
   kodawari01: "/images/kodawari_001.jpg",
   kodawariAguButa: "/images/kodawari_agu_buta.jpg",
+  /** こだわり02 — 特選石垣牛 商標 */
+  kodawari02Mark: "/images/kodawari_002v2.png",
   /** こだわり03 — お出汁 */
   kodawari03: "/images/kodawari_003.jpg",
   kodawariYasai:"/images/kodawari_04.jpg",

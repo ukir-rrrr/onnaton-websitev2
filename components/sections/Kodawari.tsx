@@ -41,30 +41,51 @@ function KodawariFeatureBlock({
 
   return (
     <div className="mb-16 grid min-w-0 grid-cols-1 items-start gap-10 sm:mb-20 sm:gap-12 lg:mb-24 xl:grid-cols-[minmax(0,720px)_1fr] xl:gap-16">
-      <motion.div
-        className={`relative mx-auto ${aspectClass} w-full ${wrapperClass} overflow-hidden rounded-sm xl:mx-0`}
-        initial={reduceMotion ? false : { opacity: 0, y: 32 }}
-        whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
-        viewport={{ once: true, amount: 0.3 }}
-        transition={{ duration: 1, ease }}
-      >
+      <div className={`mx-auto w-full ${wrapperClass} xl:mx-0`}>
         <motion.div
-          className="absolute inset-0"
-          initial={reduceMotion ? false : { scale: 1.08 }}
-          whileInView={reduceMotion ? undefined : { scale: 1 }}
+          className={`relative ${aspectClass} w-full overflow-hidden rounded-sm`}
+          initial={reduceMotion ? false : { opacity: 0, y: 32 }}
+          whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
           viewport={{ once: true, amount: 0.3 }}
-          transition={{ duration: 1.2, ease }}
+          transition={{ duration: 1, ease }}
         >
-          <Image
-            src={feature.photo}
-            alt={tr(feature.photoAlt)}
-            fill
-            sizes={imageSizes}
-            unoptimized
-            className={imageClass}
-          />
+          <motion.div
+            className="absolute inset-0"
+            initial={reduceMotion ? false : { scale: 1.08 }}
+            whileInView={reduceMotion ? undefined : { scale: 1 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 1.2, ease }}
+          >
+            <Image
+              src={feature.photo}
+              alt={tr(feature.photoAlt)}
+              fill
+              sizes={imageSizes}
+              unoptimized
+              className={imageClass}
+            />
+          </motion.div>
         </motion.div>
-      </motion.div>
+
+        {feature.photoMark ? (
+          <motion.div
+            className="mt-4 flex justify-start sm:mt-5"
+            initial={reduceMotion ? false : { opacity: 0, y: 16 }}
+            whileInView={reduceMotion ? undefined : { opacity: 1, y: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
+            transition={{ duration: 0.85, delay: 0.12, ease }}
+          >
+            <Image
+              src={feature.photoMark}
+              alt={tr(feature.photoMarkAlt ?? "")}
+              width={320}
+              height={140}
+              unoptimized
+              className="h-auto w-auto max-w-[240px] object-contain object-left sm:max-w-[280px] lg:max-w-[320px]"
+            />
+          </motion.div>
+        ) : null}
+      </div>
 
       <div className="min-w-0 max-w-full">
         <motion.p

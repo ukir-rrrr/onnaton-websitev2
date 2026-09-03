@@ -5,6 +5,9 @@ export interface KodawariFeature {
   heading: readonly string[];
   photo: string;
   photoAlt: string;
+  /** Optional mark / badge shown below the main photo (left-aligned). */
+  photoMark?: string;
+  photoMarkAlt?: string;
   paragraphs: readonly string[];
   highlights?: readonly { label: string }[];
   /** Tailwind aspect class */
@@ -19,17 +22,15 @@ export interface KodawariFeature {
 export const aguFeature: KodawariFeature = {
   num: "01",
   heading: ["「アグー豚」ではなく、", "認定ブランド「あぐー豚」"] as const,
-  photo: photos.kodawari01,
+  photo: photos.kodawari01Section,
   photoAlt: "認定ブランド あぐー豚のしゃぶしゃぶ",
   paragraphs: [
     "恩納豚で使用しているのは、\nJAおきなわの品質基準をクリアした、\n認定ブランドの「あぐー豚」です。",
     "沖縄でよく目にする「アグー豚」という呼び方とは異なり、ひらがなの「あぐー」は、JAおきなわが商標を管理するブランド名称。\n定められた品質基準を満たし、認定された豚肉だけが「あぐー」として流通します。",
     "恩納豚では、この認定された「あぐー豚」を使用しています。\n脂に上品な甘みがあり、しゃぶしゃぶにすることで\n柔らかさと旨みが際立ちます。\n沖縄が誇る上質な味わいを、存分にお楽しみください。",
   ],
-  imageAspectClass: "aspect-[5/6]",
+  imageAspectClass: "aspect-[5/3]",
   imageClassName: "object-cover object-center",
-  imageWrapperClassName: "max-w-[540px] sm:max-w-[580px] xl:max-w-[600px]",
-  imageSizes: "(min-width: 1280px) 600px, (min-width: 640px) 580px, 540px",
 };
 
 /** こだわり02 — 特選 石垣牛 */
@@ -38,6 +39,8 @@ export const ishigakiFeature: KodawariFeature = {
   heading: ["特選 石垣牛"] as const,
   photo: photos.ishigakiBeef,
   photoAlt: "特選 石垣牛のしゃぶしゃぶ",
+  photoMark: photos.kodawari02Mark,
+  photoMarkAlt: "特選 石垣牛 商標",
   highlights: [
     { label: "特選ラベル" },
     { label: "A5ランクのみ使用" },
