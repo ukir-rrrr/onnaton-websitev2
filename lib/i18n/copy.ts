@@ -193,12 +193,19 @@ export const copy = {
       "以冲绳上乘食材呈现极致涮涮锅。",
     ),
     heading: L("恩納豚について", "About ONNATON", "온나톤 소개", "关于恩纳豚", "关于恩纳豚"),
-    lead: L(
-      "あぐー豚と沖縄三大ブランド黒毛和牛。\n沖縄が育んだあぐー豚とブランド黒毛和牛を、\n数週間熟成させた恩納豚オリジナルの出汁でいただく、\n唯一無二のしゃぶしゃぶ専門店です。",
-      "Agu pork and Okinawa’s three premier brand black wagyu.\nRaised in Okinawa, enjoyed in our original dashi broth aged for several weeks—\na Shabu-shabu house like no other.",
-      "아구 돼지와 오키나와 3대 브랜드 흑모와규.\n오키나와에서 길러진 아구 돼지와 브랜드 흑모와규를\n수 주간 숙성시킨 온나톤 오리지널 육수로 즐기는\n하나뿐인 샤브샤부 전문점입니다.",
-      "阿古猪与冲绳三大品牌黑毛和牛。\n以数周熟成的恩纳豚原创高汤\n品味冲绳培育的阿古猪与品牌黑毛和牛，\n独一无二的涮涮锅专门店。",
-      "阿古猪与冲绳三大品牌黑毛和牛。\n以数周熟成的恩纳豚原创高汤\n品味冲绳培育的阿古猪与品牌黑毛和牛，\n独一无二的涮涮锅专门店。",
+    leadHeading: L(
+      "あぐー豚と\n沖縄三大ブランド黒毛和牛。",
+      "Agu pork and Okinawa’s three premier brand black wagyu.",
+      "아구 돼지와 오키나와 3대 브랜드 흑모와규.",
+      "阿古豬同沖繩三大品牌黑毛和牛。",
+      "阿古豬與沖繩三大品牌黑毛和牛。",
+    ),
+    leadBody: L(
+      "沖縄が育んだあぐー豚と\nブランド黒毛和牛を、\n数週間熟成させた恩納豚オリジナル\nの出汁でいただく、唯一無二の\nしゃぶしゃぶ専門店です。",
+      "Raised in Okinawa, enjoyed in our original dashi broth aged for several weeks—a Shabu-shabu house like no other.",
+      "오키나와에서 길러진 아구 돼지와 브랜드 흑모와규를 수 주간 숙성시킨 온나톤 오리지널 육수로 즐기는 하나뿐인 샤브샤부 전문점입니다.",
+      "以數週熟成嘅恩納豚原創湯底，品味沖繩培育嘅阿古豬同品牌黑毛和牛，獨一無二嘅 Shabu-shabu 專門店。",
+      "以數週熟成的恩納豚原創湯底，品味沖繩培育的阿古豬與品牌黑毛和牛，獨一無二的 Shabu-shabu 專門店。",
     ),
     p1: L(
       "あぐー豚や特選石垣牛は、通常のお肉に比べて甘みと旨みが際立ちます。その味わいに負けないよう、当店では数週間熟成させたコクのあるオリジナルの出汁をご用意しました。",

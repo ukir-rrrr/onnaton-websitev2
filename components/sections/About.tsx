@@ -154,11 +154,28 @@ export function About() {
           </motion.p>
 
           <motion.h3
-            className="font-serif-jp mb-10 min-w-0 max-w-full break-words text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-12 sm:text-[28px] sm:leading-[2.05] xl:text-[32px]"
+            className="font-serif-jp mb-4 min-w-0 max-w-full break-words text-center text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-5 sm:text-left sm:text-[28px] sm:leading-[2.05] xl:text-[32px]"
             {...fadeUp(0.1)}
           >
-            <MultilineText text={t(copy.about.lead)} keepAll={false} />
+            <span className="sm:hidden">
+              <MultilineText text={t(copy.about.leadHeading)} keepAll={false} />
+            </span>
+            <span className="hidden sm:inline">
+              {t(copy.about.leadHeading).replace(/\n/g, "")}
+            </span>
           </motion.h3>
+
+          <motion.p
+            className="font-serif-jp mb-10 min-w-0 max-w-full break-words text-[20px] font-medium leading-[2] tracking-[0.04em] text-cream sm:mb-12 sm:text-[28px] sm:leading-[2.05] xl:text-[32px]"
+            {...fadeUp(0.16)}
+          >
+            <span className="sm:hidden">
+              <MultilineText text={t(copy.about.leadBody)} keepAll={false} />
+            </span>
+            <span className="hidden text-pretty sm:inline">
+              {t(copy.about.leadBody).replace(/\n/g, "")}
+            </span>
+          </motion.p>
 
           <motion.div {...fadeUp(0.2)}>
             <div className="font-serif-jp min-w-0 max-w-full space-y-8 break-words text-[14px] font-normal leading-[2.35] tracking-[0.04em] text-cream/92 sm:text-[18px] sm:leading-[2.5]">

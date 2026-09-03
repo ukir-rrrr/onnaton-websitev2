@@ -48,7 +48,6 @@ export const yueCopyValues: Record<string, string> = {
   "about.overlay": "沖繩嘅饋贈，以上乘 Shabu-shabu 呈現。",
   "about.overlayEn": "Okinawa's finest ingredients, served as exquisite shabu-shabu.",
   "about.heading": "關於恩納豚",
-  "about.lead": "阿古豬同沖繩三大品牌黑毛和牛。n以數週熟成嘅恩納豚原創湯底n品味沖繩培育嘅阿古豬同品牌黑毛和牛，n獨一無二嘅 Shabu-shabu 專門店。",
   "about.p1": "阿古豬同特選石垣牛比普通肉更甘、更鮮。為與之相配，我哋準備咗熟成數週、醇厚嘅原創湯底。",
   "about.p2": "唔係醋醬油或芝麻醬，而係用呢碗湯底帶出肉本身嘅美味。",
   "about.p3": "約 95% 嘅食材產自沖繩。n本店獲沖繩縣農林水產部認證為「沖繩食材之店」。",
@@ -210,6 +209,8 @@ export const yueCopyValues: Record<string, string> = {
   "coursePage.serviceFee": "※本店收取 5% 服務費。以現金付款則豁免服務費。",
   "intlForm.successFinalNote": "只有在收到本店發出的最終預約確認郵件後，預約才正式成立。",
   "intlForm.submitDisclaimer": "提交此表格並不代表預約已確認。\n請確認本店審核您的預約內容後另行發送的確認郵件。",
+  "about.leadHeading": "阿古豬同沖繩三大品牌黑毛和牛。",
+  "about.leadBody": "以數週熟成嘅恩納豚原創湯底，品味沖繩培育嘅阿古豬同品牌黑毛和牛，獨一無二嘅 Shabu-shabu 專門店。",
 };
 
 function setByPath(obj: Record<string, unknown>, path: string, value: string): void {
